@@ -1,0 +1,63 @@
+@import '../util/variables';
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+ul,
+li {
+  list-style: none;
+  font-family: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+}
+button {
+  border: none;
+  outline: none;
+}
+svg {
+  transition: all 0.3s;
+  pointer-events: none;
+  path {
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+html {
+  height: 100%;
+  font-size: 10px;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+body {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  height: inherit;
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+}
+header,
+main,
+footer {
+  width: 100%;
+}
+main {
+  flex-grow: 1;
+}
+.header__box,
+.footer__box {
+  width: 90%;
+  margin: 0 auto;
+}
