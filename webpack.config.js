@@ -16,10 +16,16 @@ const optimization = () => {
   };
   if (!devMode) {
     config.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];
-  } else {
-    config.devTools = `eval-source-map`;
   }
   return config;
+};
+
+const devTool = () => {
+  if (devMode) {
+    return 'eval-source-map';
+  } else {
+    return false;
+  }
 };
 
 const fileName = ext => (devMode ? `[name].${ext}` : `[name].[contenthash].${ext}`);
@@ -46,6 +52,7 @@ module.exports = {
     clean: true,
   },
   optimization: optimization(),
+  devtool: devTool(),
   devServer: {
     port: 8080,
     hot: devMode,
