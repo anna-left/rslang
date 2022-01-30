@@ -22,16 +22,23 @@ const optimization = () => {
   return config;
 };
 
-const fileName = ext => (devMode ? `[name].${ext}` : `[name].[contenthash].${ext}`);
-
 const cssLoaders = newLoader => {
   const loaders = [
     {
       loader: MiniCssExtractPlugin.loader,
     },
-    'css-loader',
+    { loader: 'css-loader', options: { sourceMap: true, importLoaders: 2 } },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+        postcssOptions: {
+          plugins: [['autoprefixer']],
+        },
+      },
+    },
   ];
-  if (newLoader) loaders.push(newLoader);
+  if (newLoader) loaders.push({ loader: 'sass-loader', options: { sourceMap: true } });
   return loaders;
 };
 
@@ -41,7 +48,7 @@ module.exports = {
     main: './index.ts',
   },
   output: {
-    filename: fileName('js'),
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
     clean: true,
   },
@@ -58,7 +65,8 @@ module.exports = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: fileName('css'),
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
     }),
     new CopyPlugin({
       patterns: [{ from: 'assets', to: 'assets' }],
@@ -80,7 +88,7 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/,
-        use: cssLoaders('sass-loader'),
+        use: cssLoaders(true),
       },
       {
         test: /\.tsx?$/,
