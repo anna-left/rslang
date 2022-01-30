@@ -1,4 +1,4 @@
-import './authorization/authorization';
+import './authorization';
 
 import './games/Audiocall';
 import './games/Original';

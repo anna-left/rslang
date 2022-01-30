@@ -17,7 +17,7 @@ const optimization = () => {
   if (!devMode) {
     config.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];
   } else {
-    config.devTools = `eval-source-map`;
+    this.devtool = `inline-source-map`;
   }
   return config;
 };
