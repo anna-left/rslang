@@ -53,7 +53,6 @@ module.exports = {
     clean: true,
   },
   optimization: optimization(),
-  devtool: devTool(),
   devServer: {
     port: 8080,
     hot: devMode,
