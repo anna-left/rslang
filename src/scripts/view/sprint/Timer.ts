@@ -1,4 +1,5 @@
 import {createHTMLElement, createNSElement, setAttributes} from "../../utils/CommonFunctions";
+import './Timer.scss';
 
 class Timer {
   private readonly svg: SVGElement;
@@ -27,17 +28,13 @@ class Timer {
     this.timer = time;
     this.container = createHTMLElement('div', 'timer');
     this.timeDisplay = createHTMLElement('h2', 'timer__display', `${time}`);
-    this.timeDisplay.style.color = 'white';
-    this.timeDisplay.style.position = 'absolute';
-    this.timeDisplay.style.textAlign = 'center';
     this.timeDisplay.style.width = `${radius * 2}px`;
     this.timeDisplay.style.lineHeight = `${radius * 2}px`;
     this.timeDisplay.style.fontSize = `${radius / 2}px`;
     this.svg = createNSElement('svg');
-    this.svg.style.transform = 'rotate(-90deg)';
+    this.svg.classList.add('timer__circle');
     setAttributes(this.svg, svgAttributes);
     this.circle = createNSElement('circle');
-    this.circle.style.transition = `all 1s linear`;
     setAttributes(this.circle, circleAttribute);
     this.svg.append(this.circle);
     this.container.append(this.timeDisplay, this.svg);

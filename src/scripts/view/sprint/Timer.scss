@@ -1,0 +1,12 @@
+.timer__display {
+  color: white;
+  position: absolute;
+  text-align: center;
+}
+
+.timer__circle {
+  transform: rotate(-90deg);
+  circle {
+    transition: all 1s linear;
+  }
+}
