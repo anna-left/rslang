@@ -1,0 +1,31 @@
+$badge-size: 30px;
+
+.badges {
+  display: flex;
+  gap: 10px;
+  height: $badge-size * 2;
+  align-items: center;
+}
+
+.badge {
+  width: $badge-size;
+  height: $badge-size;
+  background-color: #999;
+  border-radius: 50%;
+  border: black solid 2px;
+  &--active {
+    background-color: transparent;
+    background-image: url("./../../../assets/svg/right.svg");
+    background-size: $badge-size $badge-size;
+    background-position: center;
+  }
+  &--super {
+    width: $badge-size * 2;
+    height: $badge-size * 2;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: url("./../../../assets/svg/cup.svg");
+    background-size: $badge-size * 2 $badge-size * 2;
+    background-position: center;
+  }
+}
