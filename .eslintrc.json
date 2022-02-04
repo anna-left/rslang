@@ -1,27 +1,82 @@
 {
-  "plugins": [
-      "@typescript-eslint",
-      "import"
-  ],
-  "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module"
-  },
-  "env": {
-      "es6": true,
-      "browser": true,
-      "node": true
-  },
-  "rules": {
-      "@typescript-eslint/no-explicit-any": 2,
-      "no-debugger": "off",
-      "no-console": 0,
-      "class-methods-use-this": "off"
-  }
+    "plugins": [
+        "@typescript-eslint",
+        "import",
+        "prettier"
+    ],
+    "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb-typescript/base",
+        "eslint:recommended",
+        "prettier",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "@typescript-eslint/no-explicit-any": 2,
+        "no-debugger": "off",
+        "no-console": 0,
+        "class-methods-use-this": "off",
+        "@typescript-eslint/ban-types": [
+            "error",
+            {
+                "types": {
+                    "Function": false
+                },
+                "extendDefaults": true
+            }
+        ],
+        "no-plusplus": "off",
+        "max-len": [
+            "warn",
+            {
+                "code": 120
+            }
+        ],
+        "indent": [
+            "warn",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "@typescript-eslint/indent": [
+            "warn",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "no-param-reassign": [
+            "error",
+            {
+                "props": false
+            }
+        ],
+        "comma-dangle": [
+            2,
+            "always-multiline"
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
+    },
+    "ignorePatterns": [
+        "*config.js",
+        "./dist/*.js"
+    ]
 }

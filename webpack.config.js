@@ -16,8 +16,6 @@ const optimization = () => {
   };
   if (!devMode) {
     config.minimizer = [new CssMinimizerPlugin(), new TerserPlugin()];
-  } else {
-    this.devtool = `inline-source-map`;
   }
   return config;
 };
@@ -45,8 +43,9 @@ const cssLoaders = newLoader => {
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    main: './index.ts',
+    main: './index',
   },
+  devtool: `source-map`,
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
