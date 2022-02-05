@@ -1,6 +1,6 @@
 import './authorization';
 
-import './games/Audiocall';
+import '../audiocall/startAudiocall';
 import './games/Original';
 import './games/Puzzle';
 import './games/Savannah';

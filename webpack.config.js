@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const { merge } = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const devMode = process.env.NODE_ENV === 'development';
 
@@ -74,29 +72,51 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpg|svg|giv|webp)$/,
-        type: 'asset',
-      },
-      {
-        test: /\.(ttf|woff|woff2|eot)$/,
-        type: 'asset',
-      },
-      {
-        test: /\.css$/i,
-        use: cssLoaders(),
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: cssLoaders(true),
-      },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.[tj]s$/,
+        loader: require.resolve('ts-loader'),
+        options: {
+          configFile: path.resolve(__dirname, './tsconfig.json'),
+        },
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg|mp3)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.scss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.ts', '.js'],
   },
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, './dist'),
+    assetModuleFilename: 'assets/[hash][ext]',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
+    }),
+    new CleanWebpackPlugin(),
+  ],
+};
+
+module.exports = ({ mode }) => {
+  const isProductionMode = mode === 'prod';
+  const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+
+  return merge(baseConfig, envConfig);
 };
