@@ -6,3 +6,5 @@ import './games/Puzzle';
 import './games/Savannah';
 import './games/SpeakIt';
 import './games/Sprint';
+
+import './home';
