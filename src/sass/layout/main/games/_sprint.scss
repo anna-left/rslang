@@ -32,11 +32,11 @@
   background-color: #999;
   border-radius: 50%;
   border: black solid 2px;
+  background-size: $badge-size $badge-size;
+  background-position: center;
   &--active {
     background-color: white;
-    background-image: url("../assets/svg/right.svg");
-    background-size: $badge-size $badge-size;
-    background-position: center;
+    background-image: url("../assets/svg/right.svg")
   }
   &--super {
     width: $badge-size * 2;
@@ -45,7 +45,6 @@
     background-color: transparent;
     background-image: url("../assets/svg/cup.svg");
     background-size: $badge-size * 2 $badge-size * 2;
-    background-position: center;
   }
 }
 
@@ -153,10 +152,12 @@
 }
 
 .modal__wrong {
+  width: 125px;
   background-color: #ec3131;
 }
 
 .modal__right {
+  width: 125px;
   background-color: #3fa13f;
 }
 
@@ -209,4 +210,18 @@
 
 .info__right {
   background-image: url("../assets/sprint/right-button.png");
+}
+
+.modal__sign {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+}
+
+.modal__sign-right {
+  background-image: url("../assets/svg/right.svg");
+}
+
+.modal__sign-wrong {
+  background-image: url("../assets/svg/wrong.svg");
 }

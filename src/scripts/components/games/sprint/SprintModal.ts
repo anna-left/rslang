@@ -31,11 +31,27 @@ class SprintModal {
 
   onRightAnswer() {
     this.header.onRightAnswer();
+    this.displaySign(true);
   }
 
   onWrongAnswer() {
     this.header.resetLevel();
     this.header.onLevelChange();
+    this.displaySign(false);
+  }
+
+  updateWords(foreign: string, translation: string) {
+    this.foreign.innerText = foreign;
+    this.translation.innerText = translation;
+  }
+
+  displaySign(isRight: boolean) {
+    const sings = ['modal__sign-wrong', 'modal__sign-right'];
+    const sign = createHTMLElement('div', `modal__sign ${sings[Number(isRight)]}`);
+    setTimeout(() => {
+      sign.remove();
+    }, 200);
+    this.separationLine.append(sign);
   }
 
   render() {
