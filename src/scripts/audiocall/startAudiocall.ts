@@ -1,14 +1,14 @@
 // import { WordAudiocall } from './WordAudiocall';
 import { startRound } from './startRound';
-import { answerIndicatorSVG, speakerSVG } from './svg';
+import { answerIndicatorSVG, speakerSVG, nextSVG } from './svg';
 import { createHtmlElement } from './createHtmlElement';
 
 function startAudiocall() {
-  const header = document.querySelector('.header') as HTMLElement;
+  const header: HTMLElement = document.querySelector('.header');
   header.style.display = 'none';
-  const footer = document.querySelector('.footer') as HTMLElement;
+  const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
-  const mainHTML = document.querySelector('.main') as HTMLElement;
+  const mainHTML: HTMLElement = document.querySelector('.main');
   while (mainHTML.firstChild) {
     mainHTML.removeChild(mainHTML.firstChild);
   }

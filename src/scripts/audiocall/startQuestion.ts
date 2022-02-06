@@ -14,12 +14,12 @@ function answerIDontKnow() {
 function startQuestion() {
   GLOBAL_VALUES.noAnswer = 0;
   // очистим страницу
-  const audiocallHTML = document.querySelector('.audiocall') as HTMLElement;
+  const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   while (audiocallHTML.firstChild) {
     audiocallHTML.removeChild(audiocallHTML.firstChild);
   }
   const audiocallQuestionHTML = createHtmlElement('div', audiocallHTML, 'audiocall-question');
-  const speakerHTML = createHtmlElement('div', audiocallQuestionHTML, 'speaker') as HTMLElement;
+  const speakerHTML: HTMLElement = createHtmlElement('div', audiocallQuestionHTML, 'speaker');
   speakerHTML.insertAdjacentHTML('beforeend', insertSpeakerSVG);
   const speakerSVGHTML = document.querySelector('#speaker');
   speakerSVGHTML.classList.add('speaker__svg');

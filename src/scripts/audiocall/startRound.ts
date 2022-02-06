@@ -9,7 +9,7 @@ function startRound() {
   words = createArrayQuestions();
   GLOBAL_VALUES.currentRound += 1;
   GLOBAL_VALUES.currentQuestion = 0;
-  const audiocallHTML = document.querySelector('.audiocall') as HTMLElement;
+  const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   while (audiocallHTML.firstChild) {
     audiocallHTML.removeChild(audiocallHTML.firstChild);
   }
