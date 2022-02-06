@@ -6,7 +6,13 @@ import { insertAnswerIndicatorSVG, insertSpeakerSVG } from './svg';
 import { playSound } from './playSound';
 import { processAnswer } from './processAnswer';
 
+function answerIDontKnow() {
+  GLOBAL_VALUES.noAnswer = 1;
+  processAnswer();
+}
+
 function startQuestion() {
+  GLOBAL_VALUES.noAnswer = 0;
   // очистим страницу
   const audiocallHTML = document.querySelector('.audiocall') as HTMLElement;
   while (audiocallHTML.firstChild) {
@@ -28,6 +34,8 @@ function startQuestion() {
     answerHTML.insertAdjacentHTML('beforeend', insertAnswerIndicatorSVG);
     createHtmlElement('div', answerHTML, 'answer__word', curWord.answers[i]);
   }
+  const audiocallQuestionBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-question__btn', 'Не знаю');
+  audiocallQuestionBtn.addEventListener('click', answerIDontKnow);
   playSound('word');
 }
 
