@@ -15,6 +15,14 @@ class API {
         this.endpoint = 'https://rslang-909.herokuapp.com';
     }
 
+    async getAllWords() {
+        const endpointModifier = `/words/all`;
+        const response = await fetch(this.endpoint + endpointModifier, {
+            method: 'GET',
+        });
+        return await response.json() as IWordSchema[];
+    }
+
     async getWords(group: number, page: number) {
         const endpointModifier = `/words?group=${group}&page=${page}`;
         const response = await fetch(this.endpoint + endpointModifier, {
