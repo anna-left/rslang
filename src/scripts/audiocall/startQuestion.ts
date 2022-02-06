@@ -23,6 +23,7 @@ function startQuestion() {
   speakerHTML.insertAdjacentHTML('beforeend', insertSpeakerSVG);
   const speakerSVGHTML = document.querySelector('#speaker');
   speakerSVGHTML.classList.add('speaker__svg');
+  speakerHTML.addEventListener('click', ()=> {playSound('word')});
 
   const answersHTML = createHtmlElement('div', audiocallQuestionHTML, 'answers');
   const curWord = words[GLOBAL_VALUES.currentQuestion];

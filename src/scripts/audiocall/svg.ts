@@ -46,4 +46,19 @@ const insertSpeakerSVG = `<svg class="speaker">
   <use href="#speaker"></use>
 </svg>`;
 
-export { answerIndicatorSVG, insertAnswerIndicatorSVG, speakerSVG, insertSpeakerSVG };
+const nextSVG = `
+<svg display="none">
+  <symbol viewBox="0 0 42 20" id="next">
+  <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="Incorrect" transform="translate(-579.000000, -494.000000)">
+            <path d="M579,503 L579,505 L616.602063,505 L609.292893,512.292893 L610.707107,513.707107 L620.414214,504 L610.707107,494.292893 L609.292893,495.707107 L616.602063,503 L579,503 Z" id="Combined-Shape"/>
+        </g>
+    </g></symbol>
+</svg>
+`;
+
+const insertNextSVG = `<svg class="next">
+  <use href="#next"></use>
+</svg>`;
+
+export { answerIndicatorSVG, insertAnswerIndicatorSVG, speakerSVG, insertSpeakerSVG, nextSVG, insertNextSVG };

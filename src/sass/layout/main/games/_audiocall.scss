@@ -60,6 +60,18 @@
   margin: 0 auto;
 }
 
+.audiocall-next__btn {
+  height: 63px;
+  padding: 0;
+}
+
+.next {
+  width: 200px;
+  height: 40px;
+  margin: 0 auto;
+  fill: hsla(0, 0%, 100%, 0.5);
+}
+
 .audiocall-start__btn:hover,
 .audiocall-question__btn:hover,
 .audiocall-next__btn:hover {
@@ -73,6 +85,7 @@
   height: 120px;
   border-radius: 120px;
   background-color: hsla(0, 0%, 100%, 0.05);
+  cursor: pointer;
   transition: all 0.15s ease;
 }
 
@@ -111,6 +124,7 @@
   transition: all 0.15s ease;
   box-sizing: border-box;
   text-align: left;
+  cursor: pointer;
 }
 
 .answer__number {
