@@ -1,5 +1,5 @@
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
-import { NUMBER_WORDS_ROUND } from './constantsAndValues/constants';
+import { AMOUNT_ROUND_WORDS } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { playSound } from './playSound';
@@ -22,7 +22,7 @@ function processAnswer() {
     GLOBAL_VALUES.noAnswer = 0;
     GLOBAL_VALUES.currentQuestion++;
 
-    if (GLOBAL_VALUES.currentQuestion > NUMBER_WORDS_ROUND) {
+    if (GLOBAL_VALUES.currentQuestion > AMOUNT_ROUND_WORDS) {
       GLOBAL_VALUES.currentQuestion = 0;
       startRound();
     } else {

@@ -1,2 +1,2 @@
-export const NUMBER_WORDS_ROUND = 10;
-export const NUMBER_ANSWERS = 5;
+export const AMOUNT_ROUND_WORDS = 10;
+export const AMOUNT_ANSWERS = 5;
