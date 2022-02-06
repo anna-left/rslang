@@ -1,6 +1,5 @@
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { createHtmlElement } from './createHtmlElement';
-// import { shuffleArray } from './shuffleArray';
 import { createArrayQuestions } from './createArrayQuestions';
 import { WordAudiocall } from './WordAudiocall';
 import { startQuestion } from './startQuestion';
@@ -11,7 +10,6 @@ function startRound() {
   GLOBAL_VALUES.currentRound += 1;
   GLOBAL_VALUES.currentQuestion = 0;
   const audiocallHTML = document.querySelector('.audiocall') as HTMLElement;
-  // const mainHTML = document.querySelector('.main');
   while (audiocallHTML.firstChild) {
     audiocallHTML.removeChild(audiocallHTML.firstChild);
   }
@@ -25,7 +23,6 @@ function startRound() {
   );
   const audiocallStartBtn = createHtmlElement('button', audiocallStart, 'audiocall-start__btn', 'Начать');
   audiocallStartBtn.addEventListener('click', startQuestion);
-  // startQuestion();
 }
 
 export { startRound, words };

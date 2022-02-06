@@ -4,6 +4,7 @@ import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { insertAnswerIndicatorSVG, insertSpeakerSVG } from './svg';
 import { playSound } from './playSound';
+import { processAnswer } from './processAnswer';
 
 function startQuestion() {
   // очистим страницу
@@ -22,6 +23,7 @@ function startQuestion() {
   for (let i = 0; i < curWord.answers.length; i++) {
     const answerHTML = createHtmlElement('div', answersHTML, 'answer');
     answerHTML.setAttribute('data-num', String(i));
+    answerHTML.addEventListener('click', processAnswer);
     createHtmlElement('div', answerHTML, 'answer__number', String(i + 1));
     answerHTML.insertAdjacentHTML('beforeend', insertAnswerIndicatorSVG);
     createHtmlElement('div', answerHTML, 'answer__word', curWord.answers[i]);
