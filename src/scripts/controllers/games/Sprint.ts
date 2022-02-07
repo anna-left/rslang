@@ -1,1 +1,10 @@
-/* TODO sprint game controller */
+import SprintView from "../../view/games/Sprint";
+
+class SprintControl{
+    private readonly view: SprintView;
+    constructor() {
+    this.view = new SprintView()
+    }
+
+
+}
