@@ -20,39 +20,38 @@ const optimization = () => {
   return config;
 };
 
-const devTool = () => {
-  if (devMode) {
-    return 'eval-source-map';
-  } else {
-    return false;
-  }
-};
-
-const fileName = ext => (devMode ? `[name].${ext}` : `[name].[contenthash].${ext}`);
-
 const cssLoaders = newLoader => {
   const loaders = [
     {
       loader: MiniCssExtractPlugin.loader,
     },
-    'css-loader',
+    { loader: 'css-loader', options: { sourceMap: true, importLoaders: 2 } },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+        postcssOptions: {
+          plugins: [['autoprefixer']],
+        },
+      },
+    },
   ];
-  if (newLoader) loaders.push(newLoader);
+  if (newLoader) loaders.push({ loader: 'sass-loader', options: { sourceMap: true } });
   return loaders;
 };
 
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    main: './index.ts',
+    main: './index',
   },
+  devtool: `source-map`,
   output: {
-    filename: fileName('js'),
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
     clean: true,
   },
   optimization: optimization(),
-  devtool: devTool(),
   devServer: {
     port: 8080,
     hot: devMode,
@@ -65,7 +64,8 @@ module.exports = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: fileName('css'),
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
     }),
     new CopyPlugin({
       patterns: [{ from: 'assets', to: 'assets' }],
@@ -87,7 +87,7 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/,
-        use: cssLoaders('sass-loader'),
+        use: cssLoaders(true),
       },
       {
         test: /\.tsx?$/,
