@@ -50,7 +50,7 @@ class Timer {
       } else {
         this.timeDisplay.innerHTML = String(0);
         clearInterval(timerId);
-        /* TODO dispatch event*/
+        this.container.dispatchEvent(new CustomEvent('time-over', {bubbles: true}));
       }
     }, 1000);
   }

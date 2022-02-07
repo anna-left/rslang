@@ -1,4 +1,6 @@
 class SprintModel {
-    constructor() {
-    }
+  constructor() {
+  }
 }
+
+export default SprintModel;

@@ -11,7 +11,7 @@ class SprintView {
   constructor() {
     this.score = 0;
     this.scoreBlock = createHTMLElement('div', 'sprint__score', `Score: ${this.score}`);
-    this.timer = new Timer(60);
+    this.timer = new Timer(6);
     this.timer.startTimer();
     this.game = new SprintModal();
     this.game.render().append(this.scoreBlock, this.timer.render())
