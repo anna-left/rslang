@@ -29,7 +29,11 @@ class Timer {
     this.svg.classList.add('timer__circle');
     this.circle = createNSElement('circle');
     setAttributes(this.circle, circleAttribute);
-    this.svg.append(this.circle);
+    const innerCircle = createNSElement('circle');
+    setAttributes(innerCircle, circleAttribute);
+    innerCircle.setAttribute('stroke', 'gray');
+    innerCircle.style.position = 'absolute;';
+    this.svg.append(innerCircle, this.circle);
     this.container.append(this.timeDisplay, this.svg);
   }
 
@@ -46,7 +50,7 @@ class Timer {
       } else {
         this.timeDisplay.innerHTML = String(0);
         clearInterval(timerId);
-        /* TODO dispatch event*/
+        this.container.dispatchEvent(new CustomEvent('time-over', {bubbles: true}));
       }
     }, 1000);
   }

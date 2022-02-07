@@ -18,7 +18,13 @@ class SprintModal {
     this.separationLine = createHTMLElement('div', 'modal__separation');
     const buttons = createHTMLElement('div', 'modal__buttons');
     this.wrongButton = createHTMLElement('button', 'modal__button modal__wrong', 'Неверно');
+    this.wrongButton.addEventListener('click', ((ev: MouseEvent) => {
+      window.dispatchEvent(new CustomEvent('sprint-wrong'));
+    }))
     this.rightButton = createHTMLElement('button', 'modal__button modal__right', 'Верно');
+    this.rightButton.addEventListener('click', ((ev: MouseEvent) => {
+      window.dispatchEvent(new CustomEvent('sprint-right'));
+    }))
     buttons.append(this.wrongButton, this.rightButton);
     footer.append(this.foreign, this.translation, this.separationLine, buttons);
     this.modal.append(this.header.render(), footer);
@@ -50,7 +56,7 @@ class SprintModal {
     const sign = createHTMLElement('div', `modal__sign ${sings[Number(isRight)]}`);
     setTimeout(() => {
       sign.remove();
-    }, 200);
+    }, 300);
     this.separationLine.append(sign);
   }
 
