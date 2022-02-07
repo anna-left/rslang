@@ -29,7 +29,11 @@ class Timer {
     this.svg.classList.add('timer__circle');
     this.circle = createNSElement('circle');
     setAttributes(this.circle, circleAttribute);
-    this.svg.append(this.circle);
+    const innerCircle = createNSElement('circle');
+    setAttributes(innerCircle, circleAttribute);
+    innerCircle.setAttribute('stroke', 'gray');
+    innerCircle.style.position = 'absolute;';
+    this.svg.append(innerCircle, this.circle);
     this.container.append(this.timeDisplay, this.svg);
   }
 
