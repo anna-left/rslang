@@ -134,7 +134,6 @@
 
 .modal__separation {
   width: 100%;
-  border-bottom: 1px black dotted;
   position: relative;
 }
 
@@ -216,6 +215,10 @@
   width: 40px;
   height: 40px;
   background-size: 40px 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal__sign-right {

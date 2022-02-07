@@ -56,7 +56,7 @@ class SprintModal {
     const sign = createHTMLElement('div', `modal__sign ${sings[Number(isRight)]}`);
     setTimeout(() => {
       sign.remove();
-    }, 200);
+    }, 300);
     this.separationLine.append(sign);
   }
 
