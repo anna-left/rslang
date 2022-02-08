@@ -9,26 +9,41 @@ export class Feature {
       'section-features',
     ]);
 
-    const aboutBox = createElement('div', ['section-features__about-box', 'about-box']);
+    const aboutBox = createElement('div', ['section-features__box', 'section-features__about-box', 'about-box']);
     setAboutBox(aboutBox);
 
     // Games
-    const gameList = createElement('div', ['section-features__game-box', 'game-box']);
+    const gameList = createElement('div', ['section-features__box', 'section-features__game-box', 'game-box']);
     setFeatureGameBox(gameList);
 
     // Progress
-    const progressBox = createElement('div', ['section-features__progress-box', 'progress-box']);
+    const progressBox = createElement('div', [
+      'section-features__box',
+      'section-features__progress-box',
+      'progress-box',
+    ]);
     setProgressBox(progressBox);
 
     // Settings
-    const settingsBox = createElement('div', ['section-features__settings-box', 'settings-box']);
+    const settingsBox = createElement('div', [
+      'section-features__box',
+      'section-features__settings-box',
+      'settings-box',
+    ]);
     setSettingsBox(settingsBox);
 
     // crossplatform
-    const crossplatformBox = createElement('div', ['section-features__cross-box', 'cross-box']);
+    const crossplatformBox = createElement('div', [
+      'section-features__box',
+      'section-features__cross-box',
+      'cross-box',
+    ]);
     setCrossBox(crossplatformBox);
 
-    section.append(aboutBox, gameList, progressBox, settingsBox, crossplatformBox);
+    const featuresBox = createElement('div', ['section-features__container']);
+    featuresBox.append(gameList, progressBox, settingsBox, crossplatformBox);
+
+    section.append(aboutBox, featuresBox);
 
     rootEl.append(section);
   }
@@ -40,9 +55,8 @@ function setAboutBox(aboutBox: HTMLElement) {
     'p',
     ['about-box__info'],
     [],
-    `Есть возможность как просто учить слова, так и играть в игры.
-  Также можно настраивать приложение под себя и ещё много чего другого.
-  Ниже есть подробное описание всего функционала.`,
+    `Есть возможность как просто учить слова, так и играть в игры,
+  можно настраивать приложение под себя, а ещё во время обучения ведется статистика!`,
   );
   aboutBox.append(aboutHeader, aboutInfo);
 }
@@ -51,13 +65,12 @@ function setAboutBox(aboutBox: HTMLElement) {
 function setFeatureGameBox(gameBox: HTMLElement) {
   // default info
   const gameHeader = createElement('h3', ['section-features__header', 'game-box__header'], [], 'Об играх');
-
   const gameInfo = createElement(
     'p',
     ['game-box__info'],
     [],
     `Благодаря играм можно позволить себе изучать ангийский в увлекательной форме.
-  Но игры позволяют не только изучить английский, они также развивают внимательность и пробуждают в нас соревновательный характер!`,
+  Однако игры позволяют не только изучить английский, они также развивают внимательность и пробуждают в нас соревновательный характер!`,
   );
 
   // pop-up info about games
@@ -78,11 +91,11 @@ function setProgressBox(progressBox: HTMLElement) {
     'p',
     ['progress-box__info'],
     [],
-    `Статистика позволяет подкорректировать программу изучения под возможности каждого пользователя.
-  Статистика отслеживает какие слова запоминаются труднее, а какие легче.
-  В зависимости от полученных данных изменяется программа обучения.
-  Также в зависимости от трудности запоминая каждого слова регулируется как часто оно должно повторяться.
-  Ваша статистика позаботится о том, чтобы вы наверняка выучили все слова и чтобы уж точно их не забыли!.`,
+    `Для каждого пользователя ведется статистика во время обучения, что позволяет:
+    - отслеживть трудные слова;
+    - корректировать программу изучения под возможности каждого пользователя;
+    - регулировать частоту появления слов
+    - смотреть свой прогресс.`,
   );
   progressBox.append(progressHeader, progressInfo);
 }
@@ -94,11 +107,11 @@ function setSettingsBox(settingsBox: HTMLElement) {
     'p',
     ['settings-box__info'],
     [],
-    `В меню настроек есть возможность выбора различных функций.
-  Вы можете выбрать для себя как светслую схему для дневных занятий, так  ночную - для вечерних.
-  Есть возможность выбрать дневную цель, регулируя таким образом сколько слов в день вы готовы изучать.
-  Имеется возможность выбрать стиль анимации, либо ее отключение.
-  Также можно выбрать анлийский язык интерфейса, для еще большего углубления в изучение английского.`,
+    `В меню настроек есть возможность выбора различных функций:
+    - выбор цветовой схемы;
+    - выбор дневной нормы;
+    - вид анимации;
+    - язык интерфейса.`,
   );
 
   settingsBox.append(settingsHeader, settingsInfo);
@@ -116,11 +129,9 @@ function setCrossBox(crossplatformBox: HTMLElement) {
     'p',
     ['cross-box__info'],
     [],
-    `Вы можете заниматься в любом месте, в любое время и на любом подходящем устройстве.
-  Можно заниматься дома сидя за компьютером и наслаждаться кофе.
-  Либо заниматься в более раслабленной форме: лежа на диване с планшетом.
-  Также можно заниматься на телефоне во время рабочего перерыва или стоя в длинной очереди.
-  И все это бесплатно. Необходимо лишь наличие интернета и желание.`,
+    `Занимайся в любом месте, в любое время и на любом подходящем устройстве.
+  Можно заниматься дома за компьютером, любо лежа на диване с планшетом, а еще можно
+  заниматься на телефоне во время рабочего перерыва, или стоя в длинной очереди.`,
   );
 
   crossplatformBox.append(crossHeader, crossInfo);

@@ -1,0 +1,9 @@
+@mixin nav-link() {
+  color: $color-prime-dark;
+  transition: all 0.15s;
+  &:hover {
+    cursor: pointer;
+    background-color: $color-prime-calm-0;
+    filter: contrast(130%);
+  }
+}
