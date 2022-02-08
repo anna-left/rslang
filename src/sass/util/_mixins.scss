@@ -7,3 +7,17 @@
     filter: contrast(130%);
   }
 }
+
+@mixin buttonize() {
+  background-color: $color-prime-candy;
+  font-size: 2rem;
+  color: $color-prime-light;
+  padding: 2rem 7rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1.5rem darken($color-prime-candy, 10%);
+  transition: all 0.2s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0.3rem darken($color-prime-candy, 10%);
+  }
+}

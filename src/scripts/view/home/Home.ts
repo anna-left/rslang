@@ -24,7 +24,7 @@ export class HomeView {
       passRepeat?: HTMLElement,
       name?: HTMLElement,) => void,
   ) {
-    new About(rootEl, 'register', authInputHandler, authRegisterHandler);
+    new About(rootEl, 'auth', authInputHandler, authRegisterHandler);
     const nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
     const header = createElement('h3', ['home-navigation__header'], [], 'Информация');
 

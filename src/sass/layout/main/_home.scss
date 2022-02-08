@@ -14,6 +14,9 @@
     &__section {
       display: flex;
       align-items: center;
+      &_type_about{
+        width: 100%;
+      }
       &_type_features {
         flex-direction: column;
         justify-content: space-evenly;
@@ -62,7 +65,11 @@
 
 .section-about {
   &__content-box {
+    padding: 0 0 7% 7%;
+    flex-basis: 43%;
+    height: 100%;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     width: 64rem;
     font-size: 2rem;
@@ -71,20 +78,12 @@
     font-size: 7rem;
   }
   &__content-info {
+    width: 80%;
     margin: 4rem 0;
   }
   &__btn-auth {
     align-self: start;
-    background-color: $color-prime-candy;
-    color: $color-prime-light;
-    padding: 2rem 7rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 1.5rem darken($color-prime-candy, 10%);
-    transition: all 0.2s;
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0 0 0.3rem darken($color-prime-candy, 10%);
-    }
+    @include buttonize;
   }
   &__image {
     position: relative;
