@@ -4,7 +4,11 @@ enum SprintSettings {
   baseScore = 10,
 }
 
-// export const SprintColors = ['#ccc', '#f2ac00', '#e0793d', '#c6717d'];
+export enum WordsSettings {
+  groups = 6,
+  pages = 30,
+}
+
 export const SprintColors = ['#ddd', '#fbcee3', '#F2D265', '#CFB276'];
 
 export default SprintSettings;

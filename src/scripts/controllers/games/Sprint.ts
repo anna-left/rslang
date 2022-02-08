@@ -9,9 +9,13 @@ class Sprint {
   private words: any[];
   private currentWordIndex: number;
   private streak: number;
-  constructor() {
+  private readonly group: number;
+  private readonly page: number;
+  constructor(group = 0, page = 0) {
+    this.group = group;
+    this.page = page;
     this.view = new SprintView();
-    this.model = new SprintModel();
+    this.model = new SprintModel(group, page);
     this.root = document.querySelector('.main-box');
     this.root.append(this.view.render());
     this.words = [];
@@ -20,9 +24,8 @@ class Sprint {
   }
 
   async init() {
-    await this.model.init();
     this.view.init();
-    this.words = this.model.getWords();
+    this.words = await this.model.getWords();
     window.addEventListener('sprint-right', () => {
       if (this.streak < SprintSettings.subLevels) {
         this.view.onRightAnswer();
