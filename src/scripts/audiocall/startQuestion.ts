@@ -11,6 +11,29 @@ function answerIDontKnow() {
   processAnswer();
 }
 
+function getContext(eventKey: number) {
+  const answersHTML = document.querySelectorAll('.answer');
+  return answersHTML[eventKey - 1];
+}
+
+function handleSpace(event: KeyboardEvent) {
+  if (event.code === 'Space') {
+    playSound('word');
+  }
+}
+
+function handleKeys(event: KeyboardEvent) {
+  const answersIdArray = ['1', '2', '3', '4', '5'];
+  if (event.key === 'Enter') {
+    document.removeEventListener('keypress', handleKeys);
+    answerIDontKnow();
+  } else if (answersIdArray.includes(event.key)) {
+    document.removeEventListener('keypress', handleKeys);
+    const context = getContext(Number(event.key));
+    const processAnswerContext = processAnswer.bind(context);
+    processAnswerContext();
+  }
+}
 function startQuestion() {
   GLOBAL_VALUES.noAnswer = 0;
   // очистим страницу
@@ -23,7 +46,9 @@ function startQuestion() {
   speakerHTML.insertAdjacentHTML('beforeend', insertSpeakerSVG);
   const speakerSVGHTML = document.querySelector('#speaker');
   speakerSVGHTML.classList.add('speaker__svg');
-  speakerHTML.addEventListener('click', ()=> {playSound('word')});
+  speakerHTML.addEventListener('click', () => {
+    playSound('word');
+  });
 
   const answersHTML = createHtmlElement('div', audiocallQuestionHTML, 'answers');
   const curWord = words[GLOBAL_VALUES.currentQuestion];
@@ -37,6 +62,8 @@ function startQuestion() {
   }
   const audiocallQuestionBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-question__btn', 'Не знаю');
   audiocallQuestionBtn.addEventListener('click', answerIDontKnow);
+  document.addEventListener('keypress', handleKeys);
+  document.addEventListener('keypress', handleSpace);
   playSound('word');
 }
 

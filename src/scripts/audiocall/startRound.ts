@@ -23,6 +23,15 @@ function startRound() {
   );
   const audiocallStartBtn = createHtmlElement('button', audiocallStart, 'audiocall-start__btn', 'Начать');
   audiocallStartBtn.addEventListener('click', startQuestion);
+  document.addEventListener(
+    'keypress',
+    function (e) {
+      if (e.key === 'Enter') {
+        startQuestion();
+      }
+    },
+    { once: true },
+  );
 }
 
 export { startRound, words };
