@@ -6,13 +6,10 @@ import { playSound } from './playSound';
 import { startRound } from './startRound';
 import { startQuestion } from './startQuestion';
 import { insertNextSVG } from './svg';
+import { endRound } from './endRound';
 
 function processAnswer() {
   const audiocallQuestionHTML: HTMLElement = document.querySelector('.audiocall-question');
-
-  // document.querySelector('.speaker').remove();
-
-  // createHtmlElement('div', audiocallQuestionHTML, 'answer__word');
 
   document.querySelector('.audiocall-question__btn').remove();
   const audiocallNextBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-next__btn');
@@ -22,9 +19,9 @@ function processAnswer() {
     GLOBAL_VALUES.noAnswer = 0;
     GLOBAL_VALUES.currentQuestion++;
 
-    if (GLOBAL_VALUES.currentQuestion > AMOUNT_ROUND_WORDS) {
+    if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
       GLOBAL_VALUES.currentQuestion = 0;
-      startRound();
+      endRound();
     } else {
       startQuestion();
     }
@@ -38,7 +35,9 @@ function processAnswer() {
       const curAnswerHTML = answersHTML[i];
       curAnswerHTML.removeEventListener('click', processAnswer);
       const answerWordHTML: HTMLElement = curAnswerHTML.querySelector('.answer__word');
-      if (curWord.wordTranslate !== curWord.answers[i]) {
+      if (curWord.wordTranslate === curWord.answers[i]) {
+        curAnswerHTML.classList.add('answer_right');
+      } else {
         answerWordHTML.style.opacity = '0.5';
       }
     }
@@ -51,10 +50,12 @@ function processAnswer() {
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];
       curAnswerHTML.removeEventListener('click', processAnswer);
+      curAnswerHTML.classList.remove('answer_hover');
       const answerWordHTML: HTMLElement = curAnswerHTML.querySelector('.answer__word');
-      const answerIndicatorHTML: HTMLElement = curAnswerHTML.querySelector('.answer__indicator');
+      // const answerIndicatorHTML: HTMLElement = curAnswerHTML.querySelector('.answer__indicator');
       if (i === curNumber) {
-        answerIndicatorHTML.style.display = 'block';
+        // answerIndicatorHTML.style.display = 'block';
+        curAnswerHTML.classList.add('answer_right');
       } else {
         answerWordHTML.style.opacity = '0.5';
       }
@@ -64,11 +65,16 @@ function processAnswer() {
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];
       curAnswerHTML.removeEventListener('click', processAnswer);
+      curAnswerHTML.classList.remove('answer_hover');
       const answerWordHTML: HTMLElement = curAnswerHTML.querySelector('.answer__word');
       if (i === curNumber) {
-        answerWordHTML.classList.add('answer__word_width');
-        answerWordHTML.style.opacity = '0.5';
-      } else if (curWord.wordTranslate !== curWord.answers[i]) {
+        // answerWordHTML.classList.add('answer__word_width');
+        curAnswerHTML.classList.add('answer_wrong');
+        // answerWordHTML.style.opacity = '0.5';
+      } else if (curWord.wordTranslate === curWord.answers[i]) {
+        curAnswerHTML.classList.add('answer_right');
+        // answerWordHTML.style.opacity = '0.5';
+      } else {
         answerWordHTML.style.opacity = '0.5';
       }
     }

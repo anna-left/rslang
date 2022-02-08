@@ -51,6 +51,7 @@
   font-size: 7rem;
   z-index: 2;
   margin-bottom: 10%;
+  user-select: none;
 }
 
 .audiocall-start__description {
@@ -62,6 +63,7 @@
   margin: 0 auto;
   margin-bottom: 10%;
   z-index: 2;
+  user-select: none;
 }
 
 .audiocall-start__levels {
@@ -85,6 +87,7 @@
   box-shadow: 1px 1px 4px #8759ab;
   border-radius: 50%;
   z-index: 2;
+  font-size: 2.5rem;
 }
 
 .audiocall-start__btn,
@@ -103,9 +106,13 @@
   background: none;
   // color: hsla(0, 0%, 100%, 0.7);
   font-size: 2rem;
-  transition: all 0.15s ease;
+  transition: all 0.1s ease;
   width: 20rem;
   margin: 0 auto;
+}
+
+.audiocall-next__btn {
+  padding: 1.4rem 2rem ;
 }
 
 .audiocall-plant {
@@ -153,7 +160,7 @@
   border-radius: 12rem;
   background-color: hsla(0, 0%, 100%, 0.05);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.1s ease;
 }
 
 .speaker__svg {
@@ -175,6 +182,7 @@
   align-items: center;
   flex-wrap: wrap;
   align-items: flex-start;
+  row-gap: 1rem;
 }
 
 .answer {
@@ -188,61 +196,57 @@
   margin: 0 1rem;
   // line-height: 3.6rem;
   max-width: 30rem;
-  transition: all 0.15s ease;
+  transition: all 0.1s ease;
   box-sizing: border-box;
   text-align: left;
   cursor: pointer;
-
+  display: flex;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2rem;
 }
 
-.answer:hover {
+.answer_hover:hover {
   background: linear-gradient(180deg, #cd8eff 0%, rgba(205, 142, 255, 0) 100%);
   filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
 }
-
-// .answer__number {
-//   font-size: 0.75em;
-//   position: absolute;
-//   font-weight: 300;
-//   line-height: 1;
-//   top: 2rem;
-//   left: 1.5rem;
-//   color: hsla(0, 0%, 100%, 0.5);
-// }
 
 .answer_right {
   background: linear-gradient(180deg, rgba(67, 210, 108, 0.7) 0%, rgba(67, 210, 108, 0.2) 100%);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
-.answer__indicator {
-  height: 2rem;
-  width: 2rem;
-  position: absolute;
-  top: 1.7rem;
-  left: 1rem;
-  display: none;
-
-  // background: url('..//..//..//..//assets/svg/answer-indicator.svg') no-repeat;
-  // background: url('./answer-indicator.svg');
+.answer_wrong {
+  background: linear-gradient(180deg, rgba(210 67 155 / 70%) 0%, rgba(210 67 155 / 10%) 100%);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
+
+// .answer__indicator {
+//   height: 2rem;
+//   width: 2rem;
+//   position: absolute;
+//   top: 1.7rem;
+//   left: 1rem;
+//   display: none;
+
+//   // background: url('..//..//..//..//assets/svg/answer-indicator.svg') no-repeat;
+//   // background: url('./answer-indicator.svg');
+// }
 
 .answer__word {
   position: relative;
   font-weight: 300;
   // color: #fff;
-  transition: all 0.15s ease;
+  transition: all 0.1s ease;
   word-wrap: break-word;
   max-height: 10.8rem;
   overflow: hidden;
+  user-select: none;
 }
 
-.answer__word:hover {
+// .answer__word:hover {
   // filter: brightness(1.5);
-}
+// }
 
 // .answer__word::after {
 //   background-color: #b08bbb;
@@ -267,33 +271,54 @@
   left: 0;
   width: 100%;
   height: 2px;
-  transition: all 0.15s ease;
+  transition: all 0.1s ease;
 }
 
 // [class*='_btn']:hover {
 //   filter: brightness(1.5);
 // }
 
+@media screen and (max-width: 1000px) {
+.audiocall-start__title {
+    font-size: 6rem;
+  }
+  .audiocall-start__description, 
+  .audiocall-start__level {
+    font-size: 2rem;
+  }
+  .audiocall-start__level {
+    width: 5rem;
+    height: 5rem;
+  }
+}
 @media screen and (max-width: 820px) {
   .answer {
     font-size: 2.2rem;
   }
-  .audiocall-start__plant,
-  .audiocall-start__lamp {
+  .audiocall-plant,
+  .audiocall-lamp {
     display: none;
   }
-  .audiocall-start__title {
-    font-size: 5rem;
+  // .audiocall-start__title {
+  //   font-size: 5rem;
+  // }
+  // .audiocall-start__description {
+  //   font-size: 1.5rem;
+  // }
+    .audiocall-start__level {
+    width: 4.5rem;
+    height: 4.5rem;
   }
+
 }
 
 @media screen and (max-width: 544px) {
   .audiocall__title {
-    font-size: 3.2rem;
+    font-size: 5rem;
   }
 
   .answers {
-    align-items: flex-start;
+    align-items: revert;
     flex-direction: column;
   }
 
@@ -303,4 +328,21 @@
   .audiocall-start__title {
     font-size: 3rem;
   }
+  .audiocall-start__description, 
+  .audiocall-start__level {
+    font-size: 1.5rem;
+  }
+    .audiocall-start__level {
+    width: 4rem;
+    height: 4rem;
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    .audiocall-start__levels {
+    width: 90%;
+    }
+
 }

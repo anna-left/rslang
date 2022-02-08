@@ -1,7 +1,7 @@
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
-import { insertAnswerIndicatorSVG, insertSpeakerSVG } from './svg';
+import { insertSpeakerSVG } from './svg';
 import { playSound } from './playSound';
 import { processAnswer } from './processAnswer';
 import { clearPage } from './startAudiocall';
@@ -52,9 +52,10 @@ function startQuestion() {
   const curWord = words[GLOBAL_VALUES.currentQuestion];
   for (let i = 0; i < curWord.answers.length; i++) {
     const answerHTML = createHtmlElement('div', answersHTML, 'answer');
+    answerHTML.classList.add('answer_hover');
     answerHTML.setAttribute('data-num', String(i));
     answerHTML.addEventListener('click', processAnswer);
-    answerHTML.insertAdjacentHTML('beforeend', insertAnswerIndicatorSVG);
+    // answerHTML.insertAdjacentHTML('beforeend', insertAnswerIndicatorSVG);
     createHtmlElement('div', answerHTML, 'answer__word', curWord.answers[i]);
   }
   const audiocallQuestionBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-question__btn', 'Не знаю');
