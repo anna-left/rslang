@@ -4,7 +4,7 @@ import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 function playSound(param: string) {
   const myPlayer = new Audio();
 
-  myPlayer.volume = 0.5;
+  // myPlayer.volume = 0.5;
   let curSoundSrc = '';
   switch (param) {
     case 'word':

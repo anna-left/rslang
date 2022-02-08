@@ -1,10 +1,10 @@
-// import { buildPageQuestion } from './buildPageQuestion';
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { insertAnswerIndicatorSVG, insertSpeakerSVG } from './svg';
 import { playSound } from './playSound';
 import { processAnswer } from './processAnswer';
+import { clearPage } from './startAudiocall';
 
 function answerIDontKnow() {
   GLOBAL_VALUES.noAnswer = 1;
@@ -34,13 +34,11 @@ function handleKeys(event: KeyboardEvent) {
     processAnswerContext();
   }
 }
+
 function startQuestion() {
   GLOBAL_VALUES.noAnswer = 0;
-  // очистим страницу
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
-  while (audiocallHTML.firstChild) {
-    audiocallHTML.removeChild(audiocallHTML.firstChild);
-  }
+  clearPage(audiocallHTML);
   const audiocallQuestionHTML = createHtmlElement('div', audiocallHTML, 'audiocall-question');
   const speakerHTML: HTMLElement = createHtmlElement('div', audiocallQuestionHTML, 'speaker');
   speakerHTML.insertAdjacentHTML('beforeend', insertSpeakerSVG);
@@ -56,7 +54,6 @@ function startQuestion() {
     const answerHTML = createHtmlElement('div', answersHTML, 'answer');
     answerHTML.setAttribute('data-num', String(i));
     answerHTML.addEventListener('click', processAnswer);
-    createHtmlElement('div', answerHTML, 'answer__number', String(i + 1));
     answerHTML.insertAdjacentHTML('beforeend', insertAnswerIndicatorSVG);
     createHtmlElement('div', answerHTML, 'answer__word', curWord.answers[i]);
   }
