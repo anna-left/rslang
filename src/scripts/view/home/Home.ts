@@ -6,23 +6,14 @@ import { Info } from './Info';
 import { Games } from './Games';
 import { Review } from './Review';
 import { Team } from './Team';
+import { IAuthInputs, IAuthLabels } from './IAuth';
 
 export class HomeView {
   constructor(
     navRootEl: HTMLElement,
     rootEl: HTMLElement,
-    authInputHandler: (
-      mode: string,
-      email: HTMLElement,
-      pass: HTMLElement,
-      passRepeat?: HTMLElement,
-      name?: HTMLElement,
-    ) => void,
-    authRegisterHandler: (      mode: string,
-      email: HTMLElement,
-      pass: HTMLElement,
-      passRepeat?: HTMLElement,
-      name?: HTMLElement,) => void,
+    authInputHandler: (mode: string, inputs: IAuthInputs, labels: IAuthLabels) => void,
+    authRegisterHandler: (mode: string, inputs: IAuthInputs, labels: IAuthLabels) => void,
   ) {
     new About(rootEl, 'auth', authInputHandler, authRegisterHandler);
     const nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
