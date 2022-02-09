@@ -15,6 +15,11 @@ export interface IWordSchema {
     wordTranslate: string,
 }
 
+export interface ISprintWord extends IWordSchema {
+  gameTranslate: string;
+  answer: boolean;
+}
+
 export enum StatusCode {
     OK = 200,
     Created = 201,

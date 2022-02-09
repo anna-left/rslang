@@ -1,0 +1,47 @@
+@import "src/sass/util/functions";
+@import "src/sass/util/variables";
+
+.sprint-game-controls {
+  display: flex;
+  gap: px-to-rem(20px);
+}
+
+.sprint-game-controls__button-container {
+  display: flex;
+  flex-direction: column;
+  gap: px-to-rem(15px);
+  align-items: center;
+}
+
+.sprint-game-controls__button {
+  font-size: px-to-rem(20px);
+  color: white;
+  cursor: pointer;
+  padding: px-to-rem(5px) px-to-rem(20px);
+  border-radius: 5px;
+}
+
+.sprint-game-controls__wrong {
+  width: px-to-rem(125px);
+  background-color: $sprintWrongColor;
+}
+
+.sprint-game-controls__right {
+  width: px-to-rem(125px);
+  background-color: $sprintRightColor;
+}
+
+.sprint-game-controls__info-button {
+  width: px-to-rem(10px);
+  height: px-to-rem(10px);
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+
+.sprint-game-controls__info-left {
+  transform: rotate(-45deg);
+}
+
+.sprint-game-controls__info-right {
+  transform: rotate(135deg);
+}

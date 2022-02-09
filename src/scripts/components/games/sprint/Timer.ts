@@ -1,4 +1,5 @@
 import {createHTMLElement, createNSElement, setAttributes} from "../../../utils/CommonFunctions";
+import './Timer.scss';
 
 class Timer {
   private readonly svg: SVGElement;
@@ -8,7 +9,7 @@ class Timer {
   private readonly timer: number;
   private readonly timeDisplay: HTMLElement;
   private readonly radius: number;
-  constructor(time: number) {
+  constructor(time: number, className: string) {
     const radius = Number(getComputedStyle(document.documentElement).getPropertyValue('--timerRadius'));
     const thickness = Number(getComputedStyle(document.documentElement).getPropertyValue('--timerBorderThickness'));
     this.radius = radius - thickness;
@@ -23,7 +24,7 @@ class Timer {
       fill: "none"
     }
     this.timer = time;
-    this.container = createHTMLElement('div', 'sprint__timer timer');
+    this.container = createHTMLElement('div', `${className}__timer timer`);
     this.timeDisplay = createHTMLElement('h2', 'timer__display', `${time}`);
     this.svg = createNSElement('svg');
     this.svg.classList.add('timer__circle');

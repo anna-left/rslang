@@ -1,0 +1,22 @@
+@import "src/sass/util/functions";
+@import "src/sass/util/variables";
+
+.timer__display {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: $timerRadius / 2;
+}
+
+.timer__circle {
+  transform: translate(-50%, -50%) rotate(-90deg);
+  position: absolute;
+  width: $timerRadius * 2;
+  height: $timerRadius * 2;
+  left: 50%;
+  top: 50%;
+  circle {
+    transition: all 1s linear;
+  }
+}
