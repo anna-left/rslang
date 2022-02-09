@@ -11,13 +11,16 @@
       <div class="header__box">
         <nav class="header__nav">
           <ul class="header__nav-list nav-list">
-            <li class="nav-list__item">Главная</li>
-            <li class="nav-list__item">Учебник</li>
+            <li class="nav-list__item">
+              <ul class="nav-list__burger-menu">
+                <li class="burger-menu__item">—</li>
+                <li class="burger-menu__item">—</li>
+                <li class="burger-menu__item">—</li>
+              </ul>
+            </li>
+            <li class="nav-list__item nav-list__item_state_active">Главная</li>
             <li class="nav-list__item">Игры</li>
           </ul>
-          <div class="header__auth-box nav-list__item">
-            <div class="header__auth">Авторизация</div>
-          </div>
         </nav>
       </div>
     </header>
@@ -29,25 +32,15 @@
         <ul class="footer-box__list">
           <li class="footer-box__item footer-box__item_course">
             <a class="footer-box__link" href="https://rs.school/js/" target="_blank">
-              <div class="rs-icon-box">
-                <svg class="rs-icon">
-                  <use href="#rs-icon"></use>
-                </svg>
-              </div>
-              <div class="footer-box__info-link-wrapper">
-                <p class="footer-box__info-link">free</p>
-                <p class="footer-box__info-link">frontend</p>
-                <p class="footer-box__info-link">course</p>
-              </div>
+              <svg class="rs-icon">
+                <use href="#rs-icon"></use>
+              </svg>
             </a>
           </li>
-          <li class="footer-box__item footer-box__item_copy">©2022 RSLang</li>
           <li class="footer-box__item footer-box__item_git">
-            <div class="git-icon-box">
-              <svg class="git-icon">
-                <use href="#git-icon"></use>
-              </svg>
-            </div>
+            <svg class="git-icon">
+              <use href="#git-icon"></use>
+            </svg>
             <div class="footer-box__info-author-wrapper">
               <a class="footer-box__link" href="https://github.com/ts-andrey" target="_blank">
                 <p class="footer-box__info-author">Andrei Tsakunou</p>
@@ -60,6 +53,7 @@
               </a>
             </div>
           </li>
+          <li class="footer-box__item footer-box__item_copy">©2022 RSLang</li>
         </ul>
       </div>
     </footer>

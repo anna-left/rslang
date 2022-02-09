@@ -1,4 +1,4 @@
-import { createElement } from '../util/Util';
+import { createElement } from '../../util/Util';
 import { IInfo } from './IInfo';
 
 export class Info {

@@ -1,5 +1,3 @@
-@import '../../util/mixins';
-
 .main {
   &__box {
     background-color: $color-prime-light;
@@ -10,13 +8,15 @@
   }
 
   &-box {
-    margin-left: 12.5rem;
     &__section {
       display: flex;
       align-items: center;
       &_type_about {
         overflow: hidden;
         width: 100%;
+        margin-left: 9vw;
+        align-items: flex-end;
+        padding-bottom: 7%;
       }
       &_type_features {
         flex-direction: column;
@@ -38,27 +38,37 @@
   }
 
   &__home-navigation {
-    height: 100%;
-    width: 12.5rem;
     position: absolute;
-    bottom: 7.86rem;
-    left: 0;
+    top: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    border-radius: 0 0 0 2rem;
     align-items: center;
     text-align: center;
     background-color: $color-prime-light-calm;
+    overflow: hidden;
   }
 }
 
 .home-navigation {
-  &__header {
-    margin-bottom: 2rem;
+  &__list {
+    display: flex;
   }
   &__link {
     @include nav-link;
-    padding: 1rem 1rem;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+    &_features {
+      height: 4rem;
+      width: 4rem;
+    }
   }
 }
 
@@ -66,28 +76,29 @@
 
 .section-about {
   &__content-box {
-    padding: 0 0 7% 7%;
-    flex-basis: 43%;
-    height: 100%;
+    flex-basis: 35%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
-    width: 64rem;
-    font-size: 2rem;
+    font-size: calc((2.2vmin + 2.2vmax) / 2);
   }
   &__content-header {
-    font-size: 7rem;
+    font-size: calc((8vmin + 8vmax) / 2);
+    letter-spacing: 1.1;
   }
   &__content-info {
-    width: 80%;
-    margin: 4rem 0;
+    width: 90%;
+    margin: 5rem 0 10rem 0;
   }
   &__btn-auth {
+    font-size: 3.2rem;
     align-self: start;
     @include buttonize;
   }
   &__image-box {
     position: relative;
+    height: 65vmin;
+    max-width: 90vmin;
   }
   &__image {
     position: relative;
@@ -99,9 +110,9 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-46%);
-    height: 119%;
-    width: 115%;
+    transform: translateX(-46%) translateY(3%);
+    height: 107%;
+    width: 106%;
 
     fill: $color-prime-candy;
   }

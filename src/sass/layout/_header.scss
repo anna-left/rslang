@@ -1,11 +1,14 @@
 .header {
+  position: absolute;
   display: flex;
-  justify-content: flex-end;
-  &__box {
-    width: 87.5%;
-  }
+  top: 0;
+  left: 0;
+  padding: 6vh 0 0 9vw;
+  justify-content: flex-start;
+  font-size: 3rem;
+
+
   &__nav {
-    width: 100%;
     color: $color-prime-dark;
     display: flex;
     justify-content: space-between;
@@ -14,16 +17,16 @@
     display: flex;
     align-items: center;
   }
-  &__auth {
-    &-box {
-      margin-right: 2rem;
-    }
-  }
 }
 
 .nav-list {
   &__item {
-    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    padding: 0 2rem;
+    border-bottom: 1px solid $color-prime-candy;
 
     &:last-of-type {
       margin-right: 0;
@@ -32,6 +35,29 @@
     &:hover {
       cursor: pointer;
       background-color: $color-prime-candy;
+    }
+
+    &_state_active {
+      border-left: 1px solid $color-prime-candy;
+      border-top: 1px solid $color-prime-candy;
+      border-right: 1px solid $color-prime-candy;
+      border-bottom: none;
+    }
+  }
+  &__burger-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.burger-menu {
+  &__item {
+    font-weight: bold;
+    line-height: 0;
+    &:nth-of-type(2) {
+      padding: 0.8rem 0;
     }
   }
 }

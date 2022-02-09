@@ -1,13 +1,4 @@
-/* TODO home controller */
-import { HomeView } from '../view/home/Home';
-import { IAuthInputs, IAuthLabels } from '../view/home/IAuth';
-const rootEl: HTMLElement = document.querySelector('.main-box');
-const root: HTMLElement = document.querySelector('main');
-
-const CLASS_INPUT_ERROR = 'input_error';
-const CLASS_INPUT_CLEAR = 'input_clear';
-
-new HomeView(root, rootEl, authInputHandler, authBtnHandler);
+import { IAuthInputs, IAuthLabels } from './IAuth';
 
 const labelsText = {
   name: 'Имя пользователя',
@@ -16,11 +7,14 @@ const labelsText = {
   passwordRepeat: 'Повторите пароль',
 };
 
-function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
+const CLASS_INPUT_ERROR = 'input_error';
+const CLASS_INPUT_CLEAR = 'input_clear';
+
+export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
   authHandler(mode, inputs, labels);
 }
 
-function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
+export function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
   authHandler(mode, inputs, labels);
 }
 

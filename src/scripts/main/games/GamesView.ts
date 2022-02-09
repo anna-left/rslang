@@ -1,4 +1,4 @@
-import { createElement } from '../util/Util';
+import { createElement } from '../../util/Util';
 
 export class Games {
   constructor(rootEl: HTMLElement) {

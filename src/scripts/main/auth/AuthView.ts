@@ -1,4 +1,4 @@
-import { createElement, regEventSeeker } from '../util/Util';
+import { createElement, regEventSeeker } from '../../util/Util';
 import { IAuthInputs, IAuthLabels } from './IAuth';
 
 export class Auth {
