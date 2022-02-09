@@ -17,10 +17,10 @@ function playSound(param: string) {
       curSoundSrc = '../../assets/sounds/wrongAnswer.mp3';
       break;
     case 'end of round':
-      // curSoundSrc = '../../assets/sounds/.mp3';
+      curSoundSrc = '../../assets/sounds/roundEnd.mp3';
       break;
-    // case 4:
-    //   curSoundSrc = '../../assets/sounds/.mp3';
+      // case 4:
+      //   curSoundSrc = '../../assets/sounds/.mp3';
       break;
     default:
       break;

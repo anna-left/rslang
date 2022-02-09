@@ -6,7 +6,7 @@ import { playSound } from './playSound';
 import { startRound } from './startRound';
 import { startQuestion } from './startQuestion';
 import { insertNextSVG } from './svg';
-import { endRound } from './endRound';
+import { showResult } from './showResult';
 
 function processAnswer() {
   const audiocallQuestionHTML: HTMLElement = document.querySelector('.audiocall-question');
@@ -21,7 +21,8 @@ function processAnswer() {
 
     if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
       GLOBAL_VALUES.currentQuestion = 0;
-      endRound();
+      playSound('end of round');
+      showResult();
     } else {
       startQuestion();
     }
@@ -46,6 +47,7 @@ function processAnswer() {
   const curNumber = Number(this.getAttribute('data-num'));
 
   if (curWord.wordTranslate === curWord.answers[curNumber]) {
+    curWord.correctAnswer = true;
     playSound('right');
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];

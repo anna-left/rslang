@@ -10,6 +10,10 @@ class WordAudiocall {
 
   answers: Array<string>;
 
+  correctAnswer: Boolean;
+
+  answerReceived: Boolean;
+
   constructor(
     // id: string,
     word: string,
@@ -17,6 +21,8 @@ class WordAudiocall {
     audio: string,
     wordTranslate: string,
     answers: Array<string>,
+    correctAnswer: Boolean,
+    answerReceived: Boolean,
   ) {
     // this.id = id;
     this.word = word;
@@ -24,6 +30,8 @@ class WordAudiocall {
     this.audio = audio;
     this.wordTranslate = wordTranslate;
     this.answers = answers;
+    this.correctAnswer = correctAnswer;
+    this.answerReceived = answerReceived;
   }
 }
 

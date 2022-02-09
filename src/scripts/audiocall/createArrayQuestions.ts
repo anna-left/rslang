@@ -25,6 +25,8 @@ function createArrayQuestions() {
       curWord.audio,
       curWord.wordTranslate,
       shuffleArray(answers),
+      false,
+      false
     );
     words.push(newWord);
   }
