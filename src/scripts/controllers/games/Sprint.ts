@@ -14,6 +14,8 @@ class Sprint {
   private readonly page: number;
   private score: number;
   private level: number;
+  private wrongWords: ISprintWord[];
+  private rightWords: ISprintWord[];
   constructor(group = 0, page = 0) {
     this.group = group;
     this.page = page;
@@ -27,6 +29,8 @@ class Sprint {
     this.streak = 0;
     this.score = 0;
     this.level = 1;
+    this.wrongWords = [];
+    this.rightWords = [];
   }
 
   async init() {
@@ -61,6 +65,7 @@ class Sprint {
   checkAnswer(answer: boolean) {
     if (this.isCorrectAnswer(answer)) {
       this.updateScore();
+      this.rightWords.push(this.round[this.currentWordIndex]);
       if (this.canLevelUp()) {
         this.streak = 0;
         this.level = this.level === SprintSettings.maxLevel ? this.level : this.level + 1;
@@ -70,6 +75,7 @@ class Sprint {
         this.view.onRightAnswer();
       }
     } else {
+      this.wrongWords.push(this.round[this.currentWordIndex]);
       this.streak = 0;
       this.level = 1;
       this.view.onWrongAnswer();
@@ -121,6 +127,7 @@ class Sprint {
 
   onGameOver() {
     this.view.onGameOver();
+    // TODO send statistics
   }
 }
 
