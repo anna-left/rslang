@@ -1,0 +1,66 @@
+@import "src/sass/util/functions";
+@import "src/sass/util/variables";
+
+.sprint-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.sprint-intro__clock {
+  width: px-to-rem(160px);
+  height: px-to-rem(160px);
+  background-image: url("../../../../assets/svg/clock.svg");
+  background-size: px-to-rem(160px) px-to-rem(160px);
+}
+
+.sprint-intro__header {
+  font-size: px-to-rem(144px);
+  line-height: 1.1719;
+}
+
+.sprint-intro__description, .sprint-intro__tooltip, .sprint-intro__button, .sprint-intro__start {
+  font-size: px-to-rem(36px);
+  line-height: 1.1719;
+}
+
+.sprint-intro__select-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem
+}
+
+.sprint-intro__buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.sprint-intro__button {
+  width: px-to-rem(80px);
+  height: px-to-rem(80px);
+  text-align: center;
+  border-radius: 50%;
+  background-color: $sprintMainColor;
+  box-shadow: #26783D;
+  &:hover {
+    background-color: #D2B143FF;
+  }
+  &:active, &:focus {
+    background-color: #d25d43;
+  }
+}
+
+.sprint-intro__start {
+  width: px-to-rem(170px);
+  height: px-to-rem(90px);
+  border-radius: 1.5rem;
+  background-color: transparent;
+  border: 1px solid black;
+}
+
+.sprint-intro__button, .sprint-intro__start {
+  cursor: pointer;
+}

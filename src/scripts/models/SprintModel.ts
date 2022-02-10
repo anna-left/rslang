@@ -1,5 +1,5 @@
 import API from "../components/api/API";
-import {IWordSchema} from "../types/types";
+import {ISprintWord, IWordSchema} from "../types/types";
 import {WordsSettings} from "../components/games/sprint/SprintSettings";
 
 class SprintModel {
@@ -20,35 +20,41 @@ class SprintModel {
 
   async getWords(group = this.group, page = this.page) {
     const words = await this.fetchWords(group, page);
-    const pairs = words.map((word) => {
-      return [word.word, word.wordTranslate]
-    });
-    const shuffledPairs = this.shuffleWordsOrder(pairs);
-    return this.shuffleWordsTranslation(shuffledPairs);
+    const shuffledWords = this.shuffleOrder(words);
+    const x = this.shuffleTranslation(shuffledWords);
+    console.log(x);
+    return x
   }
 
-  shuffleWordsOrder(array: string[][]) {
+  shuffleOrder(array: IWordSchema[]) {
     return array.slice().sort(() => Math.random() - 0.5);
   }
 
-  shuffleWordsTranslation(array: string[][]) {
-    return array.map((pair) => {
+  shuffleTranslation(array: IWordSchema[]) {
+    return array.map((word, index) => {
+      const gameWord = {...word} as ISprintWord
       if (Math.random() > 0.5) {
-        pair.push('true');
-        return pair;
+        gameWord.gameTranslate = gameWord.wordTranslate;
+        gameWord.answer = true;
       } else {
-        return [pair[0], pair[Math.random() * array.length], 'false'];
+        let randomIndex = index;
+        while (randomIndex === index) {
+          randomIndex = Math.floor(Math.random() * array.length);
+        }
+        gameWord.gameTranslate = array[randomIndex].wordTranslate;
+        gameWord.answer = false;
       }
+      return gameWord;
     })
   }
 
-  async getAnotherWordsGroup() {
-    if (this.group === WordsSettings.groups || this.currentPage === WordsSettings.pages) {
-      return;
-    } else {
-      this.currentPage += 1;
-      return await this.getWords(this.group, this.currentPage - 1);
-    }
+  async getMoreWords() {
+    return await this.getWords(this.group, this.currentPage);
+  }
+
+  hasMoreWords() {
+    this.currentPage = this.currentPage === this.page + 1 ? this.currentPage += 2 : this.currentPage += 1;
+    return !(this.group === WordsSettings.groups || this.currentPage >= WordsSettings.pages);
   }
 
 }

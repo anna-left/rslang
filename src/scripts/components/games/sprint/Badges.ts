@@ -1,4 +1,5 @@
 import {createHTMLElement} from "../../../utils/CommonFunctions";
+import './Badges.scss';
 
 class Badges {
   private readonly container: HTMLElement;

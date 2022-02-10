@@ -1,0 +1,31 @@
+@import "src/sass/util/functions";
+@import "src/sass/util/variables";
+
+.badges {
+  display: flex;
+  gap: 10px;
+  height: $badgeSize * 2;
+  align-items: center;
+}
+
+.badge {
+  width: $badgeSize;
+  height: $badgeSize;
+  background-color: #999;
+  border-radius: 50%;
+  border: black solid 2px;
+  background-size: $badgeSize $badgeSize;
+  background-position: center;
+  &--active {
+    background-color: white;
+    background-image: url("../../../../assets/svg/right.svg")
+  }
+  &--super {
+    width: $badgeSize * 2;
+    height: $badgeSize * 2;
+    border: none;
+    background-color: transparent;
+    background-image: url("../../../../assets/svg/cup.svg");
+    background-size: $badgeSize * 2 $badgeSize * 2;
+  }
+}

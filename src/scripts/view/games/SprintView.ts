@@ -1,45 +1,38 @@
-import {createHTMLElement} from "../../utils/CommonFunctions";
-import Timer from "../../components/games/sprint/Timer";
-import SprintModal from "../../components/games/sprint/SprintModal";
+import SprintViewGame from "../../components/games/sprint/SprintViewGame";
+import SprintViewIntro from "../../components/games/sprint/SprintViewIntro";
+import Page from "./Page";
+import SprintViewResults from "../../components/games/sprint/SprintViewResults";
 
-class SprintView {
-  private readonly scoreBlock: HTMLElement;
-  private readonly timer: Timer;
-  private score: number;
-  private readonly page: HTMLElement;
-  private readonly game: SprintModal;
-  constructor() {
-    this.score = 0;
-    this.scoreBlock = createHTMLElement('div', 'sprint__score', `Score: ${this.score}`);
-    this.timer = new Timer(6);
-    this.timer.startTimer();
-    this.game = new SprintModal();
-    this.game.render().append(this.scoreBlock, this.timer.render())
-    const info = createHTMLElement('div', 'sprint__info');
-    const left = createHTMLElement('div', 'info__button info__left');
-    const right = createHTMLElement('div', 'info__button info__right');
-    info.append(left, right);
-    this.page = createHTMLElement('section', 'sprint');
-    this.page.append(this.game.render(), info);
+class SprintView extends Page {
+  private readonly intro: SprintViewIntro;
+  private readonly game: SprintViewGame;
+  private readonly results: SprintViewResults;
+  constructor(className: string) {
+    super(className);
+    this.intro = new SprintViewIntro(`${className}-intro`);
+    this.game = new SprintViewGame(`${className}-game`);
+    this.results = new SprintViewResults(`${className}-results`)
   }
 
   init() {
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') {
-        window.dispatchEvent(new CustomEvent('sprint-wrong'))
-      }
-      if (event.key === 'ArrowRight') {
-        window.dispatchEvent(new CustomEvent('sprint-right'))
-      }
-    })
+    window.addEventListener('keydown', this.handleKeyPress)
   }
 
-  addScore(n: number) {
-    this.score += n;
+  handleKeyPress(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft') {
+      window.dispatchEvent(new CustomEvent('sprint-wrong'))
+    }
+    if (event.key === 'ArrowRight') {
+      window.dispatchEvent(new CustomEvent('sprint-right'))
+    }
   }
 
-  updateWords(data: string[]) {
-    this.game.updateWords(data[0], data[1]);
+  updateScore(score: number) {
+    this.game.updateScore(score);
+  }
+
+  updateWords(word: string, translation: string) {
+    this.game.updateWords(word, translation);
   }
 
   onRightAnswer() {
@@ -50,16 +43,32 @@ class SprintView {
     this.game.onWrongAnswer()
   }
 
-  render() {
-    return this.page;
+  onLevelUp() {
+    this.game.onLevelUp();
   }
 
-  gameOver() {
+  onGameOver() {
+    window.removeEventListener('keydown', this.handleKeyPress);
     //results.render()
   }
 
-  destroy() {
-    this.page.remove();
+  showIntro() {
+    this.page.innerHTML = '';
+    this.page.append(this.intro.render());
+  }
+
+  showGame() {
+    this.page.innerHTML = '';
+    this.page.append(this.game.render());
+  }
+
+  showResults() {
+    this.page.innerHTML = '';
+    this.page.append(this.results.render());
+  }
+
+  startTimer() {
+    this.game.startTimer();
   }
 
 }
