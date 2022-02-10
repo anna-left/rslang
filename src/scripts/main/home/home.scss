@@ -1,3 +1,6 @@
+
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
 .main {
   &__box {
     background-color: $color-prime-light;

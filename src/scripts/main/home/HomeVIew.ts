@@ -8,6 +8,8 @@ import { Review } from '../review/ReviewView';
 import { Team } from '../team/TeamView';
 import { IAuthInputs, IAuthLabels } from '../auth/IAuth';
 
+import './home.scss';
+
 export class HomeView {
   constructor(
     navRootEl: HTMLElement,

@@ -1,6 +1,8 @@
 import { createElement, regEventSeeker } from '../../util/Util';
 import { IAuthInputs, IAuthLabels } from './IAuth';
 
+import './authorize.scss';
+
 export class Auth {
   constructor(
     rootEl: HTMLElement,

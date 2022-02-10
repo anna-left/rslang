@@ -20,12 +20,15 @@ const optimization = () => {
   return config;
 };
 
-const cssLoaders = newLoader => {
+const cssLoaders = (newLoader) => {
   const loaders = [
     {
       loader: MiniCssExtractPlugin.loader,
     },
-    { loader: 'css-loader', options: { sourceMap: true, importLoaders: 2 } },
+    {
+      loader: 'css-loader',
+      options: { sourceMap: true, importLoaders: 2},
+    },
     {
       loader: 'postcss-loader',
       options: {
@@ -36,7 +39,11 @@ const cssLoaders = newLoader => {
       },
     },
   ];
-  if (newLoader) loaders.push({ loader: 'sass-loader', options: { sourceMap: true } });
+  if (newLoader)
+    loaders.push({
+      loader: 'sass-loader',
+      options: { sourceMap: true,  },
+    });
   return loaders;
 };
 

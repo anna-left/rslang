@@ -8,5 +8,8 @@
     "allowJs": true,
     "moduleResolution": "node",
     "sourceMap": true
-  }
+  },
+  "files": [
+    "module.d.ts"
+  ]
 }
