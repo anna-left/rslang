@@ -14,9 +14,6 @@ export class Feature {
     const aboutBox = createElement('div', ['section-features__box', 'section-features__about-box', 'about-box']);
     setAboutBox(aboutBox);
 
-    // Games
-    const gameList = createElement('div', ['section-features__box', 'section-features__game-box', 'game-box']);
-    setFeatureGameBox(gameList);
 
     // Progress
     const progressBox = createElement('div', [
@@ -43,7 +40,7 @@ export class Feature {
     setCrossBox(crossplatformBox);
 
     const featuresBox = createElement('div', ['section-features__container']);
-    featuresBox.append(gameList, progressBox, settingsBox, crossplatformBox);
+    featuresBox.append(progressBox, settingsBox, crossplatformBox);
 
     section.append(aboutBox, featuresBox);
 
@@ -61,29 +58,6 @@ function setAboutBox(aboutBox: HTMLElement) {
   можно настраивать приложение под себя, а ещё во время обучения ведется статистика!`,
   );
   aboutBox.append(aboutHeader, aboutInfo);
-}
-
-// setting games part
-function setFeatureGameBox(gameBox: HTMLElement) {
-  // default info
-  const gameHeader = createElement('h3', ['section-features__header', 'game-box__header'], [], 'Об играх');
-  const gameInfo = createElement(
-    'p',
-    ['game-box__info'],
-    [],
-    `Благодаря играм можно позволить себе изучать ангийский в увлекательной форме.
-  Однако игры позволяют не только изучить английский, они также развивают внимательность и пробуждают в нас соревновательный характер!`,
-  );
-
-  // pop-up info about games
-  const gameList = createElement('ul', ['section-features__game-list']);
-
-  const gameSprint = createElement('li', ['section-features__item', 'game-box__game', 'game-box__game_sprint']);
-  const gameAudiocall = createElement('li', ['section-features__item', 'game-box__game', 'game-box__game_audiocall']);
-
-  gameList.append(gameSprint, gameAudiocall);
-
-  gameBox.append(gameHeader, gameInfo);
 }
 
 function setProgressBox(progressBox: HTMLElement) {

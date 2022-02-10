@@ -3,6 +3,7 @@ import {
   getBtnSend,
   getEmailInput,
   getEmailLabel,
+  getHeader,
   getNameInput,
   getNameLabel,
   getPassInput,
@@ -15,6 +16,8 @@ import { authBtnHandler, authInputHandler } from './authContorller';
 export class RegisterView {
   constructor(root: HTMLElement, switcher?: HTMLElement) {
     root.innerHTML = '';
+
+    const header = getHeader('Зарегистрируйтесь в RS Lang');
 
     const inputName = getNameInput();
     const inputEmail = getEmailInput();
@@ -48,6 +51,7 @@ export class RegisterView {
     );
 
     root.append(
+      header,
       labelName,
       inputName,
       labelEmail,

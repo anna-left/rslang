@@ -43,7 +43,6 @@ function getModeSwitcher(mode: string, rootEl: HTMLElement) {
     adaptSwitchContent(mode, switchModeText, switchModeLink, switchTextObj, switchLinkObj);
     mode = mode === 'register' ? 'login' : 'register';
     rootEl.append(switchModeBox);
-    console.log(mode);
   });
   mode = mode === 'register' ? 'login' : 'register';
   rootEl.append(switchModeBox);

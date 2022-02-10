@@ -7,7 +7,7 @@
     width: 100%;
     padding-left: 9vw;
     align-items: flex-end;
-    padding-bottom: 7%;
+    padding-bottom: 7vmax;
   }
 }
 
@@ -34,7 +34,7 @@
   }
   &__image-box {
     position: relative;
-    height: 65vmin;
+    max-height: 70vmin;
     max-width: 90vmin;
   }
   &__image {
