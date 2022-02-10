@@ -24,8 +24,8 @@ export class Auth {
 }
 
 function getModeSwitcher(mode: string, rootEl: HTMLElement) {
-  const switchTextObj: IAuthSwitcher = { register: 'Ещё не с нами? Тогда ', login: 'Уже с нами? ' };
-  const switchLinkObj: IAuthSwitcher = { register: 'зарегистрируйтесь', login: 'Войти' };
+  const switchTextObj: IAuthSwitcher = {login : 'Ещё не с нами? Тогда ', register: 'Уже с нами? ' };
+  const switchLinkObj: IAuthSwitcher = { login: 'зарегистрируйтесь', register: 'Войти' };
   const switchModeBox = createElement('div', ['section-auth__switch-mode-box']);
 
   const switchModeText = createElement('span', ['switch-mode-box__text'], [], `${switchTextObj[mode]}`);
@@ -45,8 +45,8 @@ function getModeSwitcher(mode: string, rootEl: HTMLElement) {
     rootEl.append(switchModeBox);
     console.log(mode);
   });
-  rootEl.append(switchModeBox);
   mode = mode === 'register' ? 'login' : 'register';
+  rootEl.append(switchModeBox);
 }
 
 function adaptSwitchContent(

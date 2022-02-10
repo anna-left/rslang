@@ -1,3 +1,3 @@
 import '../main/auth/authContorller';
-import './games/Audiocall';
+import '../audiocall/startAudiocall';
 import './games/Sprint';
