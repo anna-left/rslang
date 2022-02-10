@@ -1,5 +1,7 @@
 import { createElement } from '../../util/Util';
 
+import './team.scss';
+
 export class Team {
   constructor(rootEl: HTMLElement) {
     rootEl.innerHTML = '';
@@ -20,19 +22,19 @@ export class Team {
       'p',
       ['section-team__member-info'],
       [],
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, perspiciatis. Minima explicabo sapiente reprehenderit consequatur eligendi neque fuga blanditiis, asperiores unde repudiandae. Aliquid placeat non vel, sint eius facere porro enim consequatur aut amet dolores illum libero reprehenderit expedita cum maxime dolorem nam tempora qui numquam laboriosam hic reiciendis in?'
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, perspiciatis. Minima explicabo sapiente reprehenderit consequatur eligendi neque fuga blanditiis, asperiores unde repudiandae. Aliquid placeat non vel, sint eius facere porro enim consequatur aut amet dolores illum libero reprehenderit expedita cum maxime dolorem nam tempora qui numquam laboriosam hic reiciendis in?',
     );
     const memberAnnaInfo = createElement(
       'p',
       ['section-team__member-info'],
       [],
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, perspiciatis. Minima explicabo sapiente reprehenderit consequatur eligendi neque fuga blanditiis, asperiores unde repudiandae. Aliquid placeat non vel, sint eius facere porro enim consequatur aut amet dolores illum libero reprehenderit expedita cum maxime dolorem nam tempora qui numquam laboriosam hic reiciendis in?'
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, perspiciatis. Minima explicabo sapiente reprehenderit consequatur eligendi neque fuga blanditiis, asperiores unde repudiandae. Aliquid placeat non vel, sint eius facere porro enim consequatur aut amet dolores illum libero reprehenderit expedita cum maxime dolorem nam tempora qui numquam laboriosam hic reiciendis in?',
     );
     const memberValentinInfo = createElement(
       'p',
       ['section-team__member-info'],
       [],
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, perspiciatis. Minima explicabo sapiente reprehenderit consequatur eligendi neque fuga blanditiis, asperiores unde repudiandae. Aliquid placeat non vel, sint eius facere porro enim consequatur aut amet dolores illum libero reprehenderit expedita cum maxime dolorem nam tempora qui numquam laboriosam hic reiciendis in?'
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, perspiciatis. Minima explicabo sapiente reprehenderit consequatur eligendi neque fuga blanditiis, asperiores unde repudiandae. Aliquid placeat non vel, sint eius facere porro enim consequatur aut amet dolores illum libero reprehenderit expedita cum maxime dolorem nam tempora qui numquam laboriosam hic reiciendis in?',
     );
 
     teamMemberAndrey.append(memberAndreyImg, memberAndreyInfo);

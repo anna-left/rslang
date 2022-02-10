@@ -1,5 +1,7 @@
 import { createElement } from '../../util/Util';
 
+import './features.scss';
+
 export class Feature {
   constructor(rootEl: HTMLElement) {
     rootEl.innerHTML = '';

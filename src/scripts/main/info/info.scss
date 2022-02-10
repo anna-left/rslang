@@ -1,0 +1,28 @@
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main-box__section {
+  &_type_info {
+    width: 120rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.section-info {
+  &__info-list {
+    columns: 2;
+  }
+  &__info-item {
+    padding: 0.5rem;
+    margin-top: 1rem;
+    border: 0.1rem solid $color-prime-candy;
+    border-radius: 1rem;
+    transition: all 0.2s;
+    &:hover {
+      cursor: help;
+      background-color: $color-prime-candy;
+      color: $color-prime-light;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main-box__section {
+  &_type_features {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
+
+.section-features {
+  &__box {
+    width: 30rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    border: 0.2rem solid $color-prime-candy;
+    box-shadow: 0 0 1rem $color-prime-candy;
+    margin: 0 2rem;
+  }
+  &__about-box {
+    width: 90rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__container {
+    display: flex;
+    margin-top: 2rem;
+  }
+  &__header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}

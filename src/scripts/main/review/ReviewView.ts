@@ -1,5 +1,7 @@
 import { createElement } from '../../util/Util';
 
+import './review.scss';
+
 export class Review {
   constructor(rootEl: HTMLElement) {
     rootEl.innerHTML = '';

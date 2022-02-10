@@ -3,12 +3,14 @@
 
 .section-auth {
   width: 100%;
+  padding-left: 9vw;
+  align-items: center;
 
   &__input-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-basis: 43%;
+    flex-basis: 35%;
     font-size: 1.7rem;
   }
 

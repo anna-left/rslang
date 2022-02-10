@@ -3,7 +3,6 @@ import { createElement, createSVG } from '../../util/Util';
 import { About } from '../about/AboutView';
 import { Feature } from '../features/FeaturesView';
 import { Info } from '../info/InfoView';
-// import { Games } from '../games/GamesView';
 import { Review } from '../review/ReviewView';
 import { Team } from '../team/TeamView';
 
@@ -46,7 +45,6 @@ export class HomeView {
     const reviewLink = createElement('li', ['home-navigation__link'], [['data-type', 'review']]);
     const featuresLink = createElement('li', ['home-navigation__link'], [['data-type', 'features']]);
     const teamLink = createElement('li', ['home-navigation__link'], [['data-type', 'team']]);
-    // const gamesLink = createElement('li', ['home-navigation__link'], [['data-type', 'games']], 'Игры');
     const infoLink = createElement('li', ['home-navigation__link'], [['data-type', 'info']]);
 
     mainLink.append(svgSHome);
@@ -57,7 +55,6 @@ export class HomeView {
 
     mainLink.addEventListener('click', () => new About(rootEl));
     featuresLink.addEventListener('click', () => new Feature(rootEl));
-    // gamesLink.addEventListener('click', () => new Games(rootEl));
     infoLink.addEventListener('click', () => new Info(rootEl));
     reviewLink.addEventListener('click', () => new Review(rootEl));
     teamLink.addEventListener('click', () => new Team(rootEl));

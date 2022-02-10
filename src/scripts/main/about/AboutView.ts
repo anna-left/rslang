@@ -1,6 +1,8 @@
 import { createElement, createSVG } from '../../util/Util';
 import { Auth } from '../auth/AuthView';
 
+import './about.scss';
+
 export class About {
   constructor(rootEl: HTMLElement) {
     rootEl.innerHTML = '';

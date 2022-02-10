@@ -1,6 +1,8 @@
 import { createElement } from '../../util/Util';
 import { IInfo } from './IInfo';
 
+import './info.scss';
+
 export class Info {
   constructor(rootEl: HTMLElement) {
     fetch('../../../assets/data/english-info.json').then(async (res) => {

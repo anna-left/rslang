@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin nav-link() {
   color: $color-prime-dark;
   transition: all 0.15s;
@@ -13,10 +15,9 @@
   color: $color-prime-light;
   padding: $padTop $padSide;
   border-radius: 1rem;
-  box-shadow: 0 0 1.5rem darken($color-prime-candy, 10%);
   transition: all 0.2s;
   &:hover {
     cursor: pointer;
-    box-shadow: 0 0 0.3rem darken($color-prime-candy, 10%);
+    box-shadow: 0 0 .5rem .1rem $color-prime-dark;
   }
 }
