@@ -1,7 +1,7 @@
 const GLOBAL_VALUES = {
   currentRound: 0,
   currentQuestion: 0,
-  // amountСorrectAnswers: 0,
+  currentLevel: 0,
   // amountWrongAnswers: 0,
   noAnswer: 0,
 };

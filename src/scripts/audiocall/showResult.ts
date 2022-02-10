@@ -158,8 +158,12 @@ function showLearnedWords() {
   const wordsTitleErrorsHTML = createHtmlElement('div', wordsTitleMiddleErrHTML, 'words-title__errors');
   createHtmlElement('div', wordsTitleErrorsHTML, 'words-title__amount-errors', String(wrongAnswersAmound));
   createHtmlElement('div', wordsTitleErHTML, 'words-title__right');
+  
+  createHtmlElement('div', wordsTitleErHTML, 'words-title__right');
 
   formLines(false, wordsHTML);
+
+  createHtmlElement('div', wordsHTML, 'words-delimiter');
 
   //correct
   const wordsTitleCorrHTML: HTMLElement = createHtmlElement('div', wordsHTML, 'words-title');
