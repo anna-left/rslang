@@ -45,6 +45,12 @@
   border-radius: 50%;
   background-color: $sprintMainColor;
   box-shadow: #26783D;
+  &:hover {
+    background-color: #D2B143FF;
+  }
+  &:active, &:focus {
+    background-color: #d25d43;
+  }
 }
 
 .sprint-intro__start {

@@ -6,10 +6,11 @@ footer {
 }
 
 .sprint {
-  height: 90vh;
-  background: linear-gradient(180deg, rgba(67, 210, 108, 0.61) 0%, #FFFFFF 100%);
+  height: 90vh; // TODO subtract header and footer
+  background: url("../assets/svg/plant1.svg") no-repeat left 2rem bottom 2rem, url("../assets/svg/plant2.svg") no-repeat right 2rem bottom 2rem, linear-gradient(180deg, rgba(67, 210, 108, 0.61) 0%, #FFFFFF 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  background-size: auto 30rem, auto 30rem, 100% 100%;
 }
