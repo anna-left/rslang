@@ -1,15 +1,8 @@
 import { createElement, createSVG } from '../../util/Util';
-
 import { Auth } from '../auth/AuthView';
-import { IAuthInputs, IAuthLabels } from '../auth/IAuth';
 
 export class About {
-  constructor(
-    rootEl: HTMLElement,
-    mode: string,
-    inputHandler: (mode: string, inputs: IAuthInputs, labels: IAuthLabels) => void,
-    btnInputHandler: (mode: string, inputs: IAuthInputs, labels: IAuthLabels) => void,
-  ) {
+  constructor(rootEl: HTMLElement) {
     rootEl.innerHTML = '';
     const section = createElement('section', ['main-box__section', 'main-box__section_type_about', 'section-about']);
     const aboutBox = createElement('div', ['section-about__content-box']);
@@ -25,14 +18,21 @@ export class About {
     );
 
     const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Регистрация');
-    btnAuth.addEventListener('click', () => new Auth(rootEl, mode, inputHandler, btnInputHandler));
+    btnAuth.addEventListener('click', () => new Auth(rootEl));
     const image = createElement('img', ['section-about__image'], [['src', '../../../assets/img/humans2.webp']]);
 
     const svgSpot = createSVG('svg', ['section-about__spot']);
     const svgUse = createSVG('use', [], [['href', '#about-spot']]);
 
     const svgHidden = createSVG('svg', [], [['display', 'none']]);
-    const svgHiddenSymbol = createSVG('symbol', [], [['viewBox', '0 0 790 715'], ['id', 'about-spot']]);
+    const svgHiddenSymbol = createSVG(
+      'symbol',
+      [],
+      [
+        ['viewBox', '0 0 790 715'],
+        ['id', 'about-spot'],
+      ],
+    );
     const svgHiddenPath = createSVG(
       'path',
       [],

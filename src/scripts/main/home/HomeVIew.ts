@@ -6,18 +6,15 @@ import { Info } from '../info/InfoView';
 // import { Games } from '../games/GamesView';
 import { Review } from '../review/ReviewView';
 import { Team } from '../team/TeamView';
-import { IAuthInputs, IAuthLabels } from '../auth/IAuth';
 
 import './home.scss';
 
 export class HomeView {
   constructor(
     navRootEl: HTMLElement,
-    rootEl: HTMLElement,
-    authInputHandler: (mode: string, inputs: IAuthInputs, labels: IAuthLabels) => void,
-    authRegisterHandler: (mode: string, inputs: IAuthInputs, labels: IAuthLabels) => void,
+    rootEl: HTMLElement
   ) {
-    new About(rootEl, 'auth', authInputHandler, authRegisterHandler);
+    new About(rootEl);
     const nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
 
     const navBox = createElement('ul', ['home-navigation__list']);
@@ -58,7 +55,7 @@ export class HomeView {
     teamLink.append(svgTeam);
     infoLink.append(svgInfo);
 
-    mainLink.addEventListener('click', () => new About(rootEl, 'register', authInputHandler, authRegisterHandler));
+    mainLink.addEventListener('click', () => new About(rootEl));
     featuresLink.addEventListener('click', () => new Feature(rootEl));
     // gamesLink.addEventListener('click', () => new Games(rootEl));
     infoLink.addEventListener('click', () => new Info(rootEl));

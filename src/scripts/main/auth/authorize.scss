@@ -3,6 +3,7 @@
 
 .section-auth {
   width: 100%;
+
   &__input-box {
     display: flex;
     flex-direction: column;
@@ -10,6 +11,7 @@
     flex-basis: 43%;
     font-size: 1.7rem;
   }
+
   &__label {
     width: 70%;
     display: flex;
@@ -19,6 +21,7 @@
       margin-bottom: 0;
     }
   }
+
   &__input {
     max-width: 40rem;
     width: 100%;
@@ -43,9 +46,19 @@
   }
 
   &__btn-send {
+    font-size: 2rem;
     margin-top: 4rem;
     max-width: 40rem;
     width: 70%;
     @include buttonize;
   }
+}
+
+
+.input_error {
+  color: $color-prime-attract;
+}
+
+.input_clear {
+  color: $color-prime-calm;
 }

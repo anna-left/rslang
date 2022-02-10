@@ -11,3 +11,9 @@ export interface IAuthLabels {
   password: HTMLElement;
   passwordRepeat?: HTMLElement;
 }
+
+export interface IAuthSwitcher {
+  [key: string]: string;
+  register: string;
+  login: string;
+}
