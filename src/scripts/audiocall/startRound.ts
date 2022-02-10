@@ -5,12 +5,27 @@ import { createArrayQuestions } from './createArrayQuestions';
 import { WordAudiocall } from './WordAudiocall';
 import { startQuestion } from './startQuestion';
 import { clearPage } from './startAudiocall';
-// import { startQuestion } from '../../assets/img/audiocall';
-// import { startQuestion } from '../../assets/img/audiocall/';
 let words: WordAudiocall[] = [];
 
+function changeLevel(event: Event) {
+  const levels = document.querySelectorAll('.audiocall-start__level');
+  for (let i = 0; i < levels.length; i++) {
+    if (levels[i] === event.target) {
+      levels[i].classList.add('audiocall-start__level_active');
+      GLOBAL_VALUES.currentLevel = i;
+    } else {
+      levels[i].classList.remove('audiocall-start__level_active');
+    }
+  }
+}
+
+async function startNewGame() {
+  words = await createArrayQuestions();
+  startQuestion();
+}
+
 function startRound() {
-  words = createArrayQuestions();
+  
   GLOBAL_VALUES.currentRound += 1;
   GLOBAL_VALUES.currentQuestion = 0;
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
@@ -43,16 +58,20 @@ function startRound() {
   );
 
   const audiocallStartLevels = createHtmlElement('div', audiocallStart, 'audiocall-start__levels');
+  audiocallStartLevels.addEventListener('click', changeLevel);
   for (let i = 0; i < AMOUNT_LEVELS; i++) {
-    createHtmlElement('div', audiocallStartLevels, 'audiocall-start__level', String(i + 1));
+    const levelHTML = createHtmlElement('div', audiocallStartLevels, 'audiocall-start__level', String(i + 1));
+    if (i === GLOBAL_VALUES.currentLevel) {
+      levelHTML.classList.add('audiocall-start__level_active');
+    }
   }
   const audiocallStartBtn = createHtmlElement('button', audiocallStart, 'audiocall-start__btn', 'Начать');
-  audiocallStartBtn.addEventListener('click', startQuestion);
+  audiocallStartBtn.addEventListener('click', startNewGame);
   document.addEventListener(
     'keypress',
     function (e) {
       if (e.key === 'Enter') {
-        startQuestion();
+        startNewGame();
       }
     },
     { once: true },

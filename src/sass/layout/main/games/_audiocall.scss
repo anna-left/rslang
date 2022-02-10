@@ -89,6 +89,11 @@
   border-radius: 50%;
   z-index: 2;
   font-size: 2.5rem;
+  user-select: none;
+}
+
+.audiocall-start__level_active {
+  border: 2px solid;
 }
 
 .audiocall-start__btn,
@@ -335,7 +340,8 @@
 
 .result-title__right,
 .words-title__left,
-.words-line__speaker {
+.words-line__speaker,
+.audiocall-start__levels {
   cursor: pointer;
 }
 
@@ -383,7 +389,7 @@
   overflow-y: scroll;
 }
 
-.words-title__errors, 
+.words-title__errors,
 .words-title__correct {
   width: 5.9rem;
   height: 5.9rem;
@@ -398,7 +404,7 @@
 }
 
 .words-title__correct {
-  background: #43D26C;
+  background: #43d26c;
 }
 
 .words-title__middle {
@@ -443,6 +449,14 @@
   font-size: 3.6rem;
   line-height: 4.2rem;
 }
+
+.words-delimiter {
+  border-top: 2px solid #000000;
+  width: 97%;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
 @media screen and (max-width: 1000px) {
   .audiocall-start__title {
     font-size: 6rem;
