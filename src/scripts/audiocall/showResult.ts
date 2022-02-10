@@ -2,7 +2,7 @@ import { clearPage } from './startAudiocall';
 import { playSound } from './playSound';
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { createHtmlElement } from './createHtmlElement';
-import { words, startRound } from './startRound';
+import { words, startRound, startNewGame } from './startRound';
 import {
   AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
@@ -81,7 +81,7 @@ function addButtons() {
   const resultBtns: HTMLElement = createHtmlElement('div', resultHTML, 'result-btns');
   const resultNextBtn = createHtmlElement('button', resultBtns, 'result-btns__next-btn', 'Сыграть ещё раз');
   const resultToTutorialBtn = createHtmlElement('button', resultBtns, 'result-btns__to-tutorial', 'Перейти в учебник');
-  resultNextBtn.addEventListener('click', startRound);
+  resultNextBtn.addEventListener('click', startNewGame);
 }
 
 function showResult() {

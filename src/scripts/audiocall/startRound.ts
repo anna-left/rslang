@@ -20,6 +20,7 @@ function changeLevel(event: Event) {
 }
 
 async function startNewGame() {
+  words = [];
   words = await createArrayQuestions();
   startQuestion();
 }
@@ -78,4 +79,4 @@ function startRound() {
   );
 }
 
-export { startRound, words };
+export { startRound, startNewGame, words };
