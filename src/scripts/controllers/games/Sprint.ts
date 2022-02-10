@@ -63,7 +63,7 @@ class Sprint {
       this.updateScore();
       if (this.canLevelUp()) {
         this.streak = 0;
-        this.level += 1;
+        this.level = this.level === SprintSettings.maxLevel ? this.level : this.level + 1;
         this.view.onLevelUp();
       } else {
         this.streak += 1;
