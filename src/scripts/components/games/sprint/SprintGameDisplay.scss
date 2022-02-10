@@ -48,3 +48,22 @@
   box-sizing: border-box;
 }
 
+.sprint-game-display__timer__value {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: $timerRadius / 2;
+}
+
+.sprint-game-display__timer__circle {
+  transform: translate(-50%, -50%) rotate(-90deg);
+  position: absolute;
+  width: $timerRadius * 2;
+  height: $timerRadius * 2;
+  left: 50%;
+  top: 50%;
+  circle {
+    transition: all 1s linear;
+  }
+}

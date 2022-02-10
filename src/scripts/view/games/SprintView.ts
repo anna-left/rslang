@@ -11,7 +11,7 @@ class SprintView extends Page {
     super(className);
     this.intro = new SprintViewIntro(`${className}-intro`);
     this.game = new SprintViewGame(`${className}-game`);
-    this.results = new SprintViewResults(`${className}-results`)
+    this.results = new SprintViewResults(`${className}-results`);
   }
 
   init() {
@@ -50,9 +50,9 @@ class SprintView extends Page {
     new Audio('../assets/audio/correct.mp3').play();
   }
 
-  onGameOver() {
+  onGameOver(learned: number, toLearn: number) {
     window.removeEventListener('keydown', this.handleKeyPress);
-    //results.render()
+    this.showResults(learned, toLearn);
   }
 
   showIntro() {
@@ -65,7 +65,8 @@ class SprintView extends Page {
     this.page.append(this.game.render());
   }
 
-  showResults() {
+  showResults(learned: number, toLearn: number) {
+    this.results.showResults(learned, toLearn);
     this.page.innerHTML = '';
     this.page.append(this.results.render());
   }

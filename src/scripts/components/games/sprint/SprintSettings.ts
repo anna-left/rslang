@@ -23,4 +23,13 @@ export enum SprintGameText {
   scoreStep = 'очков за слово',
 }
 
+export enum SprintResultText {
+  header = 'Отличный результат!',
+  learned = 'слов изучено',
+  toLearn = 'слов на изучении',
+  percentage = 'изученных слов',
+  again = 'Сыграть еще раз',
+  workbook = 'Перейти в учебник',
+}
+
 export const SprintColors = ['#ddd', '#fbcee3', '#F2D265', '#CFB276'];

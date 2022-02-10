@@ -18,8 +18,7 @@ class SprintGameDisplay {
     this.className = `${className}-display`;
     this.header = createHTMLElement('div', `${this.className}`);
     this.score = createHTMLElement('div', `${this.className}__score`, `${SprintGameText.score} ${0}`);
-    this.timer = new Timer(60, this.className);
-
+    this.timer = new Timer('--timerRadius', '--timerBorderThickness', `${this.className}__timer`, 6);
     this.centralBlock = createHTMLElement('div', `${this.className}__central`);
     this.badgesRow = new Badges(SprintSettings.subLevels);
     const firstRow = this.badgesRow.render();

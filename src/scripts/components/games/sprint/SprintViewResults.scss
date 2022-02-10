@@ -1,0 +1,96 @@
+@import "src/sass/util/functions";
+@import "src/sass/util/variables";
+
+.sprint-results {
+  width: 80rem;
+  padding: $sprintGamePadding;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  border-radius: px-to-rem($sprintGameBorderRadius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.61) 0%, rgba(255, 255, 255, 0.61) 0.01%, rgba(255, 255, 255, 0.61) 100%);
+  box-shadow: 1px 2px 4px rgba(38, 120, 61, 0.34);
+  &__header {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  &__forward {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 3rem;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.05) translateX(10%);
+    }
+  }
+
+  &__result {
+    font-size: 2rem;
+    text-decoration: underline;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 5rem;
+  }
+
+  &__again, &__workbook {
+    width: 20rem;
+    height: 7rem;
+    border-radius: 2rem;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 2rem;
+    background-color: transparent;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px #999;
+    &:hover, &:active, &:focus {
+      box-shadow: 2px 2px 2px #444;
+    }
+  }
+
+  &__progress {
+    position: relative;
+    width: $progressRadius * 2.5;
+    height: $progressRadius * 2.5;
+    &__circle {
+      transform: translate(-50%, -50%) rotate(-90deg);
+      position: absolute;
+      width: $progressRadius * 2;
+      height: $progressRadius * 2;
+      left: 50%;
+      top: 50%;
+      circle {
+        transition: all 1s linear;
+      }
+    }
+    &__value {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: $progressRadius / 2;
+    }
+    &__text {
+      position: absolute;
+      left: 50%;
+      top: 65%;
+      transform: translate(-50%, -50%);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+}

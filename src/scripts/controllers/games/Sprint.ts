@@ -52,6 +52,15 @@ class Sprint {
       this.view.showGame();
       this.view.startTimer();
     })
+    window.addEventListener('sprint-again', async () => {
+      this.view.showIntro();
+    })
+    window.addEventListener('sprint-workbook', async () => {
+      // this.view.showIntro();
+    })
+    window.addEventListener('sprint-forward', async () => {
+      // this.view.showWords();
+    })
   }
 
   async nextRound() {
@@ -126,7 +135,7 @@ class Sprint {
   }
 
   onGameOver() {
-    this.view.onGameOver();
+    this.view.onGameOver(this.rightWords.length, this.wrongWords.length);
     // TODO send statistics
   }
 }
