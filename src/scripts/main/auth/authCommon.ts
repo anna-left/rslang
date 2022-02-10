@@ -27,7 +27,6 @@ export function getEmailInput() {
       ['type', 'email'],
       ['id', 'email-input'],
       ['autocomplete', 'off'],
-
     ],
   );
 }
@@ -43,7 +42,6 @@ export function getNameInput() {
       ['placeholder', 'введите имя'],
       ['id', 'name-input'],
       ['autocomplete', 'off'],
-
     ],
   );
 }
@@ -81,5 +79,5 @@ export function getPassRepeatInput() {
 }
 
 export function getBtnSend(mode: string) {
-  return createElement('button', ['section-auth__btn-send'], [], mode === 'register' ? 'Зарегистрироваться' : 'Вход');
+  return createElement('button', ['section-auth__btn-send'], [], mode === 'register' ? 'Зарегистрироваться' : 'Войти');
 }

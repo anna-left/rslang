@@ -10,8 +10,8 @@
 
 .section-auth {
   &__header {
-    font-size: 2.8rem;
-    width: 75%;
+    font-size: 1.6vmax;
+    width: 80%;
     text-align: center;
     margin-bottom: 2vmin;
   }
@@ -71,10 +71,11 @@
 
   &__switch-mode-box {
     width: 75%;
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1vmax;
   }
 }
 
