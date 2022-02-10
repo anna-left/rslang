@@ -1,14 +1,18 @@
 import { words } from './startRound';
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 
-function playSound(param: string) {
+function playSound(param: string, wordID = -1) {
   const myPlayer = new Audio();
 
   // myPlayer.volume = 0.5;
   let curSoundSrc = '';
   switch (param) {
     case 'word':
-      curSoundSrc = `https://react-learnwords-example.herokuapp.com/${words[GLOBAL_VALUES.currentQuestion].audio}`;
+      let audioFile = words[GLOBAL_VALUES.currentQuestion].audio;
+      if (wordID > -1) {
+        audioFile = words[wordID].audio;
+      }
+      curSoundSrc = `https://react-learnwords-example.herokuapp.com/${audioFile}`;
       break;
     case 'right':
       curSoundSrc = '../../assets/sounds/piu.mp3';
