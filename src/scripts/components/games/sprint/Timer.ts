@@ -1,72 +1,33 @@
-import {createHTMLElement, createNSElement, setAttributes} from "../../../utils/CommonFunctions";
+import ColoredRing from "./ColoredRing";
+import {createHTMLElement} from "../../../utils/CommonFunctions";
 import './Timer.scss';
 
-class Timer {
-  private readonly svg: SVGElement;
-  private readonly circle: SVGElement;
-  private readonly path: number;
-  private readonly container: HTMLElement;
-  private readonly timer: number;
-  private readonly timeDisplay: HTMLElement;
-  private readonly radius: number;
-  constructor(time: number, className: string) {
-    const radius = Number(getComputedStyle(document.documentElement).getPropertyValue('--timerRadius'));
-    const thickness = Number(getComputedStyle(document.documentElement).getPropertyValue('--timerBorderThickness'));
-    this.radius = radius - thickness;
-    this.path = Math.ceil(2 * 3.14 * this.radius);
-    const circleAttribute = {
-      r: this.radius,
-      cy: radius,
-      cx: radius,
-      'stroke-width': thickness,
-      'stroke-dasharray': `${this.path}`,
-      stroke: "lightgreen",
-      fill: "none"
-    }
-    this.timer = time;
-    this.container = createHTMLElement('div', `${className}__timer timer`);
-    this.timeDisplay = createHTMLElement('h2', 'timer__display', `${time}`);
-    this.svg = createNSElement('svg');
-    this.svg.classList.add('timer__circle');
-    this.circle = createNSElement('circle');
-    setAttributes(this.circle, circleAttribute);
-    const innerCircle = createNSElement('circle');
-    setAttributes(innerCircle, circleAttribute);
-    innerCircle.setAttribute('stroke', 'gray');
-    innerCircle.style.position = 'absolute;';
-    this.svg.append(innerCircle, this.circle);
-    this.container.append(this.timeDisplay, this.svg);
+class Timer extends ColoredRing {
+  private readonly value: HTMLElement;
+  private readonly time: number;
+  constructor(radiusConstantName: string, borderThicknessConstantName: string, className = 'timer', time: number) {
+    super(radiusConstantName, borderThicknessConstantName, className);
+    this.time = time;
+    this.value = createHTMLElement('h2', `${className}__value`, `${time}`);
+    this.container.append(this.value);
   }
 
   startTimer() {
-    let timer = this.timer;
-    const oneSecondChunk = this.path / this.timer;
+    let time = this.time;
+    const oneSecondChunk = this.path / this.time;
     this.circle.style.strokeDashoffset = String(0);
     const timerId = setInterval(() => {
-      this.changeRingColor(timer / this.timer);
-      if (timer > 0) {
-        this.timeDisplay.innerHTML = String(timer);
-        timer -= 1;
-        this.circle.style.strokeDashoffset = String(oneSecondChunk * (this.timer - timer));
+      this.changeRingColor(time / this.time);
+      if (time > 0) {
+        this.value.innerHTML = String(time);
+        time -= 1;
+        this.circle.style.strokeDashoffset = String(oneSecondChunk * (this.time - time));
       } else {
-        this.timeDisplay.innerHTML = String(0);
+        this.value.innerHTML = String(0);
         clearInterval(timerId);
-        this.container.dispatchEvent(new CustomEvent('time-over', {bubbles: true}));
+        window.dispatchEvent(new CustomEvent('time-over'));
       }
     }, 1000);
-  }
-
-  changeRingColor(ratio: number) {
-    if (ratio <= 0.25) {
-      this.circle.setAttribute('stroke', 'red');
-    }
-    else if (ratio <= 0.5) {
-      this.circle.setAttribute('stroke', 'yellow');
-    }
-  }
-
-  render() {
-    return this.container;
   }
 }
 
