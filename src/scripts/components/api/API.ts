@@ -340,7 +340,7 @@ class API {
         return;
     }
 
-    async singIn(id: string, user: TUserInfo): Promise<void | IUserTokens> {
+    async singIn(user: TUserInfo): Promise<void | IUserTokens> {
         const endpointModifier = `/signin`;
         const response = await fetch(this.endpoint + endpointModifier, {
             method: 'POST',
