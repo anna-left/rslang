@@ -13,8 +13,8 @@ import {
 
 import './burger.scss';
 
-export class Burger {
-  constructor(root: HTMLElement) {
+export class BurgerView {
+  constructor() {
     const burger = getBurgerContainer();
     const list = getBurgerList();
     const home = getHomeItem();
@@ -31,6 +31,6 @@ export class Burger {
     games.append(gameList);
     list.append(home, dictionary, games, stats, settings);
     burger.append(list);
-    root.append(burger);
+    document.body.append(burger);
   }
 }

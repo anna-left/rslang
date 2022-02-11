@@ -45,7 +45,7 @@ function emailInputHandler(email: HTMLInputElement, emailLabel: HTMLElement) {
 }
 function passwordInputHandler(pass: HTMLInputElement, passLabel: HTMLElement): any {
   const value = pass.value;
-  if (value.length < 5) {
+  if (value.length < 8) {
     setError(passLabel, 'Слишком короткий пароль');
   } else {
     setPass(passLabel, labelsText.password);
