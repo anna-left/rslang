@@ -1,6 +1,4 @@
 import { FooterView } from './footer/FooterView';
-import './controllers/main';
-
 import { setHome } from './home/home/homeController';
 
 import { BurgerView } from './burger/BurgerView';

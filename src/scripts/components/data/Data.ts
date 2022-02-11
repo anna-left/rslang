@@ -1,1 +1,0 @@
-/* TODO words data component */
