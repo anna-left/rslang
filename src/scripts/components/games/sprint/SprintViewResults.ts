@@ -3,6 +3,7 @@ import {createHTMLElement} from "../../../utils/CommonFunctions";
 import {SprintResultText} from "./SprintSettings";
 import './SprintViewResults.scss';
 import ProgressRing from "./ProgressRing";
+import SprintResultsButtons from "./SprintResultsButtons";
 
 class SprintViewResults extends Page {
   private readonly className: string;
@@ -18,16 +19,7 @@ class SprintViewResults extends Page {
     })
     this.result = createHTMLElement('p', `${this.className}__result`);
     this.progressRing = new ProgressRing('--progressRadius', '--timerBorderThickness', `${this.className}__progress`);
-    const buttons = createHTMLElement('div', `${this.className}__buttons`);
-    const again = createHTMLElement('button', `${this.className}__again`, `${SprintResultText.again}`);
-    again.addEventListener('click', ()=> {
-      window.dispatchEvent(new CustomEvent('sprint-again'));
-    })
-    const workbook = createHTMLElement('button', `${this.className}__workbook`, `${SprintResultText.workbook}`);
-    workbook.addEventListener('click', ()=> {
-      window.dispatchEvent(new CustomEvent('sprint-workbook'));
-    })
-    buttons.append(again, workbook);
+    const buttons = new SprintResultsButtons().render();
     this.page.append(header, forwardButton, this.result, this.progressRing.render(),buttons);
   }
 

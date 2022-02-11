@@ -1,0 +1,21 @@
+.results-buttons {
+  &__buttons {
+    display: flex;
+    gap: 5rem;
+  }
+
+  &__again, &__workbook {
+    width: 20rem;
+    height: 7rem;
+    border-radius: 2rem;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 2rem;
+    background-color: transparent;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px #999;
+    &:hover, &:active, &:focus {
+      box-shadow: 2px 2px 2px #444;
+    }
+  }
+}
