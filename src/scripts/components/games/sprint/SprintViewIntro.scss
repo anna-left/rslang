@@ -1,5 +1,5 @@
-@import "src/sass/util/functions";
-@import "src/sass/util/variables";
+@import "../../../../sass/util/functions";
+@import "../../../../sass/util/variables";
 
 .sprint-intro {
   display: flex;
@@ -47,6 +47,7 @@
   box-shadow: 5px 5px 5px #26783D;
   &:hover, &:active, &:focus {
     box-shadow: 2px 2px 2px #26783D;
+    transform: scale(0.9);
   }
 }
 
@@ -64,4 +65,8 @@
 
 .sprint-intro__button, .sprint-intro__start {
   cursor: pointer;
+}
+
+.hide {
+  visibility: hidden;
 }
