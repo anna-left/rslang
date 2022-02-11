@@ -1,4 +1,6 @@
+import { API } from './../../api/API';
 import { IAuthInputs, IAuthLabels } from './IAuth';
+import { IUserSchema, TUserInfo } from '../../types/types';
 
 const labelsText = {
   name: 'Имя пользователя',
@@ -14,8 +16,38 @@ export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAut
   authHandler(mode, inputs, labels);
 }
 
-export function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
+export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
   authHandler(mode, inputs, labels);
+  console.log(mode);
+  console.log(inputs);
+  if (mode === 'register') {
+    if (
+      labels.name.classList.contains(CLASS_INPUT_CLEAR) &&
+      labels.email.classList.contains(CLASS_INPUT_CLEAR) &&
+      labels.password.classList.contains(CLASS_INPUT_CLEAR)
+    ) {
+      console.log('registered');
+      const api = new API();
+      const user: IUserSchema = { name: inputs.name.value, email: inputs.email.value, password: inputs.password.value };
+      console.log(user);
+      const resp = await api.createUser(user);
+      console.log(resp);
+    } else {
+      console.log('not registered');
+    }
+  } else {
+    if (labels.email.classList.contains(CLASS_INPUT_CLEAR) && labels.password.classList.contains(CLASS_INPUT_CLEAR)) {
+      console.log('login');
+      const api = new API();
+      const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
+      console.log(user);
+      const token = await api.signIn(user);
+      console.log(token);
+      sessionStorage.setItem('userToken', JSON.stringify(token));
+    } else {
+      console.log('not logined');
+    }
+  }
 }
 
 function authHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
@@ -36,7 +68,6 @@ function emailInputHandler(email: HTMLInputElement, emailLabel: HTMLElement) {
     setError(emailLabel, 'Слишком короткая почта');
   } else if (value.length >= 5 && !value.includes('@')) {
     setError(emailLabel, 'отсутствует символ "@"');
-    // /apple\.com|google\.com|yahoo\.com|facebook\.com/.test(href)
   } else if (value.length >= 5 && !/.com$|.ru$|.by$|.kz$|.ua$|.us$/.test(value)) {
     setError(emailLabel, 'неправильное окончание почты');
   } else {

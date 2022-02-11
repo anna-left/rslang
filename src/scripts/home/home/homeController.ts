@@ -1,7 +1,5 @@
 import { HomeView } from './HomeVIew';
 
-export function setHome() {
-  const rootEl: HTMLElement = document.querySelector('.main-box');
-  const root: HTMLElement = document.querySelector('main');
+export function setHome(root: HTMLElement, rootEl: HTMLElement) {
   new HomeView(root, rootEl);
 }

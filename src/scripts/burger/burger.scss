@@ -1,10 +1,26 @@
-.main-box{
-  &__burger{
+
+@import '../../sass/util/mixins';
+@import '../../sass/util/variables';
+
+.main-box {
+  &__burger {
     top: 0;
     left: 0;
-    margin-left: -5vw;
     position: fixed;
     height: 100vh;
-    width: 3vw;
+  }
+}
+
+.burger {
+  &__item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__icon {
+    max-height: 3rem;
+    max-width: 3rem;
+    margin-right: .5rem;
+    fill: $color-prime-candy;
   }
 }

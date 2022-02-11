@@ -6,9 +6,9 @@ import {
     IWordSchema,
     StatusCode,
     TUserInfo
-} from "../../types/types";
+} from "../types/types";
 
-class API {
+export class API {
     endpoint: string;
 
     constructor() {
@@ -340,7 +340,7 @@ class API {
         return;
     }
 
-    async singIn(id: string, user: TUserInfo): Promise<void | IUserTokens> {
+    async signIn(user: TUserInfo): Promise<void | IUserTokens> {
         const endpointModifier = `/signin`;
         const response = await fetch(this.endpoint + endpointModifier, {
             method: 'POST',

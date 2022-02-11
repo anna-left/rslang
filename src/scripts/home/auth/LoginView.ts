@@ -28,13 +28,14 @@ export class LoginView {
       'click',
     );
 
-    btnSend.addEventListener('click', () =>
+    btnSend.addEventListener('click', (ev) => {
+      ev.preventDefault();
       authBtnHandler(
         'login',
         { email: inputEmail, password: inputPassword },
         { email: labelEmail, password: labelPassword },
-      ),
-    );
+      );
+    });
 
     root.append(header, labelEmail, inputEmail, labelPassword, inputPassword, btnSend);
     if (switcher) {

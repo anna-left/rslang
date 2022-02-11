@@ -44,6 +44,11 @@ export function getGamesItem() {
 
   const gamesText = createElement('span', ['burger__item-text'], [], 'Мини-игры');
 
+  const gamesContainer = createElement('div', ['burger__item-games-box']);
+  const gamesList = getGameList();
+
+  gamesList.append(getSprintItem(),getAudioCallItem())
+  gamesContainer.append(gamesList);
   gamesIconSvg.append(gamesIconUse);
   games.append(gamesIconSvg, gamesText);
   return games;
@@ -75,11 +80,11 @@ export function getSettingsItem() {
   return settings;
 }
 
-export function getGameList() {
+function getGameList() {
   return createElement('ul', ['burger-games__list']);
 }
 
-export function getSprintItem() {
+function getSprintItem() {
   const sprint = createElement('li', ['burger-games__item']);
 
   const sprintIconSvg = createSVG('svg', ['burger__icon']);
@@ -91,7 +96,7 @@ export function getSprintItem() {
   sprint.append(sprintIconSvg, sprintText);
   return sprint;
 }
-export function getAudioCallItem() {
+function getAudioCallItem() {
   const audiocall = createElement('li', ['burger-games__item']);
 
   const audiocallIconSvg = createSVG('svg', ['burger__icon']);

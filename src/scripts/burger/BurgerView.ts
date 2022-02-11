@@ -1,13 +1,10 @@
 import {
-  getAudioCallItem,
   getBurgerContainer,
   getBurgerList,
   getDictionaryItem,
-  getGameList,
   getGamesItem,
   getHomeItem,
   getSettingsItem,
-  getSprintItem,
   getStatsItem,
 } from './burgerBuilder';
 
@@ -23,12 +20,6 @@ export class BurgerView {
     const stats = getStatsItem();
     const settings = getSettingsItem();
 
-    const gameList = getGameList();
-    const audioCall = getAudioCallItem();
-    const sprint = getSprintItem();
-
-    gameList.append(audioCall, sprint);
-    games.append(gameList);
     list.append(home, dictionary, games, stats, settings);
     burger.append(list);
     document.body.append(burger);

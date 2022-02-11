@@ -11,6 +11,7 @@ import {
   getPassRepeatInput,
   getPassRepeatLabel,
 } from './authCommon';
+
 import { authBtnHandler, authInputHandler } from './authContorller';
 
 export class RegisterView {
@@ -42,13 +43,14 @@ export class RegisterView {
       [inputEmail, inputPassword, inputPasswordRepeat, inputName],
       'click',
     );
-    btnSend.addEventListener('click', () =>
+    btnSend.addEventListener('click', (ev) => {
+      ev.preventDefault();
       authBtnHandler(
         'register',
         { email: inputEmail, password: inputPassword, passwordRepeat: inputPasswordRepeat, name: inputName },
         { email: labelEmail, password: labelPassword, passwordRepeat: labelPasswordRepeat, name: labelName },
-      ),
-    );
+      );
+    });
 
     root.append(
       header,
