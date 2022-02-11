@@ -43,7 +43,10 @@ async function createArrayQuestions() {
       arrayWrongWords.splice(answerID, 1);
     }
     const newWord = new WordAudiocall(
+      curWord.id,
       curWord.word,
+      curWord.group,
+      curWord.page,
       curWord.image,
       curWord.audio,
       curWord.wordTranslate,

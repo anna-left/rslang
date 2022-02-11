@@ -181,4 +181,4 @@ function showLearnedWords() {
   addButtons();
 }
 
-export { showResult, showLearnedWords };
+export { showResult, showLearnedWords, createSvgSpeaker };

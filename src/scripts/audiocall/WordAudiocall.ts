@@ -1,6 +1,11 @@
 class WordAudiocall {
-  // id: string;
+  id: string;
+
   word: string;
+
+  group: number;
+
+  page: number;
 
   image: string;
 
@@ -15,8 +20,10 @@ class WordAudiocall {
   answerReceived: Boolean;
 
   constructor(
-    // id: string,
+    id: string,
     word: string,
+    group: number,
+    page: number,
     image: string,
     audio: string,
     wordTranslate: string,
@@ -24,9 +31,11 @@ class WordAudiocall {
     correctAnswer: Boolean,
     answerReceived: Boolean,
   ) {
-    // this.id = id;
-    this.word = word;
+    this.id = id;
     this.image = image;
+    this.word = word;
+    this.group = group;
+    this.page = page;
     this.audio = audio;
     this.wordTranslate = wordTranslate;
     this.answers = answers;
