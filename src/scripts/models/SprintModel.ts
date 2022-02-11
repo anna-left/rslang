@@ -4,11 +4,17 @@ import {WordsSettings} from "../components/games/sprint/SprintSettings";
 
 class SprintModel {
   private readonly api: API;
-  private readonly page: number;
-  private readonly group: number;
+  private page: number;
+  private group: number;
   private currentPage: number;
-  constructor(group: number, page: number) {
+  constructor() {
     this.api = new API();
+    this.group = null;
+    this.page = null;
+    this.currentPage = null;
+  }
+
+  selectWords(group: number, page: number) {
     this.group = group;
     this.page = page;
     this.currentPage = page ? 0 : 1;

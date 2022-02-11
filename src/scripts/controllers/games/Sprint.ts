@@ -10,18 +10,24 @@ class Sprint {
   private round: ISprintWord[];
   private currentWordIndex: number;
   private streak: number;
-  private readonly group: number;
-  private readonly page: number;
+  private group: number;
+  private page: number;
   private score: number;
   private level: number;
   private wrongWords: ISprintWord[];
   private rightWords: ISprintWord[];
-  constructor(group = 0, page = 0) {
+  constructor(group = -1, page = -1) {
     this.group = group;
     this.page = page;
-    this.root = document.querySelector('.main-box');
+    if (group === -1) {
+      this.group = 0;
+      this.page = 0;
+    } else {
+      this.view.disableLevelSelection();
+    }
+    this.root = document.querySelector('body');
     this.view = new SprintView('sprint');
-    this.model = new SprintModel(group, page);
+    this.model = new SprintModel();
     this.view.showIntro();
     this.root.append(this.view.render());
     this.round = [];
@@ -31,12 +37,10 @@ class Sprint {
     this.level = 1;
     this.wrongWords = [];
     this.rightWords = [];
+
   }
 
   async init() {
-    this.view.init();
-    this.round = await this.model.getWords();
-    await this.nextRound();
     window.addEventListener('sprint-right', async () => {
       this.checkAnswer(true);
       await this.nextRound();
@@ -49,17 +53,27 @@ class Sprint {
       this.onGameOver();
     })
     window.addEventListener('sprint-start', async () => {
+      this.view.init();
+      this.model.selectWords(this.group, this.page);
+      this.round = await this.model.getWords();
+      await this.nextRound();
       this.view.showGame();
       this.view.startTimer();
     })
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
+      this.view.enableLevelSelection();
     })
     window.addEventListener('sprint-workbook', async () => {
       // this.view.showIntro();
     })
     window.addEventListener('sprint-forward', async () => {
       // this.view.showWords();
+    })
+    window.addEventListener('sprint-group-select', async (event: CustomEvent) => {
+      this.group = event.detail.group;
+      this.page = Math.floor(Math.random() * 30)
+      console.log(this.group, this.page);
     })
   }
 

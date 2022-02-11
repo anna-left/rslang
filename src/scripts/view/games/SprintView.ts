@@ -75,6 +75,13 @@ class SprintView extends Page {
     this.game.startTimer();
   }
 
+  disableLevelSelection() {
+    this.intro.disableLevelSelection();
+  }
+
+  enableLevelSelection() {
+    this.intro.enableLevelSelection();
+  }
 }
 
 export default SprintView;
