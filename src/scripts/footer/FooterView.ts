@@ -1,6 +1,8 @@
 import { createElement } from '../util/Util';
 import { createGitItem, createRSItem, getHiddenSvgs } from './footerUtil';
 
+import './footer.scss';
+
 export class FooterView {
   constructor() {
     const footer = createElement('footer', ['footer']);

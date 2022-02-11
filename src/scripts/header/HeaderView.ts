@@ -1,5 +1,7 @@
 import { createElement } from '../util/Util';
 
+import './header.scss';
+
 export class HeaderView {
   constructor() {
     const header = createElement('header', ['header']);
