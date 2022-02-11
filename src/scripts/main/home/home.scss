@@ -1,0 +1,53 @@
+
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main {
+  &__box {
+    background-color: $color-prime-light;
+    color: $color-prime-dark;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &-box {
+    &__section {
+      display: flex;
+    }
+  }
+
+  &__home-navigation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 0 0 0 2rem;
+    align-items: center;
+    text-align: center;
+    background-color: $color-prime-light-calm;
+    overflow: hidden;
+  }
+}
+
+.home-navigation {
+  &__list {
+    display: flex;
+  }
+  &__link {
+    @include nav-link;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+    &_features {
+      height: 4rem;
+      width: 4rem;
+    }
+  }
+}

@@ -1,10 +1,6 @@
 @import "src/sass/util/variables";
 @import "src/sass/util/functions";
 
-footer {
-  display: none;
-}
-
 .sprint {
   height: 90vh; // TODO subtract header and footer
   background: url("../assets/svg/plant1.svg") no-repeat left 3rem bottom 3rem, url("../assets/svg/plant2.svg") no-repeat right 3rem bottom 3rem, linear-gradient(180deg, rgba(67, 210, 108, 0.61) 0%, #FFFFFF 100%);
