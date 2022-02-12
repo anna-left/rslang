@@ -30,6 +30,8 @@ export enum SprintResultText {
   percentage = 'изученных слов',
   again = 'Сыграть еще раз',
   workbook = 'Перейти в учебник',
+  subheaderWrong = 'Ошибок',
+  subheaderRight = 'Знаю',
 }
 
 export const SprintColors = ['#ddd', '#fbcee3', '#F2D265', '#CFB276'];

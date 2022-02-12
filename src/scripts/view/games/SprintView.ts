@@ -1,17 +1,21 @@
 import SprintViewGame from "../../components/games/sprint/SprintViewGame";
 import SprintViewIntro from "../../components/games/sprint/SprintViewIntro";
-import Page from "./Page";
+import Page from "../../components/games/sprint/Page";
 import SprintViewResults from "../../components/games/sprint/SprintViewResults";
+import SprintViewShowWords from "../../components/games/sprint/SprintViewShowWords";
+import {ISprintWord} from "../../types/types";
 
 class SprintView extends Page {
   private readonly intro: SprintViewIntro;
   private readonly game: SprintViewGame;
   private readonly results: SprintViewResults;
+  private readonly words: SprintViewShowWords;
   constructor(className: string) {
     super(className);
     this.intro = new SprintViewIntro(`${className}-intro`);
     this.game = new SprintViewGame(`${className}-game`);
     this.results = new SprintViewResults(`${className}-results`);
+    this.words = new SprintViewShowWords(`${className}-results`);
   }
 
   init() {
@@ -50,9 +54,11 @@ class SprintView extends Page {
     new Audio('../assets/audio/correct.mp3').play();
   }
 
-  onGameOver(learned: number, toLearn: number) {
+  onGameOver(learned: ISprintWord[], toLearn: ISprintWord[]) {
     window.removeEventListener('keydown', this.handleKeyPress);
-    this.showResults(learned, toLearn);
+    this.results.showResults(learned.length, toLearn.length);
+    this.words.showResults(learned, toLearn);
+    this.showResults();
   }
 
   showIntro() {
@@ -65,10 +71,14 @@ class SprintView extends Page {
     this.page.append(this.game.render());
   }
 
-  showResults(learned: number, toLearn: number) {
-    this.results.showResults(learned, toLearn);
+  showResults() {
     this.page.innerHTML = '';
     this.page.append(this.results.render());
+  }
+
+  showWords() {
+    this.page.innerHTML = '';
+    this.page.append(this.words.render());
   }
 
   startTimer() {

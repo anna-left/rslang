@@ -17,7 +17,7 @@
     font-weight: bold;
   }
 
-  &__forward {
+  &__forward, &__backward {
     position: absolute;
     top: 2rem;
     right: 2rem;
@@ -35,6 +35,11 @@
     &:hover {
       transform: scale(1.05) translateX(10%);
     }
+  }
+
+  &__backward {
+    right: auto;
+    left: 2rem;
   }
 
   &__result {

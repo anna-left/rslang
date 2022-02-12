@@ -1,4 +1,4 @@
-import Page from "../../../view/games/Page";
+import Page from "./Page";
 import {createHTMLElement} from "../../../utils/CommonFunctions";
 import {SprintResultText} from "./SprintSettings";
 import './SprintViewResults.scss';

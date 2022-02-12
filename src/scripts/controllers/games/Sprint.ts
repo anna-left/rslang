@@ -25,10 +25,11 @@ class Sprint {
     } else {
       this.view.disableLevelSelection();
     }
-    this.root = document.querySelector('body');
+    this.root = document.querySelector('.main-box');
     this.view = new SprintView('sprint');
     this.model = new SprintModel();
     this.view.showIntro();
+    this.root.innerHTML = '';
     this.root.append(this.view.render());
     this.round = [];
     this.currentWordIndex = -1;
@@ -66,9 +67,13 @@ class Sprint {
     })
     window.addEventListener('sprint-workbook', async () => {
       // this.view.showIntro();
+      // TODO proceed to workbook;
     })
     window.addEventListener('sprint-forward', async () => {
-      // this.view.showWords();
+      this.view.showWords();
+    })
+    window.addEventListener('sprint-backward', async () => {
+      this.view.showResults();
     })
     window.addEventListener('sprint-group-select', async (event: CustomEvent) => {
       this.group = event.detail.group;
@@ -149,7 +154,7 @@ class Sprint {
   }
 
   onGameOver() {
-    this.view.onGameOver(this.rightWords.length, this.wrongWords.length);
+    this.view.onGameOver(this.rightWords, this.wrongWords);
     // TODO send statistics
   }
 }

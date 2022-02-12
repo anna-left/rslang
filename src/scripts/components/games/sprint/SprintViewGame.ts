@@ -1,6 +1,6 @@
 import SprintGameDisplay from "./SprintGameDisplay";
 import {createHTMLElement} from "../../../utils/CommonFunctions";
-import Page from "../../../view/games/Page";
+import Page from "./Page";
 import SprintGameControls from "./SprintGameControls";
 import './SprintViewGame.scss';
 

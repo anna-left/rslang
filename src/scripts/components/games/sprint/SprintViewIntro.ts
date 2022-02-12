@@ -1,6 +1,6 @@
 import {createHTMLElement} from "../../../utils/CommonFunctions";
 import {SprintIntroText, WordsSettings} from "./SprintSettings";
-import Page from "../../../view/games/Page";
+import Page from "./Page";
 import './SprintViewIntro.scss'
 
 class SprintViewIntro extends Page {

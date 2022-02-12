@@ -64,3 +64,9 @@ export interface IUserSettings {
     wordsPerDay: number,
     optional: {}
 }
+
+export interface TResultWord {
+    word: string,
+    wordTranslate: string,
+    audio: string,
+}
