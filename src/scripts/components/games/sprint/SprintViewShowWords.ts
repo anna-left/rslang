@@ -5,6 +5,7 @@ import SprintResultsButtons from "./SprintResultsButtons";
 import './SprintViewShowWords.scss';
 import {ISprintWord} from "../../../types/types";
 import SprintWordLine from "./SprintWordLine";
+import ArrowButton from "./ArrowButton";
 
 class SprintViewShowWords extends Page {
   private readonly className: string;
@@ -15,10 +16,7 @@ class SprintViewShowWords extends Page {
   constructor(className: string) {
     super(className);
     this.className = `${className}`
-    const backwardButton = createHTMLElement('button', `${this.className}__backward`, '🡠');
-    backwardButton.addEventListener('click', ()=> {
-      window.dispatchEvent(new CustomEvent('sprint-backward'));
-    })
+    const backwardButton = new ArrowButton(true, `${this.className}__backward`, 'sprint-backward');
     const container = createHTMLElement('div', `${this.className}__container`);
     const wrong = createHTMLElement('h3', `${this.className}__subheader`, SprintResultText.subheaderWrong);
     this.wrongCount = createHTMLElement('div', 'word__count word__count--wrong');
@@ -31,7 +29,7 @@ class SprintViewShowWords extends Page {
     this.rightContainer = createHTMLElement('div', `${this.className}__right-container`);
     container.append(wrong,this.wrongContainer, delimiter, right, this.rightContainer);
     const buttons = new SprintResultsButtons().render();
-    this.page.append(backwardButton, container, buttons);
+    this.page.append(backwardButton.render(), container, buttons);
   }
 
   showResults(rightWords: ISprintWord[], wrongWords: ISprintWord[]) {

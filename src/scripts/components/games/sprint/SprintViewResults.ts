@@ -4,6 +4,7 @@ import {BadResult, GoodResult, GreatResult, SprintResultText} from "./SprintSett
 import './SprintViewResults.scss';
 import ProgressRing from "./ProgressRing";
 import SprintResultsButtons from "./SprintResultsButtons";
+import ArrowButton from "./ArrowButton";
 
 class SprintViewResults extends Page {
   private readonly className: string;
@@ -14,14 +15,11 @@ class SprintViewResults extends Page {
     super(className);
     this.className = `${className}`
     this.header = createHTMLElement('h2', `${this.className}__header`);
-    const forwardButton = createHTMLElement('button', `${this.className}__forward`, '🡢');
-    forwardButton.addEventListener('click', ()=> {
-      window.dispatchEvent(new CustomEvent('sprint-forward'));
-    })
+    const forwardButton = new ArrowButton(false, `${this.className}__forward`, 'sprint-forward');
     this.result = createHTMLElement('p', `${this.className}__result`);
     this.progressRing = new ProgressRing('--progressRadius', '--timerBorderThickness', `${this.className}__progress`);
     const buttons = new SprintResultsButtons().render();
-    this.page.append(this.header, forwardButton, this.result, this.progressRing.render(),buttons);
+    this.page.append(this.header, forwardButton.render(), this.result, this.progressRing.render(),buttons);
   }
 
   showResults(learned: number, toLearn: number) {
