@@ -6,12 +6,13 @@ import { HeaderView } from './header/HeaderView';
 import { MainView } from './main/MainView';
 
 function init() {
-  new HeaderView();
-  new BurgerView();
+  const burger = new BurgerView();
   const main = new MainView();
+  new HeaderView(burger.burger, main.main, main.mainBox);
+  main.render();
   new FooterView();
-
-  setHome(main.main, main.mainInnerContainer);
+  burger.render(main.main, main.mainBox);
+  setHome(main.main, main.mainBox);
 }
 
 init();

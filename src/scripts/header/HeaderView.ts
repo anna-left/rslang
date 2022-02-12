@@ -1,9 +1,12 @@
+import { HomeView } from '../home/home/HomeVIew';
 import { createElement } from '../util/Util';
 
 import './header.scss';
 
+const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
+
 export class HeaderView {
-  constructor() {
+  constructor(burger: HTMLElement, main: HTMLElement, mainBox: HTMLElement) {
     const header = createElement('header', ['header']);
 
     const headerBox = createElement('div', ['header__box']);
@@ -17,11 +20,24 @@ export class HeaderView {
       burgerList.append(createElement('li', ['burger-menu__item'], [], '—'));
     }
 
-    const headerNavItemHome = createElement('li', ['nav-list__item'], [], 'Главная');
-    const headerNavItemDictionary = createElement('li', ['nav-list__item'], [], 'Словарь');
+    headerNabBurgerItem.addEventListener('click', () => {
+      burger.classList.add(BURGER_CLASS_SHOW);
+    });
+
+    const headerNavItemHome = createElement('li', ['nav-list__item', 'nav-list__item_state_active'], [], 'Главная');
+    const headerNavItemDictionary = createElement(
+      'li',
+      ['nav-list__item', 'nav-list__item_state_hidden'],
+      [],
+      'Словарь',
+    );
     const headerNavItemGames = createElement('li', ['nav-list__item'], [], 'Игры');
-    const headerNavItemStats = createElement('li', ['nav-list__item'], [], 'Статистика');
-    const headerNavItemConfig = createElement('li', ['nav-list__item'], [], 'Настройки');
+    const headerNavItemStats = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Статистика');
+    const headerNavItemConfig = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Настройки');
+
+    headerNavItemHome.addEventListener('click', () => {
+      new HomeView(main, mainBox);
+    });
 
     headerNabBurgerItem.append(burgerList);
 

@@ -10,7 +10,6 @@
   justify-content: flex-start;
   font-size: 3rem;
 
-
   &__nav {
     color: $color-prime-dark;
     display: flex;
@@ -45,6 +44,9 @@
       border-top: 1px solid $color-prime-candy;
       border-right: 1px solid $color-prime-candy;
       border-bottom: none;
+    }
+    &_state_hidden {
+      display: none;
     }
   }
   &__burger-menu {

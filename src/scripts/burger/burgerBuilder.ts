@@ -13,10 +13,10 @@ export function getBurgerList() {
 export function getHomeItem() {
   const home = createElement('li', ['burger__item']);
 
-  const homeIconSvg = createSVG('svg', ['burger__icon']);
+  const homeIconSvg = createSVG('svg', ['burger__item_icon']);
   const homeIconUse = createSVG('use', [], [['href', '#burger_home-icon']]);
 
-  const homeText = createElement('span', ['burger__item-text'], [], 'Главная');
+  const homeText = createElement('span', ['burger__item_text'], [], 'Главная');
 
   homeIconSvg.append(homeIconUse);
   home.append(homeIconSvg, homeText);
@@ -26,10 +26,10 @@ export function getHomeItem() {
 export function getDictionaryItem() {
   const dictionary = createElement('li', ['burger__item']);
 
-  const bookIconSvg = createSVG('svg', ['burger__icon']);
+  const bookIconSvg = createSVG('svg', ['burger__item_icon']);
   const bookIconUse = createSVG('use', [], [['href', '#burger_book-icon']]);
 
-  const bookText = createElement('span', ['burger__item-text'], [], 'Словарь');
+  const bookText = createElement('span', ['burger__item_text'], [], 'Словарь');
 
   bookIconSvg.append(bookIconUse);
   dictionary.append(bookIconSvg, bookText);
@@ -39,15 +39,15 @@ export function getDictionaryItem() {
 export function getGamesItem() {
   const games = createElement('li', ['burger__item', 'burger-games']);
 
-  const gamesIconSvg = createSVG('svg', ['burger__icon']);
+  const gamesIconSvg = createSVG('svg', ['burger__item_icon', 'burger__item_icon_area']);
   const gamesIconUse = createSVG('use', [], [['href', '#burger_games-icon']]);
 
-  const gamesText = createElement('span', ['burger__item-text'], [], 'Мини-игры');
+  const gamesText = createElement('span', ['burger__item_text'], [], 'Мини-игры');
 
   const gamesContainer = createElement('div', ['burger__item-games-box']);
   const gamesList = getGameList();
 
-  gamesList.append(getSprintItem(),getAudioCallItem())
+  gamesList.append(getSprintItem(), getAudioCallItem());
   gamesContainer.append(gamesList);
   gamesIconSvg.append(gamesIconUse);
   games.append(gamesIconSvg, gamesText);
@@ -57,10 +57,10 @@ export function getGamesItem() {
 export function getStatsItem() {
   const stats = createElement('li', ['burger__item']);
 
-  const statsIconSvg = createSVG('svg', ['burger__icon']);
+  const statsIconSvg = createSVG('svg', ['burger__item_icon']);
   const statsIconUse = createSVG('use', [], [['href', '#burger_stats-icon']]);
 
-  const statsText = createElement('span', ['burger__item-text'], [], 'Статистика');
+  const statsText = createElement('span', ['burger__item_text'], [], 'Статистика');
 
   statsIconSvg.append(statsIconUse);
   stats.append(statsIconSvg, statsText);
@@ -70,14 +70,21 @@ export function getStatsItem() {
 export function getSettingsItem() {
   const settings = createElement('li', ['burger__item']);
 
-  const configIconSvg = createSVG('svg', ['burger__icon']);
+  const configIconSvg = createSVG('svg', ['burger__item_icon']);
   const configIconUse = createSVG('use', [], [['href', '#burger_config-icon']]);
 
-  const configText = createElement('span', ['burger__item-text'], [], 'Настройки');
+  const configText = createElement('span', ['burger__item_text'], [], 'Настройки');
 
   configIconSvg.append(configIconUse);
   settings.append(configIconSvg, configText);
   return settings;
+}
+
+export function getHideBurgerIcon() {
+  const svgHideIcon = createSVG('svg', ['burger__hide-icon']);
+  const useHideIcon = createSVG('use', [], [['href', '#burger_hide-icon']]);
+  svgHideIcon.append(useHideIcon);
+  return svgHideIcon;
 }
 
 function getGameList() {
@@ -87,10 +94,10 @@ function getGameList() {
 function getSprintItem() {
   const sprint = createElement('li', ['burger-games__item']);
 
-  const sprintIconSvg = createSVG('svg', ['burger__icon']);
+  const sprintIconSvg = createSVG('svg', ['burger__item_icon']);
   const sprintIconUse = createSVG('use', [], [['href', '#burger_sprint-icon']]);
 
-  const sprintText = createElement('span', ['burger__item-text'], [], 'Спринт');
+  const sprintText = createElement('span', ['burger__item_text'], [], 'Спринт');
 
   sprintIconSvg.append(sprintIconUse);
   sprint.append(sprintIconSvg, sprintText);
@@ -99,11 +106,11 @@ function getSprintItem() {
 function getAudioCallItem() {
   const audiocall = createElement('li', ['burger-games__item']);
 
-  const audiocallIconSvg = createSVG('svg', ['burger__icon']);
+  const audiocallIconSvg = createSVG('svg', ['burger__item_icon']);
   const audiocallIconUse = createSVG('use', [], [['href', '#burger_audiocall-icon']]);
   audiocallIconSvg.append(audiocallIconUse);
 
-  const audiocallText = createElement('span', ['burger__item-text'], [], 'Аудиовызов');
+  const audiocallText = createElement('span', ['burger__item_text'], [], 'Аудиовызов');
 
   audiocall.append(audiocallIconSvg, audiocallText);
   return audiocall;
@@ -120,6 +127,7 @@ function getHiddenSvgs() {
     createConfigSymbol(),
     createAudiocallSymbol(),
     createSprintSymbol(),
+    createHideBurgerSymbol(),
   );
   return svgHidden;
 }
@@ -187,6 +195,7 @@ function createStatsSymbol() {
     [
       ['viewBox', '0 0 28 27'],
       ['id', 'burger_stats-icon'],
+      ['fill', 'none'],
     ],
   );
   const pathStats1 = createSVG(
@@ -238,6 +247,7 @@ function createGamesSymbol() {
     [
       ['viewBox', '0 0 30 21'],
       ['id', 'burger_games-icon'],
+      ['fill', 'none'],
     ],
   );
 
@@ -312,3 +322,34 @@ function createAudiocallSymbol() {
   // symbolConfig.append(pathConfig);
   return symbolConfig;
 }
+
+function createHideBurgerSymbol() {
+  const symbolBurgerHide = createSVG(
+    'symbol',
+    [],
+    [
+      ['viewBox', '0 0 59 61'],
+      ['id', 'burger_hide-icon'],
+    ],
+  );
+  const pathBurgerHide = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M29.7513 60.2803C45.9241 60.2803 59 47.0177 59 30.6138C59 14.21 45.9241 0.947266 29.7513 0.947266C13.5785 0.947266 0.502594 14.21 0.502594 30.6138C0.502594 47.0177 13.5785 60.2803 29.7513 60.2803ZM29.7513 4.43745C44.0315 4.43745 55.559 16.1296 55.559 30.6138C55.559 45.0981 44.0315 56.7902 29.7513 56.7902C15.471 56.7902 3.94362 45.0981 3.94362 30.6138C3.94362 16.1296 15.471 4.43745 29.7513 4.43745ZM28.2075 43.5174L30.9807 41.2347L21.2238 32.3585H45.2354V28.8683H21.2242L30.9807 19.9924L28.2075 17.7097L13.7756 30.6136L28.2075 43.5174Z',
+      ],
+      ['fill-rule', 'evenodd'],
+      ['clip-rule', 'evenodd'],
+    ],
+  );
+  symbolBurgerHide.append(pathBurgerHide);
+  return symbolBurgerHide;
+}
+
+/* 
+<svg width="59" height="61" viewBox="0 0 59 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M29.7513 60.2803C45.9241 60.2803 59 47.0177 59 30.6138C59 14.21 45.9241 0.947266 29.7513 0.947266C13.5785 0.947266 0.502594 14.21 0.502594 30.6138C0.502594 47.0177 13.5785 60.2803 29.7513 60.2803ZM29.7513 4.43745C44.0315 4.43745 55.559 16.1296 55.559 30.6138C55.559 45.0981 44.0315 56.7902 29.7513 56.7902C15.471 56.7902 3.94362 45.0981 3.94362 30.6138C3.94362 16.1296 15.471 4.43745 29.7513 4.43745ZM28.2075 43.5174L30.9807 41.2347L21.2238 32.3585H45.2354V28.8683H21.2242L30.9807 19.9924L28.2075 17.7097L13.7756 30.6136L28.2075 43.5174Z" fill="black"/>
+</svg>
+ */
