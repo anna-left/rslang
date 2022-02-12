@@ -1,8 +1,6 @@
 .results-buttons {
-  &__buttons {
-    display: flex;
-    gap: 5rem;
-  }
+  display: flex;
+  gap: 5rem;
 
   &__again, &__workbook {
     width: 20rem;
