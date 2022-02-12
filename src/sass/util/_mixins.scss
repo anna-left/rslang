@@ -1,0 +1,23 @@
+@import './variables';
+
+@mixin nav-link() {
+  color: $color-prime-dark;
+  transition: all 0.15s;
+  &:hover {
+    cursor: pointer;
+    background-color: $color-prime-calm;
+    filter: contrast(130%);
+  }
+}
+
+@mixin buttonize($padTop: 2rem, $padSide: 7rem) {
+  background-color: $color-prime-candy;
+  color: $color-prime-light;
+  padding: $padTop $padSide;
+  border-radius: 1.5rem;
+  transition: all 0.2s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 .5rem .1rem $color-prime-dark;
+  }
+}

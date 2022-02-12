@@ -1,0 +1,8 @@
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main-box__section {
+  &_type_team {
+    width: 100rem;
+  }
+}
