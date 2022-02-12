@@ -14,7 +14,8 @@ const wordsApi = new API();
 
 function startAudiocall() {
   const header: HTMLElement = document.querySelector('.header');
-  header.style.display = 'none';
+  header.style.zIndex = '2';
+  header.style.userSelect = 'none';
   const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
   const mainHTML: HTMLElement = document.querySelector('.main');
