@@ -7,6 +7,9 @@ import {
   AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
   AMOUNT_WORDS_GREAD_RESULT,
+  MESSAGE_BAD_RESULT,
+  MESSAGE_GOOD_RESULT,
+  MESSAGE_GREAD_RESULT
 } from './constantsAndValues/constants';
 
 function createSvgSpeaker(parent: HTMLElement, curClass: string) {
@@ -77,8 +80,8 @@ function transformAmountWords(amountWords: number) {
 }
 
 function addButtons() {
-  const resultHTML: HTMLElement = document.querySelector('.result');
-  const resultBtns: HTMLElement = createHtmlElement('div', resultHTML, 'result-btns');
+  const resultContentHTML: HTMLElement = document.querySelector('.result-content');
+  const resultBtns: HTMLElement = createHtmlElement('div', resultContentHTML, 'result-btns');
   const resultNextBtn = createHtmlElement('button', resultBtns, 'result-btns__next-btn', 'Сыграть ещё раз');
   const resultToTutorialBtn = createHtmlElement('button', resultBtns, 'result-btns__to-tutorial', 'Перейти в учебник');
   resultNextBtn.addEventListener('click', startNewGame);
@@ -91,15 +94,17 @@ function showResult() {
   const rightAnswersAmound: number = words.reduce((a, b) => a + Number(b.correctAnswer), 0);
   const wrongAnswersAmound: number = AMOUNT_ROUND_WORDS - rightAnswersAmound;
   const percent = Math.round((rightAnswersAmound / AMOUNT_ROUND_WORDS) * 100);
-  let message = 'В этот раз не получилось, но продолжай тренироваться!';
-  if (rightAnswersAmound >= AMOUNT_WORDS_GREAD_RESULT) {
-    message = 'Поздравляем, отличный результат!';
-  } else if (rightAnswersAmound >= AMOUNT_WORDS_GOOD_RESULT) {
-    message = 'Неплохо, но есть над чем поработать!';
+  let message = MESSAGE_BAD_RESULT;
+  if (percent >= AMOUNT_WORDS_GREAD_RESULT) {
+    message = MESSAGE_GREAD_RESULT;
+  } else if (percent >= AMOUNT_WORDS_GOOD_RESULT) {
+    message = MESSAGE_GOOD_RESULT;
   }
 
   const resultHTML: HTMLElement = createHtmlElement('div', audiocallHTML, 'result');
-  const titleHTML: HTMLElement = createHtmlElement('div', resultHTML, 'result-title');
+  const resultContentHTML: HTMLElement = createHtmlElement('div', resultHTML, 'result-content');
+
+  const titleHTML: HTMLElement = createHtmlElement('div', resultContentHTML, 'result-title');
 
   createHtmlElement('div', titleHTML, 'result-title__left');
   createHtmlElement('div', titleHTML, 'result-title__message', message);
@@ -110,11 +115,12 @@ function showResult() {
 
   createHtmlElement(
     'div',
-    resultHTML,
+    resultContentHTML,
     'result__amount-words',
     `${transformAmountWords(rightAnswersAmound)} изучено, ${transformAmountWords(wrongAnswersAmound)} на изучении`,
   );
-  const resultPieHTML: HTMLElement = createHtmlElement('div', resultHTML, 'result-pie');
+  const resultWrapperHTML: HTMLElement = createHtmlElement('div', resultContentHTML, 'result-wrapper');
+  const resultPieHTML: HTMLElement = createHtmlElement('div', resultWrapperHTML, 'result-pie');
   resultPieHTML.setAttribute('style', `--p:${percent}`);
   createHtmlElement('div', resultPieHTML, 'result-pie__title', `${percent}%`);
   createHtmlElement('div', resultPieHTML, 'result-pie__message', 'изученных');
@@ -138,13 +144,13 @@ function formLines(isCorrect: boolean, parent: HTMLElement) {
 }
 
 function showLearnedWords() {
-  const resultHTML: HTMLElement = document.querySelector('.result');
-  clearPage(resultHTML);
+  const resultContentHTML: HTMLElement = document.querySelector('.result-content');
+  clearPage(resultContentHTML);
 
   const rightAnswersAmound: number = words.reduce((a, b) => a + Number(b.correctAnswer), 0);
   const wrongAnswersAmound: number = AMOUNT_ROUND_WORDS - rightAnswersAmound;
 
-  const wordsHTML: HTMLElement = createHtmlElement('div', resultHTML, 'words');
+  const wordsHTML: HTMLElement = createHtmlElement('div', resultContentHTML, 'words');
   
   //errors
   const wordsTitleErHTML: HTMLElement = createHtmlElement('div', wordsHTML, 'words-title');
@@ -181,4 +187,4 @@ function showLearnedWords() {
   addButtons();
 }
 
-export { showResult, showLearnedWords, createSvgSpeaker };
+export { showResult, showLearnedWords, createSvgSpeaker, transformAmountWords };
