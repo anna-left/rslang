@@ -9,6 +9,10 @@ class Page {
   render() {
     return this.page;
   }
+
+  addClass(className: string[]) {
+    this.page.classList.add(...className);
+  }
 }
 
 export default Page;
