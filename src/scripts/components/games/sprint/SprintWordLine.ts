@@ -2,6 +2,7 @@ import Page from "./Page";
 import {createHTMLElement} from "../../../utils/CommonFunctions";
 import {TResultWord} from "../../../types/types";
 import './SprintWordLine.scss';
+import {SprintSettings, WordsSettings} from "./SprintSettings";
 
 class SprintWordLine extends Page{
   constructor(className: string, word: TResultWord) {
@@ -10,7 +11,7 @@ class SprintWordLine extends Page{
     const englishWord = createHTMLElement('span', 'english-word', word.word);
     const translation = createHTMLElement('span', 'translation', ` - ${word.wordTranslate}`);
     speakButton.addEventListener('click', () => {
-      new Audio(`${word.audio}`).play();
+      new Audio(`${WordsSettings.endpoint}${word.audio}`).play();
     })
     this.page.append(speakButton, englishWord, translation);
   }

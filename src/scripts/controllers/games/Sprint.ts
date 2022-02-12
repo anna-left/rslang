@@ -78,7 +78,6 @@ class Sprint {
     window.addEventListener('sprint-group-select', async (event: CustomEvent) => {
       this.group = event.detail.group;
       this.page = Math.floor(Math.random() * 30)
-      console.log(this.group, this.page);
     })
   }
 

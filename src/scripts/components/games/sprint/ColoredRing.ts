@@ -1,5 +1,6 @@
 import {createHTMLElement, createNSElement, setAttributes} from "../../../utils/CommonFunctions";
 import './ColoredRing.scss'
+import {BadResult, GoodResult, GreatResult} from "./SprintSettings";
 
 class ColoredRing {
   private readonly svg: SVGElement;
@@ -11,14 +12,14 @@ class ColoredRing {
     const radius = Number(getComputedStyle(document.documentElement).getPropertyValue(radiusConstantName));
     const thickness = Number(getComputedStyle(document.documentElement).getPropertyValue(borderThicknessConstantName));
     this.radius = radius - thickness;
-    this.path = Math.ceil(2 * 3.14 * this.radius);
+    this.path = Math.ceil(2 * Math.PI * this.radius);
     const circleAttribute = {
       r: this.radius,
       cy: radius,
       cx: radius,
       'stroke-width': thickness,
       'stroke-dasharray': `${this.path}`,
-      stroke: "lightgreen",
+      stroke: GreatResult.color,
       fill: "none"
     }
     this.container = createHTMLElement('div', className);
@@ -35,11 +36,11 @@ class ColoredRing {
   }
 
   changeRingColor(ratio: number) {
-    if (ratio <= 0.25) {
-      this.circle.setAttribute('stroke', 'red');
+    if (ratio <= GoodResult.ratio) {
+      this.circle.setAttribute('stroke', BadResult.color);
     }
-    else if (ratio <= 0.5) {
-      this.circle.setAttribute('stroke', 'yellow');
+    else if (ratio <= GreatResult.ratio) {
+      this.circle.setAttribute('stroke', GoodResult.color);
     }
   }
 

@@ -1,6 +1,6 @@
 import Page from "./Page";
 import {createHTMLElement} from "../../../utils/CommonFunctions";
-import {SprintResultText} from "./SprintSettings";
+import {BadResult, GoodResult, GreatResult, SprintResultText} from "./SprintSettings";
 import './SprintViewResults.scss';
 import ProgressRing from "./ProgressRing";
 import SprintResultsButtons from "./SprintResultsButtons";
@@ -9,10 +9,11 @@ class SprintViewResults extends Page {
   private readonly className: string;
   private readonly result: HTMLElement;
   private readonly progressRing: ProgressRing;
+  private readonly header: HTMLElement;
   constructor(className: string) {
     super(className);
     this.className = `${className}`
-    const header = createHTMLElement('h2', `${this.className}__header`, SprintResultText.header);
+    this.header = createHTMLElement('h2', `${this.className}__header`);
     const forwardButton = createHTMLElement('button', `${this.className}__forward`, '🡢');
     forwardButton.addEventListener('click', ()=> {
       window.dispatchEvent(new CustomEvent('sprint-forward'));
@@ -20,13 +21,20 @@ class SprintViewResults extends Page {
     this.result = createHTMLElement('p', `${this.className}__result`);
     this.progressRing = new ProgressRing('--progressRadius', '--timerBorderThickness', `${this.className}__progress`);
     const buttons = new SprintResultsButtons().render();
-    this.page.append(header, forwardButton, this.result, this.progressRing.render(),buttons);
+    this.page.append(this.header, forwardButton, this.result, this.progressRing.render(),buttons);
   }
 
   showResults(learned: number, toLearn: number) {
     const percent = Math.round(learned / (learned + toLearn) * 100) || 0;
-    this.result.innerText =  `${learned} ${SprintResultText.learned}, ${toLearn} ${SprintResultText.toLearn}`;
-    this.progressRing.update(percent, SprintResultText.percentage)
+    this.result.innerText =  `${SprintResultText.learned} ${learned}, ${SprintResultText.toLearn} ${toLearn}`;
+    this.progressRing.update(percent, SprintResultText.percentage);
+    if (percent / 100 > 0.5) {
+      this.header.innerText = GreatResult.congratulation;
+    } else if (percent / 100 > 0.25) {
+      this.header.innerText = GoodResult.congratulation;
+    } else {
+      this.header.innerText = BadResult.congratulation;
+    }
   }
 }
 
