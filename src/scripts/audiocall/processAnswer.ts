@@ -1,5 +1,5 @@
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
-import { AMOUNT_ROUND_WORDS } from './constantsAndValues/constants';
+import { AMOUNT_ROUND_WORDS, API_PATH } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { playSound } from './playSound';
@@ -15,25 +15,18 @@ function processAnswer() {
   const containerHTML: HTMLElement = document.querySelector('.audiocall-question .container');
 
   containerHTML.querySelector('.speaker').remove();
-  // const answerImage = createHtmlElement('div', audiocallQuestionHTML, 'answer-image');
-  // const answer = createHtmlElement('div', audiocallQuestionHTML, 'answer-image');
   const answerImage: HTMLImageElement = document.createElement('img');
   answerImage.classList.add('answer-image');
 
   containerHTML.appendChild(answerImage);
-  answerImage.src = `https://react-learnwords-example.herokuapp.com/${curWord.image}`;
-  
+  answerImage.src = `${API_PATH}${curWord.image}`;
+
   const wordHTML: HTMLElement = createHtmlElement('div', containerHTML, 'word');
 
-
-  
   const wordsLineSpeakerHTML = createHtmlElement('div', wordHTML, 'words-line__speaker');
   createSvgSpeaker(wordsLineSpeakerHTML, 'words-line__speaker-svg');
   wordsLineSpeakerHTML.addEventListener('click', () => playSound('word'));
   createHtmlElement('span', wordHTML, 'words-line__word', words[GLOBAL_VALUES.currentQuestion].word);
-
-
-
 
   document.querySelector('.audiocall-question__btn').remove();
   const audiocallNextBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-next__btn');
@@ -78,9 +71,7 @@ function processAnswer() {
       curAnswerHTML.removeEventListener('click', processAnswer);
       curAnswerHTML.classList.remove('answer_hover');
       const answerWordHTML: HTMLElement = curAnswerHTML.querySelector('.answer__word');
-      // const answerIndicatorHTML: HTMLElement = curAnswerHTML.querySelector('.answer__indicator');
       if (i === curNumber) {
-        // answerIndicatorHTML.style.display = 'block';
         curAnswerHTML.classList.add('answer_right');
       } else {
         answerWordHTML.style.opacity = '0.5';
@@ -94,12 +85,9 @@ function processAnswer() {
       curAnswerHTML.classList.remove('answer_hover');
       const answerWordHTML: HTMLElement = curAnswerHTML.querySelector('.answer__word');
       if (i === curNumber) {
-        // answerWordHTML.classList.add('answer__word_width');
         curAnswerHTML.classList.add('answer_wrong');
-        // answerWordHTML.style.opacity = '0.5';
       } else if (curWord.wordTranslate === curWord.answers[i]) {
         curAnswerHTML.classList.add('answer_right');
-        // answerWordHTML.style.opacity = '0.5';
       } else {
         answerWordHTML.style.opacity = '0.5';
       }
