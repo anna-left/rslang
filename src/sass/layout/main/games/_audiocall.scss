@@ -2,41 +2,24 @@
 
 .audiocall {
   position: relative;
-  // top: 0;
-  // left: 0;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 5%;
   display: grid;
-  // grid-template-rows: auto 1fr auto;
   justify-items: center;
   align-items: center;
   max-width: 100vw;
   min-height: 100%;
-  // background: linear-gradient(180deg, rgba(205, 142, 255, 0.7) 0%, #ffffff 100%);
   background: linear-gradient(180deg, rgb(205 142 255) 0%, #ffffff 100%);
-  // color: white;
-  // font-family: Open Sans, Helvetica, Arial, sans-serif;
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
-  // font-size: 144px;
-  // line-height: 169px;
-  // background-image: url(/static/media/promo_bg.7e814acc.png),url(/static/media/bg_book_2.3b3a53cf.png);
-  // background-position: 100% 0,bottom;
-  // background-repeat: no-repeat,no-repeat;
-  // background-size: 50% auto,80vh auto;
-  // background-image: url('../assets/img/audiocall/lamp.png');
-  // background-repeat: no-repeat;
-  // background-size: 80vh auto;
-  // background-position: 100% 0;
 }
 
 .audiocall-start {
   display: flex;
   flex-direction: column;
-  // gap: 60px;
 }
 
 .audiocall-start__container {
@@ -46,27 +29,24 @@
 }
 
 .audiocall-start__title {
-  font-size: 40px;
+  font-size: 7vmin;
   font-weight: 300;
   line-height: 1;
   margin: 0 auto;
   font-weight: 300;
-  font-size: 7rem;
   z-index: 2;
-  margin-bottom: 10%;
+  margin-bottom: 5vmin;
   user-select: none;
 }
 
 .audiocall-start__description {
   font-size: 2.5rem;
-  // line-height: 24px;
   font-weight: 300;
-  // color: #fff;
-  // opacity: 0.8;
   margin: 0 auto;
-  margin-bottom: 10%;
+  margin-bottom: 5vmin;
   z-index: 2;
   user-select: none;
+  text-align: center;
 }
 
 .audiocall-start__levels {
@@ -76,7 +56,7 @@
   margin: 0 auto;
   align-items: center;
   align-content: center;
-  margin-bottom: 10%;
+  margin-bottom: 5vmin;
   z-index: 2;
 }
 
@@ -107,9 +87,6 @@
 .audiocall-next__btn,
 .result-btns__next-btn,
 .result-btns__to-tutorial {
-  // padding: 19px 15px;
-  // border: 1px solid hsla(0, 0%, 100%, 0.2);
-  // border-radius: 3px;
   border: 1px solid #000000;
   box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2rem;
@@ -118,7 +95,6 @@
   cursor: pointer;
   text-transform: uppercase;
   background: none;
-  // color: hsla(0, 0%, 100%, 0.7);
   font-size: 2rem;
   transition: all 0.1s ease;
   width: 20rem;
@@ -128,7 +104,10 @@
 
 .result-btns__next-btn,
 .result-btns__to-tutorial {
-  width: 26rem;
+  width: 25vmin;
+  height: 6vmin;
+  font-size: 1.8vmin;
+  padding: 1.8vmin;
 }
 
 .audiocall-next__btn {
@@ -138,7 +117,6 @@
 .audiocall-plant {
   position: absolute;
   left: 10%;
-  // top: 14%;
   width: 17%;
   height: auto;
   user-select: none;
@@ -147,29 +125,21 @@
 .audiocall-lamp {
   position: absolute;
   right: 10%;
-  // top: 14%;
   width: 17%;
   height: auto;
   padding-bottom: 5%;
 }
 
-// .audiocall-next__btn {
-//   height: 63px;
-//   padding: 0;
-// }
-
 .next {
   width: 6rem;
   height: 3rem;
   margin: 0 auto;
-  // fill: hsla(0, 0%, 100%, 0.5);
 }
 
 .audiocall-start__btn:hover,
 .audiocall-question__btn:hover,
 .audiocall-next__btn:hover,
 .speaker:hover {
-  // filter: brightness(1.5);
   background-color: hsla(0, 0%, 100%, 0.2);
 }
 
@@ -178,14 +148,12 @@
   width: 12rem;
   height: 12rem;
   border-radius: 12rem;
-  // background-color: hsla(0, 0%, 100%, 0.05);
   background: linear-gradient(
     180deg,
     rgba(205, 142, 255, 0.4) 0%,
     rgba(205, 142, 255, 0.00555547) 99.99%,
     rgba(205, 142, 255, 0) 100%
   );
-  /* filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25)); */
   box-shadow: 1px 2px 4px rgb(0 0 0 / 25%);
   cursor: pointer;
   transition: all 0.1s ease;
@@ -248,7 +216,6 @@
   text-align: left;
   font-size: 2.5rem;
   margin: 0 1rem;
-  // line-height: 3.6rem;
   max-width: 30rem;
   transition: all 0.1s ease;
   box-sizing: border-box;
@@ -275,43 +242,17 @@
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-// .answer__indicator {
-//   height: 2rem;
-//   width: 2rem;
-//   position: absolute;
-//   top: 1.7rem;
-//   left: 1rem;
-//   display: none;
-
-//   // background: url('..//..//..//..//assets/svg/answer-indicator.svg') no-repeat;
-//   // background: url('./answer-indicator.svg');
-// }
-
 .answer__word {
   position: relative;
   font-weight: 300;
-  // color: #fff;
   transition: all 0.1s ease;
   word-wrap: break-word;
   max-height: 10.8rem;
   overflow: hidden;
   user-select: none;
+  text-align: center;
 }
 
-// .answer__word:hover {
-// filter: brightness(1.5);
-// }
-
-// .answer__word::after {
-//   background-color: #b08bbb;
-//   box-shadow: 0 2px #90609e;
-//   content: '';
-//   position: absolute;
-//   top: 48%;
-//   width: 0px;
-//   height: 2px;
-//   transition: all 0.15s ease;
-// }
 .answer__word_width {
   position: relative;
 }
@@ -328,13 +269,9 @@
   transition: all 0.1s ease;
 }
 
-// [class*='_btn']:hover {
-//   filter: brightness(1.5);
-// }
-
 .result {
-  height: calc(min(70vw, 70vh));
-  width: calc(min(70vw, 70vh));
+  height: 70vmin;
+  width: 70vmin;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.9) 0%,
@@ -359,18 +296,17 @@
   grid-template-columns: 1fr 80% 1fr;
   grid-template-rows: 1fr;
   width: 100%;
+  padding: 0.3vmin;
 }
 
 .result-title__message,
 .words-title__message {
-  font-size: 2.5rem;
-  // margin: 0 auto;
+  font-size: 3vmin;
   font-weight: bold;
-  // text-align: center;
   display: flex;
   justify-content: center;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 2vmin;
+  padding-right: 2vmin;
   text-align: center;
   align-items: center;
 }
@@ -382,24 +318,29 @@
   cursor: pointer;
 }
 
+.result-title__right:hover,
+.words-title__left:hover {
+  transform: scale(1.05);
+}
+
 .result__amount-words {
   text-decoration: underline;
-  font-size: 2rem;
-  margin-top: 2rem;
+  font-size: 3vmin;
+  margin-top: 1vmin;
+  text-align: center;
 }
 
 .result-pie {
   --v: calc(((18 / 5) * var(--p) - 90) * 1deg);
 
-  width: 26rem;
-  height: 26rem;
+  width: 30vmin;
+  height: 30vmin;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 50%;
-  padding: 4rem;
-  margin: 6rem;
+  padding: 5vmin;
   background: linear-gradient(#f8f8f8, #f8f8f8) content-box,
     linear-gradient(var(--v), hsl(281, 73%, 83%) 50%, transparent 0) 0 / min(100%, (50 - var(--p)) * 100%),
     linear-gradient(var(--v), transparent 50%, #b061ee 0) 0 / min(100%, (var(--p) - 50) * 100%),
@@ -414,10 +355,10 @@
 }
 
 .result-pie__title {
-  font-size: 4rem;
+  font-size: 6vmin;
 }
 .result-pie__message {
-  font-size: 1.8rem;
+  font-size: 3vmin;
 }
 
 .result-btns {
@@ -435,8 +376,8 @@
 
 .words-title__errors,
 .words-title__correct {
-  width: 5.9rem;
-  height: 5.9rem;
+  width: 4vmin;
+  height: 4vmin;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -459,8 +400,8 @@
 }
 .words-title__amount-errors {
   color: #ffffff;
-  font-size: 3rem;
-  line-height: 3.5rem;
+  font-size: 2.5vmin;
+  line-height: 3vmin;
   text-align: center;
 }
 
@@ -469,10 +410,11 @@
   flex-wrap: nowrap;
   flex-direction: row;
   font-weight: 500;
-  font-size: 3.6rem;
-  line-height: 4.2rem;
-  margin-top: 1rem;
+  font-size: 3vmin;
+  line-height: 3.2vmin;
+  margin-top: 1vmin;
   align-items: center;
+  padding: 0.3vmin;
 }
 
 .words-line__speaker {
@@ -482,16 +424,20 @@
   justify-content: center;
 }
 
+.words-line__speaker:hover {
+  transform: scale(1.05);
+}
+
 .words-line__word {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1vmin;
+  padding-right: 1vmin;
   font-weight: bold;
 }
 
 .words-line__translation {
   font-weight: 500;
-  font-size: 3.6rem;
-  line-height: 4.2rem;
+  font-size: 3vmin;
+  line-height: 3.2vmin;
 }
 
 .words-delimiter {
@@ -502,9 +448,9 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .audiocall-start__title {
-    font-size: 6rem;
-  }
+  // .audiocall-start__title {
+  //   font-size: 6rem;
+  // }
   .audiocall-start__description,
   .audiocall-start__level {
     font-size: 2rem;
@@ -522,22 +468,17 @@
   .audiocall-lamp {
     display: none;
   }
-  // .audiocall-start__title {
-  //   font-size: 5rem;
-  // }
-  // .audiocall-start__description {
-  //   font-size: 1.5rem;
-  // }
+  
   .audiocall-start__level {
     width: 4.5rem;
     height: 4.5rem;
   }
   .result {
-    height: min(80vw, 80vh);
-    width: min(80vw, 80vh);
+    height: 80vmin;
+    width: 80vmin;
   }
   .result-pie {
-    margin: 5rem;
+    margin: 5vmin;
   }
 }
 
@@ -554,9 +495,9 @@
   .answer {
     font-size: 2rem;
   }
-  .audiocall-start__title {
-    font-size: 3rem;
-  }
+  // .audiocall-start__title {
+  //   font-size: 3rem;
+  // }
   .audiocall-start__description,
   .audiocall-start__level {
     font-size: 1.5rem;
@@ -566,13 +507,13 @@
     height: 4rem;
   }
   .result {
-    height: min(90vw, 90vh);
-    width: min(90vw, 90vh);
+    height: 90vmin;
+    width: 90vmin;
   }
 }
 
 @media screen and (max-width: 380px) {
-  // .audiocall-start__levels {
-  //   width: 90%;
-  // }
+  .audiocall-start__levels {
+    width: 90%;
+  }
 }
