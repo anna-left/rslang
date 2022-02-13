@@ -2,7 +2,7 @@
 import { startRound } from './startRound';
 import { speakerSVG, nextSVG } from './svg';
 import { createHtmlElement } from './createHtmlElement';
-import API from '../components/api/API';
+import API from '../api/API';
 
 function clearPage(curHTMLElement: HTMLElement) {
   while (curHTMLElement.firstChild) {
