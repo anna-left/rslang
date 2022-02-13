@@ -27,9 +27,7 @@ class SprintModel {
   async getWords(group = this.group, page = this.page) {
     const words = await this.fetchWords(group, page);
     const shuffledWords = this.shuffleOrder(words);
-    const x = this.shuffleTranslation(shuffledWords);
-    console.log(x);
-    return x
+    return this.shuffleTranslation(shuffledWords)
   }
 
   shuffleOrder(array: IWordSchema[]) {
