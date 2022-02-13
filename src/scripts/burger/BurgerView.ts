@@ -11,6 +11,7 @@ import {
 
 import './burger.scss';
 import { HomeView } from '../home/home/HomeVIew';
+import Dictionary from "../controllers/Dictionary";
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
 // const BURGER_CLASS_HIDE = 'main-box__burger_state_hide';
@@ -33,6 +34,10 @@ export class BurgerView {
     const settings = getSettingsItem();
 
     home.addEventListener('click', () => new HomeView(main, mainBox));
+    dictionary.addEventListener('click', async () => {
+      const dict = new Dictionary();
+      await dict.init();
+    })
 
     list.append(home, dictionary, games, stats, settings);
     this.burger.append(hideIcon, list);
