@@ -47,7 +47,7 @@ class Dictionary {
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
-    window.addEventListener('page-to-right',  async (event: CustomEvent) => {
+    window.addEventListener('page-to-right',  async () => {
       this.currentPage = this.currentPage === WordsSettings.pages - 1 ? this.currentPage : this.currentPage + 1;
       const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
@@ -56,6 +56,7 @@ class Dictionary {
     window.addEventListener('activate-word', (event: CustomEvent) => {
       this.view.deactivateCurrentWord();
       this.view.activateWord(event.detail.id);
+      this.view.emptyActiveWord();
       this.view.displayActiveWord();
     })
   }
