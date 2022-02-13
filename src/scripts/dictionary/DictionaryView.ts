@@ -7,6 +7,8 @@ import './DictionaryView.scss';
 import WordCard from "./WordCard";
 import {IWordSchema} from "../types/types";
 import SmallWordCard from "./SmallWordCard";
+import ArrowButton from "../sprint/ArrowButton";
+import Pagination from "./Pagination";
 
 class DictionaryView extends Page {
   private readonly className: string;
@@ -18,6 +20,8 @@ class DictionaryView extends Page {
   private currentDifficultyLevel: number;
   private wordCards: SmallWordCard[];
   private currentWordId: number;
+  private readonly paginationContainer: HTMLElement;
+  private readonly pagination: Pagination;
   constructor(className: string) {
     super(className);
     this.className = className;
@@ -40,10 +44,14 @@ class DictionaryView extends Page {
     words.append(this.wordsContainer, this.currentWord);
     wordsSection.append(wordHeader, words);
 
-    const pagination = createHTMLElement('div', `${this.className}__pagination`);
+    this.paginationContainer = createHTMLElement('div', `${this.className}__pagination-container`);
+    const arrowLeft = new ArrowButton(true, `${this.className}__left`, 'page-to-left');
+    this.pagination = new Pagination(`pagination`, WordsSettings.pages);
+    const arrowRight = new ArrowButton(false, `${this.className}__right`, 'page-to-right');
+    this.paginationContainer.append(arrowLeft.render(), this.pagination.render(), arrowRight.render());
     const gamesSection = createHTMLElement('div', `${this.className}__section`);
 
-    this.page.append(levelsSection, wordsSection, pagination, gamesSection);
+    this.page.append(levelsSection, wordsSection, this.paginationContainer, gamesSection);
   }
 
   init(data: IWordSchema[]) {
@@ -97,16 +105,37 @@ class DictionaryView extends Page {
 
   displayActiveWord() {
     const currentWord = new WordCard(this.data[this.currentWordId]);
-    this.currentWord.innerHTML = '';
     this.currentWord.append(currentWord.render());
+  }
+
+  emptyActiveWord() {
+    this.currentWord.innerHTML = '';
   }
 
   updateData(data: IWordSchema[]) {
     this.data = data;
     this.createWordsCards();
     this.currentWordId = 0;
-    this.activateWord(0);
-    this.displayActiveWord();
+    this.emptyActiveWord();
+    if (data[0]) {
+      this.activateWord(0);
+      this.displayActiveWord();
+    } else {
+      this.wordsContainer.innerHTML = DictionaryText.noWords;
+    }
+  }
+
+  hidePagination() {
+    this.paginationContainer.classList.add('hidden');
+  }
+
+  showPagination() {
+    this.paginationContainer.classList.remove('hidden');
+  }
+
+  activatePage(number: number) {
+    this.pagination.deactivatePage();
+    this.pagination.activatePage(number);
   }
 }
 

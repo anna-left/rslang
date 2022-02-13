@@ -11,7 +11,7 @@ import {
 
 import './burger.scss';
 import { HomeView } from '../home/home/HomeVIew';
-import Dictionary from "../controllers/Dictionary";
+import Dictionary from "../dictionary/Dictionary";
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
 // const BURGER_CLASS_HIDE = 'main-box__burger_state_hide';

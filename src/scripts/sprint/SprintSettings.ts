@@ -10,6 +10,7 @@ export enum WordsSettings {
   endpoint = 'https://rslang-909.herokuapp.com/',
   groups = 6,
   pages = 30,
+  pagesInView = 5,
 }
 
 export enum SprintIntroText {

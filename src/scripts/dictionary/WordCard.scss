@@ -16,6 +16,8 @@
     border-left: 0.1rem solid black;
     border-top: 0.1rem solid black;
     border-radius: 2rem 2rem 0 0;
+    height: 30rem;
+    object-fit: cover;
   }
 
   &__header {
@@ -30,7 +32,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    font-size: 3rem;
+    font-size: 2.5rem;
     align-items: center;
   }
 

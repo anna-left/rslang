@@ -8,6 +8,7 @@ export enum DictionaryText {
   sprint = 'Спринт',
   sprintDesc = 'Тренировка Спринт - повторение заученных слов из вашего словаря',
   example = 'Пример',
+  noWords = 'Нет слов для отображения!',
 }
 
 export const DictionaryDifficulty = {

@@ -40,4 +40,13 @@
     flex-wrap: wrap;
     gap: 2rem;
   }
+
+  &__pagination-container {
+    display: flex;
+    gap: 1rem
+  }
+}
+
+.hidden {
+  visibility: hidden;
 }
