@@ -1,6 +1,7 @@
-import API from "../components/api/API";
+
 import {ISprintWord, IWordSchema} from "../types/types";
 import {WordsSettings} from "./SprintSettings";
+import API from "../api/API";
 
 class SprintModel {
   private readonly api: API;

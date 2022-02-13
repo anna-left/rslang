@@ -23,12 +23,12 @@ class SprintViewResults extends Page {
   }
 
   showResults(learned: number, toLearn: number) {
-    const percent = Math.round(learned / (learned + toLearn) * 100) || 0;
+    const percentWordsLearned = Math.round(learned / (learned + toLearn) * 100) || 0;
     this.result.innerText =  `${SprintResultText.learned} ${learned}, ${SprintResultText.toLearn} ${toLearn}`;
-    this.progressRing.update(percent, SprintResultText.percentage);
-    if (percent / 100 > 0.5) {
+    this.progressRing.update(percentWordsLearned, SprintResultText.percentage);
+    if (percentWordsLearned / 100 > 0.5) {
       this.header.innerText = GreatResult.congratulation;
-    } else if (percent / 100 > 0.25) {
+    } else if (percentWordsLearned / 100 > 0.25) {
       this.header.innerText = GoodResult.congratulation;
     } else {
       this.header.innerText = BadResult.congratulation;

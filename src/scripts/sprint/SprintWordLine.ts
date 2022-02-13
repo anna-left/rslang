@@ -7,13 +7,13 @@ import {WordsSettings} from "./SprintSettings";
 class SprintWordLine extends Page{
   constructor(className: string, word: TResultWord) {
     super(className, 'div')
-    const speakButton = createHTMLElement('button', 'play-word');
+    const playWord = createHTMLElement('button', 'play-word');
     const englishWord = createHTMLElement('span', 'english-word', word.word);
     const translation = createHTMLElement('span', 'translation', ` - ${word.wordTranslate}`);
-    speakButton.addEventListener('click', () => {
+    playWord.addEventListener('click', () => {
       new Audio(`${WordsSettings.endpoint}${word.audio}`).play();
     })
-    this.page.append(speakButton, englishWord, translation);
+    this.page.append(playWord, englishWord, translation);
   }
 }
 

@@ -11,8 +11,9 @@ class DictionaryModel {
   }
 
   async getUserWords() {
-    const id = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
+    // TODO check proper keys
+    const id = sessionStorage.getItem('userId');
+    const token = sessionStorage.getItem('token');
     return await this.api.getUserWords(id, token);
   }
 

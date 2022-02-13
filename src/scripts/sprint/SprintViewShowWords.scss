@@ -53,9 +53,9 @@
   line-height: 6rem;
   transform: translateY(-50%);
   &--right {
-    background-color: $sprintRightColor;
+    background-color: $color-sprint-right;
   }
   &--wrong {
-    background-color: $sprintWrongColor;
+    background-color: $color-sprint-wrong;
   }
 }

@@ -51,10 +51,10 @@
   transform: translateY(-50%);
 }
 .word__count--right {
-  background-color: #43D26C;
+  background-color: #43d26c;
 }
 .word__count--wrong {
-  background-color: #FF4F4F;
+  background-color: #ff4f4f;
 }
 
 /*# sourceMappingURL=SprintViewShowWords.css.map */

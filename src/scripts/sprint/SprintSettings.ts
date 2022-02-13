@@ -2,8 +2,8 @@ export enum SprintSettings {
   subLevels = 3,
   maxLevel = 4,
   baseScore = 10,
-  great = 0.5,
-  good = 0.25
+  greatResult = 0.5,
+  goodResult = 0.25
 }
 
 export enum WordsSettings {
@@ -55,4 +55,4 @@ export enum BadResult {
   congratulation = 'Надо постараться!'
 }
 
-export const SprintColors = ['#ddd', '#fbcee3', '#F2D265', '#CFB276'];
+export const SprintColors = ['#ddd', '#fbcee3', '#f2d265', '#cfb276'];

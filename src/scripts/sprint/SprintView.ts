@@ -41,17 +41,17 @@ class SprintView extends Page {
 
   onRightAnswer() {
     this.game.onRightAnswer();
-    new Audio('../assets/audio/correct.mp3').play();
+    new Audio('./../assets/audio/correct.mp3').play();
   }
 
   onWrongAnswer() {
     this.game.onWrongAnswer()
-    new Audio('../assets/audio/error.mp3').play();
+    new Audio('./../assets/audio/error.mp3').play();
   }
 
   onLevelUp() {
     this.game.onLevelUp();
-    new Audio('../assets/audio/correct.mp3').play();
+    new Audio('./../assets/audio/correct.mp3').play();
   }
 
   onGameOver(learned: ISprintWord[], toLearn: ISprintWord[]) {

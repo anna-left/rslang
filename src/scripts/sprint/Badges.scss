@@ -1,9 +1,8 @@
-@import "../../sass/util/functions";
 @import "../../sass/util/variables";
 
 .badges {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   height: $badgeSize * 2;
   align-items: center;
 }
@@ -13,7 +12,7 @@
   height: $badgeSize;
   background-color: #999;
   border-radius: 50%;
-  border: black solid 2px;
+  border: black solid 0.2rem;
   background-size: $badgeSize $badgeSize;
   background-position: center;
   &--active {

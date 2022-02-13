@@ -1,46 +1,46 @@
-@import "../../sass/util/functions";
 @import "../../sass/util/variables";
 
 .sprint-game {
-  font-size: px-to-rem(24px);
-  width: px-to-rem(800px);
+  font-size: 2.4rem;
+  width: 80rem;
   margin: 0 auto;
-  border-radius: px-to-rem($sprintGameBorderRadius);
+  border-radius: $sprintGameBorderRadius;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.61) 0%, rgba(255, 255, 255, 0.61) 0.01%, rgba(255, 255, 255, 0.61) 100%);
   box-shadow: 1px 2px 4px rgba(38, 120, 61, 0.34);
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: px-to-rem(30px);
-  padding: px-to-rem($sprintGamePadding) 0;
+  gap: 3rem;
+  padding: $sprintGamePadding 0;
   justify-content: center;
   align-items: center;
-}
 
-.sprint-game__foreign {
-  font-size: px-to-rem(30px);
-  font-weight: bold;
-}
 
-.sprint-game__separation {
-  width: 100%;
-  position: relative;
-}
+  &__foreign {
+    font-size: 3rem;
+    font-weight: bold;
+  }
 
-.sprint-game__sign {
-  width: px-to-rem(30px);
-  height: px-to-rem(30px);
-  background-size: px-to-rem(30px) px-to-rem(30px);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  &__separation {
+    width: 100%;
+    position: relative;
+  }
 
-.sprint-game__sign-right {
-  background-image: url("../../assets/svg/right.svg");
-}
+  &__sign {
+    width: 3rem;
+    height: 3rem;
+    background-size: 3rem 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-.sprint-game__sign-wrong {
-  background-image: url("../../assets/svg/wrong.svg");
+  &__sign-right {
+    background-image: url("../../assets/svg/right.svg");
+  }
+
+  &__sign-wrong {
+    background-image: url("../../assets/svg/wrong.svg");
+  }
 }

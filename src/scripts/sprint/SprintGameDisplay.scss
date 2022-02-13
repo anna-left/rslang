@@ -1,69 +1,69 @@
-@import "../../sass/util/functions";
 @import "../../sass/util/variables";
 
 .sprint-game-display {
-  margin: px-to-rem(-$sprintGamePadding) 0;
-  padding: px-to-rem($sprintGamePadding);
-  border-radius: px-to-rem($sprintGameBorderRadius) px-to-rem($sprintGameBorderRadius) 0 0;
+  margin: -$sprintGamePadding 0;
+  padding: $sprintGamePadding;
+  border-radius: $sprintGameBorderRadius $sprintGameBorderRadius 0 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.sprint-game-display__level-img {
-  display: block;
-  width: $levelUpSize;
-  height: $levelUpSize;
-}
+  &__level-img {
+    display: block;
+    width: $levelUpSize;
+    height: $levelUpSize;
+  }
 
-.sprint-game-display__central {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: px-to-rem(10px)
-}
+  &__central {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem
+  }
 
-.sprint-game-display__score, .sprint-game-display__score-info {
-  color: white;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-}
+  &__score, &__score-info {
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+  }
 
-.sprint-game-display__level {
-  display: flex;
-}
+  &__level {
+    display: flex;
+  }
 
-.sprint-game-display__score {
-  width: px-to-rem(2.5 * $timerRadius);
-}
+  &__score {
+    width: 2.5 * $timerRadius;
+  }
 
-.sprint-game-display__timer {
-  position: relative;
-  width: $timerRadius * 2.5;
-  height: $timerRadius * 2.5;
-  border-radius: 50%;
-  box-sizing: border-box;
-}
+  &__timer {
+    position: relative;
+    width: $timerRadius * 2.5;
+    height: $timerRadius * 2.5;
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
 
-.sprint-game-display__timer__value {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: $timerRadius / 2;
-}
+  &__timer__value {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: $timerRadius / 2;
+  }
 
-.sprint-game-display__timer__circle {
-  transform: translate(-50%, -50%) rotate(-90deg);
-  position: absolute;
-  width: $timerRadius * 2;
-  height: $timerRadius * 2;
-  left: 50%;
-  top: 50%;
-  circle {
-    transition: all 1s linear;
+  &__timer__circle {
+    transform: translate(-50%, -50%) rotate(-90deg);
+    position: absolute;
+    width: $timerRadius * 2;
+    height: $timerRadius * 2;
+    left: 50%;
+    top: 50%;
+
+    circle {
+      transition: all 1s linear;
+    }
   }
 }
