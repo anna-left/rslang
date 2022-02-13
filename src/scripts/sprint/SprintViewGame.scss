@@ -1,0 +1,46 @@
+@import "../../sass/util/functions";
+@import "../../sass/util/variables";
+
+.sprint-game {
+  font-size: px-to-rem(24px);
+  width: px-to-rem(800px);
+  margin: 0 auto;
+  border-radius: px-to-rem($sprintGameBorderRadius);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.61) 0%, rgba(255, 255, 255, 0.61) 0.01%, rgba(255, 255, 255, 0.61) 100%);
+  box-shadow: 1px 2px 4px rgba(38, 120, 61, 0.34);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: px-to-rem(30px);
+  padding: px-to-rem($sprintGamePadding) 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.sprint-game__foreign {
+  font-size: px-to-rem(30px);
+  font-weight: bold;
+}
+
+.sprint-game__separation {
+  width: 100%;
+  position: relative;
+}
+
+.sprint-game__sign {
+  width: px-to-rem(30px);
+  height: px-to-rem(30px);
+  background-size: px-to-rem(30px) px-to-rem(30px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sprint-game__sign-right {
+  background-image: url("../../assets/svg/right.svg");
+}
+
+.sprint-game__sign-wrong {
+  background-image: url("../../assets/svg/wrong.svg");
+}

@@ -1,5 +1,5 @@
-import DictionaryView from "../view/DictionaryView";
-import DictionaryModel from "../models/DictionaryModel";
+import DictionaryView from "../dictionary/DictionaryView";
+import DictionaryModel from "../dictionary/DictionaryModel";
 
 class Dictionary {
   private readonly model: DictionaryModel;

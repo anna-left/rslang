@@ -1,0 +1,66 @@
+.word-card {
+  width: 50rem;
+  height: 80rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 0.1rem solid black;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  &__img {
+    display: block;
+    margin: -2.1rem -2.1rem 0 -2.1rem;
+    border-right: 0.1rem solid black;
+    border-left: 0.1rem solid black;
+    border-top: 0.1rem solid black;
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  &__header {
+    font-size: 4.5rem;
+    font-weight: bold;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 3rem;
+    align-items: center;
+  }
+
+  &__translation:first-letter {
+    text-transform: uppercase;
+  }
+
+  &__audio {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: url("../../assets/svg/play.svg") center center;
+    background-size: 2.5rem 2.5rem;
+    cursor: pointer;
+    justify-self: auto;
+  }
+
+  &__subheader {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  &__text {
+    font-size: 2rem;
+  }
+
+  &__example {
+    margin-top: 2rem;
+  }
+
+  &__meaning, &__example {
+    font-weight: bold;
+  }
+}

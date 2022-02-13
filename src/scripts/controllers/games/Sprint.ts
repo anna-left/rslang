@@ -1,7 +1,7 @@
-import SprintView from "../../view/games/SprintView";
-import SprintModel from "../../models/SprintModel";
+import SprintView from "../../sprint/SprintView";
+import SprintModel from "../../sprint/SprintModel";
 import {ISprintWord} from "../../types/types";
-import {SprintSettings} from "../../components/games/sprint/SprintSettings";
+import {SprintSettings} from "../../sprint/SprintSettings";
 
 class Sprint {
   private readonly view: SprintView;
