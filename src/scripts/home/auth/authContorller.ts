@@ -33,8 +33,8 @@ export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: 
     if (labels.email.classList.contains(CLASS_INPUT_CLEAR) && labels.password.classList.contains(CLASS_INPUT_CLEAR)) {
       const api = new API();
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
-      const token = await api.signIn(user);
-      sessionStorage.setItem('userToken', JSON.stringify(token));
+      const userData = await api.signIn(user);
+      sessionStorage.setItem('userData', JSON.stringify(userData));
     } else {
     }
   }
