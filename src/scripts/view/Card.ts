@@ -1,1 +1,0 @@
-/* TODO single word card view*/

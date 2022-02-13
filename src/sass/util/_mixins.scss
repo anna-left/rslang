@@ -18,6 +18,7 @@
   transition: all 0.2s;
   &:hover {
     cursor: pointer;
+    color: $color-prime-dark;
     box-shadow: 0 0 .5rem .1rem $color-prime-dark;
   }
 }
