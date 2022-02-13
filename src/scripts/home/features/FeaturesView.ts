@@ -11,7 +11,7 @@ export class Feature {
       'section-features',
     ]);
 
-    const aboutBox = createElement('div', ['section-features__box', 'section-features__about-box', 'about-box']);
+    const aboutBox = createElement('div', ['section-features__about-box', 'about-box']);
     setAboutBox(aboutBox);
 
     // Progress

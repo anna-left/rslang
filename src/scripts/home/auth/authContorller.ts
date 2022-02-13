@@ -18,34 +18,24 @@ export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAut
 
 export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
   authHandler(mode, inputs, labels);
-  console.log(mode);
-  console.log(inputs);
   if (mode === 'register') {
     if (
       labels.name.classList.contains(CLASS_INPUT_CLEAR) &&
       labels.email.classList.contains(CLASS_INPUT_CLEAR) &&
       labels.password.classList.contains(CLASS_INPUT_CLEAR)
     ) {
-      console.log('registered');
       const api = new API();
       const user: IUserSchema = { name: inputs.name.value, email: inputs.email.value, password: inputs.password.value };
-      console.log(user);
-      const resp = await api.createUser(user);
-      console.log(resp);
+      await api.createUser(user);
     } else {
-      console.log('not registered');
     }
   } else {
     if (labels.email.classList.contains(CLASS_INPUT_CLEAR) && labels.password.classList.contains(CLASS_INPUT_CLEAR)) {
-      console.log('login');
       const api = new API();
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
-      console.log(user);
       const token = await api.signIn(user);
-      console.log(token);
       sessionStorage.setItem('userToken', JSON.stringify(token));
     } else {
-      console.log('not logined');
     }
   }
 }

@@ -11,7 +11,7 @@ export function getBurgerList() {
 }
 
 export function getHomeItem() {
-  const home = createElement('li', ['burger__item']);
+  const home = createElement('li', ['burger__item', 'burger__link']);
 
   const homeIconSvg = createSVG('svg', ['burger__item_icon']);
   const homeIconUse = createSVG('use', [], [['href', '#burger_home-icon']]);
@@ -24,7 +24,7 @@ export function getHomeItem() {
 }
 
 export function getDictionaryItem() {
-  const dictionary = createElement('li', ['burger__item']);
+  const dictionary = createElement('li', ['burger__item', 'burger__link']);
 
   const bookIconSvg = createSVG('svg', ['burger__item_icon']);
   const bookIconUse = createSVG('use', [], [['href', '#burger_book-icon']]);
@@ -37,25 +37,33 @@ export function getDictionaryItem() {
 }
 
 export function getGamesItem() {
+  const BURGER_GAMES_SHOW_CLASS = 'burger-games__games-box_state_active';
+
   const games = createElement('li', ['burger__item', 'burger-games']);
+  const linkBox = createElement('div', ['burger-games__link-box', 'burger__link']);
 
   const gamesIconSvg = createSVG('svg', ['burger__item_icon', 'burger__item_icon_area']);
   const gamesIconUse = createSVG('use', [], [['href', '#burger_games-icon']]);
 
   const gamesText = createElement('span', ['burger__item_text'], [], 'Мини-игры');
 
-  const gamesContainer = createElement('div', ['burger__item-games-box']);
-  const gamesList = getGameList();
-
-  gamesList.append(getSprintItem(), getAudioCallItem());
-  gamesContainer.append(gamesList);
   gamesIconSvg.append(gamesIconUse);
-  games.append(gamesIconSvg, gamesText);
+  linkBox.append(gamesIconSvg, gamesText);
+
+  const gamesContainer = createElement('span', ['burger-games__games-box']);
+  const gamesList = getGameList();
+  gamesContainer.append(gamesList);
+
+  games.addEventListener('mouseover', () => gamesContainer.classList.add(BURGER_GAMES_SHOW_CLASS));
+  games.addEventListener('mouseout', () => gamesContainer.classList.remove(BURGER_GAMES_SHOW_CLASS));
+
+  games.append(linkBox, gamesContainer);
+
   return games;
 }
 
 export function getStatsItem() {
-  const stats = createElement('li', ['burger__item']);
+  const stats = createElement('li', ['burger__item', 'burger__link']);
 
   const statsIconSvg = createSVG('svg', ['burger__item_icon']);
   const statsIconUse = createSVG('use', [], [['href', '#burger_stats-icon']]);
@@ -68,7 +76,7 @@ export function getStatsItem() {
 }
 
 export function getSettingsItem() {
-  const settings = createElement('li', ['burger__item']);
+  const settings = createElement('li', ['burger__item', 'burger__link']);
 
   const configIconSvg = createSVG('svg', ['burger__item_icon']);
   const configIconUse = createSVG('use', [], [['href', '#burger_config-icon']]);
@@ -88,11 +96,14 @@ export function getHideBurgerIcon() {
 }
 
 function getGameList() {
-  return createElement('ul', ['burger-games__list']);
+  const gamesList = createElement('ul', ['burger-games__list', 'games-list']);
+
+  gamesList.append(getAudioCallItem(), getSprintItem());
+  return gamesList;
 }
 
 function getSprintItem() {
-  const sprint = createElement('li', ['burger-games__item']);
+  const sprint = createElement('li', ['burger-games__item', 'burger__link']);
 
   const sprintIconSvg = createSVG('svg', ['burger__item_icon']);
   const sprintIconUse = createSVG('use', [], [['href', '#burger_sprint-icon']]);
@@ -104,7 +115,7 @@ function getSprintItem() {
   return sprint;
 }
 function getAudioCallItem() {
-  const audiocall = createElement('li', ['burger-games__item']);
+  const audiocall = createElement('li', ['burger-games__item', 'burger__link']);
 
   const audiocallIconSvg = createSVG('svg', ['burger__item_icon']);
   const audiocallIconUse = createSVG('use', [], [['href', '#burger_audiocall-icon']]);
@@ -286,41 +297,107 @@ function createConfigSymbol() {
     'symbol',
     [],
     [
-      // ['viewBox', ''],
+      ['viewBox', '0 0 30 30'],
       ['id', 'burger_config-icon'],
+      ['fill', 'none'],
     ],
   );
-  // const pathConfig = createSVG('path', [], [['d', '']]);
-  // symbolConfig.append(pathConfig);
+  const pathConfig1 = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M12.1875 1.875V5.625L10.3125 6.5625L7.5 3.75L3.75 7.5L6.5625 10.3125L5.625 12.1875H1.875V17.8125H5.625L6.5625 19.6875L3.75 22.5L7.5 26.25L10.3125 23.4375L12.1875 24.375V28.125H17.8125V24.375L19.6875 23.4375L22.5 26.25L26.25 22.5L23.4375 19.6875L24.375 17.8125H28.125V12.1875H24.375L23.4375 10.3125L26.25 7.5L22.5 3.75L19.6875 6.5625L17.8125 5.625V1.875H12.1875Z',
+      ],
+      ['stroke', 'white'],
+      ['stroke-width', '2'],
+      ['stroke-linecap', 'round'],
+      ['stroke-linejoin', 'round'],
+    ],
+  );
+  const pathConfig2 = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z',
+      ],
+      ['stroke', 'white'],
+      ['stroke-width', '2'],
+      ['stroke-linecap', 'round'],
+      ['stroke-linejoin', 'round'],
+    ],
+  );
+  symbolConfig.append(pathConfig1, pathConfig2);
   return symbolConfig;
 }
 
 function createSprintSymbol() {
-  const symbolConfig = createSVG(
+  const symbolSptrint = createSVG(
     'symbol',
     [],
     [
-      // ['viewBox', ''],
-      ['id', 'burger_config-icon'],
+      ['viewBox', '0 0 94 126'],
+      ['id', 'burger_sprint-icon'],
     ],
   );
-  // const pathConfig = createSVG('path', [], [['d', '']]);
-  // symbolConfig.append(pathConfig);
-  return symbolConfig;
+  const pathSptrint1 = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M67.3125 28.625C71.0421 28.625 74.619 27.1434 77.2562 24.5062C79.8934 21.869 81.375 18.2921 81.375 14.5625C81.375 10.8329 79.8934 7.25604 77.2562 4.61881C74.619 1.98158 71.0421 0.5 67.3125 0.5C63.5829 0.5 60.006 1.98158 57.3688 4.61881C54.7316 7.25604 53.25 10.8329 53.25 14.5625C53.25 18.2921 54.7316 21.869 57.3688 24.5062C60.006 27.1434 63.5829 28.625 67.3125 28.625V28.625Z',
+      ],
+    ],
+  );
+  const pathSptrint2 = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M39.0624 42.0062C35.1655 42.975 32.5062 44.4312 30.3593 46.2375C27.1405 48.95 24.5405 52.8625 21.028 59.0125C20.2055 60.4517 18.8448 61.5052 17.2455 61.9412C15.6462 62.3772 13.9391 62.1601 12.4999 61.3375C11.0607 60.5149 10.0072 59.1543 9.57118 57.5549C9.13515 55.9556 9.35232 54.2486 10.1749 52.8094C13.6718 46.6937 17.2062 40.9719 22.3093 36.6781C27.6343 32.1906 34.153 29.6531 42.9437 28.675C46.6187 28.2687 50.6624 28.35 54.453 30.0406C58.4312 31.8187 61.3374 35.0031 63.3187 39.2594C65.9874 44.9875 67.9718 48.3969 69.5593 50.3719C70.3249 51.3219 70.8593 51.7625 71.1624 51.9594C71.403 52.1156 71.5062 52.1281 71.5437 52.1344H71.5468C71.8187 52.1656 72.6999 52.1344 75.2874 50.9875C76.4155 50.4875 77.6468 49.8875 79.153 49.1531L79.5124 48.9781C81.3545 48.0691 83.2132 47.1939 85.0874 46.3531C86.6006 45.6888 88.3152 45.6509 89.8563 46.2475C91.3974 46.8441 92.6394 48.0268 93.3108 49.5368C93.9821 51.0469 94.0281 52.7613 93.4387 54.3052C92.8493 55.849 91.6724 57.0966 90.1655 57.775C88.4288 58.5545 86.7066 59.3661 84.9999 60.2094L84.5905 60.4094C83.1499 61.1125 81.6999 61.8219 80.3405 62.4219C77.528 63.6656 73.9343 65.0156 70.0374 64.5437C65.9249 64.0437 62.7562 61.7219 60.1468 58.6062L51.6062 75.0844L63.4187 90.4531C64.1218 91.3719 64.5562 92.4656 64.678 93.6156L67.278 118.603C67.3771 119.426 67.3113 120.261 67.0846 121.059C66.8579 121.856 66.4747 122.601 65.9574 123.249C65.4401 123.897 64.799 124.436 64.0715 124.833C63.3439 125.231 62.5445 125.48 61.7197 125.566C60.895 125.652 60.0614 125.573 59.2676 125.333C58.4737 125.094 57.7354 124.699 57.0958 124.171C56.4561 123.643 55.9278 122.994 55.5417 122.26C55.1556 121.526 54.9194 120.723 54.8468 119.897L52.428 96.6687L45.253 87.3312L45.1905 87.4469L44.928 86.9094L31.6718 69.6594C31.0201 68.8115 30.5969 67.8106 30.4426 66.7525C30.2883 65.6943 30.4081 64.6143 30.7905 63.6156L39.0624 42.0062V42.0062Z',
+      ],
+    ],
+  );
+  const pathSptrint3 = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M29.5998 78.6469L24.9998 91.0218L6.87479 89.5844C6.05073 89.5078 5.21968 89.5957 4.42987 89.843C3.64005 90.0902 2.9072 90.4918 2.27384 91.0245C1.64049 91.5572 1.11924 92.2104 0.740345 92.9462C0.361452 93.682 0.132461 94.4857 0.0666609 95.3107C0.000860959 96.1356 0.0995618 96.9655 0.357037 97.752C0.614512 98.5385 1.02563 99.2661 1.56654 99.8925C2.10745 100.519 2.76737 101.032 3.50802 101.401C4.24866 101.77 5.05527 101.989 5.88104 102.044L28.7185 103.856C30.0739 103.964 31.4275 103.627 32.574 102.896C33.7205 102.165 34.5974 101.08 35.0717 99.8062L38.5873 90.3437L29.5998 78.6469Z',
+      ],
+    ],
+  );
+  symbolSptrint.append(pathSptrint1, pathSptrint2, pathSptrint3);
+  return symbolSptrint;
 }
 
 function createAudiocallSymbol() {
-  const symbolConfig = createSVG(
+  const symbolAudiocall = createSVG(
     'symbol',
     [],
     [
-      // ['viewBox', ''],
-      ['id', 'burger_config-icon'],
+      ['viewBox', '0 0 81 81'],
+      ['id', 'burger_audiocall-icon'],
     ],
   );
-  const pathConfig = createSVG('path', [], [['d', '']]);
-  // symbolConfig.append(pathConfig);
-  return symbolConfig;
+  const pathAudiocall = createSVG(
+    'path',
+    [],
+    [
+      [
+        'd',
+        'M40.5 7.0625C31.6318 7.0625 23.1269 10.5854 16.8561 16.8561C10.5854 23.1269 7.0625 31.6318 7.0625 40.5V47.1875H13.75C15.5236 47.1875 17.2246 47.8921 18.4788 49.1462C19.7329 50.4004 20.4375 52.1014 20.4375 53.875V73.9375C20.4375 75.7111 19.7329 77.4121 18.4788 78.6663C17.2246 79.9204 15.5236 80.625 13.75 80.625H7.0625C5.28886 80.625 3.58787 79.9204 2.33372 78.6663C1.07957 77.4121 0.375 75.7111 0.375 73.9375V40.5C0.375 35.2307 1.41286 30.013 3.42933 25.1448C5.4458 20.2766 8.40139 15.8533 12.1273 12.1273C15.8533 8.40139 20.2766 5.4458 25.1448 3.42933C30.013 1.41286 35.2307 0.375 40.5 0.375C45.7693 0.375 50.987 1.41286 55.8552 3.42933C60.7234 5.4458 65.1467 8.40139 68.8727 12.1273C72.5986 15.8533 75.5542 20.2766 77.5707 25.1448C79.5871 30.013 80.625 35.2307 80.625 40.5V73.9375C80.625 75.7111 79.9204 77.4121 78.6663 78.6663C77.4121 79.9204 75.7111 80.625 73.9375 80.625H67.25C65.4764 80.625 63.7754 79.9204 62.5212 78.6663C61.2671 77.4121 60.5625 75.7111 60.5625 73.9375V53.875C60.5625 52.1014 61.2671 50.4004 62.5212 49.1462C63.7754 47.8921 65.4764 47.1875 67.25 47.1875H73.9375V40.5C73.9375 31.6318 70.4146 23.1269 64.1439 16.8561C57.8731 10.5854 49.3682 7.0625 40.5 7.0625V7.0625Z',
+      ],
+    ],
+  );
+  symbolAudiocall.append(pathAudiocall);
+  return symbolAudiocall;
 }
 
 function createHideBurgerSymbol() {
