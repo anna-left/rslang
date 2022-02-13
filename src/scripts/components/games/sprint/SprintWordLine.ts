@@ -2,7 +2,7 @@ import Page from "./Page";
 import {createHTMLElement} from "../../../utils/CommonFunctions";
 import {TResultWord} from "../../../types/types";
 import './SprintWordLine.scss';
-import {SprintSettings, WordsSettings} from "./SprintSettings";
+import {WordsSettings} from "./SprintSettings";
 
 class SprintWordLine extends Page{
   constructor(className: string, word: TResultWord) {

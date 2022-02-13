@@ -4,7 +4,7 @@ export function createHTMLElement(tag = '', className = '', text = ''): HTMLElem
     element.className = className;
   }
   if (text) {
-    element.innerText = text;
+    element.innerHTML = text;
   }
   return element;
 }
@@ -17,4 +17,10 @@ export function setAttributes(element: HTMLElement | SVGElement, attributes: obj
   Object.entries(attributes).forEach((keyValuePair) => {
     element.setAttribute(keyValuePair[0], keyValuePair[1]);
   });
+}
+
+export function removeTags(text: string) {
+  let newString = text.replace(/i>/g, 'em>');
+  newString = newString.replace(/b>/g, 'em>');
+  return newString;
 }

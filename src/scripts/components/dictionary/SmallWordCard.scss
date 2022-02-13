@@ -1,0 +1,21 @@
+.small-word-card {
+  width: 24rem;
+  height: 14rem;
+  border: 1px solid black;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  cursor: pointer;
+  &__word {
+    font-size: 3.6rem;
+    margin-bottom: 2rem;
+  }
+
+  &__translation {
+    font-size: 2.4rem;
+  }
+
+  &--active {
+    color: white;
+    background-color: #CD8EFF;
+  }
+}

@@ -1,8 +1,13 @@
 import './sass/style.scss';
 import './scripts/app';
-import Sprint from "./scripts/controllers/games/Sprint";
+import Dictionary from "./scripts/controllers/Dictionary";
+
+// (async () => {
+//   const sprint = new Sprint();
+//   await sprint.init();
+// })();
 
 (async () => {
-  const sprint = new Sprint();
-  await sprint.init();
+  const dict = new Dictionary();
+  await dict.init();
 })();
