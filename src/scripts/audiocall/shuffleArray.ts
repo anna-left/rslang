@@ -1,6 +1,6 @@
 import { IWordSchema } from '../types/types'
 
-function shuffleArray<T>(arr: Array<T>): T[] {
+function shuffleArray<T>(arr: Array<T>) {
   let j;
   let temp;
   for (let i = arr.length - 1; i > 0; i--) {
