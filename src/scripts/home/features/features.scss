@@ -8,7 +8,7 @@
     width: 100%;
     padding-left: 9vw;
     padding-bottom: 7vmax;
-    font-size: calc((1.6vmin + 1.6vmax) / 2);
+    font-size: calc((2vmin + 2vmax) / 2);
   }
 }
 
@@ -18,22 +18,35 @@
     padding: 1rem 2rem;
     border-radius: 2rem;
     border: 0.1rem solid $color-prime-dark;
-    margin-right: 2rem;
+    margin-right: 3rem;
+    font-size: calc((1.5vmin + 1.5vmax) / 2);
+
     &:last-of-type {
       margin-right: 0;
     }
   }
   &__about-box {
-    width: 90rem;
+    width: 60vw;
+    font-weight: 700;
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 4rem;
   }
   &__container {
-    width: 60vw;
     display: flex;
-    justify-content: flex-start;
-    margin-top: 2rem;
+
+    &_text {
+      width: 60vw;
+      display: flex;
+      justify-content: flex-start;
+      margin-right: 7vw;
+    }
+
+    &_image {
+      max-width: 15vw;
+      max-height: 70vh;
+    }
   }
   &__header {
     text-align: center;
@@ -44,7 +57,8 @@
 .about-box {
   &__header {
     width: 100%;
+    font-size: calc((3.3vmin + 3.3vmax) / 2);
     text-align: left;
-    font-size: 4rem;
+    margin-bottom: 3rem;
   }
 }
