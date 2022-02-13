@@ -1,4 +1,4 @@
-import API from "../components/api/API";
+import API from "../api/API";
 
 class DictionaryModel {
   private readonly api: API;
