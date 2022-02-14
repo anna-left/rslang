@@ -7,12 +7,10 @@ import { Review } from '../review/ReviewView';
 import { Team } from '../team/TeamView';
 
 import './home.scss';
+import { linkSeeker } from './homeController';
 
 export class HomeView {
-  constructor(
-    navRootEl: HTMLElement,
-    rootEl: HTMLElement
-  ) {
+  constructor(navRootEl: HTMLElement, rootEl: HTMLElement) {
     new About(rootEl);
     const nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
 
@@ -47,6 +45,7 @@ export class HomeView {
     const teamLink = createElement('li', ['home-navigation__link'], [['data-type', 'team']]);
     const infoLink = createElement('li', ['home-navigation__link'], [['data-type', 'info']]);
 
+    linkSeeker([mainLink, reviewLink, featuresLink, teamLink, infoLink]);
     mainLink.append(svgSHome);
     reviewLink.append(svgReview);
     featuresLink.append(svgFeatures);

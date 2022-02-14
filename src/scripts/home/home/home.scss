@@ -1,4 +1,3 @@
-
 @import '../../../sass/util/mixins';
 @import '../../../sass/util/variables';
 
@@ -48,6 +47,9 @@
     &_features {
       height: 4rem;
       width: 4rem;
+    }
+    &_state_active {
+      background-color: $color-prime-calm;
     }
   }
 }
