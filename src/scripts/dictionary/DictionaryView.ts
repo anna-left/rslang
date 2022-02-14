@@ -69,7 +69,8 @@ class DictionaryView extends Page {
         i,
         structure[i.toString() as keyof typeof DictionaryDifficulty].level,
         structure[i.toString() as keyof typeof DictionaryDifficulty].range,
-        structure[i.toString() as keyof typeof DictionaryDifficulty].label)
+        structure[i.toString() as keyof typeof DictionaryDifficulty].label,
+        structure[i.toString() as keyof typeof DictionaryDifficulty].color)
       this.difficultyCards.push(levelCard);
       this.levelsContainer.append(levelCard.render());
     }
@@ -97,7 +98,10 @@ class DictionaryView extends Page {
     this.wordCards = [];
     this.wordsContainer.innerHTML = '';
     for (let i = 0; i < this.data.length; i += 1) {
-      const card = new SmallWordCard(i, this.data[i]);
+      const card = new SmallWordCard(
+        i,
+        this.data[i],
+        DictionaryDifficulty[this.currentDifficultyLevel.toString() as keyof typeof DictionaryDifficulty].color);
       this.wordsContainer.append(card.render());
       this.wordCards.push(card);
     }
