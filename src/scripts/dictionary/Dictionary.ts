@@ -2,6 +2,7 @@ import DictionaryView from "./DictionaryView";
 import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
+import {LocalStorage} from "../../state/StrageSettings";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -67,18 +68,25 @@ class Dictionary {
     window.addEventListener('sprint-dict-start', () => {
       this.sprint.start(this.currentLevel, this.currentPage);
     })
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem(LocalStorage.dictionaryDifficultyLevel, this.currentLevel.toString());
+      localStorage.setItem(LocalStorage.dictionaryPageNumber, this.currentPage.toString());
+    })
   }
 
-  async start(level = 0, page = 0) {
-    this.currentLevel = level;
-    this.currentPage = page;
+  async start() {
     const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
-    this.view.activateDifficultyLevel(level);
+    this.view.activateDifficultyLevel(this.currentLevel);
     this.view.updateData(data);
     this.view.activatePage(this.currentPage);
     const root = document.querySelector('.main-box');
     root.innerHTML = '';
     root.append(this.view.render());
+  }
+
+  preSelectLevelAndPage(level: number, page: number) {
+    this.currentLevel = level;
+    this.currentPage = page;
   }
 }
 

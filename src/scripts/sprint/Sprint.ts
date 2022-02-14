@@ -63,7 +63,8 @@ class Sprint {
       this.view.enableLevelSelection();
     })
     window.addEventListener('sprint-workbook', async () => {
-      await this.dict.start(this.group, this.page);
+      this.dict.preSelectLevelAndPage(this.group, this.page);
+      await this.dict.start();
     })
     window.addEventListener('sprint-forward', async () => {
       this.view.showWords();

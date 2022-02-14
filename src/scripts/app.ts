@@ -6,6 +6,7 @@ import { HeaderView } from './header/HeaderView';
 import { MainView } from './main/MainView';
 import Dictionary from "./dictionary/Dictionary";
 import Sprint from "./sprint/Sprint";
+import {LocalStorage} from "../state/StrageSettings";
 
 async function init() {
   const burger = new BurgerView();
@@ -20,6 +21,10 @@ async function init() {
   await sprint.init();
   sprint.addDictionary(dict);
   dict.addSprint(sprint);
+  dict.preSelectLevelAndPage(
+    +localStorage.getItem(LocalStorage.dictionaryDifficultyLevel),
+    +localStorage.getItem(LocalStorage.dictionaryPageNumber)
+  )
 
   burger.render(main.main, main.mainBox, dict);
   setHome(main.main, main.mainBox);
