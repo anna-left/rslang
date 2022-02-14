@@ -4,14 +4,24 @@ import { setHome } from './home/home/homeController';
 import { BurgerView } from './burger/BurgerView';
 import { HeaderView } from './header/HeaderView';
 import { MainView } from './main/MainView';
+import Dictionary from "./dictionary/Dictionary";
+import Sprint from "./sprint/Sprint";
 
-function init() {
+async function init() {
   const burger = new BurgerView();
   const main = new MainView();
   new HeaderView(burger.burger, main.main, main.mainBox);
   main.render();
   new FooterView();
-  burger.render(main.main, main.mainBox);
+
+  const sprint = new Sprint();
+  const dict = new Dictionary();
+  await dict.init();
+  await sprint.init();
+  sprint.addDictionary(dict);
+  dict.addSprint(sprint);
+
+  burger.render(main.main, main.mainBox, dict);
   setHome(main.main, main.mainBox);
 }
 

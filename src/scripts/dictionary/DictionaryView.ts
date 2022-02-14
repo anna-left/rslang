@@ -75,12 +75,8 @@ class DictionaryView extends Page {
     this.page.append(levelsSection, wordsSection, this.paginationContainer, gamesSection);
   }
 
-  init(data: IWordSchema[]) {
-    this.data = data;
+  init() {
     this.createDifficultyLevels();
-    this.createWordsCards();
-    this.activateDifficultyLevel(0);
-    this.activateWord(0);
   }
 
   createDifficultyLevels() {
