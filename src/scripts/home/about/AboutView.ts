@@ -21,7 +21,7 @@ export class About {
 
     const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Регистрация');
     btnAuth.addEventListener('click', () => new Auth(rootEl));
-    const image = createElement('img', ['section-about__image'], [['src', '../../../assets/img/humans2.webp']]);
+    const image = createElement('img', ['section-about__image'], [['src', './assets/img/humans2.webp']]);
 
     const svgSpot = createSVG('svg', ['section-about__spot']);
     const svgUse = createSVG('use', [], [['href', '#about-spot']]);

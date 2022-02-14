@@ -4,7 +4,7 @@ import { createElement } from '../../util/Util';
 
 export function getImage() {
   const imageBox = createElement('div', ['section-auth__image-box']);
-  const image = createElement('img', ['section-auth__image'], [['src', '../../../assets/img/humans1.webp']]);
+  const image = createElement('img', ['section-auth__image'], [['src', './assets/img/humans1.webp']]);
   imageBox.append(image);
   return imageBox;
 }
