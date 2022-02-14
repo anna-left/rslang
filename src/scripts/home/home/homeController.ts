@@ -5,7 +5,7 @@ export function setHome(root: HTMLElement, rootEl: HTMLElement) {
 }
 
 export function linkSeeker(links: HTMLElement[]) {
-  const LINK_CLASS_ACTIVE = 'home-navigation__icon_state_active';
+  const LINK_CLASS_ACTIVE = 'home-navigation__link_state_active';
   links.forEach((el) => {
     el.addEventListener('click', () => {
       links.forEach((el) => el.classList.remove(LINK_CLASS_ACTIVE));

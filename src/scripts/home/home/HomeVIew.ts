@@ -39,7 +39,7 @@ export class HomeView {
     svgTeam.append(svgTeamUse);
     svgInfo.append(svgInfoUse);
 
-    const mainLink = createElement('li', ['home-navigation__link'], [['data-type', 'about']]);
+    const mainLink = createElement('li', ['home-navigation__link', 'home-navigation__link_state_active'], [['data-type', 'about']]);
     const reviewLink = createElement('li', ['home-navigation__link'], [['data-type', 'review']]);
     const featuresLink = createElement('li', ['home-navigation__link'], [['data-type', 'features']]);
     const teamLink = createElement('li', ['home-navigation__link'], [['data-type', 'team']]);

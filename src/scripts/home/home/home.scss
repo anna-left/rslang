@@ -27,6 +27,13 @@
     text-align: center;
     background-color: $color-prime-light-calm;
     overflow: hidden;
+    margin-top: -4.8rem;
+    transition: all 0.2s;
+    opacity: 0.5;
+    &:hover {
+      margin-top: 0;
+      opacity: 1;
+    }
   }
 }
 
@@ -36,10 +43,14 @@
   }
   &__link {
     @include nav-link;
-    padding: 1.5rem 2.5rem;
+    padding: 1.3rem 2.5rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all .2s;
+    &_state_active {
+      background-color: $color-prime-calm;
+    }
   }
   &__icon {
     height: 3rem;
@@ -47,9 +58,6 @@
     &_features {
       height: 4rem;
       width: 4rem;
-    }
-    &_state_active {
-      background-color: $color-prime-calm;
     }
   }
 }
