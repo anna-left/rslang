@@ -30,7 +30,7 @@ class DictionaryView extends Page {
     this.currentDifficultyLevel = 0;
     this.wordCards = [];
     this.currentWordId = 0;
-    const levelsSection = createHTMLElement('div', `${this.className}__section ${this.className}__section--first`);
+    const levelsSection = createHTMLElement('div', `${this.className}__section`);
     const header = createHTMLElement('h2', `${this.className}__header`, DictionaryText.header);
     const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.subheader);
     this.levelsContainer = createHTMLElement('div', `${this.className}__levels`);
@@ -49,7 +49,28 @@ class DictionaryView extends Page {
     this.pagination = new Pagination(`pagination`, WordsSettings.pages);
     const arrowRight = new ArrowButton(false, `${this.className}__right`, 'page-to-right');
     this.paginationContainer.append(arrowLeft.render(), this.pagination.render(), arrowRight.render());
+
     const gamesSection = createHTMLElement('div', `${this.className}__section`);
+    const gamesHeader = createHTMLElement('h2', `${this.className}__header`, DictionaryText.gamesHeader);
+    const gamesContainer = createHTMLElement('div', `${this.className}__games-container`);
+    const audioCall = createHTMLElement('div', `${this.className}__audiocall ${this.className}__game`);
+    audioCall.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('audiocall-dict-start'));
+    })
+    const sprint = createHTMLElement('div', `${this.className}__sprint ${this.className}__game`);
+    sprint.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('sprint-dict-start'));
+    })
+    gamesContainer.append(audioCall, sprint);
+    gamesSection.append(gamesHeader, gamesContainer);
+
+    const sprintHeader = createHTMLElement('h3', `${this.className}__game-header`, DictionaryText.sprint);
+    const sprintText = createHTMLElement('h3', `${this.className}__game-desc`, DictionaryText.sprintDesc);
+    sprint.append(sprintHeader, sprintText);
+
+    const audioCallHeader = createHTMLElement('h3', `${this.className}__game-header`, DictionaryText.audioCall);
+    const audioCallText = createHTMLElement('h3', `${this.className}__game-desc`, DictionaryText.audioCallDesc);
+    audioCall.append(audioCallHeader, audioCallText);
 
     this.page.append(levelsSection, wordsSection, this.paginationContainer, gamesSection);
   }
