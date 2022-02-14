@@ -1,4 +1,4 @@
-function shuffleArray(arr: Array<string>) {
+function shuffleArray<T>(arr: Array<T>): Array<T> {
   let j;
   let temp;
   for (let i = arr.length - 1; i > 0; i--) {

@@ -6,3 +6,21 @@ $color-prime-calm-1: #07689f;
 $color-prime-attract: #ff2e63;
 $color-prime-candy: #cd8eff;
 $color-prime-candy-light: #edd7ff;
+
+:root {
+  --timerRadius: 50;
+  --progressRadius: 70;
+  --timerBorderThickness: 8;
+}
+$timerRadius: 5rem;
+$progressRadius: 7rem;
+$timerBorderThickness: 0.8rem;
+
+$levelUpSize: 8rem;
+$badgeSize: 3rem;
+
+$sprintMainColor: #43d26c;
+$sprintGamePadding: 3rem;
+$sprintGameBorderRadius: 3.5rem;
+$color-sprint-wrong: #ff4f4f;
+$color-sprint-right: #43d26c;

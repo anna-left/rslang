@@ -1,0 +1,20 @@
+.pagination {
+  display: flex;
+  gap: 1rem;
+
+  &__page {
+    width: 4rem;
+    height: 4rem;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 4rem;
+    cursor: pointer;
+
+    &--active {
+      background: #CD8EFF;
+      box-shadow: 1px 2px 4px #8759AB;
+      border-radius: 50%;
+      color: white;
+    }
+  }
+}
