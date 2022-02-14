@@ -21,7 +21,7 @@ export class Info {
           'span',
           ['info-list__item_text'],
           [['alt', data.details[i].join('\n')]],
-          `${i + 1}. ${data.info[i]}`,
+          `${data.info[i]}`,
         );
         item.append(svgs[i], text);
         infoList.append(item);

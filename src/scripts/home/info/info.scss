@@ -7,24 +7,43 @@
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    padding: 0 9vw 3vmax;
+    padding: 0 9vw 4vmax;
   }
 }
 
 .section-info {
   &__info-list {
-    columns: 2;
+    list-style: none;
+    display: grid;
+    grid-gap: 5vmin;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(4, 10vh);
+    grid-template-columns: repeat(3, 25vw);
   }
-  &__info-item {
+  &__header {
+    padding-left: 1vw;
+    margin-bottom: 4vmin;
+    font-size: 3vmax;
+  }
+}
+
+.info-list {
+  &__item {
+    display: flex;
     padding: 0.5rem;
-    margin-top: 1rem;
-    border: 0.1rem solid $color-prime-candy;
-    border-radius: 1rem;
     transition: all 0.2s;
     &:hover {
-      cursor: help;
-      background-color: $color-prime-candy;
-      color: $color-prime-light;
+      // cursor: help;
+      // background-color: $color-prime-candy;
+      // color: $color-prime-light;
+    }
+    &_icon {
+      width: 11vmin;
+    }
+    &_text {
+      font-size: 2.4vmin;
+      padding-top: .9vmin;
+      padding-left: 1vmax;
     }
   }
 }
