@@ -136,6 +136,8 @@ class DictionaryView extends Page {
   activatePage(number: number) {
     this.pagination.deactivatePage();
     this.pagination.activatePage(number);
+    this.pagination.collapseList();
+    this.pagination.manageEllipsis();
   }
 }
 

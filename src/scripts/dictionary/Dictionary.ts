@@ -18,6 +18,7 @@ class Dictionary {
     const data = await this.model.fetchWords(0, 0);
     this.view.init(data);
     this.view.displayActiveWord();
+    this.view.activatePage(0);
     const root = document.querySelector('.main-box');
     root.innerHTML = '';
     root.append(this.view.render());
