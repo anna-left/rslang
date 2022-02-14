@@ -1,0 +1,13 @@
+@import "../../sass/util/variables";
+
+.colored-ring__circle {
+  transform: translate(-50%, -50%) rotate(-90deg);
+  position: absolute;
+  width: $timerRadius * 2;
+  height: $timerRadius * 2;
+  left: 50%;
+  top: 50%;
+  circle {
+    transition: all 1s linear;
+  }
+}
