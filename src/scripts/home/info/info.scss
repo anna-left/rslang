@@ -32,18 +32,29 @@
     display: flex;
     padding: 0.5rem;
     transition: all 0.2s;
-    &:hover {
-      // cursor: help;
-      // background-color: $color-prime-candy;
-      // color: $color-prime-light;
-    }
+
     &_icon {
       width: 11vmin;
     }
     &_text {
       font-size: 2.4vmin;
-      padding-top: .9vmin;
+      padding-top: 0.9vmin;
       padding-left: 1vmax;
+      cursor: pointer;
+      &:hover::after {
+        content: attr(alt);
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        width: 70vmin;
+        transform: translate(-50%, 0);
+        font-size: 1.7vmin;
+        z-index: 10;
+        padding: 1.5vmax;
+        border-radius: 1vmin;
+        background-color: $color-prime-candy-light;
+        line-height: 1.3;
+      }
     }
   }
 }
