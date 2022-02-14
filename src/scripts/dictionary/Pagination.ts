@@ -16,7 +16,7 @@ class Pagination extends Page {
     this.modifier = '--active';
     this.size = size;
     this.list = [];
-    this.paginationWing = 2;
+    this.paginationWing = 3;
     this.createList(size);
     this.currentActivePage = 0
     this.activatePage(this.currentActivePage);
@@ -58,7 +58,7 @@ class Pagination extends Page {
     } else {
       this.list[0].classList.remove('ellipsis-right');
     }
-    if (this.currentActivePage + this.paginationWing < this.list.length - 1) {
+    if (this.currentActivePage + this.paginationWing < this.list.length - 2) {
       this.list[this.list.length - 1].classList.add('ellipsis-left');
     } else {
       this.list[this.list.length - 1].classList.remove('ellipsis-left');

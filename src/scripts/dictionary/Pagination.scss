@@ -7,7 +7,7 @@
     width: 4rem;
     height: 4rem;
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 4rem;
     cursor: pointer;
 
@@ -40,6 +40,8 @@
     text-align: center;
     font-size: 3rem;
     line-height: 4rem;
+    cursor: auto;
+    pointer-events: none;
 }
 
 .ellipsis-right::after {
