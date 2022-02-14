@@ -3,9 +3,11 @@
 
 .main-box__section {
   &_type_info {
-    width: 120rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0 9vw 3vmax;
   }
 }
 

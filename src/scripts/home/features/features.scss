@@ -7,7 +7,7 @@
     justify-content: flex-end;
     width: 100%;
     padding-left: 9vw;
-    padding-bottom: 7vmax;
+    padding-bottom: 5vmax;
     font-size: calc((2vmin + 2vmax) / 2);
   }
 }
@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 4rem;
+    margin-bottom: 3vh;
   }
   &__container {
     display: flex;
@@ -59,6 +59,6 @@
     width: 100%;
     font-size: calc((3.3vmin + 3.3vmax) / 2);
     text-align: left;
-    margin-bottom: 3rem;
+    margin-bottom: 3vh;
   }
 }
