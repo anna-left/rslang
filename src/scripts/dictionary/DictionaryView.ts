@@ -160,6 +160,26 @@ class DictionaryView extends Page {
     this.pagination.collapseList();
     this.pagination.manageEllipsis();
   }
+
+  cardMarkHard() {
+    this.wordCards[this.currentWordId].render().classList.add('small-word-card--hard');
+    (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--hard`);
+  }
+
+  cardUnmarkHard() {
+    this.wordCards[this.currentWordId].render().classList.remove('small-word-card--hard');
+    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
+  }
+
+  cardMarkKnown() {
+    this.wordCards[this.currentWordId].render().classList.add('small-word-card--known');
+    (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--known`);
+  }
+
+  cardUnmarkKnown() {
+    this.wordCards[this.currentWordId].render().classList.remove('small-word-card--known');
+    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
+  }
 }
 
 export default DictionaryView;
