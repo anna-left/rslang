@@ -1,8 +1,25 @@
 $color-prime-light: #fff;
-$color-prime-light-calm: #C1DEE2;
+$color-prime-light-calm: #c1dee2;
 $color-prime-dark: #212121;
-$color-prime-calm: #43D26C;
+$color-prime-calm: #43d26c;
 $color-prime-calm-1: #07689f;
 $color-prime-attract: #ff2e63;
-$color-prime-candy: #CD8EFF;
-$color-prime-candy-light: #EDD7FF;
+$color-prime-candy: #cd8eff;
+$color-prime-candy-light: #edd7ff;
+:root {
+  --timerRadius: 50;
+  --progressRadius: 70;
+  --timerBorderThickness: 8;
+}
+$timerRadius: 5rem;
+$progressRadius: 7rem;
+$timerBorderThickness: 0.8rem;
+
+$levelUpSize: 8rem;
+$badgeSize: 3rem;
+
+$sprintMainColor: #43d26c;
+$sprintGamePadding: 3rem;
+$sprintGameBorderRadius: 3.5rem;
+$color-sprint-wrong: #ff4f4f;
+$color-sprint-right: #43d26c;

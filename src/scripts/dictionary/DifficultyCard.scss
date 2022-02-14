@@ -1,0 +1,36 @@
+.difficulty-card {
+  width: 24rem;
+  height: 9rem;
+  border-radius: 2rem;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3rem;
+  color: #00000033;
+
+  &__label {
+    width: 7rem;
+    height: 7rem;
+    line-height: 7rem;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  &__range {
+    font-size: 1.8rem;
+  }
+
+  &--active > &__label {
+    color: white;
+    background-color: #CD8EFF;
+    box-shadow: 1px 2px 4px #8759AB;
+  }
+
+  &--active &__range, &--active &__level {
+    color: black;
+  }
+}
