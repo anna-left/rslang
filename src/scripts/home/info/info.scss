@@ -15,13 +15,12 @@
   &__info-list {
     list-style: none;
     display: grid;
-    grid-gap: 5vmin;
+    grid-gap: 4vmin;
     grid-auto-flow: column;
     grid-template-rows: repeat(4, 10vh);
     grid-template-columns: repeat(3, 25vw);
   }
   &__header {
-    padding-left: 1vw;
     margin-bottom: 4vmin;
     font-size: 3vmax;
   }
@@ -40,6 +39,8 @@
       font-size: 2.4vmin;
       padding-top: 0.9vmin;
       padding-left: 1vmax;
+      line-height: 1.15;
+
       cursor: pointer;
       &:hover::after {
         content: attr(alt);
