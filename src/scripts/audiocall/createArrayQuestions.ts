@@ -3,29 +3,36 @@ import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { getRandomValue } from './getRandomValue';
 import { words } from './startRound';
 import { shuffleArray } from './shuffleArray';
-import { basicWords } from './words';
 import { WordAudiocall } from './WordAudiocall';
 import { wordsApi } from './startAudiocall';
 import { IWordSchema } from '../types/types';
 
 async function createArrayQuestions() {
+  let arrayWords: IWordSchema[];
+  let arrayWrongWords: IWordSchema[] = [];
+  let numberPage: number;
+
   const arrPages = [];
   for (let i = 0; i < AMOUNT_PAGES; i++) {
     arrPages.push(i);
   }
 
-  const numberPage = getRandomValue(0, arrPages.length);
+  if (GLOBAL_VALUES.currentPage === -1) {
+    numberPage = getRandomValue(0, arrPages.length);
+  } else {
+    numberPage = GLOBAL_VALUES.currentPage;
+  }
+
+  // Исключить изученные слова!!! добавить данные с предыдущих страниц, если часть слов уже изучено
+  arrayWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
   arrPages.splice(numberPage, 1);
 
-  let arrayWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
-  
-  let arrayWrongWords: IWordSchema[] = [];
   for (let i = 0; i < AMOUNT_ANSWERS - 1; i++) {
     const numberPage = getRandomValue(0, arrPages.length);
     const index = arrPages.indexOf(i);
     arrPages.splice(index, 1);
-    const promiseWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
-    arrayWrongWords = arrayWrongWords.concat(promiseWords);
+    const promiseWrongWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
+    arrayWrongWords = arrayWrongWords.concat(promiseWrongWords);
   }
 
   arrayWords = shuffleArray(arrayWords);

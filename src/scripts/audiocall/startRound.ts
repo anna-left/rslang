@@ -26,7 +26,6 @@ async function startNewGame() {
 }
 
 function startRound() {
-  
   GLOBAL_VALUES.currentRound += 1;
   GLOBAL_VALUES.currentQuestion = 0;
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
@@ -51,21 +50,20 @@ function startRound() {
     'audiocall-start__description',
     'Тренировка улучшает восприятие речи на слух.',
   );
-  createHtmlElement(
-    'span',
-    audiocallStart,
-    'audiocall-start__description',
-    'Выбрать уровень:',
-  );
+  
 
-  const audiocallStartLevels = createHtmlElement('div', audiocallStart, 'audiocall-start__levels');
-  audiocallStartLevels.addEventListener('click', changeLevel);
-  for (let i = 0; i < AMOUNT_LEVELS; i++) {
-    const levelHTML = createHtmlElement('div', audiocallStartLevels, 'audiocall-start__level', String(i + 1));
-    if (i === GLOBAL_VALUES.currentLevel) {
-      levelHTML.classList.add('audiocall-start__level_active');
+  if (GLOBAL_VALUES.currentPage === -1) {
+    createHtmlElement('span', audiocallStart, 'audiocall-start__description', 'Выбрать уровень:');
+    const audiocallStartLevels = createHtmlElement('div', audiocallStart, 'audiocall-start__levels');
+    audiocallStartLevels.addEventListener('click', changeLevel);
+    for (let i = 0; i < AMOUNT_LEVELS; i++) {
+      const levelHTML = createHtmlElement('div', audiocallStartLevels, 'audiocall-start__level', String(i + 1));
+      if (i === GLOBAL_VALUES.currentLevel) {
+        levelHTML.classList.add('audiocall-start__level_active');
+      }
     }
   }
+
   const audiocallStartBtn = createHtmlElement('button', audiocallStart, 'audiocall-start__btn', 'Начать');
   audiocallStartBtn.addEventListener('click', startNewGame);
   document.addEventListener(
