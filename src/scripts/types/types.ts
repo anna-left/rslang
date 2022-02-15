@@ -15,6 +15,19 @@ export interface IWordSchema {
     wordTranslate: string,
 }
 
+export interface IAggregatedWordSchema extends IWordSchema {
+    userWord?: IUserWord
+}
+
+export interface IAggregatedWordsSchema extends IAggregatedWordSchema {
+    paginatedResults: IAggregatedWordSchema[],
+    totalCount: ICount[]
+}
+
+export interface ICount {
+    count: string
+}
+
 export interface ISprintWord extends IWordSchema {
   gameTranslate: string;
   answer: boolean;
@@ -51,7 +64,7 @@ export interface IUserTokens {
 }
 
 export interface IUserWord {
-    difficulty: string,
+    difficulty: 'hard' | 'known',
     optional: {}
 }
 

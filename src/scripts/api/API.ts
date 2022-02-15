@@ -1,4 +1,5 @@
 import {
+  IAggregatedWordSchema, IAggregatedWordsSchema,
   IUserSchema,
   IUserSettings,
   IUserStatistics,
@@ -8,12 +9,20 @@ import {
   StatusCode,
   TUserInfo,
 } from '../types/types';
+import {SessionStorage} from "../state/StorageSettings";
 
 export class API {
   endpoint: string;
+  private userId: string;
+  private accessToken: string;
+  private refreshToken: string;
 
   constructor() {
     this.endpoint = 'https://rslang-909.herokuapp.com';
+    const userData = JSON.parse(sessionStorage.getItem(SessionStorage.userData)) as IUserTokens;
+    this.userId = userData.userId;
+    this.accessToken = userData.token;
+    this.refreshToken = userData.refreshToken;
   }
 
   async getAllWords() {
@@ -59,7 +68,7 @@ export class API {
     return;
   }
 
-  async getUser(id: string, token: string) {
+  async getUser(id: string, token = this.accessToken) {
     const endpointModifier = `/users/${id}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -76,7 +85,7 @@ export class API {
     return (await response.json()) as IUserSchema;
   }
 
-  async updateUser(id: string, user: TUserInfo, token: string): Promise<void> {
+  async updateUser(user: TUserInfo, id = this.userId, token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'PUT',
@@ -95,7 +104,7 @@ export class API {
     return;
   }
 
-  async deleteUser(id: string, token: string): Promise<void> {
+  async deleteUser(id = this.userId, token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'DELETE',
@@ -105,14 +114,14 @@ export class API {
       },
     });
     if (response.status === StatusCode.NoContent) {
-      console.log('The user has been deleted');
+      console.log('The userId has been deleted');
     } else if (response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing or invalid');
     }
     return;
   }
 
-  async getUserTokens(id: string, token: string): Promise<void | IUserTokens> {
+  async getUserTokens(id = this.userId, token = this.refreshToken): Promise<void | IUserTokens> {
     const endpointModifier = `/users/${id}/tokens`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -127,7 +136,7 @@ export class API {
     return (await response.json()) as IUserTokens;
   }
 
-  async getUserWords(id: string, token: string): Promise<void | IUserWord[]> {
+  async getUserWords(id = this.userId, token = this.accessToken): Promise<void | IUserWord[]> {
     const endpointModifier = `/users/${id}/words`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -142,7 +151,7 @@ export class API {
     return (await response.json()) as IUserWord[];
   }
 
-  async createUserWord(id: string, wordId: string, word: IUserWord, token: string): Promise<void> {
+  async createUserWord(wordId: string,  word: IUserWord, id = this.userId,token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}/words/${wordId}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'POST',
@@ -161,7 +170,7 @@ export class API {
     return;
   }
 
-  async getUserWord(id: string, wordId: string, token: string): Promise<void | IUserWord> {
+  async getUserWord(wordId: string, id = this.userId, token = this.accessToken): Promise<void | IUserWord> {
     const endpointModifier = `/users/${id}/words/${wordId}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -178,7 +187,7 @@ export class API {
     return (await response.json()) as IUserWord;
   }
 
-  async updateUserWord(id: string, wordId: string, word: IUserWord, token: string): Promise<void> {
+  async updateUserWord(wordId: string, word: IUserWord, id = this.userId, token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}/words/${wordId}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'PUT',
@@ -197,7 +206,7 @@ export class API {
     return;
   }
 
-  async deleteUserWord(id: string, wordId: string, token: string): Promise<void> {
+  async deleteUserWord(wordId: string, id = this.userId, token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}/words/${wordId}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'DELETE',
@@ -207,7 +216,7 @@ export class API {
       },
     });
     if (response.status === StatusCode.NoContent) {
-      console.log('The user word has been deleted');
+      console.log('The userId word has been deleted');
     } else if (response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing or invalid');
     }
@@ -215,13 +224,13 @@ export class API {
   }
 
   async getUserAggregatedWords(
-    id: string,
-    token: string,
-    group = '',
-    page = 0,
-    wordsPerPage = 0,
-    filter: {},
-  ): Promise<void | IWordSchema[]> {
+    group = "0",
+    page = "0",
+    wordsPerPage = "20",
+    id = this.userId,
+    token = this.accessToken,
+    filter = {},
+  ): Promise<void | IAggregatedWordsSchema[]> {
     let queryString = '';
     const queries = ['?'];
     if (group) {
@@ -250,10 +259,10 @@ export class API {
     if (response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing or invalid');
     }
-    return (await response.json()) as IWordSchema[];
+    return (await response.json()) as IAggregatedWordsSchema[];
   }
 
-  async getUserAggregateWord(id: string, wordId: string, token: string): Promise<void | IUserWord> {
+  async getUserAggregateWord(wordId: string, id = this.userId, token = this.accessToken): Promise<void | IAggregatedWordSchema[]> {
     const endpointModifier = `/users/${id}/aggregatedWords/${wordId}`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -267,10 +276,10 @@ export class API {
     } else if (response.status === StatusCode.NotFound) {
       console.log("User's word not found");
     }
-    return (await response.json()) as IUserWord;
+    return (await response.json()) as IAggregatedWordSchema[];
   }
 
-  async getUserStatistics(id: string, token: string): Promise<void | IUserStatistics> {
+  async getUserStatistics(id = this.userId, token = this.accessToken): Promise<void | IUserStatistics> {
     const endpointModifier = `/users/${id}/statistics`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -287,7 +296,7 @@ export class API {
     return (await response.json()) as IUserStatistics;
   }
 
-  async updateUserStatistics(id: string, statistics: IUserStatistics, token: string): Promise<void> {
+  async updateUserStatistics(statistics: IUserStatistics, id = this.userId, token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}/statistics`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'PUT',
@@ -306,7 +315,7 @@ export class API {
     return;
   }
 
-  async getUserSettings(id: string, token: string): Promise<void | IUserSettings> {
+  async getUserSettings(id = this.userId, token = this.accessToken): Promise<void | IUserSettings> {
     const endpointModifier = `/users/${id}/settings`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -323,7 +332,7 @@ export class API {
     return (await response.json()) as IUserSettings;
   }
 
-  async updateUserSettings(id: string, settings: IUserSettings, token: string): Promise<void> {
+  async updateUserSettings(settings: IUserSettings, id = this.userId, token = this.accessToken): Promise<void> {
     const endpointModifier = `/users/${id}/settings`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'PUT',
@@ -357,6 +366,10 @@ export class API {
     } else if (response.status === StatusCode.NotFound) {
       console.log('Incorrect e-mail or password');
     }
+    const userData = (await response.json()) as IUserTokens;
+    this.accessToken = userData.token;
+    this.userId = userData.userId;
+    this.refreshToken = userData.refreshToken;
     return (await response.json()) as IUserTokens;
   }
 }
