@@ -3,6 +3,57 @@
 
 .main-box__section {
   &_type_team {
-    width: 100rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0 9vw 4vmax;
+  }
+}
+.section-team {
+  &__header {
+    margin-bottom: 6vmin;
+    font-size: 3vmax;
+  }
+  &__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 5vmin;
+    grid-template-columns: repeat(3, 26vw);
+  }
+  &__item {
+    &_header {
+      font-size: 1.35vmax;
+      padding: 1vmin 0;
+    }
+    &_icon-box {
+      position: relative;
+    }
+    &_figure {
+      height: 65%;
+      position: absolute;
+      top: 0;
+      left: 32%;
+      transform: translate(-50%, 0);
+      z-index: 1;
+    }
+    &_icon {
+      position: relative;
+      padding-top: 1vh;
+      min-height: 30vh;
+      z-index: 5;
+    }
+    &_text {
+      font-size: 1vmax;
+    }
+    &:nth-of-type(2) {
+      .section-team__item_figure {
+        height: 67%;
+      }
+      .section-team__item_icon {
+        margin-top: 3vh;
+        min-height: 27vh;
+      }
+    }
   }
 }

@@ -1,12 +1,14 @@
+import { State } from './state/State';
 import { FooterView } from './footer/FooterView';
 import { setHome } from './home/home/homeController';
 
 import { BurgerView } from './burger/BurgerView';
 import { HeaderView } from './header/HeaderView';
 import { MainView } from './main/MainView';
-import Dictionary from "./dictionary/Dictionary";
-import Sprint from "./sprint/Sprint";
-import {LocalStorage} from "./state/StorageSettings";
+import Dictionary from './dictionary/Dictionary';
+import Sprint from './sprint/Sprint';
+import { LocalStorage } from './state/StorageSettings';
+import { IState } from './state/IState';
 
 async function init() {
   const burger = new BurgerView();
@@ -23,11 +25,12 @@ async function init() {
   dict.addSprint(sprint);
   dict.preSelectLevelAndPage(
     +localStorage.getItem(LocalStorage.dictionaryDifficultyLevel),
-    +localStorage.getItem(LocalStorage.dictionaryPageNumber)
-  )
+    +localStorage.getItem(LocalStorage.dictionaryPageNumber),
+  );
 
   burger.render(main.main, main.mainBox, dict);
   setHome(main.main, main.mainBox);
+  
 }
 
 init();
