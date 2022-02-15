@@ -101,6 +101,14 @@
     font-weight: bold;
   }
 
+  &--hard &__header::after {
+    opacity: 1.0;
+  }
+
+  &--known &__subheader::after {
+    opacity: 1.0;
+  }
+
   .unauthorized &__header::after {
     visibility: hidden;
   }
