@@ -17,9 +17,6 @@ function startAudiocall(level: number, numperPage: number) {
   GLOBAL_VALUES.currentPage = numperPage;
   GLOBAL_VALUES.currentRound = 0;
   GLOBAL_VALUES.currentQuestion = 0;
-  const header: HTMLElement = document.querySelector('.header');
-  header.style.zIndex = '2';
-  header.style.userSelect = 'none';
   const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
   const mainBoxHTML: HTMLElement = document.querySelector('.main__box');
