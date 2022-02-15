@@ -38,14 +38,9 @@ class Dictionary {
   }
 
   async getWords(level: number, page: number) {
-    let data;
-    if (this.authorized) {
-      data = await this.model.getUserWords(level, page) as IAggregatedWordsSchema[];
-      data = data[0].paginatedResults as IAggregatedWordSchema[];
-    } else {
-      data = await this.model.fetchWords(level, page) as IWordSchema[];
-    }
-    return data;
+    return this.authorized ?
+      await this.model.getUserWords(level, page) as IAggregatedWordSchema[] :
+      await this.model.fetchWords(level, page) as IWordSchema[];
   }
 
   async init() {

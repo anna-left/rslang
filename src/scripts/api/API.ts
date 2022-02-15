@@ -1,5 +1,6 @@
 import {
-  IAggregatedWordSchema, IAggregatedWordsSchema,
+  IAggregatedWordSchema,
+  IAggregatedWordsSchema,
   IUserSchema,
   IUserSettings,
   IUserStatistics,
@@ -230,7 +231,7 @@ export class API {
     id = this.userId,
     token = this.accessToken,
     filter = {},
-  ): Promise<void | IAggregatedWordsSchema[]> {
+  ): Promise<void | IAggregatedWordSchema[]> {
     let queryString = '';
     const queries = ['?'];
     if (group) {
@@ -259,7 +260,8 @@ export class API {
     if (response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing or invalid');
     }
-    return (await response.json()) as IAggregatedWordsSchema[];
+    const data = await response.json() as IAggregatedWordsSchema[];
+    return data[0].paginatedResults as IAggregatedWordSchema[];
   }
 
   async getUserAggregateWord(wordId: string, id = this.userId, token = this.accessToken): Promise<void | IAggregatedWordSchema[]> {
