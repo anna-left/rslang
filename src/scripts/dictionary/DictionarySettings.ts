@@ -19,7 +19,7 @@ export const DictionaryDifficulty = {
     color: '#e8f5e9',
   },
   '1': {
-    level: 'Easy',
+    level: 'Easy+',
     range: '601-1200',
     label: 'A2',
     color: '#c8e6c9',
@@ -31,7 +31,7 @@ export const DictionaryDifficulty = {
     color: '#fffde7',
   },
   '3': {
-    level: 'Medium',
+    level: 'Medium+',
     range: '1801-2400',
     label: 'B2',
     color: '#fff9c4',
@@ -43,7 +43,7 @@ export const DictionaryDifficulty = {
     color: '#ffebee',
   },
   '5': {
-    level: 'Hard',
+    level: 'Hard+',
     range: '3001-3600',
     label: 'C2',
     color: '#ffcdd2',
