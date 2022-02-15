@@ -76,6 +76,9 @@ class Sprint {
       this.group = event.detail.group;
       this.page = Math.floor(Math.random() * 30)
     })
+    window.addEventListener('sprint-burger-start', () => {
+      this.start();
+    })
   }
 
   async nextRound() {
