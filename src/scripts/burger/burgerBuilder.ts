@@ -1,3 +1,4 @@
+import { startAudiocall } from '../audiocall/startAudiocall';
 import { createElement, createSVG } from '../util/Util';
 
 export function getBurgerContainer() {
@@ -124,6 +125,9 @@ function getAudioCallItem() {
   const audiocallText = createElement('span', ['burger__item_text'], [], 'Аудиовызов');
 
   audiocall.append(audiocallIconSvg, audiocallText);
+
+  audiocall.addEventListener('click', () => startAudiocall(-1, -1));
+  
   return audiocall;
 }
 
