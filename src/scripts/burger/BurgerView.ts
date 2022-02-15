@@ -21,7 +21,7 @@ export class BurgerView {
   constructor() {
     this.burger = getBurgerContainer();
   }
-  render(main: HTMLElement, mainBox: HTMLElement) {
+  render(main: HTMLElement, mainBox: HTMLElement, dict: Dictionary) {
     const hideIcon = getHideBurgerIcon();
     hideIcon.addEventListener('click', ()=>{
       this.burger.classList.remove(BURGER_CLASS_SHOW);
@@ -35,8 +35,7 @@ export class BurgerView {
 
     home.addEventListener('click', () => new HomeView(main, mainBox));
     dictionary.addEventListener('click', async () => {
-      const dict = new Dictionary();
-      await dict.init();
+      await dict.start()
     })
 
     list.append(home, dictionary, games, stats, settings);

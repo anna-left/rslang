@@ -4,13 +4,21 @@
   gap: 3rem;
   width: 154rem;
   margin: 0 auto;
+  align-items: center;
 
   &__section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    &--first {
+    margin-top: 2rem;
+    width: 100%;
+
+    &:first-child {
       margin-top: 19rem;
+    }
+
+    &:last-child {
+      margin-bottom: 5rem;
     }
   }
 
@@ -43,7 +51,43 @@
 
   &__pagination-container {
     display: flex;
-    gap: 1rem
+    gap: 3rem
+  }
+
+  &__games-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__game {
+    width: 74rem;
+    height: 38rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 3.5rem;
+    cursor: pointer;
+  }
+
+  &__audiocall {
+    background: url("./../../assets/svg/plant3.svg") no-repeat right 3rem bottom 3rem, linear-gradient(180deg, #DCB1FF 0%, rgba(220, 177, 255, 0) 100%);
+    background-size: auto 31rem, auto auto;
+  }
+
+  &__sprint {
+    background: url("./../../assets/svg/plant2.svg") no-repeat right 3rem bottom 3rem, linear-gradient(180deg, #8EE4A7 0%, rgba(255, 255, 255, 0) 100%);
+    background-size: auto 26rem, auto auto;
+  }
+
+  &__game-header {
+    font-size: 7rem;
+  }
+
+  &__game-desc {
+    width: 45rem;
+    font-size: 3rem;
+    font-weight: normal;
   }
 }
 

@@ -8,7 +8,7 @@ import './WordCard.scss';
 class WordCard extends Page {
   private readonly className: string;
   constructor(word: IWordSchema) {
-    super('word-card');
+    super('word-card', 'div');
     this.className = 'word-card';
     const image = createHTMLElement('img', `${this.className}__img`);
     image.setAttribute('src', WordsSettings.endpoint + word.image);
@@ -29,6 +29,15 @@ class WordCard extends Page {
     const exampleTranslate = createHTMLElement('p', `${this.className}__example--translate`, removeTags(word.textExampleTranslate));
     container.append(meaning, meaningTranslate, example, exampleTranslate);
     this.page.append(image, header, line, subheader, container);
+
+    header.addEventListener('click', () => {
+      const marked = this.page.classList.contains('word-card--hard');
+      window.dispatchEvent(new CustomEvent('mark-hard', {detail: {hard: marked}}));
+    })
+    subheader.addEventListener('click', () => {
+      const marked = this.page.classList.contains('word-card--known');
+      window.dispatchEvent(new CustomEvent('mark-known', {detail: {known: marked}}));
+    })
   }
 }
 
