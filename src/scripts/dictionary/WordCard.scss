@@ -1,4 +1,5 @@
 .word-card {
+  position: relative;
   width: 50rem;
   height: 80rem;
   display: flex;
@@ -8,6 +9,7 @@
   border-radius: 2rem;
   padding: 2rem;
   box-sizing: border-box;
+  pointer-events: none;
 
   &__img {
     display: block;
@@ -25,6 +27,22 @@
     font-weight: bold;
     &:first-letter {
       text-transform: uppercase;
+    }
+    &::after {
+      position: absolute;
+      content: "Сложное";
+      width: 17rem;
+      height: 5rem;
+      background-color: darkred;
+      cursor: pointer;
+      pointer-events: all;
+      opacity: 0.4;
+      top: 2rem;
+      left: 0;
+      color: white;
+      font-size: 3rem;
+      line-height: 5rem;
+      text-indent: 1rem;
     }
   }
 
@@ -47,11 +65,28 @@
     background-size: 2.5rem 2.5rem;
     cursor: pointer;
     justify-self: auto;
+    pointer-events: all;
   }
 
   &__subheader {
     font-size: 3rem;
     font-weight: bold;
+    &::after {
+      position: absolute;
+      content: "Изучено";
+      width: 17rem;
+      height: 5rem;
+      background-color: darkgreen;
+      cursor: pointer;
+      pointer-events: all;
+      opacity: 0.4;
+      top: 9rem;
+      left: 0;
+      color: white;
+      font-size: 3rem;
+      line-height: 5rem;
+      text-indent: 1rem;
+    }
   }
 
   &__text {
@@ -64,5 +99,13 @@
 
   &__meaning, &__example {
     font-weight: bold;
+  }
+
+  &--hard &__header::after {
+    opacity: 1.0;
+  }
+
+  &--known &__subheader::after {
+    opacity: 1.0;
   }
 }

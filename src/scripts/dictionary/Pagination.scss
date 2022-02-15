@@ -3,10 +3,11 @@
   gap: 1rem;
 
   &__page {
+    position: relative;
     width: 4rem;
     height: 4rem;
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 4rem;
     cursor: pointer;
 
@@ -17,4 +18,36 @@
       color: white;
     }
   }
+}
+
+.conceal {
+  display: none;
+}
+
+.ellipsis-right {
+  margin-right: 5rem;
+}
+
+.ellipsis-left {
+  margin-left: 5rem;
+}
+
+.ellipsis-right::after, .ellipsis-left::before {
+    position: absolute;
+    content: "...";
+    width: 4rem;
+    height: 4rem;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 4rem;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.ellipsis-right::after {
+  left: 5rem;
+}
+
+.ellipsis-left::before {
+  right: 5rem;
 }
