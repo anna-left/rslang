@@ -6,7 +6,7 @@ import { HeaderView } from './header/HeaderView';
 import { MainView } from './main/MainView';
 import Dictionary from "./dictionary/Dictionary";
 import Sprint from "./sprint/Sprint";
-import {LocalStorage} from "../state/StrageSettings";
+import {LocalStorage} from "./state/StorageSettings";
 
 async function init() {
   const burger = new BurgerView();
