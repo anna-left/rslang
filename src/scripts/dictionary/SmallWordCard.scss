@@ -42,3 +42,9 @@
     background-color: darkgreen;
   }
 }
+
+.unauthorized .small-word-card {
+  &--hard::after, &--known::after {
+    visibility: hidden;
+  }
+}

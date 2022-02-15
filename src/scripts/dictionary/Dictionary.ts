@@ -88,6 +88,12 @@ class Dictionary {
         this.view.cardUnmarkHard();
       }
     })
+    window.addEventListener('login', ()=> {
+      this.view.authorizeView();
+    })
+    window.addEventListener('logout', ()=> {
+      this.view.unAuthorizeView();
+    })
   }
 
   async start() {

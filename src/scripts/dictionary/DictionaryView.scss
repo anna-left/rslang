@@ -94,3 +94,7 @@
 .hidden {
   visibility: hidden;
 }
+
+.unauthorized .difficulty-card:last-child {
+  display: none;
+}

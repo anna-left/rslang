@@ -180,6 +180,18 @@ class DictionaryView extends Page {
     this.wordCards[this.currentWordId].render().classList.remove('small-word-card--known');
     (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
   }
+
+  authorizeView() {
+    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach(element => {
+      element.classList.remove('unauthorized');
+    })
+  }
+
+  unAuthorizeView() {
+    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach(element => {
+      element.classList.add('unauthorized');
+    })
+  }
 }
 
 export default DictionaryView;
