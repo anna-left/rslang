@@ -17,7 +17,7 @@
     font-family: 'Roboto';
     font-weight: 500;
     margin-left: -30vw;
-    transition: all .3s;
+    transition: all 0.3s;
     &_state_show {
       margin-left: 0;
     }
@@ -27,6 +27,7 @@
 .burger {
   &__list {
     padding-top: 15vh;
+    width: 100%;
   }
   &__item_icon {
     max-height: 3rem;
@@ -37,11 +38,12 @@
   &__item {
     display: flex;
     align-items: center;
-    padding: 2rem 0;
+    padding: 2rem 0 2rem 15%;
+    user-select: none;
     transition: all 0.2s;
     &:hover {
       cursor: pointer;
-      color: $color-prime-dark;
+      background-color: $color-prime-dark;
     }
   }
 
@@ -56,6 +58,53 @@
     pointer-events: all;
     &:hover {
       fill: $color-prime-dark;
+    }
+  }
+}
+
+.burger-games {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__link-box {
+    display: flex;
+    align-items: center;
+  }
+  &__games-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(-25%);
+    border-radius: 0.5rem;
+    border: 1px solid $color-prime-dark;
+    margin-left: 30%;
+    user-select: none;
+    pointer-events: none;
+    transition: all 0.3s;
+    z-index: -10;
+
+    &_state_active {
+      opacity: 1;
+      pointer-events: all;
+      margin-left: 88%;
+      background-color: $color-prime-candy;
+      z-index: 1;
+    }
+  }
+
+  &__item {
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    transition: all 0.2s;
+    pointer-events: all;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-prime-dark;
     }
   }
 }

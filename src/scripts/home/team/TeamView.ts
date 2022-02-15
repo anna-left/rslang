@@ -7,7 +7,7 @@ export class Team {
     rootEl.innerHTML = '';
     const section = createElement('section', ['main-box__section', 'main-box__section_type_team', 'section-team']);
 
-    const header = createElement('h2', ['section-team__header']);
+    const header = createElement('h2', ['section-team__header'], [], 'О Команде');
     const teamList = createElement('ul', ['section-team__list']);
 
     const teamMemberAndrey = createElement('li', ['section-team__item']);

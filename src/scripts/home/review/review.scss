@@ -2,4 +2,24 @@
 @import '../../../sass/util/variables';
 
 .main-box__section {
+  &_type_review {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0 9vw 4vmax;
+  }
+}
+
+.section-review {
+  &__header {
+    font-size: 3vmax;
+  }
+  &__video-box{
+    align-self: center;
+    height: 60vh;
+    width: 60vw;
+    border: 1px solid $color-prime-dark;
+    border-radius: 1vmax;
+  }
 }

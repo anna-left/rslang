@@ -3,26 +3,59 @@
 
 .main-box__section {
   &_type_info {
-    width: 120rem;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0 9vw 4vmax;
   }
 }
 
 .section-info {
   &__info-list {
-    columns: 2;
+    list-style: none;
+    display: grid;
+    grid-gap: 4vmin;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(4, 10vh);
+    grid-template-columns: repeat(3, 25vw);
   }
-  &__info-item {
+  &__header {
+    margin-bottom: 4vmin;
+    font-size: 3vmax;
+  }
+}
+
+.info-list {
+  &__item {
+    display: flex;
     padding: 0.5rem;
-    margin-top: 1rem;
-    border: 0.1rem solid $color-prime-candy;
-    border-radius: 1rem;
     transition: all 0.2s;
-    &:hover {
-      cursor: help;
-      background-color: $color-prime-candy;
-      color: $color-prime-light;
+
+    &_icon {
+      width: 11vmin;
+    }
+    &_text {
+      font-size: 2.4vmin;
+      padding-top: 0.9vmin;
+      padding-left: 1vmax;
+      line-height: 1.15;
+
+      cursor: pointer;
+      &:hover::after {
+        content: attr(alt);
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        width: 70vmin;
+        transform: translate(-50%, 0);
+        font-size: 1.7vmin;
+        z-index: 10;
+        padding: 1.5vmax;
+        border-radius: 1vmin;
+        background-color: $color-prime-candy-light;
+        line-height: 1.3;
+      }
     }
   }
 }

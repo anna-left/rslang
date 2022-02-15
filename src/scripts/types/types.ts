@@ -15,6 +15,11 @@ export interface IWordSchema {
     wordTranslate: string,
 }
 
+export interface ISprintWord extends IWordSchema {
+  gameTranslate: string;
+  answer: boolean;
+}
+
 export enum StatusCode {
     OK = 200,
     Created = 201,
@@ -58,4 +63,10 @@ export interface IUserStatistics {
 export interface IUserSettings {
     wordsPerDay: number,
     optional: {}
+}
+
+export interface TResultWord {
+    word: string,
+    wordTranslate: string,
+    audio: string,
 }

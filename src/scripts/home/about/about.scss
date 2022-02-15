@@ -17,18 +17,19 @@
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    font-size: calc((2.2vmin + 2.2vmax) / 2);
+    font-size: 1.5vmax;
+    line-height: 1.3;
   }
   &__content-header {
-    font-size: calc((8vmin + 8vmax) / 2);
+    font-size: 4.5vmax;
     letter-spacing: 1.1;
   }
   &__content-info {
     width: 90%;
-    margin: 5rem 0 10rem 0;
+    margin: 5vmin 0 7vmin 0;
   }
   &__btn-auth {
-    font-size: 3.2rem;
+    font-size: 1.5vmax;
     align-self: start;
     @include buttonize;
   }

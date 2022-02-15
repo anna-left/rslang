@@ -1,5 +1,3 @@
-import { IWordSchema } from '../types/types';
-
 function shuffleArray<T>(arr: Array<T>): Array<T> {
   let j;
   let temp;
