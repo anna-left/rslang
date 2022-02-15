@@ -1,4 +1,3 @@
-import { State } from './state/State';
 import { FooterView } from './footer/FooterView';
 import { setHome } from './home/home/homeController';
 
@@ -8,7 +7,6 @@ import { MainView } from './main/MainView';
 import Dictionary from './dictionary/Dictionary';
 import Sprint from './sprint/Sprint';
 import { LocalStorage } from './state/StorageSettings';
-import { IState } from './state/IState';
 
 async function init() {
   const burger = new BurgerView();
