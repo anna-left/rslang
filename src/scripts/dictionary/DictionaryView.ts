@@ -5,7 +5,7 @@ import {WordsSettings} from "../sprint/SprintSettings";
 import DifficultyCard from "./DifficultyCard";
 import './DictionaryView.scss';
 import WordCard from "./WordCard";
-import {IWordSchema} from "../types/types";
+import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 import SmallWordCard from "./SmallWordCard";
 import ArrowButton from "../sprint/ArrowButton";
 import Pagination from "./Pagination";
@@ -33,14 +33,14 @@ class DictionaryView extends Page {
     const levelsSection = createHTMLElement('div', `${this.className}__section`);
     const header = createHTMLElement('h2', `${this.className}__header`, DictionaryText.header);
     const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.subheader);
-    this.levelsContainer = createHTMLElement('div', `${this.className}__levels`);
+    this.levelsContainer = createHTMLElement('div', `${this.className}__levels unauthorized`);
     levelsSection.append(header, subheader, this.levelsContainer);
 
     const wordsSection = createHTMLElement('div', `${this.className}__section`);
     const wordHeader = createHTMLElement('h2', `${this.className}__header`, DictionaryText.wordHeader);
     const words = createHTMLElement('div', `${this.className}__all-words`);
-    this.wordsContainer = createHTMLElement('div', `${this.className}__words`);
-    this.currentWord = createHTMLElement('div', `${this.className}__word`);
+    this.wordsContainer = createHTMLElement('div', `${this.className}__words unauthorized`);
+    this.currentWord = createHTMLElement('div', `${this.className}__word unauthorized`);
     words.append(this.wordsContainer, this.currentWord);
     wordsSection.append(wordHeader, words);
 
@@ -133,7 +133,7 @@ class DictionaryView extends Page {
     this.currentWord.innerHTML = '';
   }
 
-  updateData(data: IWordSchema[]) {
+  updateData(data: IWordSchema[] | IAggregatedWordSchema[]) {
     this.data = data;
     this.createWordsCards();
     this.currentWordId = 0;

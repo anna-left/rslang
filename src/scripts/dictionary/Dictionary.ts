@@ -2,7 +2,8 @@ import DictionaryView from "./DictionaryView";
 import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
-import {LocalStorage} from "../state/StorageSettings";
+import {LocalStorage, SessionStorage} from "../state/StorageSettings";
+import {IAggregatedWordSchema, IAggregatedWordsSchema, IWordSchema} from "../types/types";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -10,6 +11,7 @@ class Dictionary {
   private currentLevel: number;
   private currentPage: number;
   private sprint: Sprint;
+  private authorized: boolean;
   constructor() {
     this.model = new DictionaryModel();
     this.view = new DictionaryView('dictionary');
@@ -17,10 +19,33 @@ class Dictionary {
     this.currentLevel = 0;
     this.currentPage = 0;
     this.sprint = null;
+    this.authorized = false;
+    this.checkAuthorization();
   }
 
   addSprint(sprint: Sprint) {
     this.sprint = sprint;
+  }
+
+  checkAuthorization() {
+    if (sessionStorage.getItem(SessionStorage.userData)) {
+      this.authorized = true;
+      this.view.authorizeView();
+    } else {
+      this.authorized = false;
+      this.view.unAuthorizeView();
+    }
+  }
+
+  async getWords(level: number, page: number) {
+    let data;
+    if (this.authorized) {
+      data = await this.model.getUserWords(level, page) as IAggregatedWordsSchema[];
+      data = data[0].paginatedResults as IAggregatedWordSchema[];
+    } else {
+      data = await this.model.fetchWords(level, page) as IWordSchema[];
+    }
+    return data;
   }
 
   async init() {
@@ -29,7 +54,7 @@ class Dictionary {
       this.currentPage = 0;
       this.view.deactivateCurrentLevel();
       this.view.activateDifficultyLevel(this.currentLevel);
-      const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
+      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
       if (this.currentLevel === WordsSettings.groups) {
@@ -40,19 +65,19 @@ class Dictionary {
     })
     window.addEventListener('dict-page',  async (event: CustomEvent) => {
       this.currentPage = event.detail.page;
-      const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
+      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
     window.addEventListener('page-to-left',  async () => {
       this.currentPage = this.currentPage ? this.currentPage - 1 : 0;
-      const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
+      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
     window.addEventListener('page-to-right',  async () => {
       this.currentPage = this.currentPage === WordsSettings.pages - 1 ? this.currentPage : this.currentPage + 1;
-      const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
+      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
@@ -90,14 +115,16 @@ class Dictionary {
     })
     window.addEventListener('login', ()=> {
       this.view.authorizeView();
+      this.authorized = true;
     })
     window.addEventListener('logout', ()=> {
       this.view.unAuthorizeView();
+      this.authorized = false;
     })
   }
 
   async start() {
-    const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
+    const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
     this.view.deactivateCurrentLevel();
     this.view.activateDifficultyLevel(this.currentLevel);
     this.view.updateData(data);

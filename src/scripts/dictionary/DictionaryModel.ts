@@ -10,13 +10,13 @@ class DictionaryModel {
     return await this.api.getWords(group, page);
   }
 
-  async getUserWords() {
-    // TODO check proper keys
-    const id = sessionStorage.getItem('userId');
-    const token = sessionStorage.getItem('token');
-    return await this.api.getUserWords(id, token);
+  async getUserWords(group: number, page: number, wordsPerPage = 20) {
+    return await this.api.getUserAggregatedWords(
+      group.toString(),
+      page.toString(),
+      wordsPerPage.toString(),
+    );
   }
-
 }
 
 export default DictionaryModel;
