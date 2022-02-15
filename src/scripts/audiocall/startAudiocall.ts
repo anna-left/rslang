@@ -22,12 +22,12 @@ function startAudiocall(level: number, numperPage: number) {
   header.style.userSelect = 'none';
   const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
-  const mainHTML: HTMLElement = document.querySelector('.main');
-  clearPage(mainHTML);
-  createHtmlElement('div', mainHTML, 'audiocall');
+  const mainBoxHTML: HTMLElement = document.querySelector('.main__box');
+  clearPage(mainBoxHTML);
+  createHtmlElement('div', mainBoxHTML, 'audiocall');
 
-  document.body.insertAdjacentHTML('beforeend', speakerSVG);
-  document.body.insertAdjacentHTML('beforeend', nextSVG);
+  mainBoxHTML.insertAdjacentHTML('beforeend', speakerSVG);
+  mainBoxHTML.insertAdjacentHTML('beforeend', nextSVG);
   startRound();
 }
 

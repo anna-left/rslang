@@ -58,7 +58,10 @@ function startRound() {
     audiocallStartLevels.addEventListener('click', changeLevel);
     for (let i = 0; i < AMOUNT_LEVELS; i++) {
       const levelHTML = createHtmlElement('div', audiocallStartLevels, 'audiocall-start__level', String(i + 1));
-      if (i === GLOBAL_VALUES.currentLevel) {
+      if (GLOBAL_VALUES.currentLevel === -1 && !i) {
+        GLOBAL_VALUES.currentLevel = 0;
+          levelHTML.classList.add('audiocall-start__level_active');
+      } else if (i === GLOBAL_VALUES.currentLevel) {
         levelHTML.classList.add('audiocall-start__level_active');
       }
     }

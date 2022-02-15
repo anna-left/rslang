@@ -1,12 +1,12 @@
 :root {
-  --black: #ffffff;
-  --white: #000000;
-  --dark-violet: #cd8eff;;
-  --light-violet: #8759ab;
-  // --white: #ffffff;
-  // --black: #000000;
-  // --light-violet: #cd8eff;;
-  // --dark-violet: #8759ab;
+  // --black: #ffffff;
+  // --white: #000000;
+  // --dark-violet: #cd8eff;;
+  // --light-violet: #8759ab;
+  --white: #ffffff;
+  --black: #000000;
+  --light-violet: #cd8eff;;
+  --dark-violet: #8759ab;
   
   --violet: #040305;
 }
@@ -129,7 +129,7 @@
 }
 
 .audiocall-next__btn {
-  padding: 2rem 2rem;
+  padding: 1.4rem 2rem;
 }
 
 .audiocall-plant {
