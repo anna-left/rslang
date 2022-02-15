@@ -18,6 +18,7 @@
     font-weight: 500;
     margin-left: -30vw;
     transition: all 0.3s;
+    z-index: 100;
     &_state_show {
       margin-left: 0;
     }

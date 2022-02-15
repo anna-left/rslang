@@ -8,10 +8,12 @@ class DifficultyCard extends Page {
   private readonly level: HTMLElement;
   private readonly range: HTMLElement;
   private readonly modifier: string;
-  constructor(id: number, level: string, range: string, label: string) {
+  private readonly color: string;
+  constructor(id: number, level: string, range: string, label: string, color: string) {
     super('difficulty-card', 'div');
     this.className = 'difficulty-card';
     this.modifier = 'active';
+    this.color = color;
     const left = createHTMLElement('div');
     this.level = createHTMLElement('p', `${this.className}__level`, level);
     this.range = createHTMLElement('p', `${this.className}__range`, range);
@@ -25,10 +27,12 @@ class DifficultyCard extends Page {
 
   activate() {
     this.page.classList.add(`${this.className}--${this.modifier}`);
+    this.page.style.backgroundColor = this.color;
   }
 
   deactivate() {
     this.page.classList.remove(`${this.className}--${this.modifier}`);
+    this.page.style.backgroundColor = '';
   }
 }
 

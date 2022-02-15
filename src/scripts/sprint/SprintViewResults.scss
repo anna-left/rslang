@@ -54,7 +54,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      font-size: $progressRadius / 2;
+      font-size: calc($progressRadius / 2);
     }
     &__text {
       position: absolute;

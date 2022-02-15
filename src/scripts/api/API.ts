@@ -354,6 +354,8 @@ export class API {
     });
     if (response.status === StatusCode.Forbidden) {
       console.log('Incorrect e-mail or password');
+    } else if (response.status === StatusCode.NotFound) {
+      console.log('Incorrect e-mail or password');
     }
     return (await response.json()) as IUserTokens;
   }

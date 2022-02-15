@@ -1,6 +1,6 @@
 import {createHTMLElement} from "../utils/CommonFunctions";
 import {SprintResultText} from "./SprintSettings";
-import './SprintResultsButtons.css';
+import './SprintResultsButtons.scss';
 import Page from "./Page";
 
 class SprintResultsButtons extends Page {

@@ -1,10 +1,12 @@
 .small-word-card {
+  position: relative;
   width: 24rem;
   height: 14rem;
   border: 1px solid black;
   border-radius: 1.5rem;
   padding: 2rem;
   cursor: pointer;
+
   &__word {
     font-size: 3.6rem;
     margin-bottom: 2rem;
@@ -23,5 +25,20 @@
   &--active {
     color: white;
     background-color: #CD8EFF;
+  }
+
+  &--hard::after, &--known::after {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    content: "";
+    bottom: 0;
+    right: 2rem;
+    background-color: darkred;
+  }
+
+  &--known::after {
+    right: 5rem;
+    background-color: darkgreen;
   }
 }
