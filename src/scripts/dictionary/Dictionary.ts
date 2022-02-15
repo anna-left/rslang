@@ -98,6 +98,7 @@ class Dictionary {
 
   async start() {
     const data = await this.model.fetchWords(this.currentLevel, this.currentPage);
+    this.view.deactivateCurrentLevel();
     this.view.activateDifficultyLevel(this.currentLevel);
     this.view.updateData(data);
     this.view.activatePage(this.currentPage);
