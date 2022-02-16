@@ -1,4 +1,5 @@
 import {
+  getBlur,
   getBurgerContainer,
   getBurgerList,
   getDictionaryItem,
@@ -11,21 +12,32 @@ import {
 
 import './burger.scss';
 import { HomeView } from '../home/home/HomeVIew';
-import Dictionary from "../dictionary/Dictionary";
+import Dictionary from '../dictionary/Dictionary';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
-// const BURGER_CLASS_HIDE = 'main-box__burger_state_hide';
+const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
 
 export class BurgerView {
   burger: HTMLElement;
+  blur: HTMLElement;
   constructor() {
     this.burger = getBurgerContainer();
+    this.blur = getBlur();
   }
-  render(main: HTMLElement, mainBox: HTMLElement, dict: Dictionary) {
+  render(mainBox: HTMLElement, dict: Dictionary) {
+    if (!this.burger) {
+      this.burger = getBurgerContainer();
+    }
+    if (!this.blur) {
+      this.blur = getBlur();
+    }
+    this.burger.append(this.blur);
+
     const hideIcon = getHideBurgerIcon();
-    hideIcon.addEventListener('click', ()=>{
+    hideIcon.addEventListener('click', () => {
       this.burger.classList.remove(BURGER_CLASS_SHOW);
-    })
+      this.blur.classList.remove(BURGER_BLUR_CLASS_SHOW);
+    });
     const list = getBurgerList();
     const home = getHomeItem();
     const dictionary = getDictionaryItem();
@@ -33,10 +45,10 @@ export class BurgerView {
     const stats = getStatsItem();
     const settings = getSettingsItem();
 
-    home.addEventListener('click', () => new HomeView(main, mainBox));
+    home.addEventListener('click', () => new HomeView().render(mainBox));
     dictionary.addEventListener('click', async () => {
-      await dict.start()
-    })
+      await dict.start();
+    });
 
     list.append(home, dictionary, games, stats, settings);
     this.burger.append(hideIcon, list);
