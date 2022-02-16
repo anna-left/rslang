@@ -56,9 +56,12 @@ export interface IUserSchema {
 export type TUserInfo = Omit<IUserSchema, "name">
 
 export interface IUserTokens {
+  token: string,
+  refreshToken: string,
+}
+
+export interface IUserData extends IUserTokens {
     message: string,
-    token: string,
-    refreshToken: string,
     userId: string,
     name: string
 }
@@ -82,4 +85,23 @@ export interface TResultWord {
     word: string,
     wordTranslate: string,
     audio: string,
+}
+
+export enum HTTPMethod {
+  get = 'GET',
+  put = 'PUT',
+  delete = 'DELETE',
+  post = 'POST'
+}
+
+export interface FetchInit {
+  method: HTTPMethod,
+  body?: string,
+  headers: Headers,
+}
+
+export interface Headers {
+  Accept: string,
+  'Content-Type': string,
+  Authorization: string,
 }
