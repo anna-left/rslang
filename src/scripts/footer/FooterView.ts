@@ -4,8 +4,9 @@ import { createGitItem, createRSItem, getHiddenSvgs } from './footerUtil';
 import './footer.scss';
 
 export class FooterView {
-  constructor() {
-    const footer = createElement('footer', ['footer']);
+  footer: HTMLElement;
+  render() {
+    this.footer = createElement('footer', ['footer']);
     const footerBox = createElement('div', ['footer__box', 'footer-box']);
     const footerList = createElement('ul', ['footer-box__list']);
     const rsItem = createRSItem();
@@ -14,7 +15,7 @@ export class FooterView {
 
     footerList.append(rsItem, gitItem, yearItem);
     footerBox.append(footerList);
-    footer.append(getHiddenSvgs(), footerBox);
-    document.body.append(footer);
+    this.footer.append(getHiddenSvgs(), footerBox);
+    document.body.append(this.footer);
   }
 }

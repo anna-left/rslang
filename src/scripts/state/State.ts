@@ -1,43 +1,13 @@
 import { IState } from './IState';
 
 export class State {
-  private _state: {
-    difficulty: string;
-    wordsAmount: number;
-    currPage: string;
-    bookPage: number;
-    animationType: string;
-    lang: string;
-    curLinks: string[];
-    isAuth: boolean;
-    colorScheme: string;
-  };
+  private _state: IState;
 
-  public get state(): {
-    difficulty: string;
-    wordsAmount: number;
-    currPage: string;
-    bookPage: number;
-    animationType: string;
-    lang: string;
-    curLinks: string[];
-    isAuth: boolean;
-    colorScheme: string;
-  } {
+  public get state(): IState {
     return this._state;
   }
 
-  public set state(value: {
-    difficulty: string;
-    wordsAmount: number;
-    currPage: string;
-    bookPage: number;
-    animationType: string;
-    lang: string;
-    curLinks: string[];
-    isAuth: boolean;
-    colorScheme: string;
-  }) {
+  public set state(value: IState) {
     this._state = value;
   }
 
@@ -119,11 +89,3 @@ export class State {
     };
   }
 }
-
-/* 
-    setState(state: State) {
-    (Object.keys(state) as (keyof State)[]).forEach(key => {
-      Object.assign(this, { [`${key}`]: state[key] });
-    });
-  }
-   */
