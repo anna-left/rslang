@@ -7,6 +7,7 @@ import { MainView } from './main/MainView';
 import Dictionary from './dictionary/Dictionary';
 import Sprint from './sprint/Sprint';
 import { LocalStorage } from './state/StorageSettings';
+import Modal from "./api/Modal";
 
 async function init() {
   const burger = new BurgerView();
@@ -25,10 +26,18 @@ async function init() {
     +localStorage.getItem(LocalStorage.dictionaryDifficultyLevel),
     +localStorage.getItem(LocalStorage.dictionaryPageNumber),
   );
+  const body = document.querySelector('body');
+  const modal = new Modal(body);
 
   burger.render(main.main, main.mainBox, dict);
   setHome(main.main, main.mainBox);
-  
+  window.addEventListener('go-to-login-screen', ()=> {
+    setHome(main.main, main.mainBox);
+  })
+  window.addEventListener('show-error', (event: CustomEvent)=> {
+    modal.setText(event.detail.error);
+    modal.show();
+  })
 }
 
 init();
