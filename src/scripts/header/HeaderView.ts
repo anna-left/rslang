@@ -1,9 +1,11 @@
 import { HomeView } from '../home/home/HomeVIew';
+import { IViewManager } from '../manager/IViewManager';
 import { createElement } from '../util/Util';
 
 import './header.scss';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
+const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
 
 export class HeaderView {
   header: HTMLElement;
@@ -12,7 +14,7 @@ export class HeaderView {
     this.header = createElement('header', ['header']);
     this.headerBox = createElement('div', ['header__box']);
   }
-  render(burger: HTMLElement, mainBox: HTMLElement) {
+  render(manager: IViewManager) {
     if (!this.header) {
       this.header = createElement('header', ['header']);
     }
@@ -22,14 +24,15 @@ export class HeaderView {
     const headerNav = createElement('nav', ['header__nav']);
     const headerNavList = createElement('ul', ['header__nav-list', 'nav-list']);
 
-    const headerNabBurgerItem = createElement('li', ['nav-list__item']);
+    const headerNavBurgerItem = createElement('li', ['nav-list__item']);
     const burgerList = createElement('li', ['nav-list__burger-menu', 'burger-menu']);
     for (let i = 0; i < 3; i++) {
       burgerList.append(createElement('li', ['burger-menu__item'], [], '—'));
     }
 
-    headerNabBurgerItem.addEventListener('click', () => {
-      burger.classList.add(BURGER_CLASS_SHOW);
+    headerNavBurgerItem.addEventListener('click', () => {
+      manager.burger.burger.classList.add(BURGER_CLASS_SHOW);
+      manager.burger.blur.classList.add(BURGER_BLUR_CLASS_SHOW);
     });
 
     const headerNavItemHome = createElement('li', ['nav-list__item', 'nav-list__item_state_active'], [], 'Главная');
@@ -44,13 +47,13 @@ export class HeaderView {
     const headerNavItemConfig = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Настройки');
 
     headerNavItemHome.addEventListener('click', () => {
-      new HomeView().render(mainBox);
+      new HomeView().render(manager.main.mainBox);
     });
 
-    headerNabBurgerItem.append(burgerList);
+    headerNavBurgerItem.append(burgerList);
 
     headerNavList.append(
-      headerNabBurgerItem,
+      headerNavBurgerItem,
       headerNavItemHome,
       headerNavItemDictionary,
       headerNavItemGames,

@@ -3,30 +3,53 @@
 
 .main-box {
   &__burger {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
-    position: fixed;
+    z-index: 50;
+
+    margin-left: -30vw;
     height: 100vh;
     width: 15vw;
-    background-color: $color-prime-candy;
+
     display: flex;
     justify-content: center;
-    font-size: 2.6rem;
+    background-color: $color-prime-candy;
     color: $color-prime-light;
+    font-size: 2.6rem;
     font-family: 'Roboto';
     font-weight: 500;
-    margin-left: -30vw;
     transition: all 0.3s;
-    z-index: 100;
+
     &_state_show {
       margin-left: 0;
+    }
+
+    &_blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      margin-left: -100vmax;
+      width: 100vw;
+      height: 100vh;
+
+      background-color: $color-prime-dark;
+      opacity: 0.85;
+
+      transition: all 0.3s;
+    }
+    &_blur_show {
+      margin-left: 15vw;
     }
   }
 }
 
 .burger {
   &__list {
+    position: relative;
+    z-index: 100;
+
     padding-top: 15vh;
     width: 100%;
   }
@@ -64,6 +87,9 @@
 }
 
 .burger-games {
+  position: relative;
+  z-index: 100;
+
   display: flex;
   align-items: center;
   position: relative;

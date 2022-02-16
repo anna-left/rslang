@@ -1,13 +1,22 @@
 import { createElement, createSVG } from '../util/Util';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
+const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
+
 let burger = createElement('nav', ['main-box__burger', 'burger']);
+let blur = createElement('div', ['main-box__burger_blur']);
 
 export function getBurgerContainer() {
   if (!burger) {
     return createElement('nav', ['main-box__burger', 'burger']);
   }
   return burger;
+}
+export function getBlur() {
+  if (!blur) {
+    blur = createElement('div', ['main-box__burger_blur']);
+  }
+  return blur;
 }
 
 export function getBurgerList() {
@@ -142,6 +151,7 @@ function getAudioCallItem() {
 }
 
 function hideBurger() {
+  blur.classList.remove(BURGER_BLUR_CLASS_SHOW);
   burger.classList.remove(BURGER_CLASS_SHOW);
 }
 

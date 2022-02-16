@@ -25,7 +25,7 @@ export class ViewManager {
     this.dictionary = new Dictionary();
 
     this.main.render();
-    this.header.render(this.burger.burger, this.main.mainBox);
+    this.header.render(this);
     this.burger.render(this.main.mainBox, this.dictionary);
     this.home.render(this.main.mainBox);
     this.homeNavigation.render(this.main.main, this.main.mainBox);

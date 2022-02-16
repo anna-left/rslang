@@ -1,4 +1,5 @@
 import {
+  getBlur,
   getBurgerContainer,
   getBurgerList,
   getDictionaryItem,
@@ -14,19 +15,28 @@ import { HomeView } from '../home/home/HomeVIew';
 import Dictionary from '../dictionary/Dictionary';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
+const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
 
 export class BurgerView {
   burger: HTMLElement;
+  blur: HTMLElement;
   constructor() {
     this.burger = getBurgerContainer();
+    this.blur = getBlur();
   }
   render(mainBox: HTMLElement, dict: Dictionary) {
     if (!this.burger) {
       this.burger = getBurgerContainer();
     }
+    if (!this.blur) {
+      this.blur = getBlur();
+    }
+    this.burger.append(this.blur);
+
     const hideIcon = getHideBurgerIcon();
     hideIcon.addEventListener('click', () => {
       this.burger.classList.remove(BURGER_CLASS_SHOW);
+      this.blur.classList.remove(BURGER_BLUR_CLASS_SHOW);
     });
     const list = getBurgerList();
     const home = getHomeItem();
