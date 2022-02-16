@@ -3,7 +3,7 @@ import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
 import {LocalStorage, SessionStorage} from "../state/StorageSettings";
-import {IAggregatedWordSchema, IAggregatedWordsSchema, IWordSchema} from "../types/types";
+import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -12,6 +12,7 @@ class Dictionary {
   private currentPage: number;
   private sprint: Sprint;
   private authorized: boolean;
+
   constructor() {
     this.model = new DictionaryModel();
     this.view = new DictionaryView('dictionary');
@@ -44,12 +45,12 @@ class Dictionary {
   }
 
   async init() {
-    window.addEventListener('dict-level',  async (event: CustomEvent) => {
+    window.addEventListener('dict-level', async (event: CustomEvent) => {
       this.currentLevel = event.detail.id;
       this.currentPage = 0;
       this.view.deactivateCurrentLevel();
       this.view.activateDifficultyLevel(this.currentLevel);
-      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
+      const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
       if (this.currentLevel === WordsSettings.groups) {
@@ -58,21 +59,21 @@ class Dictionary {
         this.view.showPagination();
       }
     })
-    window.addEventListener('dict-page',  async (event: CustomEvent) => {
+    window.addEventListener('dict-page', async (event: CustomEvent) => {
       this.currentPage = event.detail.page;
-      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
+      const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
-    window.addEventListener('page-to-left',  async () => {
+    window.addEventListener('page-to-left', async () => {
       this.currentPage = this.currentPage ? this.currentPage - 1 : 0;
-      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
+      const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
-    window.addEventListener('page-to-right',  async () => {
+    window.addEventListener('page-to-right', async () => {
       this.currentPage = this.currentPage === WordsSettings.pages - 1 ? this.currentPage : this.currentPage + 1;
-      const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
+      const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
     })
@@ -108,18 +109,18 @@ class Dictionary {
         this.view.cardUnmarkHard();
       }
     })
-    window.addEventListener('login', ()=> {
+    window.addEventListener('login', () => {
       this.view.authorizeView();
       this.authorized = true;
     })
-    window.addEventListener('logout', ()=> {
+    window.addEventListener('logout', () => {
       this.view.unAuthorizeView();
       this.authorized = false;
     })
   }
 
   async start() {
-    const data = await this.getWords(this.currentLevel, this.currentPage) as (IAggregatedWordSchema[] | IWordSchema[]);
+    const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
     this.view.deactivateCurrentLevel();
     this.view.activateDifficultyLevel(this.currentLevel);
     this.view.updateData(data);

@@ -14,14 +14,12 @@ import {
   TUserInfo,
 } from '../types/types';
 import {SessionStorage} from "../state/StorageSettings";
-import Modal from "./Modal";
 
 export class API {
   private readonly endpoint: string;
   private userId: string;
   private accessToken: string;
   private refreshToken: string;
-  private readonly modal: Modal;
 
   constructor() {
     this.endpoint = 'https://rslang-909.herokuapp.com';
