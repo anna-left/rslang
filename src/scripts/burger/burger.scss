@@ -60,6 +60,8 @@
     fill: $color-prime-light;
   }
   &__item {
+    position: relative;
+    z-index: 100;
     display: flex;
     align-items: center;
     padding: 2rem 0 2rem 15%;
@@ -73,6 +75,7 @@
 
   &__hide-icon {
     position: absolute;
+    z-index: 150;
     top: 5%;
     right: 10%;
     max-height: 4rem;
@@ -88,7 +91,7 @@
 
 .burger-games {
   position: relative;
-  z-index: 100;
+  z-index: 50;
 
   display: flex;
   align-items: center;
@@ -100,24 +103,24 @@
   }
   &__games-box {
     position: absolute;
+    z-index: -10;
     top: 0;
     left: 0;
     opacity: 0;
     transform: translateY(-25%);
     border-radius: 0.5rem;
     border: 1px solid $color-prime-dark;
-    margin-left: 30%;
+    margin-left: 0vw;
     user-select: none;
     pointer-events: none;
     transition: all 0.3s;
-    z-index: -10;
 
     &_state_active {
+      z-index: 10;
       opacity: 1;
       pointer-events: all;
-      margin-left: 88%;
+      margin-left: 15vw;
       background-color: $color-prime-candy;
-      z-index: 1;
     }
   }
 
