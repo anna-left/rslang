@@ -10,7 +10,6 @@
   justify-content: flex-start;
   font-size: 3rem;
   z-index: 2;
-
   &__nav {
     color: $color-prime-dark;
     display: flex;
@@ -40,6 +39,13 @@
       background-color: $color-prime-candy;
     }
 
+    &_type_games {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+    }
+
     &_state_active {
       border-left: 1px solid $color-prime-candy;
       border-top: 1px solid $color-prime-candy;
@@ -64,6 +70,54 @@
     line-height: 0;
     &:nth-of-type(2) {
       padding: 0.8rem 0;
+    }
+  }
+}
+
+.header-games {
+    &__games-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5;
+
+    margin-top: -5vh;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    transition: all 0.2s;
+
+    &_state_active {
+      pointer-events: all;
+
+      margin-top: 5rem;
+      opacity: 1;
+      z-index: 10;
+    }
+  }
+
+  &__list {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-prime-candy;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+
+    &_icon {
+      height: 2.5rem;
+      width: 2.5rem;
+      margin-right: 1rem;
+      fill: $color-prime-light;
+    }
+
+    &:hover {
+      background-color: $color-prime-dark;
+      color: $color-prime-light;
     }
   }
 }

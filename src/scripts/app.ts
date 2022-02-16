@@ -1,8 +1,3 @@
-import { FooterView } from './footer/FooterView';
-
-import { BurgerView } from './burger/BurgerView';
-import { HeaderView } from './header/HeaderView';
-import { MainView } from './main/MainView';
 import Dictionary from './dictionary/Dictionary';
 import Sprint from './sprint/Sprint';
 import { LocalStorage } from './state/StorageSettings';
