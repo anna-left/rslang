@@ -1,7 +1,13 @@
 import { createElement, createSVG } from '../util/Util';
 
+const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
+let burger = createElement('nav', ['main-box__burger', 'burger']);
+
 export function getBurgerContainer() {
-  return createElement('nav', ['main-box__burger', 'burger']);
+  if (!burger) {
+    return createElement('nav', ['main-box__burger', 'burger']);
+  }
+  return burger;
 }
 
 export function getBurgerList() {
@@ -20,6 +26,7 @@ export function getHomeItem() {
 
   homeIconSvg.append(homeIconUse);
   home.append(homeIconSvg, homeText);
+  home.addEventListener('click', () => hideBurger());
   return home;
 }
 
@@ -29,10 +36,11 @@ export function getDictionaryItem() {
   const bookIconSvg = createSVG('svg', ['burger__item_icon']);
   const bookIconUse = createSVG('use', [], [['href', '#burger_book-icon']]);
 
-  const bookText = createElement('span', ['burger__item_text'], [], 'Словарь');
+  const bookText = createElement('span', ['burger__item_text'], [], 'Учебник');
 
   bookIconSvg.append(bookIconUse);
   dictionary.append(bookIconSvg, bookText);
+  dictionary.addEventListener('click', () => hideBurger());
   return dictionary;
 }
 
@@ -72,6 +80,7 @@ export function getStatsItem() {
 
   statsIconSvg.append(statsIconUse);
   stats.append(statsIconSvg, statsText);
+  stats.addEventListener('click', () => hideBurger());
   return stats;
 }
 
@@ -112,9 +121,10 @@ function getSprintItem() {
 
   sprintIconSvg.append(sprintIconUse);
   sprint.append(sprintIconSvg, sprintText);
-  sprint.addEventListener('click', ()=> {
+  sprint.addEventListener('click', () => {
     window.dispatchEvent(new CustomEvent('sprint-burger-start'));
-  })
+  });
+  sprint.addEventListener('click', () => hideBurger());
   return sprint;
 }
 function getAudioCallItem() {
@@ -127,7 +137,12 @@ function getAudioCallItem() {
   const audiocallText = createElement('span', ['burger__item_text'], [], 'Аудиовызов');
 
   audiocall.append(audiocallIconSvg, audiocallText);
+  audiocall.addEventListener('click', () => hideBurger());
   return audiocall;
+}
+
+function hideBurger() {
+  burger.classList.remove(BURGER_CLASS_SHOW);
 }
 
 function getHiddenSvgs() {
@@ -427,9 +442,3 @@ function createHideBurgerSymbol() {
   symbolBurgerHide.append(pathBurgerHide);
   return symbolBurgerHide;
 }
-
-/*
-<svg width="59" height="61" viewBox="0 0 59 61" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M29.7513 60.2803C45.9241 60.2803 59 47.0177 59 30.6138C59 14.21 45.9241 0.947266 29.7513 0.947266C13.5785 0.947266 0.502594 14.21 0.502594 30.6138C0.502594 47.0177 13.5785 60.2803 29.7513 60.2803ZM29.7513 4.43745C44.0315 4.43745 55.559 16.1296 55.559 30.6138C55.559 45.0981 44.0315 56.7902 29.7513 56.7902C15.471 56.7902 3.94362 45.0981 3.94362 30.6138C3.94362 16.1296 15.471 4.43745 29.7513 4.43745ZM28.2075 43.5174L30.9807 41.2347L21.2238 32.3585H45.2354V28.8683H21.2242L30.9807 19.9924L28.2075 17.7097L13.7756 30.6136L28.2075 43.5174Z" fill="black"/>
-</svg>
- */

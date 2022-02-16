@@ -1,5 +1,4 @@
 import { BurgerView } from '../burger/BurgerView';
-import { Auth } from '../home/auth/AuthView';
 import { HomeView } from '../home/home/HomeVIew';
 import { MainView } from '../main/MainView';
 import { HeaderView } from '../header/HeaderView';
@@ -26,7 +25,7 @@ export class ViewManager {
     this.dictionary = new Dictionary();
 
     this.main.render();
-    this.header.render(this.burger.burger, this.main.main, this.main.mainBox);
+    this.header.render(this.burger.burger, this.main.mainBox);
     this.burger.render(this.main.mainBox, this.dictionary);
     this.home.render(this.main.mainBox);
     this.homeNavigation.render(this.main.main, this.main.mainBox);

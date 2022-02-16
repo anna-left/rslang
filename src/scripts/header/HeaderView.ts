@@ -12,7 +12,7 @@ export class HeaderView {
     this.header = createElement('header', ['header']);
     this.headerBox = createElement('div', ['header__box']);
   }
-  render(burger: HTMLElement, main: HTMLElement, mainBox: HTMLElement) {
+  render(burger: HTMLElement, mainBox: HTMLElement) {
     if (!this.header) {
       this.header = createElement('header', ['header']);
     }
