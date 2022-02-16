@@ -22,7 +22,7 @@ export function getHeaderBurgerItem(manager: IViewManager) {
 }
 
 export function getHeaderHomeItem(manager: IViewManager) {
-  const item = createElement('li', ['nav-list__item', 'nav-list__item_state_active'], [], 'Главная');
+  const item = createElement('li', ['nav-list__item'], [], 'Главная');
   item.addEventListener('click', () => {
     new HomeView().render(manager.main.mainBox);
   });
@@ -44,7 +44,7 @@ export function getHeaderGamesItem(manager: IViewManager) {
   gamesContainer.append(gamesList);
   
   games.append(linkBox, gamesContainer);
-  
+
   games.addEventListener('mouseover', () => gamesContainer.classList.add(HEADER_GAMES_SHOW_CLASS));
   games.addEventListener('mouseout', () => gamesContainer.classList.remove(HEADER_GAMES_SHOW_CLASS));
 

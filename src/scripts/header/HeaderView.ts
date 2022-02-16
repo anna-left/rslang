@@ -10,7 +10,6 @@ import {
   getHeaderSettingsItem,
   getHeaderStatisticsItem,
 } from './headerBuilder';
-import { curLinkHandler } from './headerController';
 
 export class HeaderView {
   header: HTMLElement;
@@ -35,14 +34,6 @@ export class HeaderView {
     const headerNavItemGames = getHeaderGamesItem(manager);
     const headerNavItemStats = getHeaderStatisticsItem(manager);
     const headerNavItemConfig = getHeaderSettingsItem(manager);
-
-    curLinkHandler([
-      headerNavItemHome,
-      headerNavItemDictionary,
-      headerNavItemGames,
-      headerNavItemStats,
-      headerNavItemConfig,
-    ]);
 
     headerNavList.append(
       headerNavBurgerItem,
