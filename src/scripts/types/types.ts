@@ -1,5 +1,6 @@
 export interface IWordSchema {
-    id: string,
+    id?: string,
+    _id?: string,
     group: number,
     page: number,
     word: string,
@@ -39,9 +40,9 @@ export enum StatusCode {
     NoContent = 204,
     BadRequest = 400,
     Unauthorized = 401,
-    PaymentRequired = 402,
     Forbidden = 403,
     NotFound = 404,
+    'Expectation Failed' = 417,
     UnprocessableEntity = 422,
     TooManyRequests = 429,
     InternalServerError = 500,
@@ -66,13 +67,11 @@ export interface IUserData extends IUserTokens {
     name: string
 }
 
-export type WordDifficulty = {
-  difficulty: 'hard' | 'known',
-}
+export type TWordDifficulty = '' | 'hard' | 'known';
 
 export interface IUserWord {
-    difficulty: WordDifficulty,
-    optional: {}
+    difficulty: TWordDifficulty,
+    optional?: {}
 }
 
 export interface IUserStatistics {

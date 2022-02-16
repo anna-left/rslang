@@ -89,7 +89,11 @@ export class API {
   async getUser() {
     const endpointModifier = `/users/${this.userId}`;
     const response = await this.authorizedRequest(endpointModifier, HTTPMethod.get);
-    return (await response.json()) as IUserSchema;
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IUserSchema;
+    } else {
+      return
+    }
   }
 
   async updateUser(user: TUserInfo): Promise<void> {
@@ -126,7 +130,11 @@ export class API {
   async getUserWords(): Promise<void | IUserWord[]> {
     const endpointModifier = `/users/${this.userId}/words`;
     const response = await this.authorizedRequest(endpointModifier, HTTPMethod.get);
-    return (await response.json()) as IUserWord[];
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IUserWord[];
+    } else {
+      return
+    }
   }
 
   async createUserWord(wordId: string,  word: IUserWord): Promise<void> {
@@ -138,7 +146,11 @@ export class API {
   async getUserWord(wordId: string): Promise<void | IUserWord> {
     const endpointModifier = `/users/${this.userId}/words/${wordId}`;
     const response = await this.authorizedRequest(endpointModifier, HTTPMethod.get);
-    return (await response.json()) as IUserWord;
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IUserWord;
+    } else {
+      return
+    }
   }
 
   async updateUserWord(wordId: string, word: IUserWord): Promise<void> {
@@ -246,6 +258,12 @@ export class API {
     const response = await fetch(this.endpoint + path, init as unknown as RequestInit);
     if (response.status === StatusCode.OK) {
       return response;
+    } else if (response.status === StatusCode.NotFound) {
+      console.log('Not Found');
+    } else if (response.status === StatusCode.UnprocessableEntity) {
+      console.log('Incorrect e-mail or password\nor\nWrong Schema');
+    } else if (response.status === StatusCode["Expectation Failed"]) {
+      console.log('Word/User already exists');
     } else if (response.status === StatusCode.Unauthorized) {
       await this.getUserTokens();
       init.headers.Authorization = `Bearer ${this.accessToken}`;

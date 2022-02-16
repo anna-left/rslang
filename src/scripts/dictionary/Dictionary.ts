@@ -3,7 +3,8 @@ import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
 import {LocalStorage, SessionStorage} from "../state/StorageSettings";
-import {IAggregatedWordSchema, IWordSchema} from "../types/types";
+import {CustomEvents, IAggregatedWordSchema, IWordSchema} from "../types/types";
+import {DictionaryDifficulty} from "./DictionarySettings";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -39,6 +40,9 @@ class Dictionary {
   }
 
   async getWords(level: number, page: number) {
+    if (level === WordsSettings.groups) {
+      return await this.model.getAllUserWords() as IAggregatedWordSchema[];
+    }
     return this.authorized ?
       await this.model.getUserWords(level, page) as IAggregatedWordSchema[] :
       await this.model.fetchWords(level, page) as IWordSchema[];
@@ -96,17 +100,21 @@ class Dictionary {
     window.addEventListener('mark-hard', (event: CustomEvent) => {
       if (event.detail.hard) {
         this.view.cardUnmarkHard();
+        this.model.setUserWord(event.detail.wordId, '');
       } else {
         this.view.cardMarkHard();
         this.view.cardUnmarkKnown();
+        this.model.setUserWord(event.detail.wordId, 'hard');
       }
     })
     window.addEventListener('mark-known', (event: CustomEvent) => {
       if (event.detail.known) {
         this.view.cardUnmarkKnown();
+        this.model.setUserWord(event.detail.wordId, '');
       } else {
         this.view.cardMarkKnown();
         this.view.cardUnmarkHard();
+        this.model.setUserWord(event.detail.wordId, 'known');
       }
     })
     window.addEventListener('login', () => {
@@ -123,6 +131,9 @@ class Dictionary {
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
     this.view.deactivateCurrentLevel();
     this.view.activateDifficultyLevel(this.currentLevel);
+    if (this.currentLevel === WordsSettings.groups) {
+      this.view.hidePagination();
+    }
     this.view.updateData(data);
     this.view.activatePage(this.currentPage);
     const root = document.querySelector('.main-box');

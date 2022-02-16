@@ -32,11 +32,11 @@ class WordCard extends Page {
 
     header.addEventListener('click', () => {
       const marked = this.page.classList.contains('word-card--hard');
-      window.dispatchEvent(new CustomEvent('mark-hard', {detail: {hard: marked}}));
+      window.dispatchEvent(new CustomEvent('mark-hard', {detail: {hard: marked, wordId: word._id}}));
     })
     subheader.addEventListener('click', () => {
       const marked = this.page.classList.contains('word-card--known');
-      window.dispatchEvent(new CustomEvent('mark-known', {detail: {known: marked}}));
+      window.dispatchEvent(new CustomEvent('mark-known', {detail: {known: marked, wordId: word._id}}));
     })
   }
 }
