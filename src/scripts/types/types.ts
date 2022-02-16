@@ -66,8 +66,12 @@ export interface IUserData extends IUserTokens {
     name: string
 }
 
+export type WordDifficulty = {
+  difficulty: 'hard' | 'known',
+}
+
 export interface IUserWord {
-    difficulty: 'hard' | 'known',
+    difficulty: WordDifficulty,
     optional: {}
 }
 
@@ -104,4 +108,29 @@ export interface Headers {
   Accept: string,
   'Content-Type': string,
   Authorization: string,
+}
+
+export enum CustomEvents {
+  'dict-page',
+  'mark-hard',
+  'mark-known',
+  'activate-word',
+  'show-error',
+  'login',
+  'logout',
+  'go-to-login-screen',
+  'page-to-left',
+  'page-to-right',
+  'audiocall-dict-start',
+  'sprint-dict-start',
+  'sprint-right',
+  'sprint-wrong',
+  'time-over',
+  'sprint-start',
+  'sprint-again',
+  'sprint-workbook',
+  'sprint-forward',
+  'sprint-backward',
+  'sprint-group-select',
+  'sprint-burger-start',
 }
