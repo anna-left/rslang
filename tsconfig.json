@@ -11,5 +11,7 @@
   },
   "files": [
     "module.d.ts"
-  ]
+  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "*.js"]
 }
