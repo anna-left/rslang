@@ -24,9 +24,6 @@ export class API {
   constructor() {
     this.endpoint = 'https://rslang-909.herokuapp.com';
     this.getUserDataFromStorage();
-    window.addEventListener('login', () => {
-      this.getUserDataFromStorage();
-    })
   }
 
   getUserDataFromStorage() {
