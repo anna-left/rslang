@@ -3,6 +3,7 @@ import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
 import {LocalStorage} from "../state/StorageSettings";
+import { startAudiocall } from '../audiocall/startAudiocall';
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -63,7 +64,7 @@ class Dictionary {
       this.view.displayActiveWord();
     })
     window.addEventListener('audiocall-dict-start', () => {
-      // TODO start audiocall with level and page parameters
+      startAudiocall(this.currentLevel, this.currentPage);
     })
     window.addEventListener('sprint-dict-start', () => {
       this.sprint.start(this.currentLevel, this.currentPage);
