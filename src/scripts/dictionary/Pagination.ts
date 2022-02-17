@@ -9,6 +9,7 @@ class Pagination extends Page {
   private readonly size: number;
   private readonly modifier: string;
   private readonly paginationWing: number;
+  private previousPage: number;
 
   constructor(className: string, size: number) {
     super(className, 'ul');
@@ -18,7 +19,8 @@ class Pagination extends Page {
     this.list = [];
     this.paginationWing = 3;
     this.createList(size);
-    this.currentActivePage = 0
+    this.currentActivePage = 0;
+    this.previousPage = 0;
     this.activatePage(this.currentActivePage);
   }
 
@@ -35,6 +37,7 @@ class Pagination extends Page {
 
   activatePage(number: number) {
     this.list[number].classList.add(`${this.className}${this.modifier}`);
+    this.previousPage = this.currentActivePage;
     this.currentActivePage = number;
   }
 
@@ -63,6 +66,14 @@ class Pagination extends Page {
     } else {
       this.list[this.list.length - 1].classList.remove('ellipsis-left');
     }
+  }
+
+  setAccomplished() {
+    this.list[this.currentActivePage].classList.add(`${this.className}--accomplished`);
+  }
+
+  setNormal() {
+    this.list[this.previousPage].classList.remove(`${this.className}--accomplished`);
   }
 }
 

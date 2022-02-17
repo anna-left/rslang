@@ -9,7 +9,6 @@ import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 import SmallWordCard from "./SmallWordCard";
 import ArrowButton from "../sprint/ArrowButton";
 import Pagination from "./Pagination";
-import {data} from "autoprefixer";
 
 class DictionaryView extends Page {
   private readonly className: string;
@@ -23,6 +22,8 @@ class DictionaryView extends Page {
   private currentWordId: number;
   private readonly paginationContainer: HTMLElement;
   private readonly pagination: Pagination;
+  private readonly gamesSection: HTMLElement;
+  private accomplishedCount: number;
   constructor(className: string) {
     super(className);
     this.className = className;
@@ -31,6 +32,7 @@ class DictionaryView extends Page {
     this.currentDifficultyLevel = 0;
     this.wordCards = [];
     this.currentWordId = 0;
+    this.accomplishedCount = 0;
     const levelsSection = createHTMLElement('div', `${this.className}__section`);
     const header = createHTMLElement('h2', `${this.className}__header`, DictionaryText.header);
     const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.subheader);
@@ -51,7 +53,7 @@ class DictionaryView extends Page {
     const arrowRight = new ArrowButton(false, `${this.className}__right`, 'page-to-right');
     this.paginationContainer.append(arrowLeft.render(), this.pagination.render(), arrowRight.render());
 
-    const gamesSection = createHTMLElement('div', `${this.className}__section`);
+    this.gamesSection = createHTMLElement('div', `${this.className}__section`);
     const gamesHeader = createHTMLElement('h2', `${this.className}__header`, DictionaryText.gamesHeader);
     const gamesContainer = createHTMLElement('div', `${this.className}__games-container`);
     const audioCall = createHTMLElement('div', `${this.className}__audiocall ${this.className}__game`);
@@ -63,7 +65,7 @@ class DictionaryView extends Page {
       window.dispatchEvent(new CustomEvent('sprint-dict-start'));
     })
     gamesContainer.append(audioCall, sprint);
-    gamesSection.append(gamesHeader, gamesContainer);
+    this.gamesSection.append(gamesHeader, gamesContainer);
 
     const sprintHeader = createHTMLElement('h3', `${this.className}__game-header`, DictionaryText.sprint);
     const sprintText = createHTMLElement('h3', `${this.className}__game-desc`, DictionaryText.sprintDesc);
@@ -73,7 +75,7 @@ class DictionaryView extends Page {
     const audioCallText = createHTMLElement('h3', `${this.className}__game-desc`, DictionaryText.audioCallDesc);
     audioCall.append(audioCallHeader, audioCallText);
 
-    this.page.append(levelsSection, wordsSection, this.paginationContainer, gamesSection);
+    this.page.append(levelsSection, wordsSection, this.paginationContainer, this.gamesSection);
   }
 
   init() {
@@ -103,9 +105,13 @@ class DictionaryView extends Page {
     this.difficultyCards[this.currentDifficultyLevel].deactivate();
   }
 
-  activateWord(id: number) {
+  setCurrentWordId(id: number) {
     this.currentWordId = id;
-    this.wordCards[id].activate();
+  }
+
+  activateWord() {
+    this.wordCards[this.currentWordId].activate();
+    this.applyWordStatus(this.data[this.currentWordId], this.currentWordId);
   }
 
   deactivateWord() {
@@ -129,8 +135,10 @@ class DictionaryView extends Page {
     if (word.hasOwnProperty('userWord')) {
       if (word.userWord.difficulty === 'hard') {
         this.cardMarkHard(index);
+        this.accomplishedCount += 1;
       } else if (word.userWord.difficulty === 'known') {
         this.cardMarkKnown(index);
+        this.accomplishedCount += 1;
       }
     }
   }
@@ -147,7 +155,6 @@ class DictionaryView extends Page {
       }
     }
     this.clearActiveWordStatus();
-    this.applyWordStatus(this.data[0], 0);
   }
 
   displayActiveWord() {
@@ -161,13 +168,18 @@ class DictionaryView extends Page {
 
   updateData(data: IWordSchema[] | IAggregatedWordSchema[]) {
     this.data = data;
+    this.accomplishedCount = 0;
     this.createWordsCards();
     this.currentWordId = 0;
     this.emptyActiveWord();
+    this.pageNormal()
     if (data[0]) {
-      this.activateWord(0);
       this.displayActiveWord();
       this.applyStatusOnPage();
+      this.activateWord();
+      if (this.accomplishedCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
+        this.pageAccomplished();
+      }
     } else {
       this.wordsContainer.innerHTML = DictionaryText.noWords;
     }
@@ -218,6 +230,18 @@ class DictionaryView extends Page {
     [this.levelsContainer, this.wordsContainer, this.currentWord].forEach(element => {
       element.classList.add('unauthorized');
     })
+  }
+
+  pageAccomplished() {
+    this.gamesSection.classList.add('disabled');
+    this.page.classList.add('dictionary--accomplished');
+    this.pagination.setAccomplished();
+  }
+
+  pageNormal() {
+    this.gamesSection.classList.remove('disabled');
+    this.page.classList.remove('dictionary--accomplished');
+    this.pagination.setNormal();
   }
 }
 
