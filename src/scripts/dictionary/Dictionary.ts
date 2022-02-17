@@ -99,7 +99,7 @@ class Dictionary {
     window.addEventListener('mark-hard', (event: CustomEvent) => {
       if (event.detail.hard) {
         this.view.cardUnmarkHard();
-        this.model.setUserWord(event.detail.wordId, '');
+        this.model.setUserWord(event.detail.wordId, 'unset');
       } else {
         this.view.cardMarkHard();
         this.view.cardUnmarkKnown();
@@ -109,7 +109,7 @@ class Dictionary {
     window.addEventListener('mark-known', (event: CustomEvent) => {
       if (event.detail.known) {
         this.view.cardUnmarkKnown();
-        this.model.setUserWord(event.detail.wordId, '');
+        this.model.setUserWord(event.detail.wordId, 'unset');
       } else {
         this.view.cardMarkKnown();
         this.view.cardUnmarkHard();

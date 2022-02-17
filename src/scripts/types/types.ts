@@ -67,7 +67,7 @@ export interface IUserData extends IUserTokens {
     name: string
 }
 
-export type TWordDifficulty = '' | 'hard' | 'known';
+export type TWordDifficulty = 'unset' | 'hard' | 'known';
 
 export interface IUserWord {
     difficulty: TWordDifficulty,
