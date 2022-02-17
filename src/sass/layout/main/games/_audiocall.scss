@@ -27,6 +27,7 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
+  caret-color: transparent;
 }
 
 .audiocall-start {
@@ -332,9 +333,9 @@
 .words-title__left {
   font-size: 3.5vmin;
     border-radius: 50%;
-    width: 6vmin;
-    height: 6vmin;
-    border: solid 1px;
+    width: 5vmin;
+    height: 5vmin;
+    border: solid 2px;
     display: flex;
     justify-content: center;
     align-items: center;
