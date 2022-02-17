@@ -2,6 +2,7 @@ import { clearPage } from './startAudiocall';
 import { playSound } from './playSound';
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { createHtmlElement } from './createHtmlElement';
+import { currentDict } from '../app';
 import { words, startRound, startNewGame } from './startRound';
 import {
   AMOUNT_ROUND_WORDS,
@@ -53,6 +54,12 @@ function addButtons() {
   const resultNextBtn = createHtmlElement('button', resultBtns, 'result-btns__next-btn', 'Сыграть ещё раз');
   const resultToTutorialBtn = createHtmlElement('button', resultBtns, 'result-btns__to-tutorial', 'Перейти в учебник');
   resultNextBtn.addEventListener('click', startNewGame);
+  resultToTutorialBtn.addEventListener('click', async () => {
+    const dict = await currentDict;
+    console.log(dict);
+    dict.preSelectLevelAndPage(GLOBAL_VALUES.currentLevel, 0);
+    await dict.start();
+  });
 }
 
 function showResult() {

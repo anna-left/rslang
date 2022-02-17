@@ -30,7 +30,9 @@ async function init() {
 
   burger.render(main.main, main.mainBox, dict);
   setHome(main.main, main.mainBox);
-  
+  return dict;
 }
 
-init();
+const currentDict = init();
+export { currentDict };
+
