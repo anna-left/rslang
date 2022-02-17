@@ -6,7 +6,7 @@ async function init() {
   viewManager.renderFooter();
   window.addEventListener('go-to-login-screen', () => {
     viewManager.renderHome();
-  });
+  })
 }
 
 init();

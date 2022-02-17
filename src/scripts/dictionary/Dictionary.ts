@@ -1,9 +1,9 @@
-import DictionaryView from './DictionaryView';
-import DictionaryModel from './DictionaryModel';
-import { WordsSettings } from '../sprint/SprintSettings';
-import Sprint from '../sprint/Sprint';
-import { LocalStorage, SessionStorage } from '../state/StorageSettings';
-import { IAggregatedWordSchema, IWordSchema } from '../types/types';
+import DictionaryView from "./DictionaryView";
+import DictionaryModel from "./DictionaryModel";
+import {WordsSettings} from "../sprint/SprintSettings";
+import Sprint from "../sprint/Sprint";
+import {LocalStorage, SessionStorage} from "../state/StorageSettings";
+import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 
 class Dictionary {
   private readonly model: DictionaryModel;

@@ -117,9 +117,7 @@ export class API {
     if (response.status === StatusCode.Forbidden || response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing, expired or invalid');
       window.dispatchEvent(new CustomEvent('go-to-login-screen'));
-      window.dispatchEvent(
-        new CustomEvent('show-error', { detail: { error: 'Authorization failed.\nTry to re-login.' } }),
-      );
+      window.dispatchEvent(new CustomEvent('show-error', {detail: {error: 'Authorization failed.\nTry to re-login.'}}));
     } else {
       this.updateTokensInStorage(await response.json());
       this.getUserDataFromStorage();
