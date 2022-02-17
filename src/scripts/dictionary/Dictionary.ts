@@ -3,8 +3,7 @@ import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
 import {LocalStorage, SessionStorage} from "../state/StorageSettings";
-import {CustomEvents, IAggregatedWordSchema, IWordSchema} from "../types/types";
-import {DictionaryDifficulty} from "./DictionarySettings";
+import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -144,6 +143,14 @@ class Dictionary {
   preSelectLevelAndPage(level: number, page: number) {
     this.currentLevel = level;
     this.currentPage = page;
+  }
+
+  getLevel() {
+    return this.currentLevel;
+  }
+
+  getPage() {
+    return this.currentPage;
   }
 }
 
