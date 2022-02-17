@@ -9,13 +9,14 @@ import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 import SmallWordCard from "./SmallWordCard";
 import ArrowButton from "../sprint/ArrowButton";
 import Pagination from "./Pagination";
+import {data} from "autoprefixer";
 
 class DictionaryView extends Page {
   private readonly className: string;
   private readonly levelsContainer: HTMLElement;
   private readonly wordsContainer: HTMLElement;
   private readonly currentWord: HTMLElement;
-  private data: IWordSchema[];
+  private data: IWordSchema[] | IAggregatedWordSchema[];
   private difficultyCards: DifficultyCard[];
   private currentDifficultyLevel: number;
   private wordCards: SmallWordCard[];
@@ -93,12 +94,12 @@ class DictionaryView extends Page {
     }
   }
 
-  activateDifficultyLevel(level: number) {
+  activateLevel(level: number) {
     this.currentDifficultyLevel = level;
     this.difficultyCards[level].activate();
   }
 
-  deactivateCurrentLevel() {
+  deactivateLevel() {
     this.difficultyCards[this.currentDifficultyLevel].deactivate();
   }
 
@@ -107,7 +108,7 @@ class DictionaryView extends Page {
     this.wordCards[id].activate();
   }
 
-  deactivateCurrentWord() {
+  deactivateWord() {
     this.wordCards[this.currentWordId].deactivate();
   }
 
@@ -122,6 +123,31 @@ class DictionaryView extends Page {
       this.wordsContainer.append(card.render());
       this.wordCards.push(card);
     }
+  }
+
+  applyWordStatus(word: IAggregatedWordSchema, index: number) {
+    if (word.hasOwnProperty('userWord')) {
+      if (word.userWord.difficulty === 'hard') {
+        this.cardMarkHard(index);
+      } else if (word.userWord.difficulty === 'known') {
+        this.cardMarkKnown(index);
+      }
+    }
+  }
+
+  clearActiveWordStatus() {
+    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
+    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
+  }
+
+  applyStatusOnPage() {
+    if (this.data[1]) {
+      for (let i = 1; i < this.data.length; i += 1) {
+        this.applyWordStatus(this.data[i], i);
+      }
+    }
+    this.clearActiveWordStatus();
+    this.applyWordStatus(this.data[0], 0);
   }
 
   displayActiveWord() {
@@ -141,6 +167,7 @@ class DictionaryView extends Page {
     if (data[0]) {
       this.activateWord(0);
       this.displayActiveWord();
+      this.applyStatusOnPage();
     } else {
       this.wordsContainer.innerHTML = DictionaryText.noWords;
     }
@@ -161,23 +188,23 @@ class DictionaryView extends Page {
     this.pagination.manageEllipsis();
   }
 
-  cardMarkHard() {
-    this.wordCards[this.currentWordId].render().classList.add('small-word-card--hard');
+  cardMarkHard(id = this.currentWordId) {
+    this.wordCards[id].render().classList.add('small-word-card--hard');
     (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--hard`);
   }
 
-  cardUnmarkHard() {
-    this.wordCards[this.currentWordId].render().classList.remove('small-word-card--hard');
+  cardUnmarkHard(id = this.currentWordId) {
+    this.wordCards[id].render().classList.remove('small-word-card--hard');
     (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
   }
 
-  cardMarkKnown() {
-    this.wordCards[this.currentWordId].render().classList.add('small-word-card--known');
+  cardMarkKnown(id = this.currentWordId) {
+    this.wordCards[id].render().classList.add('small-word-card--known');
     (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--known`);
   }
 
-  cardUnmarkKnown() {
-    this.wordCards[this.currentWordId].render().classList.remove('small-word-card--known');
+  cardUnmarkKnown(id = this.currentWordId) {
+    this.wordCards[id].render().classList.remove('small-word-card--known');
     (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
   }
 

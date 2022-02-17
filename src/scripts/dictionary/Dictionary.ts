@@ -51,8 +51,8 @@ class Dictionary {
     window.addEventListener('dict-level', async (event: CustomEvent) => {
       this.currentLevel = event.detail.id;
       this.currentPage = 0;
-      this.view.deactivateCurrentLevel();
-      this.view.activateDifficultyLevel(this.currentLevel);
+      this.view.deactivateLevel();
+      this.view.activateLevel(this.currentLevel);
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
@@ -81,7 +81,7 @@ class Dictionary {
       this.view.activatePage(this.currentPage);
     })
     window.addEventListener('activate-word', (event: CustomEvent) => {
-      this.view.deactivateCurrentWord();
+      this.view.deactivateWord();
       this.view.activateWord(event.detail.id);
       this.view.emptyActiveWord();
       this.view.displayActiveWord();
@@ -128,8 +128,8 @@ class Dictionary {
 
   async start() {
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-    this.view.deactivateCurrentLevel();
-    this.view.activateDifficultyLevel(this.currentLevel);
+    this.view.deactivateLevel();
+    this.view.activateLevel(this.currentLevel);
     if (this.currentLevel === WordsSettings.groups) {
       this.view.hidePagination();
     }
