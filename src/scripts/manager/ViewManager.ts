@@ -26,9 +26,9 @@ export class ViewManager {
 
     this.main.render();
     this.header.render(this);
-    this.burger.render(this.main.mainBox, this.dictionary);
-    this.home.render(this.main.mainBox);
-    this.homeNavigation.render(this.main.main, this.main.mainBox);
+    this.burger.render(this, this.dictionary);
+    this.home.render(this);
+    this.homeNavigation.render(this);
   }
 
   renderFooter() {
@@ -39,11 +39,11 @@ export class ViewManager {
   }
 
   renderHome() {
-    this.home.render(this.main.mainBox);
+    this.home.render(this);
   }
 
   renderhomeNavigation() {
-    this.homeNavigation.render(this.main.main, this.main.mainBox);
+    this.homeNavigation.render(this);
   }
   removehomeNavigation() {
     document.body.removeChild(this.homeNavigation.nav);

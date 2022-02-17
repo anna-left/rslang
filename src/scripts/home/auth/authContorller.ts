@@ -1,6 +1,7 @@
 import { API } from './../../api/API';
 import { IAuthInputs, IAuthLabels } from './IAuth';
 import { IUserSchema, TUserInfo } from '../../types/types';
+import { IViewManager } from '../../manager/IViewManager';
 
 const labelsText = {
   name: 'Имя пользователя',
@@ -16,7 +17,7 @@ export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAut
   authHandler(mode, inputs, labels);
 }
 
-export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
+export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels, manager: IViewManager) {
   authHandler(mode, inputs, labels);
   if (mode === 'register') {
     if (
@@ -35,6 +36,7 @@ export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: 
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
       const userData = await api.signIn(user);
       sessionStorage.setItem('userData', JSON.stringify(userData));
+      manager.header.userAuthorize(userData.name);
     } else {
     }
   }

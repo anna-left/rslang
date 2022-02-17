@@ -13,6 +13,7 @@ import {
 import './burger.scss';
 import { HomeView } from '../home/home/HomeVIew';
 import Dictionary from '../dictionary/Dictionary';
+import { IViewManager } from '../manager/IViewManager';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
 const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
@@ -24,7 +25,7 @@ export class BurgerView {
     this.burger = getBurgerContainer();
     this.blur = getBlur();
   }
-  render(mainBox: HTMLElement, dict: Dictionary) {
+  render(manager: IViewManager, dict: Dictionary) {
     if (!this.burger) {
       this.burger = getBurgerContainer();
     }
@@ -45,7 +46,7 @@ export class BurgerView {
     const stats = getStatsItem();
     const settings = getSettingsItem();
 
-    home.addEventListener('click', () => new HomeView().render(mainBox));
+    home.addEventListener('click', () => new HomeView().render(manager));
     dictionary.addEventListener('click', async () => {
       await dict.start();
     });

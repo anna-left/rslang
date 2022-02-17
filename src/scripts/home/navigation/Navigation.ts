@@ -8,6 +8,7 @@ import { linkSeeker } from './navigationController';
 
 import './navigation.scss';
 import { getHiddenSvgBlock } from './navigationBuilder';
+import { IViewManager } from '../../manager/IViewManager';
 
 export class HomeNavigation {
   nav: HTMLElement;
@@ -15,14 +16,16 @@ export class HomeNavigation {
     this.nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
   }
 
-  render(main: HTMLElement, mainBox: HTMLElement) {
+  render(manager: IViewManager) {
     if (!this.nav) {
       this.nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
     }
+    const root = manager.main.main;
+    const rootBox = manager.main.mainBox;
 
     const navBox = createElement('ul', ['home-navigation__list']);
 
-    main.append(getHiddenSvgBlock());
+    root.append(getHiddenSvgBlock());
 
     const svgSHome = createSVG('svg', ['home-navigation__icon', 'home-navigation__icon_home']);
     const svgHomeUse = createSVG('use', [], [['href', '#home-icon']]);
@@ -62,16 +65,16 @@ export class HomeNavigation {
     teamLink.append(svgTeam);
     infoLink.append(svgInfo);
 
-    mainLink.addEventListener('click', () => new About(mainBox));
-    featuresLink.addEventListener('click', () => new Feature(mainBox));
-    infoLink.addEventListener('click', () => new Info(mainBox));
-    reviewLink.addEventListener('click', () => new Review(mainBox));
-    teamLink.addEventListener('click', () => new Team(mainBox));
+    mainLink.addEventListener('click', () => new About(manager));
+    featuresLink.addEventListener('click', () => new Feature(rootBox));
+    infoLink.addEventListener('click', () => new Info(rootBox));
+    reviewLink.addEventListener('click', () => new Review(rootBox));
+    teamLink.addEventListener('click', () => new Team(rootBox));
 
     navBox.append(mainLink, featuresLink, infoLink, reviewLink, teamLink);
     this.nav.append(navBox);
 
-    main.append(this.nav);
+    root.append(this.nav);
   }
   remove() {
     document.body.removeChild(this.nav);
