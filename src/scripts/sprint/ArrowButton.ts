@@ -1,9 +1,10 @@
-import Page from "./Page";
+import Page from './Page';
 import './ArrowButton.scss';
 
 class ArrowButton extends Page {
   private readonly className: string[];
-  constructor(reverse = false, className: string, eventName: string) {
+
+  constructor(className: string, eventName: string, reverse = false) {
     super('arrow-button', 'button');
     this.className = [];
     if (reverse) {
@@ -15,9 +16,9 @@ class ArrowButton extends Page {
       this.className = [className, 'arrow-button--forward'];
       this.addClass(this.className);
     }
-    this.page.addEventListener('click', ()=> {
+    this.page.addEventListener('click', () => {
       window.dispatchEvent(new CustomEvent(eventName));
-    })
+    });
   }
 }
 

@@ -1,22 +1,27 @@
-import DictionaryView from "./DictionaryView";
-import DictionaryModel from "./DictionaryModel";
-import {WordsSettings} from "../sprint/SprintSettings";
-import Sprint from "../sprint/Sprint";
-import {LocalStorage, SessionStorage} from "../state/StorageSettings";
-import {IAggregatedWordSchema, IWordSchema} from "../types/types";
+import DictionaryView from './DictionaryView';
+import DictionaryModel from './DictionaryModel';
+import { WordsSettings } from '../sprint/SprintSettings';
+import Sprint from '../sprint/Sprint';
+import { LocalStorage, SessionStorage } from '../state/StorageSettings';
+import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 
 class Dictionary {
   private readonly model: DictionaryModel;
+
   private readonly view: DictionaryView;
+
   private currentLevel: number;
+
   private currentPage: number;
+
   private sprint: Sprint;
+
   private authorized: boolean;
 
   constructor() {
     this.model = new DictionaryModel();
     this.view = new DictionaryView('dictionary');
-    this.view.init()
+    this.view.init();
     this.currentLevel = 0;
     this.currentPage = 0;
     this.sprint = null;
@@ -40,11 +45,11 @@ class Dictionary {
 
   async getWords(level: number, page: number) {
     if (level === WordsSettings.groups) {
-      return await this.model.getAllUserWords() as IAggregatedWordSchema[];
+      return (await this.model.getAllUserWords()) as IAggregatedWordSchema[];
     }
-    return this.authorized ?
-      await this.model.getUserWords(level, page) as IAggregatedWordSchema[] :
-      await this.model.fetchWords(level, page) as IWordSchema[];
+    return this.authorized
+      ? ((await this.model.getUserWords(level, page)) as IAggregatedWordSchema[])
+      : ((await this.model.fetchWords(level, page)) as IWordSchema[]);
   }
 
   async init() {
@@ -61,42 +66,42 @@ class Dictionary {
       } else {
         this.view.showPagination();
       }
-    })
+    });
     window.addEventListener('dict-page', async (event: CustomEvent) => {
       this.currentPage = event.detail.page;
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.activatePage(this.currentPage);
       this.view.updateData(data);
-    })
+    });
     window.addEventListener('page-to-left', async () => {
       this.currentPage = this.currentPage ? this.currentPage - 1 : 0;
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.activatePage(this.currentPage);
       this.view.updateData(data);
-    })
+    });
     window.addEventListener('page-to-right', async () => {
       this.currentPage = this.currentPage === WordsSettings.pages - 1 ? this.currentPage : this.currentPage + 1;
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.activatePage(this.currentPage);
       this.view.updateData(data);
-    })
+    });
     window.addEventListener('activate-word', (event: CustomEvent) => {
       this.view.deactivateWord();
       this.view.setCurrentWordId(event.detail.id);
       this.view.emptyActiveWord();
       this.view.displayActiveWord();
       this.view.activateWord();
-    })
+    });
     window.addEventListener('audiocall-dict-start', () => {
       // TODO start audiocall with level and page parameters
-    })
+    });
     window.addEventListener('sprint-dict-start', () => {
       this.sprint.start(this.currentLevel, this.currentPage);
-    })
+    });
     window.addEventListener('beforeunload', () => {
       localStorage.setItem(LocalStorage.dictionaryDifficultyLevel, this.currentLevel.toString());
       localStorage.setItem(LocalStorage.dictionaryPageNumber, this.currentPage.toString());
-    })
+    });
     window.addEventListener('mark-hard', (event: CustomEvent) => {
       if (event.detail.hard) {
         this.view.cardUnmarkHard();
@@ -106,7 +111,7 @@ class Dictionary {
         this.view.cardUnmarkKnown();
         this.model.setUserWord(event.detail.wordId, 'hard');
       }
-    })
+    });
     window.addEventListener('mark-known', (event: CustomEvent) => {
       if (event.detail.known) {
         this.view.cardUnmarkKnown();
@@ -116,15 +121,15 @@ class Dictionary {
         this.view.cardUnmarkHard();
         this.model.setUserWord(event.detail.wordId, 'known');
       }
-    })
+    });
     window.addEventListener('login', () => {
       this.view.authorizeView();
       this.authorized = true;
-    })
+    });
     window.addEventListener('logout', () => {
       this.view.unAuthorizeView();
       this.authorized = false;
-    })
+    });
   }
 
   async start() {

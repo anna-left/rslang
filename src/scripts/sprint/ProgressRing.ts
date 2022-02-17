@@ -1,10 +1,12 @@
-import {createHTMLElement} from "../utils/CommonFunctions";
+import { createHTMLElement } from '../utils/CommonFunctions';
 import './ProgressRing.scss';
-import ColoredRing from "./ColoredRing";
+import ColoredRing from './ColoredRing';
 
 class ProgressRing extends ColoredRing {
   private readonly value: HTMLElement;
+
   private readonly text: HTMLElement;
+
   constructor(radiusConstantName: string, borderThicknessConstantName: string, className = 'progress-ring') {
     super(radiusConstantName, borderThicknessConstantName, className);
     this.value = createHTMLElement('h2', `${className}__value`);

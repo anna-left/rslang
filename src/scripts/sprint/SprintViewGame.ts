@@ -1,15 +1,20 @@
-import SprintGameDisplay from "./SprintGameDisplay";
-import {createHTMLElement} from "../utils/CommonFunctions";
-import Page from "./Page";
-import SprintGameControls from "./SprintGameControls";
+import SprintGameDisplay from './SprintGameDisplay';
+import { createHTMLElement } from '../utils/CommonFunctions';
+import Page from './Page';
+import SprintGameControls from './SprintGameControls';
 import './SprintViewGame.scss';
 
 class SprintViewGame extends Page {
   private readonly display: SprintGameDisplay;
+
   private readonly foreign: HTMLElement;
+
   private readonly translation: HTMLElement;
+
   private readonly invisibleLine: HTMLElement;
+
   private readonly className: string;
+
   constructor(className: string) {
     super(className);
     this.className = className;

@@ -1,9 +1,11 @@
-import {createHTMLElement} from "../utils/CommonFunctions";
+import { createHTMLElement } from '../utils/CommonFunctions';
 import './Badges.scss';
 
 class Badges {
   private readonly container: HTMLElement;
+
   private readonly badgesPerLevel: number;
+
   constructor(badgesPerLevel: number) {
     this.container = createHTMLElement('div', 'badges');
     this.badgesPerLevel = badgesPerLevel;

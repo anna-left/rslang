@@ -1,21 +1,32 @@
-import SprintView from "./SprintView";
-import SprintModel from "./SprintModel";
-import {ISprintWord} from "../types/types";
-import {SprintSettings} from "./SprintSettings";
-import Dictionary from "../dictionary/Dictionary";
+import SprintView from './SprintView';
+import SprintModel from './SprintModel';
+import { ISprintWord } from '../types/types';
+import { SprintSettings } from './SprintSettings';
+import Dictionary from '../dictionary/Dictionary';
 
 class Sprint {
   private readonly view: SprintView;
+
   private readonly model: SprintModel;
+
   private round: ISprintWord[];
+
   private currentWordIndex: number;
+
   private streak: number;
+
   private group: number;
+
   private page: number;
+
   private score: number;
+
   private level: number;
+
   private wrongWords: ISprintWord[];
+
   private rightWords: ISprintWord[];
+
   private dict: Dictionary;
 
   constructor() {
@@ -45,14 +56,14 @@ class Sprint {
     window.addEventListener('sprint-right', async () => {
       this.checkAnswer(true);
       await this.nextRound();
-    })
+    });
     window.addEventListener('sprint-wrong', async () => {
       this.checkAnswer(false);
       await this.nextRound();
-    })
+    });
     window.addEventListener('time-over', async () => {
       this.onGameOver();
-    })
+    });
     window.addEventListener('sprint-start', async () => {
       this.view.init();
       this.model.selectWords(this.group, this.page);
@@ -60,28 +71,28 @@ class Sprint {
       await this.nextRound();
       this.view.showGame();
       this.view.startTimer();
-    })
+    });
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
       this.view.enableLevelSelection();
-    })
+    });
     window.addEventListener('sprint-workbook', async () => {
       this.dict.preSelectLevelAndPage(this.group, this.page);
       await this.dict.start();
-    })
+    });
     window.addEventListener('sprint-forward', async () => {
       this.view.showWords();
-    })
+    });
     window.addEventListener('sprint-backward', async () => {
       this.view.showResults();
-    })
+    });
     window.addEventListener('sprint-group-select', async (event: CustomEvent) => {
       this.group = event.detail.group;
-      this.page = Math.floor(Math.random() * 30)
-    })
+      this.page = Math.floor(Math.random() * 30);
+    });
     window.addEventListener('sprint-burger-start', () => {
       this.start();
-    })
+    });
   }
 
   async nextRound() {
