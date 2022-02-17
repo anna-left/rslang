@@ -1,19 +1,24 @@
+import { HeaderView } from '../header/HeaderView';
+import { MainView } from '../main/MainView';
+import { FooterView } from '../footer/FooterView';
 import { BurgerView } from '../burger/BurgerView';
 import { HomeView } from '../home/home/HomeVIew';
-import { MainView } from '../main/MainView';
-import { HeaderView } from '../header/HeaderView';
-import { FooterView } from '../footer/FooterView';
-import Dictionary from '../dictionary/Dictionary';
 import { HomeNavigation } from '../home/navigation/Navigation';
+import Dictionary from '../dictionary/Dictionary';
+import Sprint from '../sprint/Sprint';
+import Modal from '../api/Modal';
+import { LocalStorage } from '../state/StorageSettings';
 
 export class ViewManager {
-  burger: BurgerView;
-  main: MainView;
   header: HeaderView;
+  main: MainView;
   footer: FooterView;
-  dictionary: Dictionary;
-  homeNavigation: HomeNavigation;
+  burger: BurgerView;
   home: HomeView;
+  homeNavigation: HomeNavigation;
+  private readonly dictionary: Dictionary;
+  private readonly sprint: Sprint;
+  private readonly modal: Modal;
 
   constructor() {
     this.burger = new BurgerView();
@@ -23,12 +28,30 @@ export class ViewManager {
     this.header = new HeaderView();
     this.footer = new FooterView();
     this.dictionary = new Dictionary();
+    this.sprint = new Sprint();
+    this.modal = new Modal(document.querySelector('body'));
 
     this.main.render();
     this.header.render(this);
     this.burger.render(this, this.dictionary);
     this.home.render(this);
     this.homeNavigation.render(this);
+  }
+
+  async init() {
+    await this.dictionary.init();
+    await this.sprint.init();
+    this.sprint.addDictionary(this.dictionary);
+    this.dictionary.addSprint(this.sprint);
+    this.dictionary.preSelectLevelAndPage(
+      +localStorage.getItem(LocalStorage.dictionaryDifficultyLevel),
+      +localStorage.getItem(LocalStorage.dictionaryPageNumber),
+    );
+    // @ts-ignore
+    window.addEventListener('show-error', (event: CustomEvent) => {
+      this.modal.setText(event.detail.error);
+      this.modal.show();
+    });
   }
 
   renderFooter() {

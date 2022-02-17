@@ -17,7 +17,7 @@ export class Auth {
     const auth = createElement('section', ['main-box__section', 'main-box__section_type_auth', 'section-auth']);
     const inputBox = createElement('form', ['section-auth__input-box']);
 
-    new LoginView(inputBox);
+    new LoginView(inputBox, manager);
 
     auth.append(inputBox, getImage());
     root.append(auth);

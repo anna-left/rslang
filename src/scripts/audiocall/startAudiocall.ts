@@ -10,7 +10,7 @@ function clearPage(curHTMLElement: HTMLElement) {
   }
 }
 
-const wordsApi = new API(); 
+const wordsApi = new API();
 
 function startAudiocall() {
   const header: HTMLElement = document.querySelector('.header');
@@ -18,7 +18,7 @@ function startAudiocall() {
   header.style.userSelect = 'none';
   const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
-  const mainHTML: HTMLElement = document.querySelector('.main');
+  const mainHTML: HTMLElement = document.querySelector('.main-box');
   clearPage(mainHTML);
   createHtmlElement('div', mainHTML, 'audiocall');
 

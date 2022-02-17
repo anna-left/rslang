@@ -1,6 +1,6 @@
 import { API } from './../../api/API';
 import { IAuthInputs, IAuthLabels } from './IAuth';
-import { IUserSchema, TUserInfo } from '../../types/types';
+import { IUserData, IUserSchema, TUserInfo } from '../../types/types';
 import { IViewManager } from '../../manager/IViewManager';
 
 const labelsText = {
@@ -17,7 +17,7 @@ export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAut
   authHandler(mode, inputs, labels);
 }
 
-export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels, manager: IViewManager) {
+export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels, manager?: IViewManager) {
   authHandler(mode, inputs, labels);
   if (mode === 'register') {
     if (
@@ -34,7 +34,7 @@ export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: 
     if (labels.email.classList.contains(CLASS_INPUT_CLEAR) && labels.password.classList.contains(CLASS_INPUT_CLEAR)) {
       const api = new API();
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
-      const userData = await api.signIn(user);
+      const userData: IUserData = <IUserData>await api.signIn(user);
       sessionStorage.setItem('userData', JSON.stringify(userData));
       manager.header.userAuthorize(userData.name);
     } else {

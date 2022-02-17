@@ -1,0 +1,40 @@
+@import "src/sass/util/variables";
+
+body {
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  width: 40rem;
+  height: auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border: 0.2rem solid $color-prime-candy;
+  border-radius: 1rem;
+  background-color: $color-prime-candy-light;
+  transform: translate(-50%, -50%);
+
+  &__text {
+    color: black;
+    font: inherit;
+    text-align: center;
+    line-height: 4rem;
+    font-size: 2.4rem;
+  }
+
+  &__ok {
+    width: 8rem;
+    height: 5rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
