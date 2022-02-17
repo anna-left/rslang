@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { IUserData } from './../types/types';
 import { IViewManager } from '../manager/IViewManager';
 import { createElement } from '../util/Util';
@@ -7,14 +8,19 @@ import { getHiddenSvg, getNavList, getUserAuth, getUserUnauth } from './headerBu
 
 export class HeaderView {
   header: HTMLElement;
+
   headerBox: HTMLElement;
+
   user: HTMLElement;
+
   userText: HTMLElement;
+
   constructor() {
     this.header = createElement('header', ['header']);
     this.headerBox = createElement('div', ['header__box']);
     this.user = createElement('div', ['header__user', 'user-box']);
   }
+
   render(manager: IViewManager) {
     if (!this.header) {
       this.header = createElement('header', ['header']);
@@ -45,9 +51,11 @@ export class HeaderView {
     this.header.append(this.headerBox);
     document.body.append(this.header);
   }
+
   userAuthorize(userName: string, manager: IViewManager) {
     this.user.append(...setUserAuth(this.user, userName, manager));
   }
+
   userUnauthorize() {
     this.user.innerHTML = '';
     this.user.append(getUserUnauth());

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createElement, createSVG } from '../util/Util';
 
 export function createRSItem() {

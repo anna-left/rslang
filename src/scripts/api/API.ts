@@ -1,5 +1,4 @@
 import {
-  FetchInit,
   HTTPMethod,
   IAggregatedWordSchema,
   IAggregatedWordsSchema,
@@ -13,12 +12,15 @@ import {
   StatusCode,
   TUserInfo,
 } from '../types/types';
-import {SessionStorage} from "../state/StorageSettings";
+import { SessionStorage } from '../state/StorageSettings';
 
 export class API {
   private readonly endpoint: string;
+
   private userId: string;
+
   private accessToken: string;
+
   private refreshToken: string;
 
   constructor() {
@@ -89,20 +91,18 @@ export class API {
     if (response && response.status === StatusCode.OK) {
       return (await response.json()) as IUserSchema;
     } else {
-      return
+      return;
     }
   }
 
-  async updateUser(user: TUserInfo): Promise<void> {
+  async updateUser(user: TUserInfo): Promise<Response> {
     const endpointModifier = `/users/${this.userId}`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.put, user);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.put, user);
   }
 
-  async deleteUser(): Promise<void> {
+  async deleteUser(): Promise<Response> {
     const endpointModifier = `/users/${this.userId}`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.delete);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.delete);
   }
 
   async getUserTokens(): Promise<void | IUserTokens> {
@@ -117,7 +117,9 @@ export class API {
     if (response.status === StatusCode.Forbidden || response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing, expired or invalid');
       window.dispatchEvent(new CustomEvent('go-to-login-screen'));
-      window.dispatchEvent(new CustomEvent('show-error', {detail: {error: 'Authorization failed.\nTry to re-login.'}}));
+      window.dispatchEvent(
+        new CustomEvent('show-error', { detail: { error: 'Authorization failed.\nTry to re-login.' } }),
+      );
     } else {
       this.updateTokensInStorage(await response.json());
       this.getUserDataFromStorage();
@@ -131,14 +133,13 @@ export class API {
     if (response && response.status === StatusCode.OK) {
       return (await response.json()) as IUserWord[];
     } else {
-      return
+      return;
     }
   }
 
-  async createUserWord(wordId: string,  word: IUserWord): Promise<void> {
+  async createUserWord(wordId: string, word: IUserWord): Promise<Response> {
     const endpointModifier = `/users/${this.userId}/words/${wordId}`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.post, word);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.post, word);
   }
 
   async getUserWord(wordId: string): Promise<void | IUserWord> {
@@ -147,26 +148,24 @@ export class API {
     if (response && response.status === StatusCode.OK) {
       return (await response.json()) as IUserWord;
     } else {
-      return
+      return;
     }
   }
 
-  async updateUserWord(wordId: string, word: IUserWord): Promise<void> {
+  async updateUserWord(wordId: string, word: IUserWord): Promise<Response> {
     const endpointModifier = `/users/${this.userId}/words/${wordId}`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.put, word);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.put, word);
   }
 
-  async deleteUserWord(wordId: string): Promise<void> {
+  async deleteUserWord(wordId: string): Promise<Response> {
     const endpointModifier = `/users/${this.userId}/words/${wordId}`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.delete);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.delete);
   }
 
   async getUserAggregatedWords(
-    group = "0",
-    page = "0",
-    wordsPerPage = "20",
+    group = '0',
+    page = '0',
+    wordsPerPage = '20',
     filter = {},
   ): Promise<void | IAggregatedWordSchema[]> {
     let queryString = '';
@@ -204,10 +203,9 @@ export class API {
     return (await response.json()) as IUserStatistics;
   }
 
-  async updateUserStatistics(statistics: IUserStatistics): Promise<void> {
+  async updateUserStatistics(statistics: IUserStatistics): Promise<Response> {
     const endpointModifier = `/users/${this.userId}/statistics`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.put, statistics);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.put, statistics);
   }
 
   async getUserSettings(): Promise<void | IUserSettings> {
@@ -216,10 +214,9 @@ export class API {
     return (await response.json()) as IUserSettings;
   }
 
-  async updateUserSettings(settings: IUserSettings): Promise<void> {
+  async updateUserSettings(settings: IUserSettings): Promise<Response> {
     const endpointModifier = `/users/${this.userId}/settings`;
-    const response = await this.authorizedRequest(endpointModifier, HTTPMethod.put, settings);
-    return;
+    return this.authorizedRequest(endpointModifier, HTTPMethod.put, settings);
   }
 
   async signIn(user: TUserInfo): Promise<void | IUserData> {
@@ -235,41 +232,44 @@ export class API {
     if (response.status === StatusCode.Forbidden || response.status === StatusCode.NotFound) {
       console.log('Incorrect e-mail or password');
     }
-    const userData: IUserData = (await response.json());
+    const userData: IUserData = await response.json();
     sessionStorage.setItem(SessionStorage.userData, JSON.stringify(userData));
     this.getUserDataFromStorage();
     return userData;
   }
 
-  async authorizedRequest(path: string, method: HTTPMethod, data?: any) {
-    let init: FetchInit = {
+  async authorizedRequest(
+    path: string,
+    method: HTTPMethod,
+    data?: IUserSettings | IUserStatistics | IUserSchema | IUserWord | TUserInfo,
+  ) {
+    const init = {
       method: method,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.accessToken}`,
-      }
-    }
+      },
+      body: undefined as string,
+    };
     if (data) {
       init.body = JSON.stringify(data);
     }
-    const response = await fetch(this.endpoint + path, init as unknown as RequestInit);
+    const response = await fetch(this.endpoint + path, init);
     if (response.status === StatusCode.OK) {
       return response;
     } else if (response.status === StatusCode.NotFound) {
       console.log('Not Found');
     } else if (response.status === StatusCode.UnprocessableEntity) {
       console.log('Incorrect e-mail or password\nor\nWrong Schema');
-    } else if (response.status === StatusCode["Expectation Failed"]) {
+    } else if (response.status === StatusCode['Expectation Failed']) {
       console.log('Word/User already exists');
     } else if (response.status === StatusCode.Unauthorized) {
-      console.log(this.refreshToken);
       await this.getUserTokens();
-      console.log(this.refreshToken);
       init.headers.Authorization = `Bearer ${this.accessToken}`;
-      const response = await fetch(this.endpoint + path, init as unknown as RequestInit);
-      if (response.status === StatusCode.OK) {
-        return response;
+      const resp = await fetch(this.endpoint + path, init);
+      if (resp.status === StatusCode.OK) {
+        return resp;
       } else {
         window.dispatchEvent(new CustomEvent('go-to-login-screen'));
       }
@@ -277,7 +277,7 @@ export class API {
       window.dispatchEvent(new CustomEvent('go-to-login-screen'));
       const errorText = 'Authorization failed.\nTry to re-login.';
       console.log(errorText);
-      window.dispatchEvent(new CustomEvent('show-error', {detail: {error: errorText}}));
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: errorText } }));
     }
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { IViewManager } from './../manager/IViewManager';
 import { createElement, createSVG } from '../util/Util';
 import { HomeView } from '../home/home/HomeVIew';
@@ -47,7 +48,7 @@ export function getUserUnauth() {
   svg.append(use);
 
   const text = createElement('span', ['user-box__text'], [], 'не авторизован!');
-  woodenBox.append(svg, text)
+  woodenBox.append(svg, text);
   return woodenBox;
 }
 
@@ -122,14 +123,17 @@ function getHeaderGamesItem(manager: IViewManager) {
 }
 
 function getHeaderDictionaryItem(manager: IViewManager) {
+  console.log(manager);
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Учебник');
   return item;
 }
 function getHeaderStatisticsItem(manager: IViewManager) {
+  console.log(manager);
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Статистика');
   return item;
 }
 function getHeaderSettingsItem(manager: IViewManager) {
+  console.log(manager);
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Настройки');
   return item;
 }
@@ -137,11 +141,11 @@ function getHeaderSettingsItem(manager: IViewManager) {
 function getGameList(manager: IViewManager) {
   const gamesList = createElement('ul', ['header-games__list', 'games-list']);
 
-  gamesList.append(getAudioCallItem(manager), getSprintItem(manager));
+  gamesList.append(getAudioCallItem(manager), getSprintItem());
   return gamesList;
 }
 
-function getSprintItem(manager: IViewManager) {
+function getSprintItem() {
   const sprint = createElement('li', ['header-games__item', 'header__link']);
 
   const sprintIconSvg = createSVG('svg', ['header-games__item_icon']);
@@ -158,6 +162,7 @@ function getSprintItem(manager: IViewManager) {
 }
 
 function getAudioCallItem(manager: IViewManager) {
+  console.log(manager);
   const audiocall = createElement('li', ['header-games__item', 'header__link']);
 
   const audiocallIconSvg = createSVG('svg', ['header-games__item_icon']);

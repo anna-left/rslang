@@ -12,6 +12,7 @@ import { IViewManager } from '../../manager/IViewManager';
 
 export class HomeNavigation {
   nav: HTMLElement;
+
   constructor() {
     this.nav = createElement('nav', ['main__home-navigation', 'home-navigation']);
   }
@@ -76,6 +77,7 @@ export class HomeNavigation {
 
     root.append(this.nav);
   }
+
   remove() {
     document.body.removeChild(this.nav);
   }

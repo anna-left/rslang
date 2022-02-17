@@ -1,4 +1,5 @@
-import { createSVG } from "../util/Util";
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import { createSVG } from '../util/Util';
 
 export function getHiddenSvgs() {
   const svgHidden = createSVG('svg', [], [['display', 'none']]);

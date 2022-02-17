@@ -1,13 +1,16 @@
-
-import {ISprintWord, IWordSchema} from "../types/types";
-import {WordsSettings} from "./SprintSettings";
-import API from "../api/API";
+import { ISprintWord, IWordSchema } from '../types/types';
+import { WordsSettings } from './SprintSettings';
+import API from '../api/API';
 
 class SprintModel {
   private readonly api: API;
+
   private page: number;
+
   private group: number;
+
   private currentPage: number;
+
   constructor() {
     this.api = new API();
     this.group = null;
@@ -28,7 +31,7 @@ class SprintModel {
   async getWords(group = this.group, page = this.page) {
     const words = await this.fetchWords(group, page);
     const shuffledWords = this.shuffleOrder(words);
-    return this.shuffleTranslation(shuffledWords)
+    return this.shuffleTranslation(shuffledWords);
   }
 
   shuffleOrder(array: IWordSchema[]) {
@@ -37,7 +40,7 @@ class SprintModel {
 
   shuffleTranslation(array: IWordSchema[]) {
     return array.map((word, index) => {
-      const gameWord = {...word} as ISprintWord
+      const gameWord = { ...word } as ISprintWord;
       if (Math.random() > 0.5) {
         gameWord.gameTranslate = gameWord.wordTranslate;
         gameWord.answer = true;
@@ -50,18 +53,17 @@ class SprintModel {
         gameWord.answer = false;
       }
       return gameWord;
-    })
+    });
   }
 
   async getMoreWords() {
-    return await this.getWords(this.group, this.currentPage);
+    return this.getWords(this.group, this.currentPage);
   }
 
   hasMoreWords() {
-    this.currentPage = this.currentPage === this.page + 1 ? this.currentPage += 2 : this.currentPage += 1;
+    this.currentPage = this.currentPage === this.page + 1 ? (this.currentPage += 2) : (this.currentPage += 1);
     return !(this.group === WordsSettings.groups || this.currentPage >= WordsSettings.pages);
   }
-
 }
 
 export default SprintModel;

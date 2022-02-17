@@ -31,7 +31,12 @@ export class Team {
 
     const memberAndreyHeader = createElement('h3', ['section-team__item_header'], [], 'Andrei Tsakunou (Team Lead)');
     const memberAnnaHeader = createElement('h3', ['section-team__item_header'], [], 'Anna Rybakova (Encourager)');
-    const memberValentinHeader = createElement('h3', ['section-team__item_header'], [], 'Valiantsin Nazarau (Tech Brain)');
+    const memberValentinHeader = createElement(
+      'h3',
+      ['section-team__item_header'],
+      [],
+      'Valiantsin Nazarau (Tech Brain)',
+    );
 
     const memberAndreyInfo = createElement(
       'p',

@@ -5,8 +5,8 @@ import { Auth } from '../auth/AuthView';
 import './about.scss';
 
 export class About {
-  constructor(manager:IViewManager) {
-    const root = manager.main.mainBox
+  constructor(manager: IViewManager) {
+    const root = manager.main.mainBox;
     root.innerHTML = '';
     const section = createElement('section', ['main-box__section', 'main-box__section_type_about', 'section-about']);
     const aboutBox = createElement('div', ['section-about__content-box']);

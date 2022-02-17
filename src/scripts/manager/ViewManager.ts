@@ -4,21 +4,29 @@ import { FooterView } from '../footer/FooterView';
 import { BurgerView } from '../burger/BurgerView';
 import { HomeView } from '../home/home/HomeVIew';
 import { HomeNavigation } from '../home/navigation/Navigation';
-import Dictionary from '../dictionary/Dictionary';
 import Sprint from '../sprint/Sprint';
-import Modal from '../api/Modal';
 import { LocalStorage } from '../state/StorageSettings';
+import Modal from '../api/Modal';
+import Dictionary from '../dictionary/Dictionary';
 
 export class ViewManager {
   header: HeaderView;
+
   main: MainView;
+
   footer: FooterView;
+
   burger: BurgerView;
-  home: HomeView;
+
   homeNavigation: HomeNavigation;
-  private readonly dictionary: Dictionary;
-  private readonly sprint: Sprint;
-  private readonly modal: Modal;
+
+  home: HomeView;
+
+  readonly dictionary: Dictionary;
+
+  readonly sprint: Sprint;
+
+  readonly modal: Modal;
 
   constructor() {
     this.burger = new BurgerView();
@@ -47,7 +55,6 @@ export class ViewManager {
       +localStorage.getItem(LocalStorage.dictionaryDifficultyLevel),
       +localStorage.getItem(LocalStorage.dictionaryPageNumber),
     );
-    // @ts-ignore
     window.addEventListener('show-error', (event: CustomEvent) => {
       this.modal.setText(event.detail.error);
       this.modal.show();
@@ -57,6 +64,7 @@ export class ViewManager {
   renderFooter() {
     this.footer.render();
   }
+
   removeFooter() {
     document.body.removeChild(this.footer.footer);
   }
@@ -68,6 +76,7 @@ export class ViewManager {
   renderhomeNavigation() {
     this.homeNavigation.render(this);
   }
+
   removehomeNavigation() {
     document.body.removeChild(this.homeNavigation.nav);
   }

@@ -1,30 +1,43 @@
-import {createHTMLElement} from "../utils/CommonFunctions";
-import Badges from "./Badges";
-import {SprintColors, SprintGameText, SprintSettings} from "./SprintSettings";
-import Timer from "./Timer";
+import { createHTMLElement } from '../utils/CommonFunctions';
+import Badges from './Badges';
+import { SprintColors, SprintGameText, SprintSettings } from './SprintSettings';
+import Timer from './Timer';
 import './SprintGameDisplay.scss';
 
 class SprintGameDisplay {
   private readonly header: HTMLElement;
+
   private readonly badgesRow: Badges;
+
   private readonly secondRow: HTMLElement;
+
   private readonly thirdRow: HTMLElement;
+
   private level: number;
+
   private readonly score: HTMLElement;
+
   private timer: Timer;
+
   private readonly centralBlock: HTMLElement;
+
   private readonly className: string;
+
   constructor(className: string) {
     this.className = `${className}-display`;
     this.header = createHTMLElement('div', `${this.className}`);
     this.score = createHTMLElement('div', `${this.className}__score`, `${SprintGameText.score} ${0}`);
-    this.timer = new Timer('--timerRadius', '--timerBorderThickness', `${this.className}__timer`, 60);
+    this.timer = new Timer('--timerRadius', '--timerBorderThickness', 60, `${this.className}__timer`);
     this.centralBlock = createHTMLElement('div', `${this.className}__central`);
     this.badgesRow = new Badges(SprintSettings.subLevels);
     const firstRow = this.badgesRow.render();
-    this.secondRow = createHTMLElement('div', `${this.className}__score-info`, `+${SprintSettings.baseScore} ${SprintGameText.scoreStep}`);
+    this.secondRow = createHTMLElement(
+      'div',
+      `${this.className}__score-info`,
+      `+${SprintSettings.baseScore} ${SprintGameText.scoreStep}`,
+    );
     this.thirdRow = createHTMLElement('div', `${this.className}__level`);
-    this.centralBlock.append(firstRow, this.secondRow, this.thirdRow)
+    this.centralBlock.append(firstRow, this.secondRow, this.thirdRow);
     this.header.append(this.timer.render(), this.centralBlock, this.score);
 
     this.level = 1;
@@ -78,6 +91,10 @@ class SprintGameDisplay {
 
   startTimer() {
     this.timer.startTimer();
+  }
+
+  clearTimer() {
+    this.timer.clearTimer();
   }
 
   render() {

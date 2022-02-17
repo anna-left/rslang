@@ -1,4 +1,4 @@
-import {createHTMLElement} from "../utils/CommonFunctions";
+import { createHTMLElement } from '../utils/CommonFunctions';
 import './Modal.scss';
 
 class Modal {

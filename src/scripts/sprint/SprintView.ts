@@ -1,15 +1,19 @@
-import SprintViewGame from "./SprintViewGame";
-import SprintViewIntro from "./SprintViewIntro";
-import Page from "./Page";
-import SprintViewResults from "./SprintViewResults";
-import SprintViewShowWords from "./SprintViewShowWords";
-import {ISprintWord} from "../types/types";
+import SprintViewGame from './SprintViewGame';
+import SprintViewIntro from './SprintViewIntro';
+import Page from './Page';
+import SprintViewResults from './SprintViewResults';
+import SprintViewShowWords from './SprintViewShowWords';
+import { ISprintWord } from '../types/types';
 
 class SprintView extends Page {
   private readonly intro: SprintViewIntro;
+
   private readonly game: SprintViewGame;
+
   private readonly results: SprintViewResults;
+
   private readonly words: SprintViewShowWords;
+
   constructor(className: string) {
     super(className);
     this.intro = new SprintViewIntro(`${className}-intro`);
@@ -19,15 +23,15 @@ class SprintView extends Page {
   }
 
   init() {
-    window.addEventListener('keydown', this.handleKeyPress)
+    window.addEventListener('keydown', this.handleKeyPress);
   }
 
   handleKeyPress(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft') {
-      window.dispatchEvent(new CustomEvent('sprint-wrong'))
+      window.dispatchEvent(new CustomEvent('sprint-wrong'));
     }
     if (event.key === 'ArrowRight') {
-      window.dispatchEvent(new CustomEvent('sprint-right'))
+      window.dispatchEvent(new CustomEvent('sprint-right'));
     }
   }
 
@@ -45,7 +49,7 @@ class SprintView extends Page {
   }
 
   onWrongAnswer() {
-    this.game.onWrongAnswer()
+    this.game.onWrongAnswer();
     new Audio('./../assets/audio/error.mp3').play();
   }
 
@@ -83,6 +87,10 @@ class SprintView extends Page {
 
   startTimer() {
     this.game.startTimer();
+  }
+
+  clearTimer() {
+    this.game.clearTimer();
   }
 
   disableLevelSelection() {

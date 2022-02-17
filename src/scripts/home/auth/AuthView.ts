@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createElement } from '../../util/Util';
 
 import { getImage } from './authCommon';
@@ -10,6 +13,7 @@ import { IViewManager } from '../../manager/IViewManager';
 
 export class Auth {
   mode: string;
+
   constructor(manager: IViewManager) {
     this.mode = 'login';
     const root = manager.main.mainBox;
