@@ -43,10 +43,10 @@
     text-align: center;
     border-radius: 50%;
     background-color: $sprintMainColor;
-    box-shadow: 5px 5px 5px #26783D;
+    box-shadow: 5px 5px 5px $sprintMainColorShadow;
 
     &:hover, &:active, &:focus {
-      box-shadow: 2px 2px 2px #26783D;
+      box-shadow: 2px 2px 2px $sprintMainColorShadow;
       transform: scale(0.9);
     }
   }

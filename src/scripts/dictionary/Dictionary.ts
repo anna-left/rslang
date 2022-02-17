@@ -51,8 +51,8 @@ class Dictionary {
     window.addEventListener('dict-level', async (event: CustomEvent) => {
       this.currentLevel = event.detail.id;
       this.currentPage = 0;
-      this.view.deactivateCurrentLevel();
-      this.view.activateDifficultyLevel(this.currentLevel);
+      this.view.deactivateLevel();
+      this.view.activateLevel(this.currentLevel);
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
       this.view.updateData(data);
       this.view.activatePage(this.currentPage);
@@ -65,26 +65,27 @@ class Dictionary {
     window.addEventListener('dict-page', async (event: CustomEvent) => {
       this.currentPage = event.detail.page;
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-      this.view.updateData(data);
       this.view.activatePage(this.currentPage);
+      this.view.updateData(data);
     })
     window.addEventListener('page-to-left', async () => {
       this.currentPage = this.currentPage ? this.currentPage - 1 : 0;
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-      this.view.updateData(data);
       this.view.activatePage(this.currentPage);
+      this.view.updateData(data);
     })
     window.addEventListener('page-to-right', async () => {
       this.currentPage = this.currentPage === WordsSettings.pages - 1 ? this.currentPage : this.currentPage + 1;
       const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-      this.view.updateData(data);
       this.view.activatePage(this.currentPage);
+      this.view.updateData(data);
     })
     window.addEventListener('activate-word', (event: CustomEvent) => {
-      this.view.deactivateCurrentWord();
-      this.view.activateWord(event.detail.id);
+      this.view.deactivateWord();
+      this.view.setCurrentWordId(event.detail.id);
       this.view.emptyActiveWord();
       this.view.displayActiveWord();
+      this.view.activateWord();
     })
     window.addEventListener('audiocall-dict-start', () => {
       // TODO start audiocall with level and page parameters
@@ -128,8 +129,8 @@ class Dictionary {
 
   async start() {
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-    this.view.deactivateCurrentLevel();
-    this.view.activateDifficultyLevel(this.currentLevel);
+    this.view.deactivateLevel();
+    this.view.activateLevel(this.currentLevel);
     if (this.currentLevel === WordsSettings.groups) {
       this.view.hidePagination();
     }

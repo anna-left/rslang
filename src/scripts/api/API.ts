@@ -263,9 +263,7 @@ export class API {
     } else if (response.status === StatusCode["Expectation Failed"]) {
       console.log('Word/User already exists');
     } else if (response.status === StatusCode.Unauthorized) {
-      console.log(this.refreshToken);
       await this.getUserTokens();
-      console.log(this.refreshToken);
       init.headers.Authorization = `Bearer ${this.accessToken}`;
       const response = await fetch(this.endpoint + path, init as unknown as RequestInit);
       if (response.status === StatusCode.OK) {

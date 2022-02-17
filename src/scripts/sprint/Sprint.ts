@@ -14,8 +14,8 @@ class Sprint {
   private page: number;
   private score: number;
   private level: number;
-  private readonly wrongWords: ISprintWord[];
-  private readonly rightWords: ISprintWord[];
+  private wrongWords: ISprintWord[];
+  private rightWords: ISprintWord[];
   private dict: Dictionary;
 
   constructor() {
@@ -24,6 +24,10 @@ class Sprint {
     this.page = null;
     this.view = new SprintView('sprint');
     this.model = new SprintModel();
+    this.initializeGameState();
+  }
+
+  initializeGameState() {
     this.round = [];
     this.currentWordIndex = -1;
     this.streak = 0;
@@ -31,7 +35,6 @@ class Sprint {
     this.level = 1;
     this.wrongWords = [];
     this.rightWords = [];
-
   }
 
   addDictionary(dictionary: Dictionary) {
@@ -170,6 +173,10 @@ class Sprint {
     root.innerHTML = '';
     root.append(this.view.render());
     this.view.showIntro();
+    this.score = 0;
+    this.view.clearTimer();
+    this.wrongWords = [];
+    this.rightWords = [];
   }
 }
 
