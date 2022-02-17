@@ -108,4 +108,12 @@
   &--known &__subheader::after {
     opacity: 1.0;
   }
+
+  .unauthorized &__header::after {
+    visibility: hidden;
+  }
+
+  .unauthorized &__subheader::after {
+    visibility: hidden;
+  }
 }

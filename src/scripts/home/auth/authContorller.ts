@@ -35,6 +35,7 @@ export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: 
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
       const userData = await api.signIn(user);
       sessionStorage.setItem('userData', JSON.stringify(userData));
+      window.dispatchEvent(new CustomEvent('login'));
     } else {
     }
   }
