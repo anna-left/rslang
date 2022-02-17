@@ -61,9 +61,9 @@ class DictionaryView extends Page {
     wordsSection.append(wordHeader, words);
 
     this.paginationContainer = createHTMLElement('div', `${this.className}__pagination-container`);
-    const arrowLeft = new ArrowButton(true, `${this.className}__left`, 'page-to-left');
+    const arrowLeft = new ArrowButton(`${this.className}__left`, 'page-to-left', true);
     this.pagination = new Pagination(`pagination`, WordsSettings.pages);
-    const arrowRight = new ArrowButton(false, `${this.className}__right`, 'page-to-right');
+    const arrowRight = new ArrowButton(`${this.className}__right`, 'page-to-right', false);
     this.paginationContainer.append(arrowLeft.render(), this.pagination.render(), arrowRight.render());
 
     this.gamesSection = createHTMLElement('div', `${this.className}__section`);
