@@ -19,9 +19,9 @@ function startAudiocall(level: number, numperPage: number) {
   GLOBAL_VALUES.currentQuestion = 0;
   const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
-  const mainHTML: HTMLElement = document.querySelector('.main-box');
-  clearPage(mainHTML);
-  createHtmlElement('div', mainHTML, 'audiocall');
+  const mainBoxHTML: HTMLElement = document.querySelector('.main-box');
+  clearPage(mainBoxHTML);
+  createHtmlElement('div', mainBoxHTML, 'audiocall');
 
   mainBoxHTML.insertAdjacentHTML('beforeend', speakerSVG);
   mainBoxHTML.insertAdjacentHTML('beforeend', nextSVG);
