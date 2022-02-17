@@ -3,7 +3,7 @@ export enum SprintSettings {
   maxLevel = 4,
   baseScore = 10,
   greatResult = 0.5,
-  goodResult = 0.25
+  goodResult = 0.25,
 }
 
 export enum WordsSettings {
@@ -40,19 +40,19 @@ export enum SprintResultText {
 export enum GreatResult {
   ratio = 0.5,
   color = 'lightgreen',
-  congratulation = 'Отличный результат!'
+  congratulation = 'Отличный результат!',
 }
 
 export enum GoodResult {
   ratio = 0.25,
   color = 'yellow',
-  congratulation = 'Хороший результат!'
+  congratulation = 'Хороший результат!',
 }
 
 export enum BadResult {
   ratio = 0,
   color = 'red',
-  congratulation = 'Надо постараться!'
+  congratulation = 'Надо постараться!',
 }
 
 export const SprintColors = ['#ddd', '#fbcee3', '#f2d265', '#cfb276'];

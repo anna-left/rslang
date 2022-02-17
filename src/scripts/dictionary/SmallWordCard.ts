@@ -1,14 +1,19 @@
-import Page from "../sprint/Page";
-import {createHTMLElement} from "../utils/CommonFunctions";
-import {IWordSchema} from "../types/types";
+import Page from '../sprint/Page';
+import { createHTMLElement } from '../utils/CommonFunctions';
+import { IWordSchema } from '../types/types';
 import './SmallWordCard.scss';
 
 class SmallWordCard extends Page {
   private readonly className: string;
+
   private readonly word: HTMLElement;
+
   private readonly translation: HTMLElement;
+
   private readonly modifier: string;
+
   private readonly color: string;
+
   constructor(id: number, word: IWordSchema, color: string) {
     super('small-word-card');
     this.className = 'small-word-card';
@@ -18,8 +23,8 @@ class SmallWordCard extends Page {
     this.translation = createHTMLElement('p', `${this.className}__translation`, word.wordTranslate);
     this.page.append(this.word, this.translation);
     this.page.addEventListener('click', () => {
-      window.dispatchEvent(new CustomEvent('activate-word', {detail: {id: id}}));
-    })
+      window.dispatchEvent(new CustomEvent('activate-word', { detail: { id: id } }));
+    });
     this.page.style.backgroundColor = color;
   }
 
@@ -32,7 +37,6 @@ class SmallWordCard extends Page {
     this.page.classList.remove(`${this.className}--${this.modifier}`);
     this.page.style.backgroundColor = this.color;
   }
-
 }
 
 export default SmallWordCard;

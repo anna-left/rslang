@@ -1,14 +1,20 @@
-import Page from "../sprint/Page";
-import {createHTMLElement} from "../utils/CommonFunctions";
+import Page from '../sprint/Page';
+import { createHTMLElement } from '../utils/CommonFunctions';
 import './Pagination.scss';
 
 class Pagination extends Page {
   private readonly className: string;
+
   private readonly list: HTMLElement[];
+
   private currentActivePage: number;
+
   private readonly size: number;
+
   private readonly modifier: string;
+
   private readonly paginationWing: number;
+
   private previousPage: number;
 
   constructor(className: string, size: number) {
@@ -30,8 +36,8 @@ class Pagination extends Page {
       this.page.append(li);
       this.list.push(li);
       li.addEventListener('click', () => {
-        window.dispatchEvent(new CustomEvent('dict-page', {detail: {page: i}}))
-      })
+        window.dispatchEvent(new CustomEvent('dict-page', { detail: { page: i } }));
+      });
     }
   }
 
@@ -46,7 +52,7 @@ class Pagination extends Page {
   }
 
   collapseList() {
-    for (let i = 1; i  < this.list.length - 1; i += 1) {
+    for (let i = 1; i < this.list.length - 1; i += 1) {
       if (i < this.currentActivePage - this.paginationWing || i > this.currentActivePage + this.paginationWing) {
         this.list[i].classList.add('conceal');
       } else {

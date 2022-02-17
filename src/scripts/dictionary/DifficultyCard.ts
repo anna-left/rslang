@@ -1,14 +1,20 @@
-import Page from "../sprint/Page";
+import Page from '../sprint/Page';
 import './DifficultyCard.scss';
-import {createHTMLElement} from "../utils/CommonFunctions";
+import { createHTMLElement } from '../utils/CommonFunctions';
 
 class DifficultyCard extends Page {
   private readonly className: string;
+
   private readonly right: HTMLElement;
+
   private readonly level: HTMLElement;
+
   private readonly range: HTMLElement;
+
   private readonly modifier: string;
+
   private readonly color: string;
+
   constructor(id: number, level: string, range: string, label: string, color: string) {
     super('difficulty-card', 'div');
     this.className = 'difficulty-card';
@@ -21,8 +27,8 @@ class DifficultyCard extends Page {
     this.right = createHTMLElement('div', `${this.className}__label`, label);
     this.page.append(left, this.right);
     this.page.addEventListener('click', () => {
-      window.dispatchEvent(new CustomEvent('dict-level', {detail: {id: id}}))
-    })
+      window.dispatchEvent(new CustomEvent('dict-level', { detail: { id: id } }));
+    });
   }
 
   activate() {

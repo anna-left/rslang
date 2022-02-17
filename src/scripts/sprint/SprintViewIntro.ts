@@ -1,11 +1,13 @@
-import {createHTMLElement} from "../utils/CommonFunctions";
-import {SprintIntroText, WordsSettings} from "./SprintSettings";
-import Page from "./Page";
-import './SprintViewIntro.scss'
+import { createHTMLElement } from '../utils/CommonFunctions';
+import { SprintIntroText, WordsSettings } from './SprintSettings';
+import Page from './Page';
+import './SprintViewIntro.scss';
 
 class SprintViewIntro extends Page {
   private readonly buttonsContainer: HTMLElement;
+
   private readonly selectLevel: HTMLElement;
+
   constructor(className: string) {
     super(className);
     const clock = createHTMLElement('div', `${className}__clock`);
@@ -19,7 +21,7 @@ class SprintViewIntro extends Page {
     const start = createHTMLElement('button', `${className}__start button`, SprintIntroText.startButton);
     start.addEventListener('click', () => {
       window.dispatchEvent(new CustomEvent('sprint-start'));
-    })
+    });
     this.page.append(clock, header, description, this.selectLevel, start);
   }
 
@@ -27,8 +29,8 @@ class SprintViewIntro extends Page {
     for (let i = 0; i < WordsSettings.groups; i += 1) {
       const button = createHTMLElement('button', `${className}__button button`, `${i + 1}`);
       button.addEventListener('click', () => {
-        window.dispatchEvent(new CustomEvent('sprint-group-select', {detail: {group: `${i}`}}));
-      })
+        window.dispatchEvent(new CustomEvent('sprint-group-select', { detail: { group: `${i}` } }));
+      });
       this.buttonsContainer.append(button);
     }
   }

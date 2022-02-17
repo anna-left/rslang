@@ -1,13 +1,18 @@
-import {createHTMLElement, createNSElement, setAttributes} from "../utils/CommonFunctions";
-import './ColoredRing.scss'
-import {BadResult, GoodResult, GreatResult} from "./SprintSettings";
+import { createHTMLElement, createNSElement, setAttributes } from '../utils/CommonFunctions';
+import './ColoredRing.scss';
+import { BadResult, GoodResult, GreatResult } from './SprintSettings';
 
 class ColoredRing {
   private readonly svg: SVGElement;
+
   readonly circle: SVGElement;
+
   readonly path: number;
+
   readonly container: HTMLElement;
+
   readonly radius: number;
+
   constructor(radiusConstantName: string, borderThicknessConstantName: string, className = 'colored-ring') {
     const radius = Number(getComputedStyle(document.documentElement).getPropertyValue(radiusConstantName));
     const thickness = Number(getComputedStyle(document.documentElement).getPropertyValue(borderThicknessConstantName));
@@ -20,8 +25,8 @@ class ColoredRing {
       'stroke-width': thickness,
       'stroke-dasharray': `${this.path}`,
       stroke: GreatResult.color,
-      fill: "none"
-    }
+      fill: 'none',
+    };
     this.container = createHTMLElement('div', className);
     this.svg = createNSElement('svg');
     this.svg.classList.add(`${className}__circle`);
@@ -38,14 +43,13 @@ class ColoredRing {
   changeRingColor(ratio: number) {
     if (ratio <= GoodResult.ratio) {
       this.circle.setAttribute('stroke', BadResult.color);
-    }
-    else if (ratio <= GreatResult.ratio) {
+    } else if (ratio <= GreatResult.ratio) {
       this.circle.setAttribute('stroke', GoodResult.color);
     }
   }
 
   partialRing(percent: number) {
-    this.circle.style.strokeDashoffset = String(this.path - this.path * percent / 100);
+    this.circle.style.strokeDashoffset = String(this.path - (this.path * percent) / 100);
   }
 
   render() {

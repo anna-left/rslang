@@ -1,29 +1,42 @@
-import Page from "../sprint/Page";
-import {createHTMLElement} from "../utils/CommonFunctions";
-import {DictionaryDifficulty, DictionaryText} from "./DictionarySettings";
-import {WordsSettings} from "../sprint/SprintSettings";
-import DifficultyCard from "./DifficultyCard";
+import Page from '../sprint/Page';
+import { createHTMLElement } from '../utils/CommonFunctions';
+import { DictionaryDifficulty, DictionaryText } from './DictionarySettings';
+import { WordsSettings } from '../sprint/SprintSettings';
+import DifficultyCard from './DifficultyCard';
 import './DictionaryView.scss';
-import WordCard from "./WordCard";
-import {IAggregatedWordSchema, IWordSchema} from "../types/types";
-import SmallWordCard from "./SmallWordCard";
-import ArrowButton from "../sprint/ArrowButton";
-import Pagination from "./Pagination";
+import WordCard from './WordCard';
+import { IAggregatedWordSchema, IWordSchema } from '../types/types';
+import SmallWordCard from './SmallWordCard';
+import ArrowButton from '../sprint/ArrowButton';
+import Pagination from './Pagination';
 
 class DictionaryView extends Page {
   private readonly className: string;
+
   private readonly levelsContainer: HTMLElement;
+
   private readonly wordsContainer: HTMLElement;
+
   private readonly currentWord: HTMLElement;
+
   private data: IWordSchema[] | IAggregatedWordSchema[];
+
   private difficultyCards: DifficultyCard[];
+
   private currentDifficultyLevel: number;
+
   private wordCards: SmallWordCard[];
+
   private currentWordId: number;
+
   private readonly paginationContainer: HTMLElement;
+
   private readonly pagination: Pagination;
+
   private readonly gamesSection: HTMLElement;
+
   private accomplishedCount: number;
+
   constructor(className: string) {
     super(className);
     this.className = className;
@@ -59,11 +72,11 @@ class DictionaryView extends Page {
     const audioCall = createHTMLElement('div', `${this.className}__audiocall ${this.className}__game`);
     audioCall.addEventListener('click', () => {
       window.dispatchEvent(new CustomEvent('audiocall-dict-start'));
-    })
+    });
     const sprint = createHTMLElement('div', `${this.className}__sprint ${this.className}__game`);
     sprint.addEventListener('click', () => {
       window.dispatchEvent(new CustomEvent('sprint-dict-start'));
-    })
+    });
     gamesContainer.append(audioCall, sprint);
     this.gamesSection.append(gamesHeader, gamesContainer);
 
@@ -90,7 +103,8 @@ class DictionaryView extends Page {
         structure[i.toString() as keyof typeof DictionaryDifficulty].level,
         structure[i.toString() as keyof typeof DictionaryDifficulty].range,
         structure[i.toString() as keyof typeof DictionaryDifficulty].label,
-        structure[i.toString() as keyof typeof DictionaryDifficulty].color)
+        structure[i.toString() as keyof typeof DictionaryDifficulty].color,
+      );
       this.difficultyCards.push(levelCard);
       this.levelsContainer.append(levelCard.render());
     }
@@ -125,13 +139,15 @@ class DictionaryView extends Page {
       const card = new SmallWordCard(
         i,
         this.data[i],
-        DictionaryDifficulty[this.currentDifficultyLevel.toString() as keyof typeof DictionaryDifficulty].color);
+        DictionaryDifficulty[this.currentDifficultyLevel.toString() as keyof typeof DictionaryDifficulty].color,
+      );
       this.wordsContainer.append(card.render());
       this.wordCards.push(card);
     }
   }
 
   applyWordStatus(word: IAggregatedWordSchema, index: number) {
+    // eslint-disable-next-line no-prototype-builtins
     if (word.hasOwnProperty('userWord')) {
       if (word.userWord.difficulty === 'hard') {
         this.cardMarkHard(index);
@@ -172,7 +188,7 @@ class DictionaryView extends Page {
     this.createWordsCards();
     this.currentWordId = 0;
     this.emptyActiveWord();
-    this.pageNormal()
+    this.pageNormal();
     if (data[0]) {
       this.displayActiveWord();
       this.applyStatusOnPage();
@@ -221,15 +237,15 @@ class DictionaryView extends Page {
   }
 
   authorizeView() {
-    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach(element => {
+    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach((element) => {
       element.classList.remove('unauthorized');
-    })
+    });
   }
 
   unAuthorizeView() {
-    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach(element => {
+    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach((element) => {
       element.classList.add('unauthorized');
-    })
+    });
   }
 
   pageAccomplished() {

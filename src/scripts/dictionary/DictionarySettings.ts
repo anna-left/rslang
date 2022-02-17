@@ -54,5 +54,4 @@ export const DictionaryDifficulty = {
     label: 'H',
     color: '#bbdefb',
   },
-}
-
+};

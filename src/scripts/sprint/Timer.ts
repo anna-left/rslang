@@ -1,12 +1,16 @@
-import ColoredRing from "./ColoredRing";
-import {createHTMLElement} from "../utils/CommonFunctions";
+import ColoredRing from './ColoredRing';
+import { createHTMLElement } from '../utils/CommonFunctions';
 import './Timer.scss';
 
 class Timer extends ColoredRing {
   private readonly value: HTMLElement;
+
   private readonly time: number;
+
+  // eslint-disable-next-line no-undef
   private setIntervalId: NodeJS.Timer;
-  constructor(radiusConstantName: string, borderThicknessConstantName: string, className = 'timer', time: number) {
+
+  constructor(radiusConstantName: string, borderThicknessConstantName: string, time: number, className = 'timer') {
     super(radiusConstantName, borderThicknessConstantName, className);
     this.time = time;
     this.value = createHTMLElement('h2', `${className}__value`, `${time}`);
