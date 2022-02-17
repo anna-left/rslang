@@ -148,7 +148,7 @@ function showLearnedWords() {
 
   //correct
   const wordsTitleCorrHTML: HTMLElement = createHtmlElement('div', wordsHTML, 'words-title');
-  const resultArrowRight: HTMLElement = createHtmlElement('div', wordsTitleCorrHTML, 'words-title__left');
+  const resultArrowRight: HTMLElement = createHtmlElement('div', wordsTitleCorrHTML, 'result-title__left');
 
   const wordsTitleMiddleCorrHTML = createHtmlElement('div', wordsTitleCorrHTML, 'words-title__middle');
 
