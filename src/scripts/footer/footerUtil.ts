@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { createElement, createSVG } from '../util/Util';
 

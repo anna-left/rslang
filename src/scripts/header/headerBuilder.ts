@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { IViewManager } from './../manager/IViewManager';
 import { createElement, createSVG } from '../util/Util';

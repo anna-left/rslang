@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { IViewManager } from '../../manager/IViewManager';
 import { createElement, createSVG } from '../../util/Util';
 import { Auth } from '../auth/AuthView';

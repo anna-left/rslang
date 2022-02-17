@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createSVG } from '../../util/Util';
 
 export function getHiddenSvgBlock() {
