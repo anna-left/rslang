@@ -7,7 +7,6 @@ import {
   getHideBurgerIcon,
   getHomeItem,
   getSettingsItem,
-  getStatsItem,
 } from './burgerBuilder';
 
 import './burger.scss';
@@ -20,11 +19,14 @@ const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
 
 export class BurgerView {
   burger: HTMLElement;
+
   blur: HTMLElement;
+
   constructor() {
     this.burger = getBurgerContainer();
     this.blur = getBlur();
   }
+
   render(manager: IViewManager, dict: Dictionary) {
     if (!this.burger) {
       this.burger = getBurgerContainer();
@@ -43,7 +45,6 @@ export class BurgerView {
     const home = getHomeItem();
     const dictionary = getDictionaryItem();
     const games = getGamesItem();
-    const stats = getStatsItem();
     const settings = getSettingsItem();
 
     home.addEventListener('click', () => new HomeView().render(manager));
@@ -51,7 +52,7 @@ export class BurgerView {
       await dict.start();
     });
 
-    list.append(home, dictionary, games, stats, settings);
+    list.append(home, dictionary, games, settings);
     this.burger.append(hideIcon, list);
     document.body.append(this.burger);
   }

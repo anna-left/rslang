@@ -60,7 +60,6 @@ export function getNavList(manager: IViewManager) {
   const headerNavItemHome = getHeaderHomeItem(manager);
   const headerNavItemDictionary = getHeaderDictionaryItem(manager);
   const headerNavItemGames = getHeaderGamesItem(manager);
-  const headerNavItemStats = getHeaderStatisticsItem(manager);
   const headerNavItemConfig = getHeaderSettingsItem(manager);
 
   headerNavList.append(
@@ -68,7 +67,6 @@ export function getNavList(manager: IViewManager) {
     headerNavItemHome,
     headerNavItemDictionary,
     headerNavItemGames,
-    headerNavItemStats,
     headerNavItemConfig,
   );
   return headerNavList;
@@ -128,11 +126,7 @@ function getHeaderDictionaryItem(manager: IViewManager) {
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Учебник');
   return item;
 }
-function getHeaderStatisticsItem(manager: IViewManager) {
-  console.log(manager);
-  const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Статистика');
-  return item;
-}
+
 function getHeaderSettingsItem(manager: IViewManager) {
   console.log(manager);
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Настройки');
