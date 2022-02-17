@@ -80,6 +80,10 @@ class SprintGameDisplay {
     this.timer.startTimer();
   }
 
+  clearTimer() {
+    this.timer.clearTimer();
+  }
+
   render() {
     return this.header;
   }

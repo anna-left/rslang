@@ -58,6 +58,10 @@ class SprintViewGame extends Page {
   startTimer() {
     this.display.startTimer();
   }
+
+  clearTimer() {
+    this.display.clearTimer();
+  }
 }
 
 export default SprintViewGame;

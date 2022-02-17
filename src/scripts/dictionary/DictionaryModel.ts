@@ -1,5 +1,5 @@
 import API from "../api/API";
-import {IAggregatedWordSchema, IUserWord, TWordDifficulty} from "../types/types";
+import {IUserWord, TWordDifficulty} from "../types/types";
 
 class DictionaryModel {
   private readonly api: API;
