@@ -24,9 +24,6 @@ export class API {
   constructor() {
     this.endpoint = 'https://rslang-909.herokuapp.com';
     this.getUserDataFromStorage();
-    window.addEventListener('login', () => {
-      this.getUserDataFromStorage();
-    })
   }
 
   getUserDataFromStorage() {
@@ -120,6 +117,7 @@ export class API {
     if (response.status === StatusCode.Forbidden || response.status === StatusCode.Unauthorized) {
       console.log('Access token is missing, expired or invalid');
       window.dispatchEvent(new CustomEvent('go-to-login-screen'));
+      window.dispatchEvent(new CustomEvent('show-error', {detail: {error: 'Authorization failed.\nTry to re-login.'}}));
     } else {
       this.updateTokensInStorage(await response.json());
       this.getUserDataFromStorage();
@@ -265,7 +263,9 @@ export class API {
     } else if (response.status === StatusCode["Expectation Failed"]) {
       console.log('Word/User already exists');
     } else if (response.status === StatusCode.Unauthorized) {
+      console.log(this.refreshToken);
       await this.getUserTokens();
+      console.log(this.refreshToken);
       init.headers.Authorization = `Bearer ${this.accessToken}`;
       const response = await fetch(this.endpoint + path, init as unknown as RequestInit);
       if (response.status === StatusCode.OK) {

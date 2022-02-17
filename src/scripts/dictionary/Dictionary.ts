@@ -3,8 +3,7 @@ import DictionaryModel from "./DictionaryModel";
 import {WordsSettings} from "../sprint/SprintSettings";
 import Sprint from "../sprint/Sprint";
 import {LocalStorage, SessionStorage} from "../state/StorageSettings";
-import {CustomEvents, IAggregatedWordSchema, IWordSchema} from "../types/types";
-import {DictionaryDifficulty} from "./DictionarySettings";
+import {IAggregatedWordSchema, IWordSchema} from "../types/types";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -100,7 +99,7 @@ class Dictionary {
     window.addEventListener('mark-hard', (event: CustomEvent) => {
       if (event.detail.hard) {
         this.view.cardUnmarkHard();
-        this.model.setUserWord(event.detail.wordId, '');
+        this.model.setUserWord(event.detail.wordId, 'unset');
       } else {
         this.view.cardMarkHard();
         this.view.cardUnmarkKnown();
@@ -110,7 +109,7 @@ class Dictionary {
     window.addEventListener('mark-known', (event: CustomEvent) => {
       if (event.detail.known) {
         this.view.cardUnmarkKnown();
-        this.model.setUserWord(event.detail.wordId, '');
+        this.model.setUserWord(event.detail.wordId, 'unset');
       } else {
         this.view.cardMarkKnown();
         this.view.cardUnmarkHard();
@@ -144,6 +143,14 @@ class Dictionary {
   preSelectLevelAndPage(level: number, page: number) {
     this.currentLevel = level;
     this.currentPage = page;
+  }
+
+  getLevel() {
+    return this.currentLevel;
+  }
+
+  getPage() {
+    return this.currentPage;
   }
 }
 
