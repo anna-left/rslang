@@ -2,22 +2,53 @@ import { IViewManager } from './../manager/IViewManager';
 import { createElement, createSVG } from '../util/Util';
 import { HomeView } from '../home/home/HomeVIew';
 
-export function getUserAuth(userName: string) {
+export function getUserAuth(userName: string, manager: IViewManager) {
+  const woodenBox = createElement('div', ['user-box__container']);
+
   const svg = createSVG('svg', ['user-box__icon']);
   const use = createSVG('use', [], [['href', '#header_user-auth-icon']]);
   svg.append(use);
+  const text = createElement('span', ['user-box__text'], [], `${userName}`);
+  woodenBox.append(svg, text);
 
-  const text = createElement('span', ['user-box__text'], [], `#${userName}`);
-  return [svg, text];
+  const userMenu = getUserNavigation(manager);
+
+  return [woodenBox, userMenu];
+}
+
+function getUserNavigation(manager: IViewManager) {
+  const NAV_ACTIVE_CLASS = 'user-box__navigation_state_active';
+  const box = createElement('ul', ['user-box__navigation', 'user-navigation']);
+  const stat = createElement('li', ['user-navigation__item'], [], 'Статистика');
+  const words = createElement('li', ['user-navigation__item'], [], 'Добавленные слова');
+  const logout = createElement('li', ['user-navigation__item'], [], 'Выйти из профиля');
+
+  stat.addEventListener('click', () => {
+    box.classList.remove(NAV_ACTIVE_CLASS);
+  });
+  words.addEventListener('click', () => {
+    box.classList.remove(NAV_ACTIVE_CLASS);
+  });
+  logout.addEventListener('click', () => {
+    box.classList.remove(NAV_ACTIVE_CLASS);
+    sessionStorage.removeItem('userData');
+    manager.header.userUnauthorize();
+  });
+
+  box.append(stat, words, logout);
+  return box;
 }
 
 export function getUserUnauth() {
+  const woodenBox = createElement('div', ['user-box__container']);
+
   const svg = createSVG('svg', ['user-box__icon']);
   const use = createSVG('use', [], [['href', '#header_user-unauth-icon']]);
   svg.append(use);
 
-  const text = createElement('span', ['user-box__text'], [], '');
-  return [svg, text];
+  const text = createElement('span', ['user-box__text'], [], 'не авторизован!');
+  woodenBox.append(svg, text)
+  return woodenBox;
 }
 
 export function getNavList(manager: IViewManager) {
@@ -203,7 +234,6 @@ function createUserAuthSymbol() {
     [
       ['viewBox', '0 0 50 50'],
       ['id', 'header_user-auth-icon'],
-      ['fill', 'none'],
     ],
   );
   const circle = createSVG(

@@ -17,6 +17,8 @@
   border-radius: 1.5rem;
   box-shadow: 0 0 .5rem .2rem $color-prime-dark;
   transition: all 0.2s;
+  user-select: none;
+
   &:hover {
     cursor: pointer;
     color: $color-prime-dark;

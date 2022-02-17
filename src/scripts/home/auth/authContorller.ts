@@ -36,7 +36,8 @@ export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: 
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
       const userData: IUserData = <IUserData>await api.signIn(user);
       sessionStorage.setItem('userData', JSON.stringify(userData));
-      manager.header.userAuthorize(userData.name);
+      manager.header.userAuthorize(userData.name, manager);
+      manager.home.render(manager);
     } else {
     }
   }
