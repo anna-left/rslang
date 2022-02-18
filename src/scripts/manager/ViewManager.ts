@@ -70,30 +70,38 @@ export class ViewManager {
       this.renderFooter();
     });
     window.addEventListener('hide-nav', () => {
-      this.removehomeNavigation();
+      this.removeHomeNavigation();
     });
     window.addEventListener('show-nav', () => {
-      this.renderhomeNavigation();
+      this.renderHomeNavigation();
     });
   }
 
   renderFooter() {
-    this.footer.render();
+    if (!document.body.contains(this.footer.footer)) {
+      this.footer.render();
+    }
   }
 
   removeFooter() {
-    document.body.removeChild(this.footer.footer);
+    if (document.body.contains(this.footer.footer)) {
+      document.body.removeChild(this.footer.footer);
+    }
   }
 
   renderHome() {
     this.home.render(this);
   }
 
-  renderhomeNavigation() {
-    this.homeNavigation.render(this);
+  renderHomeNavigation() {
+    if (!this.main.main.contains(this.homeNavigation.nav)) {
+      this.main.main.append(this.homeNavigation.nav);
+    }
   }
 
-  removehomeNavigation() {
-    this.main.main.removeChild(this.homeNavigation.nav);
+  removeHomeNavigation() {
+    if (this.main.main.contains(this.homeNavigation.nav)) {
+      this.main.main.removeChild(this.homeNavigation.nav);
+    }
   }
 }

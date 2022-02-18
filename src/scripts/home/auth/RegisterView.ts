@@ -12,7 +12,7 @@ import {
   getPassRepeatLabel,
 } from './authCommon';
 
-import { authBtnHandler, authInputHandler } from './authContorller';
+import { authInputHandler, registerBtnHandler } from './authContorller';
 
 export class RegisterView {
   constructor(root: HTMLElement, switcher?: HTMLElement) {
@@ -35,7 +35,6 @@ export class RegisterView {
     regEventSeeker(
       () => {
         authInputHandler(
-          'register',
           { email: inputEmail, password: inputPassword, passwordRepeat: inputPasswordRepeat, name: inputName },
           { email: labelEmail, password: labelPassword, passwordRepeat: labelPasswordRepeat, name: labelName },
         );
@@ -45,8 +44,7 @@ export class RegisterView {
     );
     btnSend.addEventListener('click', (ev) => {
       ev.preventDefault();
-      authBtnHandler(
-        'register',
+      registerBtnHandler(
         { email: inputEmail, password: inputPassword, passwordRepeat: inputPasswordRepeat, name: inputName },
         { email: labelEmail, password: labelPassword, passwordRepeat: labelPasswordRepeat, name: labelName },
       );

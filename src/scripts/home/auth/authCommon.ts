@@ -26,7 +26,7 @@ export function getEmailInput() {
       ['placeholder', 'введите почту'],
       ['type', 'email'],
       ['id', 'email-input'],
-      ['autocomplete', 'auto'],
+      ['autocomplete', 'off'],
     ],
   );
 }
@@ -57,7 +57,7 @@ export function getPassInput() {
       ['placeholder', 'введите пароль'],
       ['type', 'password'],
       ['id', 'pass-input'],
-      ['autocomplete', 'auto'],
+      ['autocomplete', 'new-password'],
     ],
   );
 }
@@ -73,7 +73,7 @@ export function getPassRepeatInput() {
       ['placeholder', 'повторите пароль'],
       ['type', 'password'],
       ['id', 'pass-again-input'],
-      ['autocomplete', 'off'],
+      ['autocomplete', 'new-password'],
     ],
   );
 }

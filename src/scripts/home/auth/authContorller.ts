@@ -13,50 +13,43 @@ const labelsText = {
 const CLASS_INPUT_ERROR = 'input_error';
 const CLASS_INPUT_CLEAR = 'input_clear';
 
-export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
-  authHandler(mode, inputs, labels);
+export function authInputHandler(inputs: IAuthInputs, labels: IAuthLabels) {
+  authHandler(inputs, labels);
 }
 
-export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels, manager?: IViewManager) {
-  authHandler(mode, inputs, labels);
-  if (mode === 'register') {
-    if (
-      labels.name.classList.contains(CLASS_INPUT_CLEAR) &&
-      labels.email.classList.contains(CLASS_INPUT_CLEAR) &&
-      labels.password.classList.contains(CLASS_INPUT_CLEAR)
-    ) {
-      const api = new API();
-      const user: IUserSchema = { name: inputs.name.value, email: inputs.email.value, password: inputs.password.value };
-      await api.createUser(user);
-    } else {
-      throw new Error('not registered');
-    }
+export async function registerBtnHandler(inputs: IAuthInputs, labels: IAuthLabels) {
+  authHandler(inputs, labels);
+  if (
+    labels.name.classList.contains(CLASS_INPUT_CLEAR) &&
+    labels.email.classList.contains(CLASS_INPUT_CLEAR) &&
+    labels.password.classList.contains(CLASS_INPUT_CLEAR)
+  ) {
+    const api = new API();
+    const user: IUserSchema = { name: inputs.name.value, email: inputs.email.value, password: inputs.password.value };
+    await api.createUser(user);
   } else {
-    if (labels.email.classList.contains(CLASS_INPUT_CLEAR) && labels.password.classList.contains(CLASS_INPUT_CLEAR)) {
-      const api = new API();
-      const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
-      const userData: IUserData = <IUserData>await api.signIn(user);
-      sessionStorage.setItem('userData', JSON.stringify(userData));
-      manager.header.userAuthorize(userData.name, manager);
-      manager.home.render(manager);
-    } else {
-      throw new Error('not logged in');
-    }
+    throw new Error('not registered');
   }
 }
 
-function authHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
+export async function loginBtnHandler(inputs: IAuthInputs, labels: IAuthLabels, manager: IViewManager) {
+  const api = new API();
+  const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
+  const userData: IUserData = <IUserData>await api.signIn(user);
+  sessionStorage.setItem('userData', JSON.stringify(userData));
+  manager.header.userAuthorize(userData.name, manager);
+  manager.home.render(manager);
+}
+
+function authHandler(inputs: IAuthInputs, labels: IAuthLabels) {
+  inputs.name.addEventListener('input', () => nameInputHandler(inputs.name, labels.name));
   inputs.email.addEventListener('input', () => {
     return emailInputHandler(inputs.email, labels.email);
   });
   inputs.password.addEventListener('input', () => passwordInputHandler(inputs.password, labels.password));
-
-  if (mode === 'register') {
-    inputs.passwordRepeat.addEventListener('input', () =>
-      passwordRepeatInputHandler(inputs.password, inputs.passwordRepeat, labels.passwordRepeat),
-    );
-    inputs.name.addEventListener('input', () => nameInputHandler(inputs.name, labels.name));
-  }
+  inputs.passwordRepeat.addEventListener('input', () =>
+    passwordRepeatInputHandler(inputs.password, inputs.passwordRepeat, labels.passwordRepeat),
+  );
 }
 
 function emailInputHandler(email: HTMLInputElement, emailLabel: HTMLElement) {
