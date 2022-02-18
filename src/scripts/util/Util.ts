@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 export function regEventSeeker(homeNavHandler: (link: HTMLElement) => void, elems: HTMLElement[], type: string) {
   elems.forEach((el) => {
     el.addEventListener(type, () => homeNavHandler(el));

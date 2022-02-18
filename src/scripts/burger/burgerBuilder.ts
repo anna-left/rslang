@@ -4,7 +4,7 @@ import { startAudiocall } from '../audiocall/startAudiocall';
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
 const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
 
-let burger = createElement('nav', ['main-box__burger', 'burger']);
+const burger = createElement('nav', ['main-box__burger', 'burger']);
 let blur = createElement('div', ['main-box__burger_blur']);
 
 export function getBurgerContainer() {
@@ -78,20 +78,6 @@ export function getGamesItem() {
   games.append(linkBox, gamesContainer);
 
   return games;
-}
-
-export function getStatsItem() {
-  const stats = createElement('li', ['burger__item', 'burger__link']);
-
-  const statsIconSvg = createSVG('svg', ['burger__item_icon']);
-  const statsIconUse = createSVG('use', [], [['href', '#burger_stats-icon']]);
-
-  const statsText = createElement('span', ['burger__item_text'], [], 'Статистика');
-
-  statsIconSvg.append(statsIconUse);
-  stats.append(statsIconSvg, statsText);
-  stats.addEventListener('click', () => hideBurger());
-  return stats;
 }
 
 export function getSettingsItem() {

@@ -10,7 +10,12 @@
   justify-content: flex-start;
   font-size: 3rem;
   z-index: 2;
-
+  &__box {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
   &__nav {
     color: $color-prime-dark;
     display: flex;
@@ -19,6 +24,7 @@
   &__nav-list {
     display: flex;
     align-items: center;
+    user-select: none;
   }
 }
 
@@ -29,7 +35,7 @@
     justify-content: center;
     height: 5rem;
     padding: 0 2rem;
-    border-bottom: 1px solid $color-prime-candy;
+    border-radius: 0.5rem;
 
     &:last-of-type {
       margin-right: 0;
@@ -38,6 +44,13 @@
     &:hover {
       cursor: pointer;
       background-color: $color-prime-candy;
+    }
+
+    &_type_games {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
     }
 
     &_state_active {
@@ -64,6 +77,124 @@
     line-height: 0;
     &:nth-of-type(2) {
       padding: 0.8rem 0;
+    }
+  }
+}
+
+.header-games {
+  &__games-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5;
+
+    margin-top: -5vh;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    transition: all 0.2s;
+
+    &_state_active {
+      pointer-events: all;
+
+      margin-top: 5rem;
+      opacity: 1;
+      z-index: 10;
+    }
+  }
+
+  &__list {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: $color-prime-candy;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+
+    &_icon {
+      height: 2.5rem;
+      width: 2.5rem;
+      margin-right: 1rem;
+      fill: $color-prime-light;
+    }
+
+    &:hover {
+      background-color: $color-prime-dark;
+      color: $color-prime-light;
+    }
+  }
+}
+
+.user-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 3vh;
+  font-size: 1.1vmax;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $color-prime-candy;
+  padding: 0 1vmax;
+  border-radius: 2rem 0 0 2rem;
+  transition: all 0.2s;
+  &:hover {
+    border-radius: 2rem 0 0 0;
+  }
+
+  &__container {
+    height: 8rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    height: 3.3vmax;
+    width: 3.3vmax;
+    fill: $color-prime-dark;
+    margin-right: 1vmax;
+  }
+
+  &__navigation {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    background-color: $color-prime-candy;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 0 0 0 2rem;
+
+    margin-top: -5vmax;
+
+    transition: all 0.3s;
+    &:hover {
+      cursor: pointer;
+    }
+    &_state_active {
+      margin-top: calc(8rem);
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+.user-navigation {
+  &__item {
+    padding: 2vmin 4vmin;
+    &:hover {
+      background-color: $color-prime-dark;
+      color: $color-prime-light;
     }
   }
 }

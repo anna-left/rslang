@@ -1,23 +1,31 @@
+import { HeaderView } from '../header/HeaderView';
+import { MainView } from '../main/MainView';
+import { FooterView } from '../footer/FooterView';
 import { BurgerView } from '../burger/BurgerView';
 import { HomeView } from '../home/home/HomeVIew';
-import { MainView } from '../main/MainView';
-import { HeaderView } from '../header/HeaderView';
-import { FooterView } from '../footer/FooterView';
-import Dictionary from '../dictionary/Dictionary';
 import { HomeNavigation } from '../home/navigation/Navigation';
 import Sprint from '../sprint/Sprint';
 import { LocalStorage } from '../state/StorageSettings';
 import Modal from '../api/Modal';
+import Dictionary from '../dictionary/Dictionary';
 
 export class ViewManager {
-  burger: BurgerView;
-  main: MainView;
   header: HeaderView;
+
+  main: MainView;
+
   footer: FooterView;
-  readonly dictionary: Dictionary;
+
+  burger: BurgerView;
+
   homeNavigation: HomeNavigation;
+
   home: HomeView;
+
+  readonly dictionary: Dictionary;
+
   readonly sprint: Sprint;
+
   readonly modal: Modal;
 
   constructor() {
@@ -33,9 +41,9 @@ export class ViewManager {
 
     this.main.render();
     this.header.render(this);
-    this.burger.render(this.main.mainBox, this.dictionary);
-    this.home.render(this.main.mainBox);
-    this.homeNavigation.render(this.main.main, this.main.mainBox);
+    this.burger.render(this, this.dictionary);
+    this.home.render(this);
+    this.homeNavigation.render(this);
   }
 
   async init() {
@@ -62,11 +70,11 @@ export class ViewManager {
   }
 
   renderHome() {
-    this.home.render(this.main.mainBox);
+    this.home.render(this);
   }
 
   renderhomeNavigation() {
-    this.homeNavigation.render(this.main.main, this.main.mainBox);
+    this.homeNavigation.render(this);
   }
 
   removehomeNavigation() {

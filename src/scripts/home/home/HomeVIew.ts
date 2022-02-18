@@ -1,9 +1,10 @@
+import { IViewManager } from '../../manager/IViewManager';
 import { About } from '../about/AboutView';
 
 import './home.scss';
 
 export class HomeView {
-  render(mainBox: HTMLElement) {
-    new About(mainBox);
+  render(manager: IViewManager) {
+    new About(manager);
   }
 }

@@ -5,6 +5,7 @@ import './footer.scss';
 
 export class FooterView {
   footer: HTMLElement;
+
   render() {
     this.footer = createElement('footer', ['footer']);
     const footerBox = createElement('div', ['footer__box', 'footer-box']);

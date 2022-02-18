@@ -1,6 +1,7 @@
 import { API } from './../../api/API';
 import { IAuthInputs, IAuthLabels } from './IAuth';
-import { IUserSchema, TUserInfo } from '../../types/types';
+import { IUserData, IUserSchema, TUserInfo } from '../../types/types';
+import { IViewManager } from '../../manager/IViewManager';
 
 const labelsText = {
   name: 'Имя пользователя',
@@ -16,7 +17,7 @@ export function authInputHandler(mode: string, inputs: IAuthInputs, labels: IAut
   authHandler(mode, inputs, labels);
 }
 
-export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
+export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels, manager?: IViewManager) {
   authHandler(mode, inputs, labels);
   if (mode === 'register') {
     if (
@@ -28,21 +29,26 @@ export async function authBtnHandler(mode: string, inputs: IAuthInputs, labels: 
       const user: IUserSchema = { name: inputs.name.value, email: inputs.email.value, password: inputs.password.value };
       await api.createUser(user);
     } else {
+      throw new Error('not registered');
     }
   } else {
     if (labels.email.classList.contains(CLASS_INPUT_CLEAR) && labels.password.classList.contains(CLASS_INPUT_CLEAR)) {
       const api = new API();
       const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
-      const userData = await api.signIn(user);
+      const userData: IUserData = <IUserData>await api.signIn(user);
       sessionStorage.setItem('userData', JSON.stringify(userData));
-      window.dispatchEvent(new CustomEvent('login'));
+      manager.header.userAuthorize(userData.name, manager);
+      manager.home.render(manager);
     } else {
+      throw new Error('not logged in');
     }
   }
 }
 
 function authHandler(mode: string, inputs: IAuthInputs, labels: IAuthLabels) {
-  inputs.email.addEventListener('input', () => emailInputHandler(inputs.email, labels.email));
+  inputs.email.addEventListener('input', () => {
+    return emailInputHandler(inputs.email, labels.email);
+  });
   inputs.password.addEventListener('input', () => passwordInputHandler(inputs.password, labels.password));
 
   if (mode === 'register') {
@@ -65,7 +71,7 @@ function emailInputHandler(email: HTMLInputElement, emailLabel: HTMLElement) {
     setPass(emailLabel, labelsText.email);
   }
 }
-function passwordInputHandler(pass: HTMLInputElement, passLabel: HTMLElement): any {
+function passwordInputHandler(pass: HTMLInputElement, passLabel: HTMLElement) {
   const value = pass.value;
   if (value.length < 8) {
     setError(passLabel, 'Слишком короткий пароль');
@@ -74,18 +80,14 @@ function passwordInputHandler(pass: HTMLInputElement, passLabel: HTMLElement): a
   }
 }
 
-function passwordRepeatInputHandler(
-  pass: HTMLInputElement,
-  passAgain: HTMLInputElement,
-  passAgainLabel: HTMLElement,
-): any {
+function passwordRepeatInputHandler(pass: HTMLInputElement, passAgain: HTMLInputElement, passAgainLabel: HTMLElement) {
   if (pass.value !== passAgain.value) {
     setError(passAgainLabel, 'Пароли не совпадают!');
   } else {
     setPass(passAgainLabel, labelsText.passwordRepeat);
   }
 }
-function nameInputHandler(name: HTMLInputElement, nameLabel: HTMLElement): any {
+function nameInputHandler(name: HTMLInputElement, nameLabel: HTMLElement) {
   if (name.value.length < 3) {
     setError(nameLabel, 'Слишком короткое имя');
   } else {
