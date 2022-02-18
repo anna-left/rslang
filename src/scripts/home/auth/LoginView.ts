@@ -1,5 +1,4 @@
-import { regEventSeeker } from '../../util/Util';
-import { authInputHandler, authBtnHandler } from './authContorller';
+import { loginBtnHandler } from './authContorller';
 
 import { getBtnSend, getEmailInput, getEmailLabel, getHeader, getPassInput, getPassLabel } from './authCommon';
 import { IViewManager } from '../../manager/IViewManager';
@@ -17,22 +16,9 @@ export class LoginView {
 
     const btnSend = getBtnSend('login');
 
-    regEventSeeker(
-      () => {
-        authInputHandler(
-          'login',
-          { email: inputEmail, password: inputPassword },
-          { email: labelEmail, password: labelPassword },
-        );
-      },
-      [inputEmail, inputPassword],
-      'click',
-    );
-
     btnSend.addEventListener('click', (ev) => {
       ev.preventDefault();
-      authBtnHandler(
-        'login',
+      loginBtnHandler(
         { email: inputEmail, password: inputPassword },
         { email: labelEmail, password: labelPassword },
         manager,

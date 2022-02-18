@@ -22,12 +22,11 @@ export class About {
       'Убедитесь, что изучение английского - это совсем не скучно. Проводите время весело и с пользой! Играйте в увлекательные игры. Изучайте английский и следите за своим прогрессом.',
     );
 
-    const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Регистрация');
-    btnAuth.addEventListener('click', () => new Auth(manager));
     const image = createElement('img', ['section-about__image'], [['src', './assets/img/humans2.webp']]);
 
     const svgSpot = createSVG('svg', ['section-about__spot']);
     const svgUse = createSVG('use', [], [['href', '#about-spot']]);
+    svgSpot.append(svgUse);
 
     const svgHidden = createSVG('svg', [], [['display', 'none']]);
     const svgHiddenSymbol = createSVG(
@@ -48,13 +47,21 @@ export class About {
         ],
       ],
     );
-
     svgHiddenSymbol.append(svgHiddenPath);
     svgHidden.append(svgHiddenSymbol);
-    imageBox.append(svgHidden);
-    svgSpot.append(svgUse);
     imageBox.append(image, svgSpot, svgHidden);
-    aboutBox.append(aboutHeader, aboutInfo, btnAuth);
+
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (!userData) {
+      const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Вход');
+      btnAuth.addEventListener('click', () => new Auth(manager));
+      aboutBox.append(aboutHeader, aboutInfo, btnAuth);
+      aboutBox.classList.remove('section-about__content-box_indented');
+    } else {
+      aboutBox.append(aboutHeader, aboutInfo);
+      aboutBox.classList.add('section-about__content-box_indented');
+    }
+
     section.append(aboutBox, imageBox);
     root.append(section);
   }
