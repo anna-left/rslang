@@ -136,6 +136,8 @@ class Dictionary {
 
   async start() {
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
+    window.dispatchEvent(new CustomEvent('show-footer'));
+    window.dispatchEvent(new CustomEvent('hide-nav'));
     if (data) {
       this.view.deactivateLevel();
       this.view.activateLevel(this.currentLevel);

@@ -185,6 +185,7 @@ class Sprint {
     root.innerHTML = '';
     root.append(this.view.render());
     window.dispatchEvent(new CustomEvent('hide-footer'));
+    window.dispatchEvent(new CustomEvent('hide-nav'));
     this.view.showIntro();
     this.score = 0;
     this.view.clearTimer();

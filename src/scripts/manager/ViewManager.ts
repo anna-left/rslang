@@ -69,6 +69,12 @@ export class ViewManager {
     window.addEventListener('show-footer', () => {
       this.renderFooter();
     });
+    window.addEventListener('hide-nav', () => {
+      this.removehomeNavigation();
+    });
+    window.addEventListener('show-nav', () => {
+      this.renderhomeNavigation();
+    });
   }
 
   renderFooter() {

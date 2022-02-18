@@ -139,5 +139,7 @@ declare global {
     'sprint-burger-start': CustomEvent;
     'hide-footer': CustomEvent;
     'show-footer': CustomEvent;
+    'hide-nav': CustomEvent;
+    'show-nav': CustomEvent;
   }
 }
