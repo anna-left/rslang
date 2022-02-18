@@ -1,4 +1,4 @@
-import { createSVG } from "../util/Util";
+import { createSVG } from '../util/Util';
 
 export function getHiddenSvgs() {
   const svgHidden = createSVG('svg', [], [['display', 'none']]);

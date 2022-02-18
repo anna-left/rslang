@@ -1,19 +1,25 @@
-import { HomeView } from '../home/home/HomeVIew';
+import { IUserData } from './../types/types';
 import { IViewManager } from '../manager/IViewManager';
 import { createElement } from '../util/Util';
 
 import './header.scss';
-
-const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
-const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
+import { getHiddenSvg, getNavList, getUserAuth, getUserUnauth } from './headerBuilder';
 
 export class HeaderView {
   header: HTMLElement;
+
   headerBox: HTMLElement;
+
+  user: HTMLElement;
+
+  userText: HTMLElement;
+
   constructor() {
     this.header = createElement('header', ['header']);
     this.headerBox = createElement('div', ['header__box']);
+    this.user = createElement('div', ['header__user', 'user-box']);
   }
+
   render(manager: IViewManager) {
     if (!this.header) {
       this.header = createElement('header', ['header']);
@@ -21,48 +27,49 @@ export class HeaderView {
     if (!this.headerBox) {
       this.headerBox = createElement('div', ['header__box']);
     }
-    const headerNav = createElement('nav', ['header__nav']);
-    const headerNavList = createElement('ul', ['header__nav-list', 'nav-list']);
-
-    const headerNavBurgerItem = createElement('li', ['nav-list__item']);
-    const burgerList = createElement('li', ['nav-list__burger-menu', 'burger-menu']);
-    for (let i = 0; i < 3; i++) {
-      burgerList.append(createElement('li', ['burger-menu__item'], [], '—'));
+    if (!this.user) {
+      this.user = createElement('div', ['header__user', 'user-box']);
     }
+    try {
+      const userData: IUserData = JSON.parse(sessionStorage.getItem('userData'));
+      if (userData !== undefined) {
+        this.user.append(...setUserAuth(this.user, userData.name, manager));
+      } else {
+        this.user.append(getUserUnauth());
+      }
+    } catch (error) {
+      console.log(error);
+      this.user.append(getUserUnauth());
+    }
+    this.headerBox.append(getHiddenSvg());
+    const headerNav = createElement('nav', ['header__nav']);
+    const headerNavList = getNavList(manager);
 
-    headerNavBurgerItem.addEventListener('click', () => {
-      manager.burger.burger.classList.add(BURGER_CLASS_SHOW);
-      manager.burger.blur.classList.add(BURGER_BLUR_CLASS_SHOW);
-    });
-
-    const headerNavItemHome = createElement('li', ['nav-list__item', 'nav-list__item_state_active'], [], 'Главная');
-    const headerNavItemDictionary = createElement(
-      'li',
-      ['nav-list__item', 'nav-list__item_state_hidden'],
-      [],
-      'Учебник',
-    );
-    const headerNavItemGames = createElement('li', ['nav-list__item'], [], 'Игры');
-    const headerNavItemStats = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Статистика');
-    const headerNavItemConfig = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Настройки');
-
-    headerNavItemHome.addEventListener('click', () => {
-      new HomeView().render(manager.main.mainBox);
-    });
-
-    headerNavBurgerItem.append(burgerList);
-
-    headerNavList.append(
-      headerNavBurgerItem,
-      headerNavItemHome,
-      headerNavItemDictionary,
-      headerNavItemGames,
-      headerNavItemStats,
-      headerNavItemConfig,
-    );
     headerNav.append(headerNavList);
-    this.headerBox.append(headerNav);
+    this.headerBox.append(headerNav, this.user);
     this.header.append(this.headerBox);
     document.body.append(this.header);
   }
+
+  userAuthorize(userName: string, manager: IViewManager) {
+    this.user.append(...setUserAuth(this.user, userName, manager));
+  }
+
+  userUnauthorize() {
+    this.user.innerHTML = '';
+    this.user.append(getUserUnauth());
+  }
+}
+
+function setUserAuth(person: HTMLElement, userName: string, manager: IViewManager) {
+  const NAV_ACTIVE_CLASS = 'user-box__navigation_state_active';
+  person.innerHTML = '';
+  const [user, nav] = getUserAuth(userName, manager);
+  person.addEventListener('mouseover', () => {
+    nav.classList.add(NAV_ACTIVE_CLASS);
+  });
+  person.addEventListener('mouseleave', () => {
+    nav.classList.remove(NAV_ACTIVE_CLASS);
+  });
+  return [user, nav];
 }

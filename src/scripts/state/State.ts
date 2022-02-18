@@ -15,6 +15,7 @@ export class State {
   public get difficulty(): string {
     return this._state.difficulty;
   }
+
   public set difficulty(value: string) {
     this._state.difficulty = value;
   }
@@ -22,6 +23,7 @@ export class State {
   public get wordsAmount(): number {
     return this._state.wordsAmount;
   }
+
   public set wordsAmount(value: number) {
     this._state.wordsAmount = value;
   }
@@ -29,6 +31,7 @@ export class State {
   public get currPage(): string {
     return this._state.currPage;
   }
+
   public set currPage(value: string) {
     this._state.currPage = value;
   }
@@ -36,6 +39,7 @@ export class State {
   public get bookPage(): number {
     return this._state.bookPage;
   }
+
   public set bookPage(value: number) {
     this._state.bookPage = value;
   }
@@ -43,6 +47,7 @@ export class State {
   public get animationType(): string {
     return this._state.animationType;
   }
+
   public set animationType(value: string) {
     this._state.animationType = value;
   }
@@ -50,6 +55,7 @@ export class State {
   public get lang(): string {
     return this._state.lang;
   }
+
   public set lang(value: string) {
     this._state.lang = value;
   }
@@ -57,6 +63,7 @@ export class State {
   public get curLinks(): string[] {
     return this._state.curLinks;
   }
+
   public set curLinks(value: string[]) {
     this._state.curLinks = value;
   }
@@ -64,6 +71,7 @@ export class State {
   public get isAuth(): boolean {
     return this._state.isAuth;
   }
+
   public set isAuth(value: boolean) {
     this._state.isAuth = value;
   }
@@ -71,6 +79,7 @@ export class State {
   public get colorScheme(): string {
     return this._state.colorScheme;
   }
+
   public set colorScheme(value: string) {
     this._state.colorScheme = value;
   }

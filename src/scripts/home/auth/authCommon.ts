@@ -26,7 +26,7 @@ export function getEmailInput() {
       ['placeholder', 'введите почту'],
       ['type', 'email'],
       ['id', 'email-input'],
-      ['autocomplete', 'off'],
+      ['autocomplete', 'auto'],
     ],
   );
 }
@@ -57,7 +57,7 @@ export function getPassInput() {
       ['placeholder', 'введите пароль'],
       ['type', 'password'],
       ['id', 'pass-input'],
-      ['autocomplete', 'off'],
+      ['autocomplete', 'auto'],
     ],
   );
 }

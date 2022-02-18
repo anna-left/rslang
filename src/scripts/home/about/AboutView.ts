@@ -1,11 +1,14 @@
+/* eslint-disable max-len */
+import { IViewManager } from '../../manager/IViewManager';
 import { createElement, createSVG } from '../../util/Util';
 import { Auth } from '../auth/AuthView';
 
 import './about.scss';
 
 export class About {
-  constructor(mainBox: HTMLElement) {
-    mainBox.innerHTML = '';
+  constructor(manager: IViewManager) {
+    const root = manager.main.mainBox;
+    root.innerHTML = '';
     const section = createElement('section', ['main-box__section', 'main-box__section_type_about', 'section-about']);
     const aboutBox = createElement('div', ['section-about__content-box']);
     const imageBox = createElement('div', ['section-about__image-box']);
@@ -20,7 +23,7 @@ export class About {
     );
 
     const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Регистрация');
-    btnAuth.addEventListener('click', () => new Auth(mainBox));
+    btnAuth.addEventListener('click', () => new Auth(manager));
     const image = createElement('img', ['section-about__image'], [['src', './assets/img/humans2.webp']]);
 
     const svgSpot = createSVG('svg', ['section-about__spot']);
@@ -53,6 +56,6 @@ export class About {
     imageBox.append(image, svgSpot, svgHidden);
     aboutBox.append(aboutHeader, aboutInfo, btnAuth);
     section.append(aboutBox, imageBox);
-    mainBox.append(section);
+    root.append(section);
   }
 }

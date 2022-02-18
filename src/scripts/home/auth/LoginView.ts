@@ -2,9 +2,10 @@ import { regEventSeeker } from '../../util/Util';
 import { authInputHandler, authBtnHandler } from './authContorller';
 
 import { getBtnSend, getEmailInput, getEmailLabel, getHeader, getPassInput, getPassLabel } from './authCommon';
+import { IViewManager } from '../../manager/IViewManager';
 
 export class LoginView {
-  constructor(root: HTMLElement, switcher?: HTMLElement) {
+  constructor(root: HTMLElement, manager: IViewManager, switcher?: HTMLElement) {
     root.innerHTML = '';
 
     const header = getHeader('Войдите в свой аккаунт RS Lang');
@@ -34,6 +35,7 @@ export class LoginView {
         'login',
         { email: inputEmail, password: inputPassword },
         { email: labelEmail, password: labelPassword },
+        manager,
       );
     });
 
