@@ -17,8 +17,8 @@ function startAudiocall(level: number, numperPage: number) {
   GLOBAL_VALUES.currentPage = numperPage;
   GLOBAL_VALUES.currentRound = 0;
   GLOBAL_VALUES.currentQuestion = 0;
-  const footer: HTMLElement = document.querySelector('.footer');
-  footer.style.display = 'none';
+  dispatchEvent(new CustomEvent('hide-footer'));
+  dispatchEvent(new CustomEvent('hide-nav'));
   const mainBoxHTML: HTMLElement = document.querySelector('.main-box');
   clearPage(mainBoxHTML);
   createHtmlElement('div', mainBoxHTML, 'audiocall');
