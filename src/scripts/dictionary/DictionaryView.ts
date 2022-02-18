@@ -183,13 +183,13 @@ class DictionaryView extends Page {
   }
 
   updateData(data: IWordSchema[] | IAggregatedWordSchema[]) {
-    this.data = data;
+    this.data = data ? data : [];
     this.accomplishedCount = 0;
     this.createWordsCards();
     this.currentWordId = 0;
     this.emptyActiveWord();
     this.pageNormal();
-    if (data[0]) {
+    if (this.data.length > 0) {
       this.displayActiveWord();
       this.applyStatusOnPage();
       this.activateWord();

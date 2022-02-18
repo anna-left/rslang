@@ -4,8 +4,8 @@ import { IUserWord, TWordDifficulty } from '../types/types';
 class DictionaryModel {
   private readonly api: API;
 
-  constructor() {
-    this.api = new API();
+  constructor(api: API) {
+    this.api = api;
   }
 
   async fetchWords(group: number, page: number) {
