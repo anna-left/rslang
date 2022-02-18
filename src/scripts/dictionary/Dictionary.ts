@@ -5,6 +5,7 @@ import Sprint from '../sprint/Sprint';
 import { LocalStorage, SessionStorage } from '../state/StorageSettings';
 import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 import { startAudiocall } from '../audiocall/startAudiocall';
+import API from '../api/API';
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -19,8 +20,8 @@ class Dictionary {
 
   private authorized: boolean;
 
-  constructor() {
-    this.model = new DictionaryModel();
+  constructor(api: API) {
+    this.model = new DictionaryModel(api);
     this.view = new DictionaryView('dictionary');
     this.view.init();
     this.currentLevel = 0;
@@ -135,16 +136,20 @@ class Dictionary {
 
   async start() {
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-    this.view.deactivateLevel();
-    this.view.activateLevel(this.currentLevel);
-    if (this.currentLevel === WordsSettings.groups) {
-      this.view.hidePagination();
+    window.dispatchEvent(new CustomEvent('show-footer'));
+    window.dispatchEvent(new CustomEvent('hide-nav'));
+    if (data) {
+      this.view.deactivateLevel();
+      this.view.activateLevel(this.currentLevel);
+      if (this.currentLevel === WordsSettings.groups) {
+        this.view.hidePagination();
+      }
+      this.view.updateData(data);
+      this.view.activatePage(this.currentPage);
+      const root = document.querySelector('.main-box');
+      root.innerHTML = '';
+      root.append(this.view.render());
     }
-    this.view.updateData(data);
-    this.view.activatePage(this.currentPage);
-    const root = document.querySelector('.main-box');
-    root.innerHTML = '';
-    root.append(this.view.render());
   }
 
   preSelectLevelAndPage(level: number, page: number) {
