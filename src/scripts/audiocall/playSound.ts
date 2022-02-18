@@ -4,11 +4,10 @@ import { API_PATH } from './constantsAndValues/constants';
 
 function playSound(param: string, wordID = -1) {
   const myPlayer = new Audio();
-
+  let audioFile = words[GLOBAL_VALUES.currentQuestion].audio;
   let curSoundSrc = '';
   switch (param) {
     case 'word':
-      let audioFile = words[GLOBAL_VALUES.currentQuestion].audio;
       if (wordID > -1) {
         audioFile = words[wordID].audio;
       }
@@ -23,14 +22,12 @@ function playSound(param: string, wordID = -1) {
     case 'end of round':
       curSoundSrc = '../../assets/sounds/roundEnd.mp3';
       break;
-      break;
     default:
       break;
   }
   if (curSoundSrc) {
     myPlayer.src = curSoundSrc;
     myPlayer.play();
-
   }
 }
 

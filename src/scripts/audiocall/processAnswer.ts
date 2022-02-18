@@ -3,7 +3,6 @@ import { AMOUNT_ROUND_WORDS, API_PATH } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { playSound } from './playSound';
-import { startRound } from './startRound';
 import { startQuestion } from './startQuestion';
 import { insertNextSVG } from './svg';
 import { showResult, createSvgSpeaker } from './showResult';

@@ -41,7 +41,7 @@ function startQuestion() {
   clearPage(audiocallHTML);
   const audiocallQuestionHTML = createHtmlElement('div', audiocallHTML, 'audiocall-question');
   const containerHTML = createHtmlElement('div', audiocallQuestionHTML, 'container');
-  
+
   const speakerHTML: HTMLElement = createHtmlElement('div', containerHTML, 'speaker');
   speakerHTML.insertAdjacentHTML('beforeend', insertSpeakerSVG);
   const speakerSVGHTML = document.querySelector('#speaker');
