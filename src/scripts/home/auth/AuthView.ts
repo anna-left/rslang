@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createElement } from '../../util/Util';
 
 import { getImage } from './authCommon';

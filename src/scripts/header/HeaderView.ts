@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { IUserData } from './../types/types';
 import { IViewManager } from '../manager/IViewManager';
 import { createElement } from '../util/Util';

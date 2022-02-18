@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { createSVG } from '../util/Util';
 
 export function getHiddenSvgs() {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable max-len */
 import { createElement, createSVG } from '../util/Util';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';

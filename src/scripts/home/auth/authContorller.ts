@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { API } from './../../api/API';
 import { IAuthInputs, IAuthLabels } from './IAuth';
 import { IUserData, IUserSchema, TUserInfo } from '../../types/types';
