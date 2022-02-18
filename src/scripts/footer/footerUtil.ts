@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { createElement, createSVG } from '../util/Util';
 
 export function createRSItem() {

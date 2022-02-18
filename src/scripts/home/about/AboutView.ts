@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { IViewManager } from '../../manager/IViewManager';
 import { createElement, createSVG } from '../../util/Util';
 import { Auth } from '../auth/AuthView';
@@ -52,6 +51,7 @@ export class About {
     imageBox.append(image, svgSpot, svgHidden);
 
     const userData = JSON.parse(sessionStorage.getItem('userData'));
+    aboutBox.innerHTML = '';
     if (!userData) {
       const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Вход');
       btnAuth.addEventListener('click', () => new Auth(manager));
@@ -61,6 +61,14 @@ export class About {
       aboutBox.append(aboutHeader, aboutInfo);
       aboutBox.classList.add('section-about__content-box_indented');
     }
+
+    window.addEventListener('show-auth-btn', () => {
+      aboutBox.innerHTML = '';
+      const btnAuth = createElement('btn', ['section-about__btn-auth'], [], 'Вход');
+      btnAuth.addEventListener('click', () => new Auth(manager));
+      aboutBox.append(aboutHeader, aboutInfo, btnAuth);
+      aboutBox.classList.remove('section-about__content-box_indented');
+    });
 
     section.append(aboutBox, imageBox);
     root.append(section);

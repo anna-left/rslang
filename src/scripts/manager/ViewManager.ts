@@ -73,11 +73,11 @@ export class ViewManager {
     this.home.render(this);
   }
 
-  renderhomeNavigation() {
+  renderHomeNavigation() {
     this.homeNavigation.render(this);
   }
 
-  removehomeNavigation() {
-    document.body.removeChild(this.homeNavigation.nav);
+  removeHomeNavigation() {
+    this.main.main.removeChild(this.homeNavigation.nav);
   }
 }

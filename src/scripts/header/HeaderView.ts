@@ -32,7 +32,7 @@ export class HeaderView {
     }
     try {
       const userData: IUserData = JSON.parse(sessionStorage.getItem('userData'));
-      if (userData !== undefined) {
+      if (userData) {
         this.user.append(...setUserAuth(this.user, userData.name, manager));
       } else {
         this.user.append(getUserUnauth());
@@ -58,6 +58,7 @@ export class HeaderView {
   userUnauthorize() {
     this.user.innerHTML = '';
     this.user.append(getUserUnauth());
+    dispatchEvent(new CustomEvent('show-auth-btn'));
   }
 }
 
