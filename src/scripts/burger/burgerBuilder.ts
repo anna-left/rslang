@@ -36,7 +36,12 @@ export function getHomeItem() {
 
   homeIconSvg.append(homeIconUse);
   home.append(homeIconSvg, homeText);
-  home.addEventListener('click', () => hideBurger());
+  home.addEventListener('click', () => {
+    hideBurger();
+    dispatchEvent(new CustomEvent('show-footer'));
+    dispatchEvent(new CustomEvent('show-nav'));
+  });
+
   return home;
 }
 

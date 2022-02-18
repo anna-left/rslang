@@ -18,7 +18,7 @@ export class Auth {
     const root = manager.main.mainBox;
     root.innerHTML = '';
     const auth = createElement('section', ['main-box__section', 'main-box__section_type_auth', 'section-auth']);
-    const inputBox = createElement('form', ['section-auth__input-box']);
+    const inputBox = createElement('form', ['section-auth__input-box'], [['autocomplete', 'off']]);
 
     new LoginView(inputBox, manager);
 

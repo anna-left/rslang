@@ -1,4 +1,5 @@
-/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IViewManager } from './../manager/IViewManager';
 import { createElement, createSVG } from '../util/Util';
 import { HomeView } from '../home/home/HomeVIew';
@@ -122,13 +123,11 @@ function getHeaderGamesItem(manager: IViewManager) {
 }
 
 function getHeaderDictionaryItem(manager: IViewManager) {
-  console.log(manager);
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Учебник');
   return item;
 }
 
 function getHeaderSettingsItem(manager: IViewManager) {
-  console.log(manager);
   const item = createElement('li', ['nav-list__item', 'nav-list__item_state_hidden'], [], 'Настройки');
   return item;
 }
@@ -157,7 +156,6 @@ function getSprintItem() {
 }
 
 function getAudioCallItem(manager: IViewManager) {
-  console.log(manager);
   const audiocall = createElement('li', ['header-games__item', 'header__link']);
 
   const audiocallIconSvg = createSVG('svg', ['header-games__item_icon']);

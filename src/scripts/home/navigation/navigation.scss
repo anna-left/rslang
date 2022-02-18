@@ -15,6 +15,13 @@
     overflow: hidden;
     z-index: 3;
     user-select: none;
+
+    margin-top: -5rem;
+    transition: all .3s;
+
+    &:hover{
+      margin-top: 0;
+    }
   }
 }
 
@@ -24,7 +31,8 @@
   }
   &__link {
     @include nav-link;
-    padding: 1.3rem 2.5rem 2rem;
+    height: 7.5rem;
+    padding: 0 2.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;

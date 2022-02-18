@@ -28,7 +28,7 @@ export class HomeNavigation {
 
     root.append(getHiddenSvgBlock());
 
-    const svgSHome = createSVG('svg', ['home-navigation__icon', 'home-navigation__icon_home']);
+    const svgHome = createSVG('svg', ['home-navigation__icon', 'home-navigation__icon_home']);
     const svgHomeUse = createSVG('use', [], [['href', '#home-icon']]);
 
     const svgReview = createSVG('svg', ['home-navigation__icon', 'home-navigation__icon_review']);
@@ -43,7 +43,7 @@ export class HomeNavigation {
     const svgInfo = createSVG('svg', ['home-navigation__icon', 'home-navigation__icon_info']);
     const svgInfoUse = createSVG('use', [], [['href', '#info-icon']]);
 
-    svgSHome.append(svgHomeUse);
+    svgHome.append(svgHomeUse);
     svgReview.append(svgReviewUse);
     svgFeatures.append(svgFeaturesUse);
     svgTeam.append(svgTeamUse);
@@ -60,7 +60,7 @@ export class HomeNavigation {
     const infoLink = createElement('li', ['home-navigation__link'], [['data-type', 'info']]);
 
     linkSeeker([mainLink, reviewLink, featuresLink, teamLink, infoLink]);
-    mainLink.append(svgSHome);
+    mainLink.append(svgHome);
     reviewLink.append(svgReview);
     featuresLink.append(svgFeatures);
     teamLink.append(svgTeam);
@@ -76,9 +76,5 @@ export class HomeNavigation {
     this.nav.append(navBox);
 
     root.append(this.nav);
-  }
-
-  remove() {
-    document.body.removeChild(this.nav);
   }
 }
