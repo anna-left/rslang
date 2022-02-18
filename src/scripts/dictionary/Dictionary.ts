@@ -5,7 +5,7 @@ import Sprint from '../sprint/Sprint';
 import { LocalStorage, SessionStorage } from '../state/StorageSettings';
 import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 import { startAudiocall } from '../audiocall/startAudiocall';
-import API from "../api/API";
+import API from '../api/API';
 
 class Dictionary {
   private readonly model: DictionaryModel;

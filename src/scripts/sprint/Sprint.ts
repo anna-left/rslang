@@ -3,7 +3,7 @@ import SprintModel from './SprintModel';
 import { ISprintWord } from '../types/types';
 import { SprintSettings } from './SprintSettings';
 import Dictionary from '../dictionary/Dictionary';
-import API from "../api/API";
+import API from '../api/API';
 
 class Sprint {
   private readonly view: SprintView;
@@ -184,6 +184,7 @@ class Sprint {
     const root = document.querySelector('.main-box');
     root.innerHTML = '';
     root.append(this.view.render());
+    window.dispatchEvent(new CustomEvent('hide-footer'));
     this.view.showIntro();
     this.score = 0;
     this.view.clearTimer();
