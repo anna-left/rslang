@@ -5,6 +5,7 @@ import Sprint from '../sprint/Sprint';
 import { LocalStorage, SessionStorage } from '../state/StorageSettings';
 import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 import { startAudiocall } from '../audiocall/startAudiocall';
+import API from "../api/API";
 
 class Dictionary {
   private readonly model: DictionaryModel;
@@ -19,8 +20,8 @@ class Dictionary {
 
   private authorized: boolean;
 
-  constructor() {
-    this.model = new DictionaryModel();
+  constructor(api: API) {
+    this.model = new DictionaryModel(api);
     this.view = new DictionaryView('dictionary');
     this.view.init();
     this.currentLevel = 0;

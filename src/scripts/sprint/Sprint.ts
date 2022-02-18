@@ -3,6 +3,7 @@ import SprintModel from './SprintModel';
 import { ISprintWord } from '../types/types';
 import { SprintSettings } from './SprintSettings';
 import Dictionary from '../dictionary/Dictionary';
+import API from "../api/API";
 
 class Sprint {
   private readonly view: SprintView;
@@ -29,12 +30,12 @@ class Sprint {
 
   private dict: Dictionary;
 
-  constructor() {
+  constructor(api: API) {
     this.dict = null;
     this.group = null;
     this.page = null;
     this.view = new SprintView('sprint');
-    this.model = new SprintModel();
+    this.model = new SprintModel(api);
     this.initializeGameState();
   }
 

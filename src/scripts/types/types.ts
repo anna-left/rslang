@@ -137,5 +137,7 @@ declare global {
     'sprint-backward': CustomEvent;
     'sprint-group-select': CustomEvent;
     'sprint-burger-start': CustomEvent;
+    'hide-footer': CustomEvent;
+    'show-footer': CustomEvent;
   }
 }

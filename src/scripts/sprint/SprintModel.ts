@@ -11,8 +11,8 @@ class SprintModel {
 
   private currentPage: number;
 
-  constructor() {
-    this.api = new API();
+  constructor(api: API) {
+    this.api = api;
     this.group = null;
     this.page = null;
     this.currentPage = null;
