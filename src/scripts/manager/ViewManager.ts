@@ -78,11 +78,15 @@ export class ViewManager {
   }
 
   renderFooter() {
-    this.footer.render();
+    if (!document.body.contains(this.footer.footer)) {
+      this.footer.render();
+    }
   }
 
   removeFooter() {
-    document.body.removeChild(this.footer.footer);
+    if (document.body.contains(this.footer.footer)) {
+      document.body.removeChild(this.footer.footer);
+    }
   }
 
   renderHome() {
@@ -90,10 +94,14 @@ export class ViewManager {
   }
 
   renderHomeNavigation() {
-    this.homeNavigation.render(this);
+    if (!this.main.main.contains(this.homeNavigation.nav)) {
+      this.main.main.append(this.homeNavigation.nav);
+    }
   }
 
   removeHomeNavigation() {
-    this.main.main.removeChild(this.homeNavigation.nav);
+    if (this.main.main.contains(this.homeNavigation.nav)) {
+      this.main.main.removeChild(this.homeNavigation.nav);
+    }
   }
 }
