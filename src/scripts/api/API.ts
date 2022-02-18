@@ -105,7 +105,7 @@ export class API {
     return this.authorizedRequest(endpointModifier, HTTPMethod.delete);
   }
 
-  async getUserTokens(): Promise<void | IUserTokens> {
+  async getUserTokens(): Promise<number> {
     const endpointModifier = `/users/${this.userId}/tokens`;
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
@@ -124,7 +124,7 @@ export class API {
       this.updateTokensInStorage(await response.json());
       this.getUserDataFromStorage();
     }
-    return;
+    return response.status;
   }
 
   async getUserWords(): Promise<void | IUserWord[]> {
@@ -187,8 +187,10 @@ export class API {
     }
     const endpointModifier = `/users/${this.userId}/aggregatedWords` + queryString;
     const response = await this.authorizedRequest(endpointModifier, HTTPMethod.get);
-    const data: IAggregatedWordsSchema[] = await response.json();
-    return data[0].paginatedResults;
+    if (response && response.status === 200) {
+      const data: IAggregatedWordsSchema[] = await response.json();
+      return data[0].paginatedResults;
+    }
   }
 
   async getUserAggregateWord(wordId: string): Promise<void | IAggregatedWordSchema[]> {
@@ -230,7 +232,9 @@ export class API {
       body: JSON.stringify(user),
     });
     if (response.status === StatusCode.Forbidden || response.status === StatusCode.NotFound) {
-      console.log('Incorrect e-mail or password');
+      const errorText = 'Incorrect e-mail or password';
+      console.log(errorText);
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: errorText } }));
     }
     const userData: IUserData = await response.json();
     sessionStorage.setItem(SessionStorage.userData, JSON.stringify(userData));
@@ -255,24 +259,25 @@ export class API {
     if (data) {
       init.body = JSON.stringify(data);
     }
-    const response = await fetch(this.endpoint + path, init);
+    let response = await fetch(this.endpoint + path, init);
     if (response.status === StatusCode.OK) {
       return response;
-    } else if (response.status === StatusCode.NotFound) {
+    } else if (response.status === StatusCode.Unauthorized) {
+      const status = await this.getUserTokens();
+      if (status === 200) {
+        init.headers.Authorization = `Bearer ${this.accessToken}`;
+        response = await fetch(this.endpoint + path, init);
+        if (response.status === StatusCode.OK) {
+          return response;
+        }
+      }
+    }
+    if (response.status === StatusCode.NotFound) {
       console.log('Not Found');
     } else if (response.status === StatusCode.UnprocessableEntity) {
       console.log('Incorrect e-mail or password\nor\nWrong Schema');
     } else if (response.status === StatusCode['Expectation Failed']) {
       console.log('Word/User already exists');
-    } else if (response.status === StatusCode.Unauthorized) {
-      await this.getUserTokens();
-      init.headers.Authorization = `Bearer ${this.accessToken}`;
-      const resp = await fetch(this.endpoint + path, init);
-      if (resp.status === StatusCode.OK) {
-        return resp;
-      } else {
-        window.dispatchEvent(new CustomEvent('go-to-login-screen'));
-      }
     } else {
       window.dispatchEvent(new CustomEvent('go-to-login-screen'));
       const errorText = 'Authorization failed.\nTry to re-login.';

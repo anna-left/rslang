@@ -8,6 +8,7 @@ import Sprint from '../sprint/Sprint';
 import { LocalStorage } from '../state/StorageSettings';
 import Modal from '../api/Modal';
 import Dictionary from '../dictionary/Dictionary';
+import API from '../api/API';
 
 export class ViewManager {
   header: HeaderView;
@@ -28,6 +29,8 @@ export class ViewManager {
 
   readonly modal: Modal;
 
+  private readonly api: API;
+
   constructor() {
     this.burger = new BurgerView();
     this.main = new MainView();
@@ -35,8 +38,9 @@ export class ViewManager {
     this.homeNavigation = new HomeNavigation();
     this.header = new HeaderView();
     this.footer = new FooterView();
-    this.dictionary = new Dictionary();
-    this.sprint = new Sprint();
+    this.api = new API();
+    this.dictionary = new Dictionary(this.api);
+    this.sprint = new Sprint(this.api);
     this.modal = new Modal(document.querySelector('body'));
 
     this.main.render();
@@ -59,6 +63,18 @@ export class ViewManager {
       this.modal.setText(event.detail.error);
       this.modal.show();
     });
+    window.addEventListener('hide-footer', () => {
+      this.removeFooter();
+    });
+    window.addEventListener('show-footer', () => {
+      this.renderFooter();
+    });
+    window.addEventListener('hide-nav', () => {
+      this.removehomeNavigation();
+    });
+    window.addEventListener('show-nav', () => {
+      this.renderhomeNavigation();
+    });
   }
 
   renderFooter() {
@@ -78,6 +94,6 @@ export class ViewManager {
   }
 
   removehomeNavigation() {
-    document.body.removeChild(this.homeNavigation.nav);
+    this.main.main.removeChild(this.homeNavigation.nav);
   }
 }
