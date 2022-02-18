@@ -232,7 +232,9 @@ export class API {
       body: JSON.stringify(user),
     });
     if (response.status === StatusCode.Forbidden || response.status === StatusCode.NotFound) {
-      console.log('Incorrect e-mail or password');
+      const errorText = 'Incorrect e-mail or password';
+      console.log(errorText);
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: errorText } }));
     }
     const userData: IUserData = await response.json();
     sessionStorage.setItem(SessionStorage.userData, JSON.stringify(userData));
