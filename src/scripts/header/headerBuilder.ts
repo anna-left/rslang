@@ -95,6 +95,8 @@ function getHeaderHomeItem(manager: IViewManager) {
   const item = createElement('li', ['nav-list__item'], [], 'Главная');
   item.addEventListener('click', () => {
     new HomeView().render(manager);
+    dispatchEvent(new CustomEvent('show-footer'));
+    dispatchEvent(new CustomEvent('show-nav'));
   });
   return item;
 }
