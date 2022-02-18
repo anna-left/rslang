@@ -1,4 +1,5 @@
 import { createElement, createSVG } from '../util/Util';
+import { startAudiocall } from '../audiocall/startAudiocall';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
 const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
@@ -146,6 +147,7 @@ function getAudioCallItem() {
   const audiocallText = createElement('span', ['burger__item_text'], [], 'Аудиовызов');
 
   audiocall.append(audiocallIconSvg, audiocallText);
+  audiocall.addEventListener('click', () => startAudiocall(-1, -1));
   audiocall.addEventListener('click', () => hideBurger());
   return audiocall;
 }
