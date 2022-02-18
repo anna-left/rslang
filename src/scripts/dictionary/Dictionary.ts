@@ -134,16 +134,18 @@ class Dictionary {
 
   async start() {
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-    this.view.deactivateLevel();
-    this.view.activateLevel(this.currentLevel);
-    if (this.currentLevel === WordsSettings.groups) {
-      this.view.hidePagination();
+    if (data) {
+      this.view.deactivateLevel();
+      this.view.activateLevel(this.currentLevel);
+      if (this.currentLevel === WordsSettings.groups) {
+        this.view.hidePagination();
+      }
+      this.view.updateData(data);
+      this.view.activatePage(this.currentPage);
+      const root = document.querySelector('.main-box');
+      root.innerHTML = '';
+      root.append(this.view.render());
     }
-    this.view.updateData(data);
-    this.view.activatePage(this.currentPage);
-    const root = document.querySelector('.main-box');
-    root.innerHTML = '';
-    root.append(this.view.render());
   }
 
   preSelectLevelAndPage(level: number, page: number) {
