@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { createSVG } from '../../util/Util';
 import { ITeamSvgs } from './ITeamSvgs';
 
