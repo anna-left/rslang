@@ -1,4 +1,4 @@
-// import { WordAudiocall } from './WordAudiocall';
+import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { startRound } from './startRound';
 import { speakerSVG, nextSVG } from './svg';
 import { createHtmlElement } from './createHtmlElement';
@@ -12,18 +12,19 @@ function clearPage(curHTMLElement: HTMLElement) {
 
 const wordsApi = new API();
 
-function startAudiocall() {
-  const header: HTMLElement = document.querySelector('.header');
-  header.style.zIndex = '2';
-  header.style.userSelect = 'none';
+function startAudiocall(level: number, numperPage: number) {
+  GLOBAL_VALUES.currentLevel = level;
+  GLOBAL_VALUES.currentPage = numperPage;
+  GLOBAL_VALUES.currentRound = 0;
+  GLOBAL_VALUES.currentQuestion = 0;
   const footer: HTMLElement = document.querySelector('.footer');
   footer.style.display = 'none';
-  const mainHTML: HTMLElement = document.querySelector('.main-box');
-  clearPage(mainHTML);
-  createHtmlElement('div', mainHTML, 'audiocall');
+  const mainBoxHTML: HTMLElement = document.querySelector('.main-box');
+  clearPage(mainBoxHTML);
+  createHtmlElement('div', mainBoxHTML, 'audiocall');
 
-  document.body.insertAdjacentHTML('beforeend', speakerSVG);
-  document.body.insertAdjacentHTML('beforeend', nextSVG);
+  mainBoxHTML.insertAdjacentHTML('beforeend', speakerSVG);
+  mainBoxHTML.insertAdjacentHTML('beforeend', nextSVG);
   startRound();
 }
 
