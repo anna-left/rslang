@@ -94,6 +94,6 @@ export class ViewManager {
   }
 
   removehomeNavigation() {
-    document.querySelector('main').removeChild(this.homeNavigation.nav);
+    this.main.main.removeChild(this.homeNavigation.nav);
   }
 }
