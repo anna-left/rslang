@@ -28,7 +28,7 @@ async function createArrayQuestions() {
   arrPages.splice(numberPage, 1);
 
   for (let i = 0; i < AMOUNT_ANSWERS - 1; i++) {
-    const numberPage = getRandomValue(0, arrPages.length);
+    numberPage = getRandomValue(0, arrPages.length);
     const index = arrPages.indexOf(i);
     arrPages.splice(index, 1);
     const promiseWrongWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
@@ -42,7 +42,7 @@ async function createArrayQuestions() {
     const idNewWord = i;
     const curWord = arrayWords[idNewWord];
 
-    let answers: string[] = [];
+    const answers: string[] = [];
     answers.push(curWord.wordTranslate);
     for (let j = 0; j < AMOUNT_ANSWERS - 1; j++) {
       const answerID = getRandomValue(0, arrayWrongWords.length);

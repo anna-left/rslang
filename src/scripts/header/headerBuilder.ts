@@ -3,6 +3,7 @@
 import { IViewManager } from './../manager/IViewManager';
 import { createElement, createSVG } from '../util/Util';
 import { HomeView } from '../home/home/HomeVIew';
+import { startAudiocall } from '../audiocall/startAudiocall';
 
 export function getUserAuth(userName: string, manager: IViewManager) {
   const woodenBox = createElement('div', ['user-box__container']);
@@ -164,6 +165,7 @@ function getAudioCallItem(manager: IViewManager) {
   const audiocallText = createElement('span', ['header-games__item_text'], [], 'Аудиовызов');
 
   audiocall.append(audiocallIconSvg, audiocallText);
+  audiocall.addEventListener('click', () => startAudiocall(-1, -1));
   return audiocall;
 }
 

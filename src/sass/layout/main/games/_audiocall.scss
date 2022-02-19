@@ -5,12 +5,11 @@
   // --light-violet: #8759ab;
   --white: #ffffff;
   --black: #000000;
-  --light-violet: #cd8eff;;
+  --light-violet: #cd8eff;
   --dark-violet: #8759ab;
-  
+
   --black-violet: #040305;
 }
-
 
 .audiocall {
   position: relative;
@@ -191,12 +190,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 26rem;
+  height: 36rem;
 }
 
 .answer-image {
-  width: 20rem;
-  height: 20rem;
+  width: 30rem;
+  height: 30rem;
   border-radius: 5%;
   object-fit: cover;
 }
@@ -332,20 +331,19 @@
 .result-title__right,
 .words-title__left {
   font-size: 3.5vmin;
-    border-radius: 50%;
-    width: 5vmin;
-    height: 5vmin;
-    border: solid 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  border-radius: 50%;
+  width: 5vmin;
+  height: 5vmin;
+  border: solid 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 .result-title__right:hover,
 .words-title__left:hover {
   transform: scale(1.05);
 }
-
 
 .result__amount-words {
   text-decoration: underline;
@@ -511,6 +509,20 @@
     font-size: 2vmin;
     padding: 1.8vmin;
   }
+
+  .audiocall-question {
+    gap: 4rem;
+  }
+  .container {
+    height: 30rem;
+  }
+  .answer-image {
+    width: 25rem;
+    height: 25rem;
+  }
+  .answer {
+    padding: 0.7rem 3rem;
+  }
 }
 
 @media screen and (max-width: 544px) {
@@ -526,9 +538,7 @@
   .answer {
     font-size: 2rem;
   }
-  // .audiocall-start__title {
-  //   font-size: 3rem;
-  // }
+
   .audiocall-start__description,
   .audiocall-start__level {
     font-size: 1.5rem;
@@ -551,6 +561,9 @@
     font-size: 1.4rem;
     width: 14rem;
   }
+  .audiocall-next__btn {
+    padding: 0.4rem 2rem;
+}
 
   .result-btns__next-btn,
   .result-btns__to-tutorial {
@@ -558,6 +571,20 @@
     height: 9vmin;
     font-size: 2.2vmin;
     padding: 1.8vmin;
+  }
+
+  .audiocall-question {
+    gap: 2rem;
+  }
+  .container {
+    height: 24rem;
+  }
+  .answer-image {
+    width: 20rem;
+    height: 20rem;
+  }
+  .answer {
+    padding: 0.5rem 3rem;
   }
 }
 

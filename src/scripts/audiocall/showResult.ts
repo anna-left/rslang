@@ -1,9 +1,8 @@
 import { clearPage } from './startAudiocall';
 import { playSound } from './playSound';
-import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { createHtmlElement } from './createHtmlElement';
 // import { currentDict } from '../app';
-import { words, startRound, startNewGame } from './startRound';
+import { words, startNewGame } from './startRound';
 import {
   AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
@@ -148,7 +147,7 @@ function showLearnedWords() {
 
   //correct
   const wordsTitleCorrHTML: HTMLElement = createHtmlElement('div', wordsHTML, 'words-title');
-  const resultArrowRight: HTMLElement = createHtmlElement('div', wordsTitleCorrHTML, 'result-title__left');
+  createHtmlElement('div', wordsTitleCorrHTML, 'result-title__left');
 
   const wordsTitleMiddleCorrHTML = createHtmlElement('div', wordsTitleCorrHTML, 'words-title__middle');
 
