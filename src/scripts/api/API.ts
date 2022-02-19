@@ -48,6 +48,12 @@ export class API {
     sessionStorage.setItem(SessionStorage.userData, JSON.stringify(userData));
   }
 
+  clearUserData() {
+    this.userId = null;
+    this.accessToken = null;
+    this.refreshToken = null;
+  }
+
   async getAllWords() {
     const endpointModifier = `/words/all`;
     const response = await fetch(this.endpoint + endpointModifier, {
