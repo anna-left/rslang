@@ -2,15 +2,13 @@ import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { startRound } from './startRound';
 import { speakerSVG, nextSVG } from './svg';
 import { createHtmlElement } from './createHtmlElement';
-import API from '../api/API';
+// import API from '../api/API';
 
 function clearPage(curHTMLElement: HTMLElement) {
   while (curHTMLElement.firstChild) {
     curHTMLElement.removeChild(curHTMLElement.firstChild);
   }
 }
-
-const wordsApi = new API();
 
 function startAudiocall(level: number, numperPage: number) {
   GLOBAL_VALUES.currentLevel = level;
@@ -28,4 +26,4 @@ function startAudiocall(level: number, numperPage: number) {
   startRound();
 }
 
-export { startAudiocall, clearPage, wordsApi };
+export { startAudiocall, clearPage };

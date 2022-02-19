@@ -3,6 +3,7 @@ import { playSound } from './playSound';
 import { createHtmlElement } from './createHtmlElement';
 // import { currentDict } from '../app';
 import { words, startNewGame } from './startRound';
+import { dict } from '../app';
 import {
   AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
