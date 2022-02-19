@@ -23,23 +23,36 @@ export class API {
 
   private refreshToken: string;
 
+  private static _instance: API;
+
   constructor() {
+    if (API._instance) {
+      return API._instance;
+    }
+    API._instance = this;
     this.endpoint = 'https://rslang-909.herokuapp.com';
-    this.getUserDataFromStorage();
+    this.getStorageUserData();
   }
 
-  getUserDataFromStorage() {
+  getStorageUserData() {
     const userData: IUserData = JSON.parse(sessionStorage.getItem(SessionStorage.userData));
     this.userId = userData?.userId;
     this.accessToken = userData?.token;
     this.refreshToken = userData?.refreshToken;
   }
 
-  updateTokensInStorage(tokensData: IUserTokens) {
+  updateStorageTokens(tokensData: IUserTokens) {
     const userData: IUserData = JSON.parse(sessionStorage.getItem(SessionStorage.userData));
     userData.token = tokensData.token;
     userData.refreshToken = tokensData.refreshToken;
     sessionStorage.setItem(SessionStorage.userData, JSON.stringify(userData));
+  }
+
+  clearUserData() {
+    this.userId = null;
+    this.accessToken = null;
+    this.refreshToken = null;
+    sessionStorage.removeItem(SessionStorage.userData);
   }
 
   async getAllWords() {
@@ -121,8 +134,8 @@ export class API {
         new CustomEvent('show-error', { detail: { error: 'Authorization failed.\nTry to re-login.' } }),
       );
     } else {
-      this.updateTokensInStorage(await response.json());
-      this.getUserDataFromStorage();
+      this.updateStorageTokens(await response.json());
+      this.getStorageUserData();
     }
     return response.status;
   }
@@ -238,7 +251,7 @@ export class API {
     }
     const userData: IUserData = await response.json();
     sessionStorage.setItem(SessionStorage.userData, JSON.stringify(userData));
-    this.getUserDataFromStorage();
+    this.getStorageUserData();
     return userData;
   }
 

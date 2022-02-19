@@ -1,6 +1,6 @@
 import Page from '../sprint/Page';
 import { createHTMLElement } from '../utils/CommonFunctions';
-import { IWordSchema } from '../types/types';
+import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 import './SmallWordCard.scss';
 
 class SmallWordCard extends Page {
@@ -14,14 +14,18 @@ class SmallWordCard extends Page {
 
   private readonly color: string;
 
-  constructor(id: number, word: IWordSchema, color: string) {
+  constructor(id: number, word: IWordSchema | IAggregatedWordSchema, color: string) {
     super('small-word-card');
     this.className = 'small-word-card';
     this.modifier = 'active';
     this.color = color;
     this.word = createHTMLElement('p', `${this.className}__word`, word.word);
     this.translation = createHTMLElement('p', `${this.className}__translation`, word.wordTranslate);
-    this.page.append(this.word, this.translation);
+    const additionalInfoBox = createHTMLElement('div', `${this.className}__info`, '?');
+    const additionalInfo = createHTMLElement('div', `${this.className}__info--text`);
+    this.addInfo(additionalInfo, word);
+    additionalInfoBox.append(additionalInfo);
+    this.page.append(this.word, this.translation, additionalInfoBox);
     this.page.addEventListener('click', () => {
       window.dispatchEvent(new CustomEvent('activate-word', { detail: { id: id } }));
     });
@@ -36,6 +40,11 @@ class SmallWordCard extends Page {
   deactivate() {
     this.page.classList.remove(`${this.className}--${this.modifier}`);
     this.page.style.backgroundColor = this.color;
+  }
+
+  addInfo(element: HTMLElement, word: IAggregatedWordSchema) {
+    element.innerHTML = `Угадано: ${word.userWord?.optional?.totalCountRight || 0}<br>
+                         Ошибок: ${word.userWord?.optional?.totalCountWrong || 0}`;
   }
 }
 

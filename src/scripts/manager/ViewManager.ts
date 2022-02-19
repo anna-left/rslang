@@ -108,4 +108,12 @@ export class ViewManager {
       this.main.main.removeChild(this.homeNavigation.nav);
     }
   }
+
+  getDict() {
+    return this.dictionary;
+  }
+
+  getAPI() {
+    return this.api;
+  }
 }

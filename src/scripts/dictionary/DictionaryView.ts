@@ -147,8 +147,7 @@ class DictionaryView extends Page {
   }
 
   applyWordStatus(word: IAggregatedWordSchema, index: number) {
-    // eslint-disable-next-line no-prototype-builtins
-    if (word.hasOwnProperty('userWord')) {
+    if ('userWord' in word) {
       if (word.userWord.difficulty === 'hard') {
         this.cardMarkHard(index);
         this.accomplishedCount += 1;
