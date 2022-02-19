@@ -7,9 +7,6 @@ export const api = viewManager.getAPI();
 async function init() {
   await viewManager.init();
   viewManager.renderFooter();
-  window.addEventListener('go-to-login-screen', () => {
-    viewManager.renderHome();
-  });
 }
 
 init();

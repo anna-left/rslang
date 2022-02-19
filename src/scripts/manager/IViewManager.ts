@@ -5,6 +5,7 @@ import { HomeView } from '../home/home/HomeVIew';
 import { HomeNavigation } from '../home/navigation/Navigation';
 import { MainView } from '../main/MainView';
 import { StatisticsView } from '../statistics/StatisticsView';
+import { ViewManager } from './ViewManager';
 
 export interface IViewManager {
   header: HeaderView;
@@ -14,4 +15,5 @@ export interface IViewManager {
   home: HomeView;
   homeNavigation: HomeNavigation;
   statistics: StatisticsView;
+  manager: ViewManager;
 }

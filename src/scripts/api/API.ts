@@ -128,13 +128,7 @@ export class API {
         Authorization: `Bearer ${this.refreshToken}`,
       },
     });
-    if (response.status === StatusCode.Forbidden || response.status === StatusCode.Unauthorized) {
-      console.log('Access token is missing, expired or invalid');
-      window.dispatchEvent(new CustomEvent('go-to-login-screen'));
-      window.dispatchEvent(
-        new CustomEvent('show-error', { detail: { error: 'Authorization failed.\nTry to re-login.' } }),
-      );
-    } else {
+    if (response.status === StatusCode.OK || response.status === StatusCode.Unauthorized) {
       this.updateStorageTokens(await response.json());
       this.getStorageUserData();
     }
@@ -293,10 +287,12 @@ export class API {
     } else if (response.status === StatusCode['Expectation Failed']) {
       console.log('Word/User already exists');
     } else {
-      window.dispatchEvent(new CustomEvent('go-to-login-screen'));
       const errorText = 'Authorization failed.\nTry to re-login.';
       console.log(errorText);
       window.dispatchEvent(new CustomEvent('show-error', { detail: { error: errorText } }));
+      window.dispatchEvent(new CustomEvent('logout'));
+      this.clearUserData();
+      console.log('fired');
     }
   }
 }
