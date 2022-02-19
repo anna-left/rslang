@@ -27,12 +27,14 @@ export async function registerBtnHandler(inputs: IAuthInputs, labels: IAuthLabel
     const api = new API();
     const user: IUserSchema = { name: inputs.name.value, email: inputs.email.value, password: inputs.password.value };
     await api.createUser(user);
+    const link = document.querySelector('.switch-mode-box__link');
+    link.dispatchEvent(new CustomEvent('click'));
   } else {
     throw new Error('not registered');
   }
 }
 
-export async function loginBtnHandler(inputs: IAuthInputs, labels: IAuthLabels, manager: IViewManager) {
+export async function loginBtnHandler(inputs: IAuthInputs, manager: IViewManager) {
   const api = new API();
   const user: TUserInfo = { email: inputs.email.value, password: inputs.password.value };
   const userData: IUserData = <IUserData>await api.signIn(user);

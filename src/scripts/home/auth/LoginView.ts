@@ -18,11 +18,7 @@ export class LoginView {
 
     btnSend.addEventListener('click', (ev) => {
       ev.preventDefault();
-      loginBtnHandler(
-        { email: inputEmail, password: inputPassword },
-        { email: labelEmail, password: labelPassword },
-        manager,
-      );
+      loginBtnHandler({ email: inputEmail, password: inputPassword }, manager);
     });
 
     root.append(header, labelEmail, inputEmail, labelPassword, inputPassword, btnSend);

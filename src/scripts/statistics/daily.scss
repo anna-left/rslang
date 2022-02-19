@@ -1,0 +1,67 @@
+@import '../../sass/util/variables';
+
+.statistics {
+  &__daily-common-box {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__daily-game-box {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.content-box {
+}
+
+.daily-stats {
+  &__game_box {
+    width: 47%;
+    display: grid;
+    border-radius: 3rem;
+    padding: 3rem;
+  }
+}
+
+.daily-common {
+  &__word_box,
+  &__answer_box {
+    width: 47%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: bolder;
+  }
+  &__word_amount,
+  &__answer_amount-box {
+    font-size: 5vmax;
+  }
+  &__word_text,
+  &__answer_text {
+    font-size: 1.5vmax;
+  }
+}
+
+.daily-card {
+  &__learned_box {
+  }
+  &__learned {
+  }
+
+  &__right_box {
+  }
+  &__right {
+  }
+
+  &__sequence_box {
+  }
+  &__sequence {
+  }
+}
+
+.daily-audiocall {
+  background: linear-gradient(180deg, $color-prime-candy 0%, $color-prime-light 100%);
+}
+
+.daily-sprint {
+}
