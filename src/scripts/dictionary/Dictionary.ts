@@ -20,7 +20,13 @@ class Dictionary {
 
   private authorized: boolean;
 
+  private static _instance: Dictionary;
+
   constructor(api: API) {
+    if (Dictionary._instance) {
+      return Dictionary._instance;
+    }
+    Dictionary._instance = this;
     this.model = new DictionaryModel(api);
     this.view = new DictionaryView('dictionary');
     this.view.init();
@@ -28,7 +34,6 @@ class Dictionary {
     this.currentPage = 0;
     this.sprint = null;
     this.authorized = false;
-    this.checkAuthorization();
   }
 
   addSprint(sprint: Sprint) {
@@ -46,7 +51,7 @@ class Dictionary {
   }
 
   async getWords(level: number, page: number) {
-    if (level === WordsSettings.groups) {
+    if (this.authorized && level === WordsSettings.groups) {
       return (await this.model.getAllUserWords()) as IAggregatedWordSchema[];
     }
     return this.authorized
@@ -135,6 +140,7 @@ class Dictionary {
   }
 
   async start() {
+    this.checkAuthorization();
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
     window.dispatchEvent(new CustomEvent('show-footer'));
     window.dispatchEvent(new CustomEvent('hide-nav'));

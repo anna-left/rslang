@@ -41,6 +41,44 @@
     right: 5rem;
     background-color: darkgreen;
   }
+
+  &__info {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    cursor: default;
+    &--text {
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16rem;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: center;
+      color: white;
+      background-color: black;
+      border-radius: 1rem;
+      visibility: hidden;
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -1rem;
+        border-width: 1rem;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+      }
+    }
+    &:hover &--text {
+      transition: visibility 0.3s;
+      visibility: visible;
+    }
+  }
 }
 
 .unauthorized .small-word-card {
