@@ -1,3 +1,4 @@
+import { API } from './../api/API';
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IViewManager } from './../manager/IViewManager';
@@ -41,7 +42,7 @@ function getUserNavigation(manager: IViewManager) {
   });
   logout.addEventListener('click', () => {
     box.classList.remove(NAV_ACTIVE_CLASS);
-    sessionStorage.removeItem('userData');
+    new API().clearUserData();
     manager.header.userUnauthorize();
   });
 
