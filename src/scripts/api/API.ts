@@ -23,7 +23,13 @@ export class API {
 
   private refreshToken: string;
 
+  private static _instance: API;
+
   constructor() {
+    if (API._instance) {
+      return API._instance;
+    }
+    API._instance = this;
     this.endpoint = 'https://rslang-909.herokuapp.com';
     this.getUserDataFromStorage();
   }

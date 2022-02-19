@@ -20,7 +20,13 @@ class Dictionary {
 
   private authorized: boolean;
 
+  private static _instance: Dictionary;
+
   constructor(api: API) {
+    if (Dictionary._instance) {
+      return Dictionary._instance;
+    }
+    Dictionary._instance = this;
     this.model = new DictionaryModel(api);
     this.view = new DictionaryView('dictionary');
     this.view.init();
