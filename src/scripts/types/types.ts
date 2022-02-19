@@ -71,14 +71,38 @@ export type TWordDifficulty = 'unset' | 'hard' | 'known';
 
 export interface IUserWord {
   difficulty: TWordDifficulty;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  optional?: {};
+  optional?: {
+    faced?: 'yes';
+    countTowardsKnown?: number;
+    totalCountRight?: number;
+    totalCountWrong?: number;
+  };
 }
 
 export interface IUserStatistics {
-  learnedWords: number;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  optional: {};
+  learnedWords?: number;
+  optional?: {
+    statistics: IOneDayStatistics[];
+  };
+}
+
+export interface IGameStatistics {
+  newWordsCount: number;
+  percentRight: number;
+  longestStreak: number;
+}
+
+export interface IGeneralStatistics {
+  newWordsCount: number;
+  percentRight: number;
+  knownWordsCount: number;
+}
+
+export interface IOneDayStatistics {
+  date: string;
+  audiocall?: IGameStatistics;
+  sprint?: IGameStatistics;
+  general: IGeneralStatistics;
 }
 
 export interface IUserSettings {
