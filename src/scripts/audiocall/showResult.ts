@@ -54,10 +54,8 @@ function addButtons() {
   const resultToTutorialBtn = createHtmlElement('button', resultBtns, 'result-btns__to-tutorial', 'Перейти в учебник');
   resultNextBtn.addEventListener('click', startNewGame);
   resultToTutorialBtn.addEventListener('click', async () => {
-    // const dict = await currentDict;
-    // console.log(dict);
-    // dict.preSelectLevelAndPage(GLOBAL_VALUES.currentLevel, 0);
-    // await dict.start();
+    await dict.preSelectLevelAndPage(dict.getLevel(), dict.getPage());
+    await dict.start();
   });
 }
 
