@@ -93,6 +93,7 @@ export class API {
       },
     });
     if (response.status === StatusCode.UnprocessableEntity) {
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: 'Incorrect e-mail or password' } }));
       console.log('Incorrect e-mail or password');
     }
     return;
