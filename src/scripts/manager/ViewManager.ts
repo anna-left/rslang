@@ -1,3 +1,4 @@
+import { StatisticsView } from './../statistics/StatisticsView';
 import { HeaderView } from '../header/HeaderView';
 import { MainView } from '../main/MainView';
 import { FooterView } from '../footer/FooterView';
@@ -23,6 +24,8 @@ export class ViewManager {
 
   home: HomeView;
 
+  statistics: StatisticsView;
+
   readonly dictionary: Dictionary;
 
   readonly sprint: Sprint;
@@ -38,6 +41,7 @@ export class ViewManager {
     this.homeNavigation = new HomeNavigation();
     this.header = new HeaderView();
     this.footer = new FooterView();
+    this.statistics = new StatisticsView();
     this.api = new API();
     this.dictionary = new Dictionary(this.api);
     this.sprint = new Sprint(this.api);

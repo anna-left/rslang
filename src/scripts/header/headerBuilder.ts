@@ -27,6 +27,13 @@ function getUserNavigation(manager: IViewManager) {
 
   stat.addEventListener('click', () => {
     box.classList.remove(NAV_ACTIVE_CLASS);
+    manager.statistics.renderDaily(
+      manager.main.mainBox,
+      0,
+      0,
+      { wordsLearned: 0, rightAnswers: 0, maxSequence: 0 },
+      { wordsLearned: 0, rightAnswers: 0, maxSequence: 0 },
+    );
   });
   words.addEventListener('click', () => {
     box.classList.remove(NAV_ACTIVE_CLASS);
