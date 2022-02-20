@@ -14,13 +14,13 @@ function playSound(param: string, wordID = -1) {
       curSoundSrc = `${API_PATH}${audioFile}`;
       break;
     case 'right':
-      curSoundSrc = '../../assets/sounds/piu.mp3';
+      curSoundSrc = './assets/sounds/piu.mp3';
       break;
     case 'wrong':
-      curSoundSrc = '../../assets/sounds/wrongAnswer.mp3';
+      curSoundSrc = './assets/sounds/wrongAnswer.mp3';
       break;
     case 'end of round':
-      curSoundSrc = '../../assets/sounds/roundEnd.mp3';
+      curSoundSrc = './assets/sounds/roundEnd.mp3';
       break;
     default:
       break;

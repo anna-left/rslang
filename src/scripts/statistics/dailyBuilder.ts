@@ -21,7 +21,7 @@ export function getCommonBoxContent(learnedWordsOverall: number, rightAnswerOver
 export function getGameBoxContent(game: { wordsLearned: number; rightAnswers: number; maxSequence: number }) {
   const learnedWordsBox = createElement('span', ['daily-card__learned_box'], [], 'Изучено ');
   const learnedWords = createElement('span', ['daily-card__learned'], [], `${game.wordsLearned}`);
-  learnedWordsBox.append(learnedWords, 'слов');
+  learnedWordsBox.append(learnedWords, ' слов');
 
   const rightAnswersBox = createElement('span', ['daily-card__right_box'], [], 'Правильных ответов: ');
   const rightAnswers = createElement('span', ['daily-card__right'], [], `${game.rightAnswers}`);
@@ -31,7 +31,7 @@ export function getGameBoxContent(game: { wordsLearned: number; rightAnswers: nu
     'span',
     ['daily-card__sequence_box'],
     [],
-    'Самая длинная серия правильных ответов: ',
+    'Самая длинная серия\nправильных ответов: ',
   );
   const maxSequence = createElement('span', ['daily-card__sequence'], [], `${game.maxSequence}`);
   maxSequenceBox.append(maxSequence, '%');
