@@ -1,4 +1,4 @@
-import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
+import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
 import { AMOUNT_ROUND_WORDS, API_PATH } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
@@ -6,6 +6,17 @@ import { playSound } from './playSound';
 import { startQuestion } from './startQuestion';
 import { insertNextSVG } from './svg';
 import { showResult, createSvgSpeaker } from './showResult';
+
+function calcLongestStreak(answerIsRight: boolean) {
+  if (answerIsRight) {
+    GLOBAL_VALUES.longestStreak += 1;
+  } else {
+    if (GLOBAL_VALUES.longestStreak) {
+      LONGEST_STREAKS.push(GLOBAL_VALUES.longestStreak);
+      GLOBAL_VALUES.longestStreak = 0;
+    }
+  }
+}
 
 function processAnswer() {
   const curWord = words[GLOBAL_VALUES.currentQuestion];
@@ -47,6 +58,7 @@ function processAnswer() {
   const answersHTML = document.querySelectorAll('.answer');
 
   if (GLOBAL_VALUES.noAnswer === 1) {
+    calcLongestStreak(false);
     playSound('wrong');
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];
@@ -63,6 +75,7 @@ function processAnswer() {
   const curNumber = Number(this.getAttribute('data-num'));
 
   if (curWord.wordTranslate === curWord.answers[curNumber]) {
+    calcLongestStreak(true);
     curWord.correctAnswer = true;
     playSound('right');
     for (let i = 0; i < answersHTML.length; i++) {
@@ -77,6 +90,7 @@ function processAnswer() {
       }
     }
   } else {
+    calcLongestStreak(false);
     playSound('wrong');
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];

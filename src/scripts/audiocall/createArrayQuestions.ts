@@ -4,7 +4,7 @@ import { getRandomValue } from './getRandomValue';
 import { words } from './startRound';
 import { shuffleArray } from './shuffleArray';
 import { WordAudiocall } from './WordAudiocall';
-import { wordsApi } from './startAudiocall';
+import { api } from '../app';
 import { IWordSchema } from '../types/types';
 
 async function createArrayQuestions() {
@@ -17,21 +17,22 @@ async function createArrayQuestions() {
     arrPages.push(i);
   }
 
+  //    ************************ временное изменение ************************
   if (GLOBAL_VALUES.currentPage === -1) {
-    numberPage = getRandomValue(0, arrPages.length);
+    numberPage = 0; //getRandomValue(0, arrPages.length);
   } else {
     numberPage = GLOBAL_VALUES.currentPage;
   }
 
   // Исключить изученные слова!!! добавить данные с предыдущих страниц, если часть слов уже изучено
-  arrayWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
+  arrayWords = await api.getWords(GLOBAL_VALUES.currentLevel, numberPage);
   arrPages.splice(numberPage, 1);
 
   for (let i = 0; i < AMOUNT_ANSWERS - 1; i++) {
     numberPage = getRandomValue(0, arrPages.length);
     const index = arrPages.indexOf(i);
     arrPages.splice(index, 1);
-    const promiseWrongWords = await wordsApi.getWords(GLOBAL_VALUES.currentLevel, numberPage);
+    const promiseWrongWords = await api.getWords(GLOBAL_VALUES.currentLevel, numberPage);
     arrayWrongWords = arrayWrongWords.concat(promiseWrongWords);
   }
 
