@@ -10,6 +10,7 @@
   justify-content: flex-start;
   font-size: 3rem;
   z-index: 2;
+  
   &__box {
     position: relative;
     width: 100%;
@@ -135,18 +136,20 @@
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 1.1vmax;
-
+  width: 20vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: $color-prime-candy;
-  padding: 0 1vmax;
   border-radius: 2rem 0 0 2rem;
   transition: all 0.2s;
+  margin-right: -16vw;
   &:hover {
+    padding: 0 1vmax;
+    background-color: $color-prime-candy;
     border-radius: 2rem 0 0 0;
+    margin-right: 0;
   }
 
   &__container {

@@ -109,11 +109,9 @@
     opacity: 1.0;
   }
 
-  .unauthorized &__header::after {
-    visibility: hidden;
-  }
-
-  .unauthorized &__subheader::after {
+  .unauthorized &__header::after,
+  .unauthorized &__subheader::after,
+  .unauthorized &__info {
     visibility: hidden;
   }
 }

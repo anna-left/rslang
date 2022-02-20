@@ -1,0 +1,29 @@
+.main-box {
+  &__section {
+    &_type_statistics {
+      overflow: hidden;
+      width: 100%;
+      padding: 0 9vw;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 7vmax;
+    }
+  }
+}
+
+.statistics {
+  &__navigation_box {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+  }
+  &__navigation_link {
+    width: 47%;
+    text-align: center;
+    font-size: 2.5vmax;
+  }
+  &__content_box {
+    display: flex;
+    flex-direction: column;
+  }
+}
