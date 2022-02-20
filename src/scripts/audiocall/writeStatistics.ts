@@ -1,7 +1,5 @@
 import { api } from '../app';
-// import { IOneDayStatistics, IGeneralStatistics, IUserStatistics } from '../types/types';
-import { IOneDayStatistics, IGeneralStatistics, IUserStatistics } from '../types/types';
-// import { words } from './startRound';
+import { IOneDayStatistics, IGameStatistics, IGeneralStatistics, IUserStatistics, IUserWord } from '../types/types';
 
 interface IAnswer {
   wordId: string;
@@ -12,76 +10,24 @@ interface IAnswer {
 
 type TGameName = 'audiocall' | 'sprint';
 
-// async function writeUserWords(arrayWords: IAnswer[]) {
-//   arrayWords.forEach(async (curWord) => {
-//     // user/word
-//     curWord.knownWord = false;
-//     const userWordAPI = await api.getUserWord(curWord.wordId);
-//     let countTowardsKnown = Number(curWord.isRight);
-//     let totalCountRight = Number(curWord.isRight);
-//     let totalCountWrong = curWord.isRight ? 0 : 1;
-
-//     if (userWordAPI) {
-//       console.log(userWordAPI);
-//       curWord.newWord = false;
-//       if (userWordAPI.optional.totalCountRight !== undefined) {
-//         totalCountRight += userWordAPI.optional.totalCountRight;
-//         totalCountWrong += userWordAPI.optional.totalCountWrong;
-//         if (curWord.isRight) {
-//           countTowardsKnown += userWordAPI.optional.countTowardsKnown;
-//         } else {
-//           countTowardsKnown = 0;
-//         }
-//       }
-//       let difficulty = userWordAPI.difficulty;
-//       if (countTowardsKnown >= 3) {
-//         difficulty = 'known';
-//       } else if (!curWord.isRight && difficulty === 'known') {
-//         difficulty = 'unset';
-//       }
-//       if (difficulty === 'known') {
-//         curWord.knownWord = true;
-//       }
-//       await api.updateUserWord(curWord.wordId, {
-//         difficulty: difficulty,
-//         optional: {
-//           faced: 'yes',
-//           countTowardsKnown: countTowardsKnown,
-//           totalCountRight: totalCountRight,
-//           totalCountWrong: totalCountWrong,
-//         },
-//       });
-//     } else {
-//       curWord.newWord = true;
-//       await api.createUserWord(curWord.wordId, {
-//         difficulty: 'unset',
-//         optional: {
-//           faced: 'yes',
-//           countTowardsKnown: countTowardsKnown,
-//           totalCountRight: totalCountRight,
-//           totalCountWrong: totalCountWrong,
-//         },
-//       });
-//     }
-//   });
-//   return arrayWords;
-// }
-
 async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longestStreak: number) {
-  // word statistics
-  // let totalCountRight = 0;
-  // let totalCountWrong = 0;
-  // let countTowardsKnown = 0;
-  // const newArrayWords: IAnswer[] = await writeUserWords(arrayWords);
-  const promises = [];
-  arrayWords.forEach(async (curWord) => {
-    // user/word
+  // user/words
+  const promises: Array<Promise<IUserWord | void>> = [];
+  arrayWords.forEach((curWord) => {
     curWord.knownWord = false;
-    const userWordAPI = await api.getUserWord(curWord.wordId);
+    const userWordAPI = api.getUserWord(curWord.wordId);
+    promises.push(userWordAPI);
+  });
+
+  const answersAPI = await Promise.all(promises);
+  console.log(answersAPI);
+  arrayWords.forEach(async (curWord) => {
+    const userWordAPI = answersAPI.find((item) => item && item.wordId === curWord.wordId);
+    console.log(userWordAPI);
+
     let countTowardsKnown = Number(curWord.isRight);
     let totalCountRight = Number(curWord.isRight);
     let totalCountWrong = curWord.isRight ? 0 : 1;
-
     if (userWordAPI) {
       console.log(userWordAPI);
       curWord.newWord = false;
@@ -103,7 +49,7 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
       if (difficulty === 'known') {
         curWord.knownWord = true;
       }
-      const promise = await api.updateUserWord(curWord.wordId, {
+      await api.updateUserWord(curWord.wordId, {
         difficulty: difficulty,
         optional: {
           faced: 'yes',
@@ -112,10 +58,9 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
           totalCountWrong: totalCountWrong,
         },
       });
-      promises.push(promise);
     } else {
       curWord.newWord = true;
-      const promise = await api.createUserWord(curWord.wordId, {
+      await api.createUserWord(curWord.wordId, {
         difficulty: 'unset',
         optional: {
           faced: 'yes',
@@ -124,64 +69,8 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
           totalCountWrong: totalCountWrong,
         },
       });
-      promises.push(promise);
     }
   });
-  const result = await Promise.all(promises);
-  console.log(result);
-  // arrayWords.forEach(async (item) => {
-  //   // user/word
-  //   item.knownWord = false;
-  //   const userWordAPI = await api.getUserWord(item.wordId);
-  //   totalCountRight += Number(item.isRight);
-  //   totalCountWrong += item.isRight ? 0 : 1;
-
-  //   if (userWordAPI) {
-  //     console.log(userWordAPI);
-  //     item.newWord = true;
-  //     if (userWordAPI.optional.totalCountRight !== undefined) {
-  //       totalCountRight += userWordAPI.optional.totalCountRight;
-  //       totalCountWrong += userWordAPI.optional.totalCountWrong;
-  //       if (item.isRight) {
-  //         countTowardsKnown += userWordAPI.optional.countTowardsKnown;
-  //       } else {
-  //         countTowardsKnown = 0;
-  //       }
-  //     }
-  //     let difficulty = userWordAPI.difficulty;
-  //     if (countTowardsKnown >= 3) {
-  //       difficulty = 'known';
-  //     } else if (!item.isRight && difficulty === 'known') {
-  //       difficulty = 'unset';
-  //     }
-  //     if (difficulty === 'known') {
-  //       item.knownWord = true;
-  //     }
-  //     await api.updateUserWord(item.wordId, {
-  //       difficulty: difficulty,
-  //       optional: {
-  //         faced: 'yes',
-  //         countTowardsKnown: countTowardsKnown,
-  //         totalCountRight: totalCountRight,
-  //         totalCountWrong: totalCountWrong,
-  //       },
-  //     });
-  //   } else {
-  //     item.newWord = false;
-  //     await api.createUserWord(item.wordId, {
-  //       difficulty: 'unset',
-  //       optional: {
-  //         faced: 'yes',
-  //         countTowardsKnown: countTowardsKnown,
-  //         totalCountRight: totalCountRight,
-  //         totalCountWrong: totalCountWrong,
-  //       },
-  //     });
-  //   }
-  // });
-  // if (arrayWords) {
-  //   return;
-  // }
 
   // user statistics
   const curDate = new Date().toLocaleDateString();
@@ -201,13 +90,8 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
   const wrongWordsCount = arrayWords.length - rightWordsCount;
 
   if (userStatistics) {
-    console.log(userStatistics);
     const statistics: IOneDayStatistics[] = JSON.parse(userStatistics.optional.statistics);
-    console.log(statistics);
-
     const registerCurDate = statistics.find((item) => item.date === curDate);
-    console.log(registerCurDate);
-
     //есть запись за эту дату
     if (registerCurDate) {
       const general = registerCurDate.general;
@@ -221,24 +105,46 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
         audiocall.longestStreak = Math.max(audiocall.longestStreak, longestStreak);
         audiocall.rightWordsCount += rightWordsCount;
         audiocall.wrongWordsCount += wrongWordsCount;
-
+      } else {
+        const sprint = registerCurDate.sprint;
+        sprint.newWordsCount += newWordsCount;
+        sprint.longestStreak = Math.max(registerCurDate.sprint.longestStreak, longestStreak);
+        sprint.rightWordsCount += rightWordsCount;
+        sprint.wrongWordsCount += wrongWordsCount;
         const updateStatistics = {
           learnedWords: knownWordsCount,
           optional: { statistics: JSON.stringify(statistics) },
         };
         await api.updateUserStatistics(updateStatistics);
-      } else {
-        registerCurDate.sprint.newWordsCount += newWordsCount;
-        registerCurDate.sprint.longestStreak = Math.max(registerCurDate.sprint.longestStreak, longestStreak);
-        registerCurDate.sprint.rightWordsCount += rightWordsCount;
-        registerCurDate.sprint.wrongWordsCount += wrongWordsCount;
       }
     } else {
-      // registerCurDate = { date: curDate, general: generalStatistics };
-      // statistics.push();
+      //нет записи за эту дату
+      const general: IGeneralStatistics = {
+        newWordsCount: newWordsCount,
+        rightWordsCount: rightWordsCount,
+        wrongWordsCount: wrongWordsCount,
+        knownWordsCount: knownWordsCount,
+      };
+      const newRegisterCurDate: IOneDayStatistics = { date: curDate, general: general };
+      const gameStatistics: IGameStatistics = {
+        newWordsCount: newWordsCount,
+        rightWordsCount: rightWordsCount,
+        wrongWordsCount: wrongWordsCount,
+        longestStreak: longestStreak,
+      };
+      if (gameName === 'audiocall') {
+        newRegisterCurDate.audiocall = gameStatistics;
+      } else {
+        newRegisterCurDate.sprint = gameStatistics;
+      }
+      statistics.push(newRegisterCurDate);
+      const updateStatistics = {
+        learnedWords: knownWordsCount,
+        optional: { statistics: JSON.stringify(statistics) },
+      };
+      await api.updateUserStatistics(updateStatistics);
     }
-    await api.updateUserStatistics(userStatistics);
-    // const gameRegister = register[gameName];
+    // await api.updateUserStatistics(userStatistics);
   } else {
     const generalStatistics: IGeneralStatistics = {
       newWordsCount: newWordsCount,

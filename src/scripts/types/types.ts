@@ -77,6 +77,8 @@ export interface IUserWord {
     totalCountRight?: number;
     totalCountWrong?: number;
   };
+  id?: string;
+  wordId?: string;
 }
 
 export interface IUserStatistics {
