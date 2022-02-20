@@ -17,8 +17,9 @@ async function createArrayQuestions() {
     arrPages.push(i);
   }
 
+  //    ************************ временное изменение ************************
   if (GLOBAL_VALUES.currentPage === -1) {
-    numberPage = getRandomValue(0, arrPages.length);
+    numberPage = 0; //getRandomValue(0, arrPages.length);
   } else {
     numberPage = GLOBAL_VALUES.currentPage;
   }

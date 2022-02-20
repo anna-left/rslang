@@ -65,7 +65,7 @@ function showResult() {
   words.forEach(function (item) {
     arrAnswers.push({ wordId: item.id, isRight: item.correctAnswer });
   });
-  writeStatistics(arrAnswers);
+  writeStatistics(arrAnswers, 'audiocall', 0);
 
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   clearPage(audiocallHTML);
