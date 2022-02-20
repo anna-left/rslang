@@ -18,6 +18,19 @@ function calcLongestStreak(answerIsRight: boolean) {
   }
 }
 
+function handleNextButton() {
+  GLOBAL_VALUES.noAnswer = 0;
+  GLOBAL_VALUES.currentQuestion++;
+
+  if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
+    GLOBAL_VALUES.currentQuestion = 0;
+    playSound('end of round');
+    showResult();
+  } else {
+    startQuestion();
+  }
+}
+
 function processAnswer() {
   const curWord = words[GLOBAL_VALUES.currentQuestion];
 
@@ -41,19 +54,16 @@ function processAnswer() {
   document.querySelector('.audiocall-question__btn').remove();
   const audiocallNextBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-next__btn');
   audiocallNextBtn.insertAdjacentHTML('beforeend', insertNextSVG);
-
-  audiocallNextBtn.addEventListener('click', () => {
-    GLOBAL_VALUES.noAnswer = 0;
-    GLOBAL_VALUES.currentQuestion++;
-
-    if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
-      GLOBAL_VALUES.currentQuestion = 0;
-      playSound('end of round');
-      showResult();
-    } else {
-      startQuestion();
-    }
-  });
+  audiocallNextBtn.addEventListener('click', handleNextButton);
+  document.addEventListener(
+    'keypress',
+    function (e) {
+      if (e.key === 'Enter') {
+        handleNextButton();
+      }
+    },
+    { once: true },
+  );
 
   const answersHTML = document.querySelectorAll('.answer');
 
