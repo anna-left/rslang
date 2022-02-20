@@ -140,12 +140,12 @@
   margin-top: 2rem;
   font-size: 1.1vmax;
   width: 20vw;
+  margin-right: -16vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 2rem 0 0 2rem;
   transition: all 0.3s;
-  margin-right: -16vw;
   &:hover {
     padding: 0 1vmax;
     background-color: $color-prime-candy;
@@ -177,6 +177,7 @@
     user-select: none;
     pointer-events: none;
     overflow: hidden;
+    border-top: 1px solid $color-prime-dark;
     border-radius: 0 0 0 2rem;
 
     margin-top: -5vmax;
@@ -186,7 +187,7 @@
       cursor: pointer;
     }
     &_state_active {
-      margin-top: calc(8rem);
+      margin-top: 8rem;
       opacity: 1;
       pointer-events: all;
     }
@@ -208,14 +209,25 @@
     padding: 5vh 0 0 calc(7vw - 2rem);
     font-size: 2.7rem;
   }
-  .user-box {
-  }
 }
 @media screen and (max-width: 1200px) {
   .header {
     font-size: 2.5rem;
   }
   .user-box {
+    margin-top: 0;
+    font-size: 1.45vmax;
+    width: 26vw;
+    margin-right: -22vw;
+
+    &__container {
+      height: 7rem;
+    }
+    &__navigation {
+      &_state_active {
+        margin-top: 7rem;
+      }
+    }
   }
 }
 @media screen and (max-width: 900px) {
@@ -251,14 +263,37 @@
     }
   }
   .user-box {
+    z-index: 50;
+    margin-top: 0;
+    font-size: 1.6vmax;
+    width: 27rem;
+    margin-right: -22rem;
+
+    &__icon {
+      height: 4vmax;
+      width: 4vmax;
+    }
+    &__container {
+      height: 5.5rem;
+    }
+    &__navigation {
+      &_state_active {
+        margin-top: 5.5rem;
+      }
+    }
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .nav-list {
     &__item {
       padding: 0 1.2rem;
     }
   }
   .user-box {
+    z-index: 50;
+    margin-top: 0;
+    font-size: 1.4rem;
+    width: 24rem;
+    margin-right: -20rem;
   }
 }
