@@ -6,7 +6,7 @@
   display: flex;
   top: 0;
   left: 0;
-  padding: 5vh 0 0 9vw;
+  padding: 5vh 0 0 calc(9vw - 2rem);
   justify-content: flex-start;
   font-size: 3rem;
   z-index: 2;
@@ -200,5 +200,65 @@
       background-color: $color-prime-dark;
       color: $color-prime-light;
     }
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .header {
+    padding: 5vh 0 0 calc(7vw - 2rem);
+    font-size: 2.7rem;
+  }
+  .user-box {
+  }
+}
+@media screen and (max-width: 1200px) {
+  .header {
+    font-size: 2.5rem;
+  }
+  .user-box {
+  }
+}
+@media screen and (max-width: 900px) {
+  .header {
+    padding: 7vh 0 0 calc(5vw - 2rem);
+    font-size: 2rem;
+  }
+  .nav-list {
+    &__item {
+      padding: 0 1.5rem;
+      height: 4rem;
+    }
+  }
+  .header-games {
+    &__games-box {
+      font-size: 2rem;
+      &_state_active {
+        margin-top: 4rem;
+      }
+    }
+    &__item {
+      padding: 0.7rem 1.5rem;
+      &_icon {
+        height: 2rem;
+        width: 2rem;
+        margin-right: 1rem;
+      }
+    }
+  }
+  .burger-menu__item {
+    &:nth-of-type(2) {
+      padding: 0.6rem 0;
+    }
+  }
+  .user-box {
+  }
+}
+@media screen and (max-width: 500px) {
+  .nav-list {
+    &__item {
+      padding: 0 1.2rem;
+    }
+  }
+  .user-box {
   }
 }
