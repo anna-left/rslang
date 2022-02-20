@@ -4,7 +4,8 @@ import { createHtmlElement } from './createHtmlElement';
 import { IAnswer, writeStatistics } from './writeStatistics';
 import { words, startNewGame } from './startRound';
 import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
-import { dict } from '../app';
+import Dictionary from '../dictionary/Dictionary';
+import { api } from '../app';
 import {
   AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
@@ -56,6 +57,7 @@ function addButtons() {
   const resultToTutorialBtn = createHtmlElement('button', resultBtns, 'result-btns__to-tutorial', 'Перейти в учебник');
   resultNextBtn.addEventListener('click', startNewGame);
   resultToTutorialBtn.addEventListener('click', async () => {
+    const dict = new Dictionary(api);
     await dict.preSelectLevelAndPage(dict.getLevel(), dict.getPage());
     await dict.start();
   });
