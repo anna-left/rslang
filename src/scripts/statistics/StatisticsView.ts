@@ -1,5 +1,6 @@
 import { createElement } from '../util/Util';
 import { DailyStatistics } from './DailyStatistics';
+import { GeneralStatistics } from './GeneralStatistics';
 
 import './statistics.scss';
 
@@ -17,6 +18,18 @@ export class StatisticsView {
     const statNav = createElement('div', ['statistics__navigation_box']);
     const statDailyLink = createElement('span', ['statistics__navigation_link'], [], 'Статистика за сегодня');
     const statGeneralLink = createElement('span', ['statistics__navigation_link'], [], 'Статистика за все время');
+
+    statDailyLink.addEventListener('click', () => {
+      new DailyStatistics(this.contentBox).render(
+        0,
+        0,
+        { wordsLearned: 0, rightAnswers: 0, maxSequence: 0 },
+        { wordsLearned: 0, rightAnswers: 0, maxSequence: 0 },
+      );
+    });
+    statGeneralLink.addEventListener('click', () => {
+      new GeneralStatistics(this.contentBox).render([10, 20, 30, 40, 15, 22, 43, 17]);
+    });
     statNav.append(statDailyLink, statGeneralLink);
 
     this.stats.append(statNav, this.contentBox);
@@ -31,7 +44,7 @@ export class StatisticsView {
   ) {
     root.replaceChildren();
     this.contentBox.replaceChildren();
-    this.contentBox.append(...new DailyStatistics().render(learnedWordsOverall, rightAnswerOverall, audio, sprint));
+    new DailyStatistics(this.contentBox).render(learnedWordsOverall, rightAnswerOverall, audio, sprint);
     root.append(this.stats);
   }
 }

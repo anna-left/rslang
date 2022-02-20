@@ -10,7 +10,7 @@
   justify-content: flex-start;
   font-size: 3rem;
   z-index: 2;
-  
+
   &__box {
     position: relative;
     width: 100%;
@@ -41,7 +41,7 @@
     &:last-of-type {
       margin-right: 0;
     }
-    transition: all 0.2s;
+    transition: all 0.3s;
     &:hover {
       cursor: pointer;
       background-color: $color-prime-candy;
@@ -52,6 +52,7 @@
       z-index: 5;
       display: flex;
       flex-direction: column;
+      border-radius: 0.5rem 0.5rem 0 0;
     }
 
     &_state_active {
@@ -109,7 +110,7 @@
     z-index: 10;
     display: flex;
     flex-direction: column;
-    border-radius: 0.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     overflow: hidden;
     background-color: $color-prime-candy;
   }
@@ -143,7 +144,7 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 2rem 0 0 2rem;
-  transition: all 0.2s;
+  transition: all 0.3s;
   margin-right: -16vw;
   &:hover {
     padding: 0 1vmax;
@@ -180,7 +181,7 @@
 
     margin-top: -5vmax;
 
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     &:hover {
       cursor: pointer;
     }

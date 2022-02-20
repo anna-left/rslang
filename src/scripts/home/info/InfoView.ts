@@ -6,7 +6,7 @@ import { getHiddenSvgs, getSvgs } from './InfoBuilder';
 
 export class Info {
   constructor(rootEl: HTMLElement) {
-    fetch('../../../assets/data/english-info.json').then(async (res) => {
+    fetch('./assets/data/english-info.json').then(async (res) => {
       const data: IInfo = await res.json();
       rootEl.innerHTML = '';
       const section = createElement('section', ['main-box__section_type_info', 'section-info']);

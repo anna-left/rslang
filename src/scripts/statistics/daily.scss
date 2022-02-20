@@ -4,22 +4,25 @@
   &__daily-common-box {
     display: flex;
     justify-content: space-between;
+    margin-top: 5vh;
   }
   &__daily-game-box {
     display: flex;
     justify-content: space-between;
+    margin-top: 6vh;
+    margin-bottom: 2vmax;
   }
 }
-
-.content-box {
-}
-
 .daily-stats {
   &__game_box {
+    position: relative;
     width: 47%;
+    height: fit-content;
     display: grid;
     border-radius: 3rem;
-    padding: 3rem;
+    padding: 2vmax 3vmax;
+    gap: 3vh 0;
+    font-size: 1.5vmax;
   }
 }
 
@@ -43,25 +46,32 @@
 }
 
 .daily-card {
-  &__learned_box {
+  &__header {
+    font-size: 3.6vmax;
+    font-weight: 400;
   }
-  &__learned {
-  }
+  &__icon {
+    position: absolute;
+    right: 3vmax;
+    bottom: 2vmax;
 
-  &__right_box {
-  }
-  &__right {
-  }
+    height: 85%;
+    &_audio {
+      max-width: 20%;
+    }
+    &_sprint {
+      max-width: 30%;
 
-  &__sequence_box {
-  }
-  &__sequence {
+    }
   }
 }
 
 .daily-audiocall {
   background: linear-gradient(180deg, $color-prime-candy 0%, $color-prime-light 100%);
+  box-shadow: 3px 3px 3px lighten($color-prime-candy, 10%);
 }
 
 .daily-sprint {
+  background: linear-gradient(180deg, $color-prime-calm 0%, $color-prime-light 100%);
+  box-shadow: 3px 3px 3px lighten($color-prime-calm, 10%);
 }
