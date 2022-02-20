@@ -17,9 +17,9 @@
     user-select: none;
 
     margin-top: -5rem;
-    transition: all .3s;
+    transition: all 0.3s;
 
-    &:hover{
+    &:hover {
       margin-top: 0;
     }
   }
@@ -47,6 +47,49 @@
     &_features {
       height: 4rem;
       width: 4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+    &__home-navigation {
+      margin-top: -4.3rem;
+    }
+  }
+  .home-navigation {
+    &__link {
+      height: 6.5rem;
+      padding: 0 2rem 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main {
+    &__home-navigation {
+      margin-top: -4rem;
+    }
+  }
+  .home-navigation {
+    &__link {
+      height: 6rem;
+      padding: 0 2.5rem 1rem;
+    }
+    &__icon {
+      height: 2.5rem;
+      width: 2.5rem;
+      &_features {
+        height: 3.5rem;
+        width: 3.5rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .home-navigation {
+    &__link {
+      padding: 0 1.5rem 1rem;
     }
   }
 }
