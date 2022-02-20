@@ -65,7 +65,7 @@ class SprintGameDisplay {
     this.thirdRow.innerHTML = '';
     for (let i = 0; i < this.level; i += 1) {
       const img = createHTMLElement('img', `${this.className}__level-img`);
-      img.setAttribute('src', `./../../../assets/sprint/${i + 1}.png`);
+      img.setAttribute('src', `./assets/sprint/${i + 1}.png`);
       this.thirdRow.append(img);
     }
   }

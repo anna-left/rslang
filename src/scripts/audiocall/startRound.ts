@@ -36,12 +36,12 @@ function startRound() {
   const audiocallPlant: HTMLImageElement = document.createElement('img');
   audiocallPlant.classList.add('audiocall-plant');
   audiocallHTML.appendChild(audiocallPlant);
-  audiocallPlant.src = '../../assets/img/audiocall/plant.png';
+  audiocallPlant.src = './assets/img/audiocall/plant.png';
 
   const audiocallLamp: HTMLImageElement = document.createElement('img');
   audiocallLamp.classList.add('audiocall-lamp');
   audiocallHTML.appendChild(audiocallLamp);
-  audiocallLamp.src = '../../assets/img/audiocall/lamp.png';
+  audiocallLamp.src = './assets/img/audiocall/lamp.png';
 
   createHtmlElement('span', audiocallStart, 'audiocall-start__title', 'Аудиовызов');
   createHtmlElement(
