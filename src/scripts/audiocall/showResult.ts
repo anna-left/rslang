@@ -1,7 +1,7 @@
 import { clearPage } from './startAudiocall';
 import { playSound } from './playSound';
 import { createHtmlElement } from './createHtmlElement';
-// import { currentDict } from '../app';
+import { IAnswer, writeStatistics } from './writeStatistics';
 import { words, startNewGame } from './startRound';
 import { dict } from '../app';
 import {
@@ -61,6 +61,12 @@ function addButtons() {
 }
 
 function showResult() {
+  const arrAnswers: IAnswer[] = [];
+  words.forEach(function (item) {
+    arrAnswers.push({ wordId: item.id, isRight: item.correctAnswer });
+  });
+  writeStatistics(arrAnswers);
+
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   clearPage(audiocallHTML);
 
