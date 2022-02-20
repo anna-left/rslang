@@ -82,19 +82,21 @@ export interface IUserWord {
 export interface IUserStatistics {
   learnedWords?: number;
   optional?: {
-    statistics: IOneDayStatistics[];
+    statistics: string;
   };
 }
 
 export interface IGameStatistics {
   newWordsCount: number;
-  percentRight: number;
+  rightWordsCount: number;
+  wrongWordsCount: number;
   longestStreak: number;
 }
 
 export interface IGeneralStatistics {
   newWordsCount: number;
-  percentRight: number;
+  rightWordsCount: number;
+  wrongWordsCount: number;
   knownWordsCount: number;
 }
 
