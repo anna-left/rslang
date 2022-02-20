@@ -1,9 +1,6 @@
 @import "../../sass/util/variables";
 
 .sprint-game-display {
-  margin: -$sprintGamePadding 0;
-  padding: $sprintGamePadding;
-  border-radius: $sprintGameBorderRadius $sprintGameBorderRadius 0 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -51,7 +48,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: calc($timerRadius / 2);
+    font-size: calc(#{$timerRadius} / 2);
   }
 
   &__timer__circle {

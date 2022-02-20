@@ -1,0 +1,13 @@
+@import "src/sass/util/variables";
+
+.sprint {
+  height: 100vh;
+  margin: auto 0 0;
+  width: 100%;
+  background: url("./../assets/svg/plant1.svg") no-repeat left 27rem bottom 15rem, url("./../assets/svg/plant2.svg") no-repeat right 27rem bottom 15rem, linear-gradient(180deg, rgba(67, 210, 108, 0.61) 0%, #FFFFFF 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-size: auto 40rem, auto 40rem, auto auto;
+}

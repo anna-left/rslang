@@ -1,14 +1,15 @@
 .results-buttons {
   display: flex;
-  gap: 5rem;
+  gap: 10rem;
+  margin-top: auto;
 
   &__again, &__workbook {
-    width: 20rem;
-    height: 7rem;
-    border-radius: 2rem;
+    width: 36rem;
+    height: 9rem;
+    border-radius: 2.5rem;
     border: 1px solid black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 3.6rem;
     background-color: transparent;
     cursor: pointer;
     box-shadow: 5px 5px 5px #999;

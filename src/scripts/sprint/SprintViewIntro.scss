@@ -19,6 +19,10 @@
     line-height: 1.1719;
   }
 
+  &__description {
+    width: 65rem;
+  }
+
   &__description, &__tooltip, &__button, &__start {
     font-size: 3.6rem;
     line-height: 1.1719;
@@ -42,19 +46,19 @@
     height: 8rem;
     text-align: center;
     border-radius: 50%;
-    background-color: $sprintMainColor;
-    box-shadow: 5px 5px 5px $sprintMainColorShadow;
+    background-color: $color-sprint-right;
+    box-shadow: 5px 5px 5px $color-sprint-right-shadow;
 
     &:hover, &:active, &:focus {
-      box-shadow: 2px 2px 2px $sprintMainColorShadow;
-      transform: scale(0.9);
+      box-shadow: 2px 2px 2px $color-sprint-right-shadow;
+      transform: scale(0.95);
     }
   }
 
   &__start {
-    width: 20rem;
-    height: 8rem;
-    border-radius: 2rem;
+    width: 17rem;
+    height: 9rem;
+    border-radius: 2.5rem;
     background-color: transparent;
     border: 1px solid black;
     box-shadow: 5px 5px 5px #999;
