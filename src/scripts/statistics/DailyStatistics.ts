@@ -9,9 +9,10 @@ export class DailyStatistics {
 
   gameBox: HTMLElement;
 
-  root: HTMLElement;
+  private _root: HTMLElement;
 
-  constructor() {
+  constructor(root: HTMLElement) {
+    this._root = root;
     this.commonBox = createElement('div', ['statistics__daily-common-box', 'daily-common']);
     this.gameBox = createElement('div', ['statistics__daily-game-box']);
   }
@@ -37,10 +38,11 @@ export class DailyStatistics {
     this.gameBox.append(getHiddenSvgs());
     this.gameBox.append(audiocallBox, sprintBox);
 
-    return [this.commonBox, this.gameBox];
+    this._root.append(this.commonBox, this.gameBox);
   }
 
   clear() {
+    this._root.replaceChildren();
     this.commonBox.replaceChildren();
     this.gameBox.replaceChildren();
   }
