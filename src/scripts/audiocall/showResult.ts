@@ -3,6 +3,7 @@ import { playSound } from './playSound';
 import { createHtmlElement } from './createHtmlElement';
 import { IAnswer, writeStatistics } from './writeStatistics';
 import { words, startNewGame } from './startRound';
+import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
 import { dict } from '../app';
 import {
   AMOUNT_ROUND_WORDS,
@@ -65,7 +66,8 @@ function showResult() {
   words.forEach(function (item) {
     arrAnswers.push({ wordId: item.id, isRight: item.correctAnswer });
   });
-  writeStatistics(arrAnswers, 'audiocall', 0);
+  const longestStreak = Math.max(Math.max.apply(null, LONGEST_STREAKS), GLOBAL_VALUES.longestStreak);
+  writeStatistics(arrAnswers, 'audiocall', longestStreak);
 
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   clearPage(audiocallHTML);

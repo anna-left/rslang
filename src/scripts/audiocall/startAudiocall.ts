@@ -2,7 +2,6 @@ import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { startRound } from './startRound';
 import { speakerSVG, nextSVG } from './svg';
 import { createHtmlElement } from './createHtmlElement';
-// import API from '../api/API';
 
 function clearPage(curHTMLElement: HTMLElement) {
   while (curHTMLElement.firstChild) {

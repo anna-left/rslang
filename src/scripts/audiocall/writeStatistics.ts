@@ -20,16 +20,13 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
   });
 
   const answersAPI = await Promise.all(promises);
-  console.log(answersAPI);
   arrayWords.forEach(async (curWord) => {
     const userWordAPI = answersAPI.find((item) => item && item.wordId === curWord.wordId);
-    console.log(userWordAPI);
 
     let countTowardsKnown = Number(curWord.isRight);
     let totalCountRight = Number(curWord.isRight);
     let totalCountWrong = curWord.isRight ? 0 : 1;
     if (userWordAPI) {
-      console.log(userWordAPI);
       curWord.newWord = false;
       if (userWordAPI.optional.totalCountRight !== undefined) {
         totalCountRight += userWordAPI.optional.totalCountRight;
