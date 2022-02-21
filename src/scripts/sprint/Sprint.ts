@@ -75,11 +75,9 @@ class Sprint {
       await this.initializeGameState();
       this.model.selectWords(this.group, this.page);
       this.round = await this.model.getWords();
-      if (this.round && this.round.length > 0) {
-        await this.nextRound();
-        this.view.showGame();
-        this.view.startTimer();
-      }
+      await this.nextRound();
+      this.view.showGame();
+      this.view.startTimer();
     });
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
