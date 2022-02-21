@@ -1,0 +1,26 @@
+.play-word {
+  width: 3rem;
+  height: 3rem;
+  background: url("../../assets/svg/play.svg") center center;
+  background-size: 3rem 3rem;
+  cursor: pointer;
+  margin-right: 3rem;
+}
+
+.english-word, .translation {
+  font-size: 2.4rem;
+}
+
+.english-word {
+  font-weight: bold;
+}
+
+.translation {
+  white-space: pre;
+}
+
+@media screen and (max-width: 390px) {
+  .english-word, .translation {
+    font-size: 1.5rem;
+  }
+}

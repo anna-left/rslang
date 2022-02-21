@@ -1,0 +1,95 @@
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main {
+  &__home-navigation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 0 0 0 2rem;
+    align-items: center;
+    text-align: center;
+    background-color: $color-prime-light-calm;
+    overflow: hidden;
+    z-index: 3;
+    user-select: none;
+
+    margin-top: -5rem;
+    transition: all 0.3s;
+
+    &:hover {
+      margin-top: 0;
+    }
+  }
+}
+
+.home-navigation {
+  &__list {
+    display: flex;
+  }
+  &__link {
+    @include nav-link;
+    height: 7.5rem;
+    padding: 0 2.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    &_state_active {
+      background-color: $color-prime-calm;
+    }
+  }
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+    &_features {
+      height: 4rem;
+      width: 4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+    &__home-navigation {
+      margin-top: -4.3rem;
+    }
+  }
+  .home-navigation {
+    &__link {
+      height: 6.5rem;
+      padding: 0 2rem 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main {
+    &__home-navigation {
+      margin-top: -4rem;
+    }
+  }
+  .home-navigation {
+    &__link {
+      height: 6rem;
+      padding: 0 2.5rem 1rem;
+    }
+    &__icon {
+      height: 2.5rem;
+      width: 2.5rem;
+      &_features {
+        height: 3.5rem;
+        width: 3.5rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .home-navigation {
+    &__link {
+      padding: 0 1.5rem 1rem;
+    }
+  }
+}

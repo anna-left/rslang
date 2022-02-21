@@ -1,0 +1,56 @@
+{
+  "name": "rslang",
+  "version": "1.0.0",
+  "description": "app for english learning",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
+    "build": "cross-env NODE_ENV=production webpack --mode production --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ts-andrey/rslang.git"
+  },
+  "contributors": [
+    "Andrei Tsakunou, <andrey.tsakunov@gmail.com>, @ts-andrey",
+    "Anna Rybakova, @anna-left",
+    "Valiantsin Nazarau, @valentine909"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ts-andrey/rslang/issues"
+  },
+  "homepage": "https://github.com/ts-andrey/rslang#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "autoprefixer": "^10.4.2",
+    "copy-webpack-plugin": "^10.2.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.3.1",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.6",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^6.2.1",
+    "prettier": "^2.5.1",
+    "sass": "^1.47.0",
+    "sass-loader": "^12.4.0",
+    "terser-webpack-plugin": "^5.3.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.2"
+  },
+  "dependencies": {
+    "chart.js": "^3.7.1"
+  }
+}

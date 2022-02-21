@@ -1,0 +1,139 @@
+.small-word-card {
+  position: relative;
+  width: 24rem;
+  height: 14rem;
+  border: 1px solid black;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  cursor: pointer;
+
+  &__word {
+    font-size: 3.6rem;
+    margin-bottom: 2rem;
+  }
+
+  &__translation {
+    font-size: 2.4rem;
+  }
+
+  &__word, &__translation {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &--active {
+    color: white;
+    background-color: #CD8EFF;
+  }
+
+  &--hard::after, &--known::after {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    content: "";
+    bottom: 0;
+    right: 2rem;
+    background-color: darkred;
+  }
+
+  &--known::after {
+    right: 5rem;
+    background-color: darkgreen;
+  }
+
+  &__info {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    cursor: default;
+
+    &--text {
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16rem;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: center;
+      color: white;
+      background-color: black;
+      border-radius: 1rem;
+      visibility: hidden;
+
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -1rem;
+        border-width: 1rem;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+      }
+    }
+
+    &:hover &--text {
+      transition: visibility 0.3s;
+      visibility: visible;
+    }
+  }
+}
+
+.unauthorized .small-word-card {
+  &--hard::after, &--known::after, &__info {
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .small-word-card {
+    width: 16rem;
+    height: 9.5rem;
+    padding: 1.5rem;
+
+    &__word {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    &__translation {
+      font-size: 1.6rem;
+    }
+
+    &--hard::after {
+      right: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &--known::after {
+      right: 4rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &__info {
+      top: -0.5rem;
+      right: -0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .small-word-card {
+    width: 16rem;
+    height: 9rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .small-word-card {
+    width: 15rem;
+    height: 9rem;
+  }
+}

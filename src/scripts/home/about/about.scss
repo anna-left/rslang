@@ -1,0 +1,133 @@
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main-box__section {
+  &_type_about {
+    overflow: hidden;
+    padding-left: 9vw;
+    align-items: flex-end;
+    padding-bottom: 7vmax;
+  }
+}
+
+.section-about {
+  &__content-box {
+    flex-basis: 35%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    font-size: 1.7vmax;
+    line-height: 1.3;
+
+    &_indented {
+      margin-bottom: 5vmin;
+    }
+  }
+  &__content-header {
+    font-size: 5vmax;
+    letter-spacing: 1.1;
+  }
+  &__content-info {
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+  }
+  &__btn-auth {
+    font-size: 1.7vmax;
+    align-self: start;
+    @include buttonize;
+  }
+  &__image-box {
+    position: relative;
+    max-height: 70vh;
+    max-width: 60vw;
+  }
+  &__image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
+  &__spot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-46%) translateY(3%);
+    height: 110%;
+    width: 106%;
+
+    fill: $color-prime-candy;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main-box__section {
+    &_type_about {
+      padding-left: 7vw;
+      padding-bottom: 10vmax;
+    }
+  }
+  .section-about {
+    &__content-box {
+      font-size: 2vmax;
+    }
+    &__content-header {
+      font-size: 6vmax;
+    }
+    &__content-info {
+      margin-top: 6vh;
+      margin-bottom: 10vh;
+    }
+    &__btn-auth {
+      font-size: 2vmax;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .main-box__section {
+    align-self: center;
+    &_type_about {
+      height: 85%;
+      padding-left: 7vw;
+      align-items: center;
+      padding-bottom: 0;
+      padding-top: 5%;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .main-box__section {
+    align-self: flex-end;
+
+    &_type_about {
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 5vw;
+      padding-right: 5vw;
+      padding-bottom: 4vh;
+    }
+  }
+  .section-about {
+    &__content-box {
+      margin-top: 2vh;
+      font-size: 2vmax;
+      align-items: center;
+    }
+    &__content-header {
+      font-size: 6vmax;
+    }
+    &__content-info {
+      margin-top: 1vh;
+      margin-bottom: 3vh;
+    }
+    &__btn-auth {
+      font-size: 2vmax;
+      align-self: center;
+    }
+    &__image-box {
+      position: relative;
+      max-height: 40vh;
+      max-width: 95vw;
+    }
+  }
+}

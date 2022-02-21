@@ -1,0 +1,155 @@
+@import "../../sass/util/variables";
+
+.sprint-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  line-height: 1.1719;
+
+  &__clock {
+    width: 16rem;
+    height: 16rem;
+    background-image: url("../../assets/svg/clock.svg");
+    background-size: 16rem 16rem;
+  }
+
+  &__header {
+    font-size: 14.4rem;
+    font-weight: normal;
+  }
+
+  &__description {
+    width: 65rem;
+  }
+
+  &__description, &__tooltip, &__button, &__start {
+    font-size: 3.6rem;
+    text-align: center;
+  }
+
+  &__select-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  &__button {
+    width: 8rem;
+    height: 8rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: $color-sprint-right;
+    box-shadow: 5px 5px 5px $color-sprint-right-shadow;
+
+    &:hover, &:active, &:focus {
+      box-shadow: 2px 2px 2px $color-sprint-right-shadow;
+      transform: scale(0.95);
+    }
+  }
+
+  &__start {
+    width: 17rem;
+    height: 9rem;
+    border-radius: 2.5rem;
+    background-color: transparent;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px #999;
+
+    &:hover, &:active, &:focus {
+      box-shadow: 2px 2px 2px #444;
+    }
+  }
+
+  &__button, &__start {
+    cursor: pointer;
+  }
+}
+
+.hide {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 1280px) {
+  .sprint-intro {
+    &__clock {
+      width: 11rem;
+      height: 11rem;
+      background-size: 11rem 11rem;
+    }
+
+    &__header {
+      font-size: 9.6rem;
+    }
+
+    &__description {
+      width: 45rem;
+    }
+
+    &__description, &__tooltip, &__button, &__start {
+      font-size: 2.4rem;
+    }
+
+    &__button {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    &__start {
+      width: 11rem;
+      height: 6rem;
+      border-radius: 1.7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sprint-intro {
+    &__clock {
+      display: none;
+    }
+
+    &__header {
+      font-size: 9rem;
+    }
+
+    &__buttons {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &__button {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    &__start {
+      width: 11rem;
+      height: 6rem;
+      border-radius: 1.7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .sprint-intro {
+    margin-top: 7rem;
+    &__header {
+      font-size: 5rem;
+    }
+    &__description {
+      width: 34rem;
+    }
+
+    &__description, &__tooltip, &__button, &__start {
+      font-size: 1.8rem;
+    }
+  }
+}
