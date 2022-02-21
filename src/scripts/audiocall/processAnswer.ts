@@ -1,5 +1,5 @@
 import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
-import { AMOUNT_ROUND_WORDS, API_PATH } from './constantsAndValues/constants';
+import { API_PATH } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { playSound } from './playSound';
@@ -15,6 +15,19 @@ function calcLongestStreak(answerIsRight: boolean) {
       LONGEST_STREAKS.push(GLOBAL_VALUES.longestStreak);
       GLOBAL_VALUES.longestStreak = 0;
     }
+  }
+}
+
+function handleNextButton() {
+  GLOBAL_VALUES.noAnswer = 0;
+  GLOBAL_VALUES.currentQuestion++;
+
+  if (GLOBAL_VALUES.currentQuestion >= words.length) {
+    GLOBAL_VALUES.currentQuestion = 0;
+    playSound('end of round');
+    showResult();
+  } else {
+    startQuestion();
   }
 }
 
@@ -41,19 +54,16 @@ function processAnswer() {
   document.querySelector('.audiocall-question__btn').remove();
   const audiocallNextBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-next__btn');
   audiocallNextBtn.insertAdjacentHTML('beforeend', insertNextSVG);
-
-  audiocallNextBtn.addEventListener('click', () => {
-    GLOBAL_VALUES.noAnswer = 0;
-    GLOBAL_VALUES.currentQuestion++;
-
-    if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
-      GLOBAL_VALUES.currentQuestion = 0;
-      playSound('end of round');
-      showResult();
-    } else {
-      startQuestion();
-    }
-  });
+  audiocallNextBtn.addEventListener('click', handleNextButton);
+  document.addEventListener(
+    'keypress',
+    function (e) {
+      if (e.key === 'Enter') {
+        handleNextButton();
+      }
+    },
+    { once: true },
+  );
 
   const answersHTML = document.querySelectorAll('.answer');
 

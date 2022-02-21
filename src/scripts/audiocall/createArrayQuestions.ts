@@ -1,4 +1,4 @@
-import { AMOUNT_ROUND_WORDS, AMOUNT_ANSWERS, AMOUNT_PAGES } from './constantsAndValues/constants';
+import { AMOUNT_ROUND_WORDS, AMOUNT_ANSWERS, AMOUNT_WORDS_PAGE, AMOUNT_PAGES } from './constantsAndValues/constants';
 import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
 import { getRandomValue } from './getRandomValue';
 import { words } from './startRound';
@@ -6,9 +6,25 @@ import { shuffleArray } from './shuffleArray';
 import { WordAudiocall } from './WordAudiocall';
 import { api } from '../app';
 import { IWordSchema } from '../types/types';
+import { IUserData } from '../types/types';
+import { SessionStorage } from '../state/StorageSettings';
+
+async function getUserIsAutorized() {
+  let userIsAutorized = false;
+  const userData: IUserData = JSON.parse(sessionStorage.getItem(SessionStorage.userData));
+  if (userData) {
+    const userTokens = await api.getUserTokens();
+    if (userTokens === 200) {
+      userIsAutorized = true;
+    }
+  }
+  return userIsAutorized;
+}
 
 async function createArrayQuestions() {
-  let arrayWords: IWordSchema[];
+  const userIsAutorized = await getUserIsAutorized();
+
+  let arrayWords: IWordSchema[] = [];
   let arrayWrongWords: IWordSchema[] = [];
   let numberPage: number;
 
@@ -17,38 +33,27 @@ async function createArrayQuestions() {
     arrPages.push(i);
   }
 
-  //    ************************ временное изменение ************************
   if (GLOBAL_VALUES.currentPage === -1) {
-    numberPage = 0; //getRandomValue(0, arrPages.length);
+    numberPage = AMOUNT_WORDS_PAGE - 1;
   } else {
     numberPage = GLOBAL_VALUES.currentPage;
   }
 
-  // Исключить изученные слова!!! добавить данные с предыдущих страниц, если часть слов уже изучено
-  arrayWords = await api.getWords(GLOBAL_VALUES.currentLevel, numberPage);
-  arrPages.splice(numberPage, 1);
-
-  for (let i = 0; i < AMOUNT_ANSWERS - 1; i++) {
-    numberPage = getRandomValue(0, arrPages.length);
-    const index = arrPages.indexOf(i);
-    arrPages.splice(index, 1);
-    const promiseWrongWords = await api.getWords(GLOBAL_VALUES.currentLevel, numberPage);
-    arrayWrongWords = arrayWrongWords.concat(promiseWrongWords);
+  for (let i = numberPage; i >= 0; i--) {
+    const promiseWords = await api.getWords(GLOBAL_VALUES.currentLevel, i);
+    arrayWords = arrayWords.concat(promiseWords);
   }
 
-  arrayWords = shuffleArray(arrayWords);
-  arrayWrongWords = shuffleArray(arrayWrongWords);
-
-  for (let i = 0; i < AMOUNT_ROUND_WORDS; i++) {
-    const idNewWord = i;
-    const curWord = arrayWords[idNewWord];
-
-    const answers: string[] = [];
-    answers.push(curWord.wordTranslate);
-    for (let j = 0; j < AMOUNT_ANSWERS - 1; j++) {
-      const answerID = getRandomValue(0, arrayWrongWords.length);
-      answers.push(arrayWrongWords[answerID].wordTranslate);
-      arrayWrongWords.splice(answerID, 1);
+  if (GLOBAL_VALUES.currentPage === -1) {
+    arrayWords = shuffleArray(arrayWords);
+  }
+  for (let i = arrayWords.length - 1; i >= 0; i--) {
+    const curWord = arrayWords[i];
+    if (userIsAutorized) {
+      const promiseUserWord = await api.getUserWord(curWord.id);
+      if (promiseUserWord && promiseUserWord.difficulty === 'known') {
+        continue;
+      }
     }
     const newWord = new WordAudiocall(
       curWord.id,
@@ -58,14 +63,39 @@ async function createArrayQuestions() {
       curWord.image,
       curWord.audio,
       curWord.wordTranslate,
-      shuffleArray(answers),
+      [],
       false,
       false,
     );
     words.push(newWord);
+    if (words.length === AMOUNT_ROUND_WORDS) {
+      break;
+    }
+  }
+
+  for (let i = 0; i < AMOUNT_ANSWERS - 1; i++) {
+    numberPage = getRandomValue(0, arrPages.length);
+    const index = arrPages.indexOf(i);
+    arrPages.splice(index, 1);
+    const promiseWrongWords = await api.getWords(GLOBAL_VALUES.currentLevel, numberPage);
+    arrayWrongWords = arrayWrongWords.concat(promiseWrongWords);
+  }
+
+  arrayWrongWords = shuffleArray(arrayWrongWords);
+
+  for (let i = 0; i < words.length; i++) {
+    const curWord = words[i];
+    const answers: string[] = [];
+    answers.push(curWord.wordTranslate);
+    for (let j = 0; j < AMOUNT_ANSWERS - 1; j++) {
+      const answerID = getRandomValue(0, arrayWrongWords.length);
+      answers.push(arrayWrongWords[answerID].wordTranslate);
+      arrayWrongWords.splice(answerID, 1);
+    }
+    curWord.answers = answers;
   }
 
   return words;
 }
 
-export { createArrayQuestions };
+export { createArrayQuestions, getUserIsAutorized };
