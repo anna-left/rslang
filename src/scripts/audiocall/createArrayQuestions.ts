@@ -6,8 +6,24 @@ import { shuffleArray } from './shuffleArray';
 import { WordAudiocall } from './WordAudiocall';
 import { api } from '../app';
 import { IWordSchema } from '../types/types';
+import { IUserData } from '../types/types';
+import { SessionStorage } from '../state/StorageSettings';
+
+async function getUserIsAutorized() {
+  let userIsAutorized = false;
+  const userData: IUserData = JSON.parse(sessionStorage.getItem(SessionStorage.userData));
+  if (userData) {
+    const userTokens = await api.getUserTokens();
+    if (userTokens === 200) {
+      userIsAutorized = true;
+    }
+  }
+  return userIsAutorized;
+}
 
 async function createArrayQuestions() {
+  const userIsAutorized = await getUserIsAutorized();
+
   let arrayWords: IWordSchema[] = [];
   let arrayWrongWords: IWordSchema[] = [];
   let numberPage: number;
@@ -33,9 +49,11 @@ async function createArrayQuestions() {
   }
   for (let i = arrayWords.length - 1; i >= 0; i--) {
     const curWord = arrayWords[i];
-    const promiseUserWord = await api.getUserWord(curWord.id);
-    if (promiseUserWord && promiseUserWord.difficulty === 'known') {
-      continue;
+    if (userIsAutorized) {
+      const promiseUserWord = await api.getUserWord(curWord.id);
+      if (promiseUserWord && promiseUserWord.difficulty === 'known') {
+        continue;
+      }
     }
     const newWord = new WordAudiocall(
       curWord.id,
@@ -50,7 +68,6 @@ async function createArrayQuestions() {
       false,
     );
     words.push(newWord);
-    console.log(words);
     if (words.length === AMOUNT_ROUND_WORDS) {
       break;
     }
@@ -81,4 +98,4 @@ async function createArrayQuestions() {
   return words;
 }
 
-export { createArrayQuestions };
+export { createArrayQuestions, getUserIsAutorized };
