@@ -1,3 +1,4 @@
+@import '../../sass/util/variables';
 .main-box {
   &__section {
     &_type_statistics {
@@ -6,7 +7,7 @@
       padding: 0 9vw;
       flex-direction: column;
       justify-content: flex-end;
-      padding-bottom: 7vmax;
+      padding-bottom: 2vmax;
     }
   }
 }
@@ -18,9 +19,25 @@
     font-weight: bolder;
   }
   &__navigation_link {
+    position: relative;
     width: 47%;
     text-align: center;
     font-size: 2.5vmax;
+    transition: all 0.3s;
+
+    &:hover {
+      cursor: pointer;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        border-bottom: 2px solid $color-prime-candy;
+        box-shadow: 2px 2px 2px $color-prime-candy-light;
+      }
+    }
   }
   &__content_box {
     display: flex;
