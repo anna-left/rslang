@@ -10,7 +10,7 @@ export function getCommonBoxContent(learnedWordsOverall: number, newWordsOverall
 
   const newWordBox = createElement('div', ['daily-common__word_box']);
   const newWordAmount = createElement('span', ['daily-common__word_amount'], [], `${newWordsOverall}`);
-  const newWordText = createElement('span', ['daily-common__word_text'], [], 'новых слов изучено');
+  const newWordText = createElement('span', ['daily-common__word_text'], [], 'новых слов');
   newWordBox.append(newWordAmount, newWordText);
 
   const rightAnswerBox = createElement('div', ['daily-common__answer_box']);
