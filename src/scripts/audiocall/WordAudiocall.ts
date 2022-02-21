@@ -15,9 +15,9 @@ class WordAudiocall {
 
   answers: Array<string>;
 
-  correctAnswer: Boolean;
+  correctAnswer: boolean;
 
-  answerReceived: Boolean;
+  answerReceived: boolean;
 
   constructor(
     id: string,
@@ -28,8 +28,8 @@ class WordAudiocall {
     audio: string,
     wordTranslate: string,
     answers: Array<string>,
-    correctAnswer: Boolean,
-    answerReceived: Boolean,
+    correctAnswer: boolean,
+    answerReceived: boolean,
   ) {
     this.id = id;
     this.image = image;

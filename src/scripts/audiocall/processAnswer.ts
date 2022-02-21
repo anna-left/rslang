@@ -1,11 +1,35 @@
-import { GLOBAL_VALUES } from './constantsAndValues/globalValues';
-import { AMOUNT_ROUND_WORDS, API_PATH } from './constantsAndValues/constants';
+import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
+import { API_PATH } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { playSound } from './playSound';
 import { startQuestion } from './startQuestion';
 import { insertNextSVG } from './svg';
 import { showResult, createSvgSpeaker } from './showResult';
+
+function calcLongestStreak(answerIsRight: boolean) {
+  if (answerIsRight) {
+    GLOBAL_VALUES.longestStreak += 1;
+  } else {
+    if (GLOBAL_VALUES.longestStreak) {
+      LONGEST_STREAKS.push(GLOBAL_VALUES.longestStreak);
+      GLOBAL_VALUES.longestStreak = 0;
+    }
+  }
+}
+
+function handleNextButton() {
+  GLOBAL_VALUES.noAnswer = 0;
+  GLOBAL_VALUES.currentQuestion++;
+
+  if (GLOBAL_VALUES.currentQuestion >= words.length) {
+    GLOBAL_VALUES.currentQuestion = 0;
+    playSound('end of round');
+    showResult();
+  } else {
+    startQuestion();
+  }
+}
 
 function processAnswer() {
   const curWord = words[GLOBAL_VALUES.currentQuestion];
@@ -30,23 +54,21 @@ function processAnswer() {
   document.querySelector('.audiocall-question__btn').remove();
   const audiocallNextBtn = createHtmlElement('button', audiocallQuestionHTML, 'audiocall-next__btn');
   audiocallNextBtn.insertAdjacentHTML('beforeend', insertNextSVG);
-
-  audiocallNextBtn.addEventListener('click', () => {
-    GLOBAL_VALUES.noAnswer = 0;
-    GLOBAL_VALUES.currentQuestion++;
-
-    if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
-      GLOBAL_VALUES.currentQuestion = 0;
-      playSound('end of round');
-      showResult();
-    } else {
-      startQuestion();
-    }
-  });
+  audiocallNextBtn.addEventListener('click', handleNextButton);
+  document.addEventListener(
+    'keypress',
+    function (e) {
+      if (e.key === 'Enter') {
+        handleNextButton();
+      }
+    },
+    { once: true },
+  );
 
   const answersHTML = document.querySelectorAll('.answer');
 
   if (GLOBAL_VALUES.noAnswer === 1) {
+    calcLongestStreak(false);
     playSound('wrong');
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];
@@ -63,6 +85,7 @@ function processAnswer() {
   const curNumber = Number(this.getAttribute('data-num'));
 
   if (curWord.wordTranslate === curWord.answers[curNumber]) {
+    calcLongestStreak(true);
     curWord.correctAnswer = true;
     playSound('right');
     for (let i = 0; i < answersHTML.length; i++) {
@@ -77,6 +100,7 @@ function processAnswer() {
       }
     }
   } else {
+    calcLongestStreak(false);
     playSound('wrong');
     for (let i = 0; i < answersHTML.length; i++) {
       const curAnswerHTML = answersHTML[i];

@@ -215,7 +215,11 @@ export class API {
   async getUserStatistics(): Promise<void | IUserStatistics> {
     const endpointModifier = `/users/${this.userId}/statistics`;
     const response = await this.authorizedRequest(endpointModifier, HTTPMethod.get);
-    return (await response.json()) as IUserStatistics;
+    if (response && response.status === 200) {
+      return (await response.json()) as IUserStatistics;
+    } else {
+      return;
+    }
   }
 
   async updateUserStatistics(statistics: IUserStatistics): Promise<Response> {

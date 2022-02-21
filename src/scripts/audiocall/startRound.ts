@@ -21,6 +21,8 @@ function changeLevel(event: Event) {
 
 async function startNewGame() {
   words = [];
+  const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
+  createHtmlElement('span', audiocallHTML, 'audiocall-start__modal', 'Подождите, идет подбор слов...');
   words = await createArrayQuestions();
   startQuestion();
 }
@@ -67,7 +69,7 @@ function startRound() {
   }
 
   const audiocallStartBtn = createHtmlElement('button', audiocallStart, 'audiocall-start__btn', 'Начать');
-  audiocallStartBtn.addEventListener('click', startNewGame);
+  audiocallStartBtn.addEventListener('click', startNewGame, { once: true });
   document.addEventListener(
     'keypress',
     function (e) {

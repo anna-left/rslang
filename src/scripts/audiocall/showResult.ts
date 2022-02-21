@@ -1,10 +1,12 @@
 import { clearPage } from './startAudiocall';
 import { playSound } from './playSound';
 import { createHtmlElement } from './createHtmlElement';
-// import { currentDict } from '../app';
+import { IAnswer, writeStatistics } from './writeStatistics';
 import { words, startNewGame } from './startRound';
+import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
+import Dictionary from '../dictionary/Dictionary';
+import { api } from '../app';
 import {
-  AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
   AMOUNT_WORDS_GREAD_RESULT,
   MESSAGE_BAD_RESULT,
@@ -54,20 +56,26 @@ function addButtons() {
   const resultToTutorialBtn = createHtmlElement('button', resultBtns, 'result-btns__to-tutorial', 'Перейти в учебник');
   resultNextBtn.addEventListener('click', startNewGame);
   resultToTutorialBtn.addEventListener('click', async () => {
-    // const dict = await currentDict;
-    // console.log(dict);
-    // dict.preSelectLevelAndPage(GLOBAL_VALUES.currentLevel, 0);
-    // await dict.start();
+    const dict = new Dictionary(api);
+    await dict.preSelectLevelAndPage(dict.getLevel(), dict.getPage());
+    await dict.start();
   });
 }
 
 function showResult() {
+  const arrAnswers: IAnswer[] = [];
+  words.forEach(function (item) {
+    arrAnswers.push({ wordId: item.id, isRight: item.correctAnswer });
+  });
+  const longestStreak = Math.max(Math.max.apply(null, LONGEST_STREAKS), GLOBAL_VALUES.longestStreak);
+  writeStatistics(arrAnswers, 'audiocall', longestStreak);
+
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   clearPage(audiocallHTML);
 
   const rightAnswersAmound: number = words.reduce((a, b) => a + Number(b.correctAnswer), 0);
-  const wrongAnswersAmound: number = AMOUNT_ROUND_WORDS - rightAnswersAmound;
-  const percent = Math.round((rightAnswersAmound / AMOUNT_ROUND_WORDS) * 100);
+  const wrongAnswersAmound: number = words.length - rightAnswersAmound;
+  const percent = Math.round((rightAnswersAmound / words.length) * 100);
   let message = MESSAGE_BAD_RESULT;
   if (percent >= AMOUNT_WORDS_GREAD_RESULT) {
     message = MESSAGE_GREAD_RESULT;
@@ -122,7 +130,7 @@ function showLearnedWords() {
   clearPage(resultContentHTML);
 
   const rightAnswersAmound: number = words.reduce((a, b) => a + Number(b.correctAnswer), 0);
-  const wrongAnswersAmound: number = AMOUNT_ROUND_WORDS - rightAnswersAmound;
+  const wrongAnswersAmound: number = words.length - rightAnswersAmound;
 
   const wordsHTML: HTMLElement = createHtmlElement('div', resultContentHTML, 'words');
 
