@@ -21,6 +21,8 @@ function changeLevel(event: Event) {
 
 async function startNewGame() {
   words = [];
+  const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
+  createHtmlElement('span', audiocallHTML, 'audiocall-start__modal', 'Подождите, идет подбор слов...');
   words = await createArrayQuestions();
   startQuestion();
 }

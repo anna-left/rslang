@@ -63,10 +63,6 @@ async function createArrayQuestions() {
     const promiseWrongWords = await api.getWords(GLOBAL_VALUES.currentLevel, numberPage);
     arrayWrongWords = arrayWrongWords.concat(promiseWrongWords);
   }
-  // for (let i = 0; i < AMOUNT_ANSWERS; i++) {
-  //   const promiseWrongWords = await api.getWords(GLOBAL_VALUES.currentLevel, i);
-  //   arrayWrongWords = arrayWrongWords.concat(promiseWrongWords);
-  // }
 
   arrayWrongWords = shuffleArray(arrayWrongWords);
 
