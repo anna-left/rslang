@@ -8,9 +8,9 @@
     left: 0;
     z-index: 50;
 
-    margin-left: -30vw;
     height: 100vh;
-    width: 15vw;
+    margin-left: -30vw;
+    width: 17vw;
 
     display: flex;
     justify-content: center;
@@ -19,7 +19,7 @@
     font-size: 2.6rem;
     font-family: 'Roboto';
     font-weight: 500;
-    transition: all 0.3s;
+    transition: all 0.32s;
     user-select: none;
 
     &_state_show {
@@ -31,8 +31,8 @@
       top: 0;
       left: 0;
 
-      margin-left: -100vmax;
-      width: 100vw;
+      margin-left: -150vmax;
+      width: 83vw;
       height: 100vh;
 
       background-color: $color-prime-dark;
@@ -41,7 +41,7 @@
       transition: all 0.3s;
     }
     &_blur_show {
-      margin-left: 15vw;
+      margin-left: 17vw;
     }
   }
 }
@@ -136,6 +136,119 @@
     &:hover {
       cursor: pointer;
       background-color: $color-prime-dark;
+    }
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main-box {
+    &__burger {
+      margin-left: -30vw;
+      width: 23vw;
+
+      &_state_show {
+        margin-left: 0;
+      }
+
+      &_blur {
+        width: 77vw;
+        &_show {
+          margin-left: 23vw;
+        }
+      }
+    }
+  }
+  .burger-games {
+    &__games-box {
+      &_state_active {
+        margin-left: 23vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-box {
+    &__burger {
+      margin-left: -40vw;
+      width: 35vw;
+
+      &_state_show {
+        margin-left: 0;
+      }
+
+      &_blur {
+        width: 66vw;
+        &_show {
+          margin-left: calc(35vw - 2px);
+        }
+      }
+    }
+  }
+  .burger {
+    &__list {
+      font-size: 2rem;
+    }
+    &__item {
+      padding-left: 10%;
+    }
+    &__item_icon {
+      max-height: 2.5rem;
+      max-width: 2.5rem;
+    }
+    &__hide-icon {
+      max-height: 3.5rem;
+      max-width: 3.5rem;
+    }
+  }
+  .burger-games {
+    &__games-box {
+      &_state_active {
+        margin-left: 28vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main-box {
+    &__burger {
+      margin-left: -50vw;
+      width: 43vw;
+
+      &_state_show {
+        margin-left: 0;
+      }
+
+      &_blur {
+        width: 58vw;
+        &_show {
+          margin-left: calc(43vw - 2px);
+        }
+      }
+    }
+  }
+  .burger {
+    &__list {
+      font-size: 1.9rem;
+    }
+    &__item {
+      padding-left: 4%;
+    }
+    &__item_icon {
+      max-height: 2.3rem;
+      max-width: 2.3rem;
+    }
+    &__hide-icon {
+      max-height: 3.2rem;
+      max-width: 3.2rem;
+    }
+  }
+  .burger-games {
+    &__games-box {
+      &_state_active {
+        margin-left: 35vw;
+      }
     }
   }
 }
