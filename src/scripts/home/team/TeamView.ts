@@ -29,14 +29,39 @@ export class Team {
     const textBoxAnna = createElement('div', ['section-team__item_text-box']);
     const textBoxValentin = createElement('div', ['section-team__item_text-box']);
 
-    const memberAndreyHeader = createElement('h3', ['section-team__item_header'], [], 'Andrei Tsakunou (Team Lead)');
-    const memberAnnaHeader = createElement('h3', ['section-team__item_header'], [], 'Anna Rybakova (Encourager)');
-    const memberValentinHeader = createElement(
-      'h3',
-      ['section-team__item_header'],
-      [],
+    const memberAndreyHeader = createElement('h3', ['section-team__item_header']);
+    const gitLinkAndrey = createElement(
+      'a',
+      ['section-team__item_git-link'],
+      [
+        ['href', 'https://github.com/ts-andrey'],
+        ['target', '_blank'],
+      ],
+      'Andrei Tsakunou (Team Lead)',
+    );
+    memberAndreyHeader.append(gitLinkAndrey);
+    const memberAnnaHeader = createElement('h3', ['section-team__item_header']);
+    const gitLinkAnna = createElement(
+      'a',
+      ['section-team__item_git-link'],
+      [
+        ['href', 'https://github.com/anna-left'],
+        ['target', '_blank'],
+      ],
+      'Anna Rybakova (Encourager)',
+    );
+    memberAnnaHeader.append(gitLinkAnna);
+    const memberValentinHeader = createElement('h3', ['section-team__item_header']);
+    const gitLinkValentin = createElement(
+      'a',
+      ['section-team__item_git-link'],
+      [
+        ['href', 'https://github.com/valentine909'],
+        ['target', '_blank'],
+      ],
       'Valiantsin Nazarau (Tech Brain)',
     );
+    memberValentinHeader.append(gitLinkValentin);
 
     const memberAndreyInfo = createElement(
       'p',
@@ -46,8 +71,8 @@ export class Team {
       - разработал структуру проекта.
       - разработал информационный блок сайта;
       - настроил авторизацию;
+      - сверстал и подключил статистику;
       - решал организационные и технические вопросы/проблемы;
-      - активно участвовал в разработке features;
       - проводил Code Review.`,
     );
     const memberAnnaInfo = createElement(
@@ -68,7 +93,7 @@ export class Team {
       `Стэк проделанной работы:
       - разработал игру Sprint;
       - разработал словарь;
-      - настроил работу с сервером;
+      - настроил back-end часть;
       - помогал решать многие технические вопросы;
       - проводил Code Review.`,
     );
