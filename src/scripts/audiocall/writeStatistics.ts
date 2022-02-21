@@ -51,9 +51,8 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
       } else if (!curWord.isRight && difficulty === 'known') {
         difficulty = 'unset';
       }
-      if (difficulty === 'known') {
-        curWord.knownWord = true;
-      }
+      curWord.knownWord = difficulty === 'known' ? true : false;
+
       await api.updateUserWord(curWord.wordId, {
         difficulty: difficulty,
         optional: {
@@ -181,4 +180,4 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
   }
 }
 
-export { IAnswer, writeStatistics };
+export { IAnswer, writeStatistics, TGameName };
