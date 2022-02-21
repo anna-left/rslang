@@ -2,7 +2,7 @@ import DictionaryView from './DictionaryView';
 import DictionaryModel from './DictionaryModel';
 import { WordsSettings } from '../sprint/SprintSettings';
 import Sprint from '../sprint/Sprint';
-import { LocalStorage, SessionStorage } from '../state/StorageSettings';
+import { LocalStorage } from '../state/StorageSettings';
 import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 import { startAudiocall } from '../audiocall/startAudiocall';
 import API from '../api/API';
@@ -40,12 +40,11 @@ class Dictionary {
     this.sprint = sprint;
   }
 
-  checkAuthorization() {
-    if (sessionStorage.getItem(SessionStorage.userData)) {
-      this.authorized = true;
+  async setAuthorizationLevel() {
+    this.authorized = await this.model.checkAuthorizationStatus();
+    if (this.authorized) {
       this.view.authorizeView();
     } else {
-      this.authorized = false;
       this.view.unAuthorizeView();
     }
   }
@@ -162,7 +161,7 @@ class Dictionary {
   }
 
   async start() {
-    this.checkAuthorization();
+    await this.setAuthorizationLevel();
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
     if (data) {
       window.dispatchEvent(new CustomEvent('show-footer'));
