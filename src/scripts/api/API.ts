@@ -127,13 +127,18 @@ export class API {
 
   async getUserTokens(): Promise<number> {
     const endpointModifier = `/users/${this.userId}/tokens`;
-    const response = await fetch(this.endpoint + endpointModifier, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${this.refreshToken}`,
-      },
-    });
+    let response: Response;
+    if (this.userId) {
+      response = await fetch(this.endpoint + endpointModifier, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.refreshToken}`,
+        },
+      });
+    } else {
+      return 401;
+    }
     if (response) {
       if (response.status === StatusCode.OK) {
         this.updateStorageTokens(await response.json());
