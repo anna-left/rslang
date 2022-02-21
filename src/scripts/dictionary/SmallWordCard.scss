@@ -82,7 +82,7 @@
 }
 
 .unauthorized .small-word-card {
-  &--hard::after, &--known::after {
+  &--hard::after, &--known::after, &__info {
     visibility: hidden;
   }
 }
