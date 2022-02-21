@@ -4,6 +4,7 @@ import { ISprintWord } from '../types/types';
 import { SprintSettings } from './SprintSettings';
 import Dictionary from '../dictionary/Dictionary';
 import API from '../api/API';
+import { IAnswer, writeStatistics } from '../audiocall/writeStatistics';
 
 class Sprint {
   private readonly view: SprintView;
@@ -30,16 +31,17 @@ class Sprint {
 
   private dict: Dictionary;
 
+  private longestStreak: number;
+
   constructor(api: API) {
     this.dict = null;
     this.group = null;
     this.page = null;
     this.view = new SprintView('sprint');
     this.model = new SprintModel(api);
-    this.initializeGameState();
   }
 
-  initializeGameState() {
+  async initializeGameState() {
     this.round = [];
     this.currentWordIndex = -1;
     this.streak = 0;
@@ -47,6 +49,9 @@ class Sprint {
     this.level = 1;
     this.wrongWords = [];
     this.rightWords = [];
+    this.longestStreak = 0;
+    this.view.clearTimer();
+    await this.model.checkAuthorizationStatus();
   }
 
   addDictionary(dictionary: Dictionary) {
@@ -63,15 +68,18 @@ class Sprint {
       await this.nextRound();
     });
     window.addEventListener('time-over', async () => {
-      this.onGameOver();
+      await this.onGameOver();
     });
     window.addEventListener('sprint-start', async () => {
       this.view.init();
+      await this.initializeGameState();
       this.model.selectWords(this.group, this.page);
       this.round = await this.model.getWords();
-      await this.nextRound();
-      this.view.showGame();
-      this.view.startTimer();
+      if (this.round && this.round.length > 0) {
+        await this.nextRound();
+        this.view.showGame();
+        this.view.startTimer();
+      }
     });
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
@@ -100,7 +108,7 @@ class Sprint {
     if (await this.canAskMore()) {
       this.nextQuestion();
     } else {
-      this.onGameOver();
+      await this.onGameOver();
     }
   }
 
@@ -108,6 +116,7 @@ class Sprint {
     if (this.isCorrectAnswer(answer)) {
       this.updateScore();
       this.rightWords.push(this.round[this.currentWordIndex]);
+      this.longestStreak += 1;
       if (this.canLevelUp()) {
         this.streak = 0;
         this.level = this.level === SprintSettings.maxLevel ? this.level : this.level + 1;
@@ -167,12 +176,44 @@ class Sprint {
     return this.model.hasMoreWords();
   }
 
-  onGameOver() {
+  async onGameOver() {
     this.view.onGameOver(this.rightWords, this.wrongWords);
-    // TODO send statistics
+    if (await this.model.checkAuthorizationStatus()) {
+      const answers = this.getAnswers();
+      await writeStatistics(answers, 'sprint', this.longestStreak);
+    }
   }
 
-  start(group = -1, page = -1) {
+  getAnswers() {
+    const results: IAnswer[] = [];
+    this.rightWords.forEach((word) => {
+      const id = this.getWordId(word);
+      results.push({
+        wordId: id,
+        isRight: true,
+      });
+    });
+    this.wrongWords.forEach((word) => {
+      const id = this.getWordId(word);
+      results.push({
+        wordId: id,
+        isRight: false,
+      });
+    });
+    return results;
+  }
+
+  getWordId(word: ISprintWord) {
+    let id: string;
+    if ('id' in word) {
+      id = word.id;
+    } else {
+      id = word._id;
+    }
+    return id;
+  }
+
+  async start(group = -1, page = -1) {
     if (group === -1) {
       this.group = 0;
       this.page = 0;
@@ -187,10 +228,6 @@ class Sprint {
     window.dispatchEvent(new CustomEvent('hide-footer'));
     window.dispatchEvent(new CustomEvent('hide-nav'));
     this.view.showIntro();
-    this.score = 0;
-    this.view.clearTimer();
-    this.wrongWords = [];
-    this.rightWords = [];
   }
 }
 

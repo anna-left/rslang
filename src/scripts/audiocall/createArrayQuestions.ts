@@ -92,7 +92,7 @@ async function createArrayQuestions() {
       answers.push(arrayWrongWords[answerID].wordTranslate);
       arrayWrongWords.splice(answerID, 1);
     }
-    curWord.answers = answers;
+    curWord.answers = shuffleArray(answers);
   }
 
   return words;

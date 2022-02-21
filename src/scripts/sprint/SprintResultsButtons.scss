@@ -1,19 +1,39 @@
 .results-buttons {
   display: flex;
-  gap: 5rem;
+  gap: 10rem;
+  margin-top: auto;
 
   &__again, &__workbook {
-    width: 20rem;
-    height: 7rem;
-    border-radius: 2rem;
+    width: 36rem;
+    height: 9rem;
+    border-radius: 2.5rem;
     border: 1px solid black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 3.6rem;
     background-color: transparent;
     cursor: pointer;
     box-shadow: 5px 5px 5px #999;
     &:hover, &:active, &:focus {
       box-shadow: 2px 2px 2px #444;
     }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .results-buttons {
+    &__again, &__workbook {
+      width: 24rem;
+      height: 6rem;
+      border-radius: 1.5rem;
+      font-size: 2.4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .results-buttons {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 0;
   }
 }

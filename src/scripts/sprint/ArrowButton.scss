@@ -7,14 +7,24 @@
   font-size: 3rem;
   line-height: 3rem;
   box-sizing: border-box;
-  padding: 0.5rem;
   background-color: transparent;
   cursor: pointer;
+
   &--backward:hover {
     transform: scale(1.05) translateX(-10%);
   }
 
   &--forward:hover {
     transform: scale(1.05) translateX(10%);
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .arrow-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    padding: 0;
   }
 }

@@ -30,16 +30,17 @@ class Timer extends ColoredRing {
         this.circle.style.strokeDashoffset = String(oneSecondChunk * (this.time - time));
       } else {
         this.value.innerHTML = String(0);
-        this.clearTimer();
+        this.resetTimer();
         window.dispatchEvent(new CustomEvent('time-over'));
       }
     }, 1000);
   }
 
-  clearTimer() {
+  resetTimer() {
     if (this.setIntervalId) {
       clearInterval(this.setIntervalId);
     }
+    this.resetColor();
   }
 }
 

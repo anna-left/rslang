@@ -60,7 +60,9 @@ export class API {
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
     });
-    return (await response.json()) as IWordSchema[];
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IWordSchema[];
+    }
   }
 
   async getWords(group: number, page: number) {
@@ -68,7 +70,9 @@ export class API {
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
     });
-    return (await response.json()) as IWordSchema[];
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IWordSchema[];
+    }
   }
 
   async getWord(id: string) {
@@ -76,10 +80,12 @@ export class API {
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
     });
-    if (response.status === StatusCode.InternalServerError) {
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IWordSchema;
+    } else if (response && response.status === StatusCode.InternalServerError) {
       console.log('There is no word with such id');
     }
-    return (await response.json()) as IWordSchema;
+    return;
   }
 
   async createUser(user: IUserSchema): Promise<void> {
@@ -92,7 +98,8 @@ export class API {
         'Content-Type': 'application/json',
       },
     });
-    if (response.status === StatusCode.UnprocessableEntity) {
+    if (response && response.status === StatusCode.UnprocessableEntity) {
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: 'Incorrect e-mail or password' } }));
       console.log('Incorrect e-mail or password');
     }
     return;
@@ -127,17 +134,13 @@ export class API {
         Authorization: `Bearer ${this.refreshToken}`,
       },
     });
-    if (response.status === StatusCode.Forbidden || response.status === StatusCode.Unauthorized) {
-      console.log('Access token is missing, expired or invalid');
-      window.dispatchEvent(new CustomEvent('go-to-login-screen'));
-      window.dispatchEvent(
-        new CustomEvent('show-error', { detail: { error: 'Authorization failed.\nTry to re-login.' } }),
-      );
-    } else {
-      this.updateStorageTokens(await response.json());
-      this.getStorageUserData();
+    if (response) {
+      if (response.status === StatusCode.OK) {
+        this.updateStorageTokens(await response.json());
+        this.getStorageUserData();
+      }
+      return response.status;
     }
-    return response.status;
   }
 
   async getUserWords(): Promise<void | IUserWord[]> {
@@ -281,7 +284,7 @@ export class API {
       return response;
     } else if (response.status === StatusCode.Unauthorized) {
       const status = await this.getUserTokens();
-      if (status === 200) {
+      if (status === StatusCode.OK) {
         init.headers.Authorization = `Bearer ${this.accessToken}`;
         response = await fetch(this.endpoint + path, init);
         if (response.status === StatusCode.OK) {
@@ -296,10 +299,11 @@ export class API {
     } else if (response.status === StatusCode['Expectation Failed']) {
       console.log('Word/User already exists');
     } else {
-      window.dispatchEvent(new CustomEvent('go-to-login-screen'));
       const errorText = 'Authorization failed.\nTry to re-login.';
       console.log(errorText);
       window.dispatchEvent(new CustomEvent('show-error', { detail: { error: errorText } }));
+      window.dispatchEvent(new CustomEvent('logout'));
+      this.clearUserData();
     }
   }
 }

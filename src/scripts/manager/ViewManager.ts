@@ -34,6 +34,8 @@ export class ViewManager {
 
   private readonly api: API;
 
+  manager: this;
+
   constructor() {
     this.burger = new BurgerView();
     this.main = new MainView();
@@ -52,6 +54,7 @@ export class ViewManager {
     this.burger.render(this, this.dictionary);
     this.home.render(this);
     this.homeNavigation.render(this);
+    this.manager = this;
   }
 
   async init() {

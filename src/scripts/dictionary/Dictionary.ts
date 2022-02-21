@@ -2,7 +2,7 @@ import DictionaryView from './DictionaryView';
 import DictionaryModel from './DictionaryModel';
 import { WordsSettings } from '../sprint/SprintSettings';
 import Sprint from '../sprint/Sprint';
-import { LocalStorage, SessionStorage } from '../state/StorageSettings';
+import { LocalStorage } from '../state/StorageSettings';
 import { IAggregatedWordSchema, IWordSchema } from '../types/types';
 import { startAudiocall } from '../audiocall/startAudiocall';
 import API from '../api/API';
@@ -40,12 +40,11 @@ class Dictionary {
     this.sprint = sprint;
   }
 
-  checkAuthorization() {
-    if (sessionStorage.getItem(SessionStorage.userData)) {
-      this.authorized = true;
+  async setAuthorizationLevel() {
+    this.authorized = await this.model.checkAuthorizationStatus();
+    if (this.authorized) {
       this.view.authorizeView();
     } else {
-      this.authorized = false;
       this.view.unAuthorizeView();
     }
   }
@@ -113,20 +112,42 @@ class Dictionary {
       if (event.detail.hard) {
         this.view.cardUnmarkHard();
         this.model.setUserWord(event.detail.wordId, 'unset');
+        this.view.incrementAccomplishCount(-1);
+        this.view.changeDataWordStatus('unset');
       } else {
         this.view.cardMarkHard();
-        this.view.cardUnmarkKnown();
         this.model.setUserWord(event.detail.wordId, 'hard');
+        this.view.incrementAccomplishCount(1);
+        this.view.changeDataWordStatus('hard');
+      }
+      if (event.detail.known) {
+        this.view.cardUnmarkKnown();
+        this.view.incrementAccomplishCount(-1);
+      }
+      this.view.setPageStatus();
+      if (this.currentLevel === WordsSettings.groups) {
+        this.view.removeWord();
       }
     });
     window.addEventListener('mark-known', (event: CustomEvent) => {
       if (event.detail.known) {
         this.view.cardUnmarkKnown();
         this.model.setUserWord(event.detail.wordId, 'unset');
+        this.view.incrementAccomplishCount(-1);
+        this.view.changeDataWordStatus('unset');
       } else {
         this.view.cardMarkKnown();
-        this.view.cardUnmarkHard();
         this.model.setUserWord(event.detail.wordId, 'known');
+        this.view.incrementAccomplishCount(1);
+        this.view.changeDataWordStatus('known');
+      }
+      if (event.detail.hard) {
+        this.view.cardUnmarkHard();
+        this.view.incrementAccomplishCount(-1);
+      }
+      this.view.setPageStatus();
+      if (this.currentLevel === WordsSettings.groups) {
+        this.view.removeWord();
       }
     });
     window.addEventListener('login', () => {
@@ -140,11 +161,11 @@ class Dictionary {
   }
 
   async start() {
-    this.checkAuthorization();
+    await this.setAuthorizationLevel();
     const data: IAggregatedWordSchema[] | IWordSchema[] = await this.getWords(this.currentLevel, this.currentPage);
-    window.dispatchEvent(new CustomEvent('show-footer'));
-    window.dispatchEvent(new CustomEvent('hide-nav'));
     if (data) {
+      window.dispatchEvent(new CustomEvent('show-footer'));
+      window.dispatchEvent(new CustomEvent('hide-nav'));
       this.view.deactivateLevel();
       this.view.activateLevel(this.currentLevel);
       if (this.currentLevel === WordsSettings.groups) {

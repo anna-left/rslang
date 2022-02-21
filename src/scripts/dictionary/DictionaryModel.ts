@@ -31,6 +31,11 @@ class DictionaryModel {
       await this.api.createUserWord(wordId, userWord);
     }
   }
+
+  async checkAuthorizationStatus() {
+    const status = await this.api.getUserTokens();
+    return status === 200;
+  }
 }
 
 export default DictionaryModel;
