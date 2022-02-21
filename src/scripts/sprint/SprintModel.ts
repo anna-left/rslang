@@ -11,11 +11,14 @@ class SprintModel {
 
   private currentPage: number;
 
+  private authorized: boolean;
+
   constructor(api: API) {
     this.api = api;
     this.group = null;
     this.page = null;
     this.currentPage = null;
+    this.authorized = false;
   }
 
   selectWords(group: number, page: number) {
@@ -25,13 +28,17 @@ class SprintModel {
   }
 
   async fetchWords(group: number, page: number) {
-    return this.api.getWords(group, page);
+    return this.authorized
+      ? this.api.getUserAggregatedWords(group.toString(), page.toString(), '20', { 'userWord.difficulty': {'$not': {'$eq':'known'} } })
+      : this.api.getWords(group, page);
   }
 
   async getWords(group = this.group, page = this.page) {
     const words = await this.fetchWords(group, page);
-    const shuffledWords = this.shuffleOrder(words);
-    return this.shuffleTranslation(shuffledWords);
+    if (words) {
+      const shuffledWords = this.shuffleOrder(words);
+      return this.shuffleTranslation(shuffledWords);
+    }
   }
 
   shuffleOrder(array: IWordSchema[]) {
@@ -63,6 +70,12 @@ class SprintModel {
   hasMoreWords() {
     this.currentPage = this.currentPage === this.page + 1 ? (this.currentPage += 2) : (this.currentPage += 1);
     return !(this.group === WordsSettings.groups || this.currentPage >= WordsSettings.pages);
+  }
+
+  async checkAuthorizationStatus() {
+    const status = await this.api.getUserTokens();
+    this.authorized = status === 200;
+    return this.authorized;
   }
 }
 

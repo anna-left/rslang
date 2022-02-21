@@ -38,10 +38,9 @@ class Sprint {
     this.page = null;
     this.view = new SprintView('sprint');
     this.model = new SprintModel(api);
-    this.initializeGameState();
   }
 
-  initializeGameState() {
+  async initializeGameState() {
     this.round = [];
     this.currentWordIndex = -1;
     this.streak = 0;
@@ -50,6 +49,8 @@ class Sprint {
     this.wrongWords = [];
     this.rightWords = [];
     this.longestStreak = 0;
+    this.view.clearTimer();
+    await this.model.checkAuthorizationStatus();
   }
 
   addDictionary(dictionary: Dictionary) {
@@ -66,15 +67,18 @@ class Sprint {
       await this.nextRound();
     });
     window.addEventListener('time-over', async () => {
-      this.onGameOver();
+      await this.onGameOver();
     });
     window.addEventListener('sprint-start', async () => {
       this.view.init();
+      await this.initializeGameState();
       this.model.selectWords(this.group, this.page);
       this.round = await this.model.getWords();
-      await this.nextRound();
-      this.view.showGame();
-      this.view.startTimer();
+      if (this.round && this.round.length > 0) {
+        await this.nextRound();
+        this.view.showGame();
+        this.view.startTimer();
+      }
     });
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
@@ -103,7 +107,7 @@ class Sprint {
     if (await this.canAskMore()) {
       this.nextQuestion();
     } else {
-      this.onGameOver();
+      await this.onGameOver();
     }
   }
 
@@ -171,12 +175,14 @@ class Sprint {
     return this.model.hasMoreWords();
   }
 
-  onGameOver() {
+  async onGameOver() {
     this.view.onGameOver(this.rightWords, this.wrongWords);
-    // TODO send statistics
+    if (await this.model.checkAuthorizationStatus()) {
+      // TODO send statistics
+    }
   }
 
-  start(group = -1, page = -1) {
+  async start(group = -1, page = -1) {
     if (group === -1) {
       this.group = 0;
       this.page = 0;
@@ -191,10 +197,6 @@ class Sprint {
     window.dispatchEvent(new CustomEvent('hide-footer'));
     window.dispatchEvent(new CustomEvent('hide-nav'));
     this.view.showIntro();
-    this.score = 0;
-    this.view.clearTimer();
-    this.wrongWords = [];
-    this.rightWords = [];
   }
 }
 
