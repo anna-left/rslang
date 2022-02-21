@@ -67,4 +67,35 @@ async function getDailyStatistics() {
   return dailyStatistics;
 }
 
-export { getDailyGameStatistics, getDailyStatistics };
+interface ILongTermStatistics {
+  date: string;
+  newWordsCount: number;
+  knownWordsCount: number;
+}
+
+async function getLongTermStatistics() {
+  const longTermStatistics: ILongTermStatistics[] = [];
+  const userStatistics = await api.getUserStatistics();
+  if (!userStatistics) {
+    return;
+  }
+  const optional = userStatistics.optional;
+  if (!optional) {
+    return longTermStatistics;
+  }
+  if (!optional.statistics) {
+    return longTermStatistics;
+  }
+  const statistics: IOneDayStatistics[] = JSON.parse(optional.statistics);
+  for (let i = 0; i < statistics.length; i++) {
+    const dailystaticics: ILongTermStatistics = {
+      date: statistics[i].date,
+      newWordsCount: statistics[i].general.newWordsCount,
+      knownWordsCount: statistics[i].general.knownWordsCount,
+    };
+    longTermStatistics.push(dailystaticics);
+  }
+  return longTermStatistics;
+}
+
+export { getDailyGameStatistics, getDailyStatistics, ILongTermStatistics, getLongTermStatistics };
