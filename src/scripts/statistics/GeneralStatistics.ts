@@ -29,11 +29,7 @@ export class GeneralStatistics {
       newWordsAmount.push(el.newWordsCount);
       knownWordsAmount.push(el.knownWordsCount);
     });
-
-    console.log({ dates, newWordsAmount, knownWordsAmount });
-    console.log(typeof dates[0], typeof newWordsAmount[0], typeof knownWordsAmount[0]);
     const canvas = <HTMLCanvasElement>createElement('canvas', ['statistics__general_canvas', 'canvas-box__canvas']);
-    console.log(canvas);
     const dataChart = {
       labels: dates,
       datasets: [
