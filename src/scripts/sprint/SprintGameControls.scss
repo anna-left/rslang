@@ -58,3 +58,36 @@
     }
   }
 }
+
+@media screen and (max-width: 1280px) {
+  .sprint-game {
+    &-controls {
+      gap: 7rem;
+    }
+
+    &-controls {
+      &__button {
+        width: 13rem;
+        height: 6rem;
+        font-size: 2.4rem;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem 2rem;
+        border-radius: 2.5rem;
+      }
+
+      &__info-button {
+        border-top: 0.3rem solid black;
+        border-left: 0.3rem solid black;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .sprint-game {
+    &-controls {
+      gap: 1rem;
+    }
+  }
+}

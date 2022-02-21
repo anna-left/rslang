@@ -18,3 +18,9 @@
 .translation {
   white-space: pre;
 }
+
+@media screen and (max-width: 390px) {
+  .english-word, .translation {
+    font-size: 1.5rem;
+  }
+}

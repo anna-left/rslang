@@ -8,16 +8,13 @@ $color-prime-candy: #cd8eff;
 $color-prime-candy-light: #edd7ff;
 
 :root {
-  --timerRadius: 100;
+  --timerRadius: 60;
   --progressRadius: 100;
   --timerBorderThickness: 15;
 }
-$timerRadius: 10rem;
+$timerRadius: 6rem;
 $progressRadius: 10rem;
 $timerBorderThickness: 1.5rem;
-
-$levelUpSize: 8rem;
-$badgeSize: 3rem;
 
 $color-sprint-right: #43d26c;
 $color-sprint-right-shadow:#26783d;

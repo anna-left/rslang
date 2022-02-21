@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 7rem 5rem;
+  padding: 4rem 6rem;
   justify-content: center;
   align-items: center;
 
@@ -46,5 +46,29 @@
 
   &__sign-wrong {
     background-image: url("../../assets/svg/wrong.svg");
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .sprint-game {
+    font-size: 2rem;
+    width: 65rem;
+    gap: 2rem;
+    padding: 2rem 3rem;
+
+    &__foreign {
+      font-size: 3.2rem;
+    }
+
+    &__translation {
+      font-size: 2.4rem;
+    }
+  }
+}
+
+
+@media screen and (max-width: 390px) {
+  .sprint-game {
+    width: 32rem;
   }
 }
