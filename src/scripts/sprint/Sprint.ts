@@ -4,6 +4,7 @@ import { ISprintWord } from '../types/types';
 import { SprintSettings } from './SprintSettings';
 import Dictionary from '../dictionary/Dictionary';
 import API from '../api/API';
+import { IAnswer, writeStatistics } from '../audiocall/writeStatistics';
 
 class Sprint {
   private readonly view: SprintView;
@@ -178,8 +179,38 @@ class Sprint {
   async onGameOver() {
     this.view.onGameOver(this.rightWords, this.wrongWords);
     if (await this.model.checkAuthorizationStatus()) {
-      // TODO send statistics
+      const answers = this.getAnswers();
+      await writeStatistics(answers, 'sprint', this.longestStreak);
     }
+  }
+
+  getAnswers() {
+    const results: IAnswer[] = [];
+    this.rightWords.forEach((word) => {
+      const id = this.getWordId(word);
+      results.push({
+        wordId: id,
+        isRight: true,
+      });
+    });
+    this.wrongWords.forEach((word) => {
+      const id = this.getWordId(word);
+      results.push({
+        wordId: id,
+        isRight: false,
+      });
+    });
+    return results;
+  }
+
+  getWordId(word: ISprintWord) {
+    let id: string;
+    if ('id' in word) {
+      id = word.id;
+    } else {
+      id = word._id;
+    }
+    return id;
   }
 
   async start(group = -1, page = -1) {
