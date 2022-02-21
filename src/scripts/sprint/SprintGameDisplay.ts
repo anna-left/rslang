@@ -94,7 +94,7 @@ class SprintGameDisplay {
   }
 
   clearTimer() {
-    this.timer.clearTimer();
+    this.timer.resetTimer();
   }
 
   render() {
