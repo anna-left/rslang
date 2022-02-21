@@ -19,9 +19,10 @@ export class DailyStatistics {
 
   render(
     learnedWordsOverall: number,
+    newWordsLearned: number,
     rightAnswerOverall: number,
-    audio: { wordsLearned: number; rightAnswers: number; maxSequence: number },
-    sprint: { wordsLearned: number; rightAnswers: number; maxSequence: number },
+    audio: { newWordsLearned: number; rightAnswerNum: number; maxSequence: number },
+    sprint: { newWordsLearned: number; rightAnswerNum: number; maxSequence: number },
   ) {
     this.clear();
     const gameIcons = getSvgs();
@@ -34,7 +35,7 @@ export class DailyStatistics {
     const sprintHeader = createElement('h3', ['daily-card__header'], [], 'Спринт');
     sprintBox.append(sprintHeader, ...getGameBoxContent(sprint), gameIcons[1]);
 
-    this.commonBox.append(...getCommonBoxContent(learnedWordsOverall, rightAnswerOverall));
+    this.commonBox.append(...getCommonBoxContent(learnedWordsOverall, newWordsLearned, rightAnswerOverall));
     this.gameBox.append(getHiddenSvgs());
     this.gameBox.append(audiocallBox, sprintBox);
 

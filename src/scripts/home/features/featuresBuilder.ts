@@ -6,7 +6,7 @@ export function setAboutBox(aboutBox: HTMLElement) {
     'p',
     ['about-box__info'],
     [],
-    'RS Lang - приложение, которое позволяет не только учить слова, но и при этом играть в игры. Можно настраивать под себя и вести статистику',
+    'RS Lang - приложение, которое позволяет не только учить слова, но и при этом играть в игры. Еще ведется статистика, но только для авторизованных пользователей.',
   );
   aboutBox.append(aboutHeader, aboutInfo);
 }
@@ -27,22 +27,22 @@ export function setProgressBox(progressBox: HTMLElement) {
   progressBox.append(progressHeader, progressInfo);
 }
 
-export function setSettingsBox(settingsBox: HTMLElement) {
-  const settingsHeader = createElement('h3', ['section-features__header', 'settings-box__header'], [], 'Настройки');
+// export function setSettingsBox(settingsBox: HTMLElement) {
+//   const settingsHeader = createElement('h3', ['section-features__header', 'settings-box__header'], [], 'Настройки');
 
-  const settingsInfo = createElement(
-    'p',
-    ['settings-box__info'],
-    [],
-    `В меню настроек вы можете выбрать:
-    - цветовую схему;
-    - дневную норму изучаемых слов;
-    - вид анимации;
-    - язык интерфейса;`,
-  );
+//   const settingsInfo = createElement(
+//     'p',
+//     ['settings-box__info'],
+//     [],
+//     `В меню настроек вы можете выбрать:
+//     - цветовую схему;
+//     - дневную норму изучаемых слов;
+//     - вид анимации;
+//     - язык интерфейса;`,
+//   );
 
-  settingsBox.append(settingsHeader, settingsInfo);
-}
+//   settingsBox.append(settingsHeader, settingsInfo);
+// }
 
 export function setCrossBox(crossplatformBox: HTMLElement) {
   const crossHeader = createElement('h3', ['section-features__header', 'cross-box__header'], [], 'Всегда рядом');
