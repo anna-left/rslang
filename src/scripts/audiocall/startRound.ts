@@ -67,7 +67,7 @@ function startRound() {
   }
 
   const audiocallStartBtn = createHtmlElement('button', audiocallStart, 'audiocall-start__btn', 'Начать');
-  audiocallStartBtn.addEventListener('click', startNewGame);
+  audiocallStartBtn.addEventListener('click', startNewGame, { once: true });
   document.addEventListener(
     'keypress',
     function (e) {

@@ -1,5 +1,5 @@
 import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValues';
-import { AMOUNT_ROUND_WORDS, API_PATH } from './constantsAndValues/constants';
+import { API_PATH } from './constantsAndValues/constants';
 import { createHtmlElement } from './createHtmlElement';
 import { words } from './startRound';
 import { playSound } from './playSound';
@@ -22,7 +22,7 @@ function handleNextButton() {
   GLOBAL_VALUES.noAnswer = 0;
   GLOBAL_VALUES.currentQuestion++;
 
-  if (GLOBAL_VALUES.currentQuestion >= AMOUNT_ROUND_WORDS) {
+  if (GLOBAL_VALUES.currentQuestion >= words.length) {
     GLOBAL_VALUES.currentQuestion = 0;
     playSound('end of round');
     showResult();
