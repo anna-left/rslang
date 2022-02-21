@@ -1,4 +1,5 @@
 import { api } from '../app';
+import { getUserIsAutorized } from './createArrayQuestions';
 import { IOneDayStatistics, IGameStatistics, IGeneralStatistics, IUserStatistics, IUserWord } from '../types/types';
 
 interface IAnswer {
@@ -11,6 +12,13 @@ interface IAnswer {
 type TGameName = 'audiocall' | 'sprint';
 
 async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longestStreak: number) {
+  const userIsAutorized = await getUserIsAutorized();
+  if (!userIsAutorized) {
+    return;
+  }
+
+  const userTokens = await api.getUserTokens;
+  console.log(userTokens);
   // user/words
   const promises: Array<Promise<IUserWord | void>> = [];
   arrayWords.forEach((curWord) => {

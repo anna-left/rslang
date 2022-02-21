@@ -39,7 +39,12 @@ function startQuestion() {
   GLOBAL_VALUES.noAnswer = 0;
   const audiocallHTML: HTMLElement = document.querySelector('.audiocall');
   clearPage(audiocallHTML);
+  if (!words.length) {
+    createHtmlElement('div', audiocallHTML, 'audiocall-start__description', 'Нет слов для изучения');
+    return;
+  }
   const audiocallQuestionHTML = createHtmlElement('div', audiocallHTML, 'audiocall-question');
+
   const containerHTML = createHtmlElement('div', audiocallQuestionHTML, 'container');
 
   const speakerHTML: HTMLElement = createHtmlElement('div', containerHTML, 'speaker');

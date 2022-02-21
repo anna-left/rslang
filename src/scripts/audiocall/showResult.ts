@@ -7,7 +7,6 @@ import { GLOBAL_VALUES, LONGEST_STREAKS } from './constantsAndValues/globalValue
 import Dictionary from '../dictionary/Dictionary';
 import { api } from '../app';
 import {
-  AMOUNT_ROUND_WORDS,
   AMOUNT_WORDS_GOOD_RESULT,
   AMOUNT_WORDS_GREAD_RESULT,
   MESSAGE_BAD_RESULT,
@@ -75,8 +74,8 @@ function showResult() {
   clearPage(audiocallHTML);
 
   const rightAnswersAmound: number = words.reduce((a, b) => a + Number(b.correctAnswer), 0);
-  const wrongAnswersAmound: number = AMOUNT_ROUND_WORDS - rightAnswersAmound;
-  const percent = Math.round((rightAnswersAmound / AMOUNT_ROUND_WORDS) * 100);
+  const wrongAnswersAmound: number = words.length - rightAnswersAmound;
+  const percent = Math.round((rightAnswersAmound / words.length) * 100);
   let message = MESSAGE_BAD_RESULT;
   if (percent >= AMOUNT_WORDS_GREAD_RESULT) {
     message = MESSAGE_GREAD_RESULT;
@@ -131,7 +130,7 @@ function showLearnedWords() {
   clearPage(resultContentHTML);
 
   const rightAnswersAmound: number = words.reduce((a, b) => a + Number(b.correctAnswer), 0);
-  const wrongAnswersAmound: number = AMOUNT_ROUND_WORDS - rightAnswersAmound;
+  const wrongAnswersAmound: number = words.length - rightAnswersAmound;
 
   const wordsHTML: HTMLElement = createHtmlElement('div', resultContentHTML, 'words');
 
