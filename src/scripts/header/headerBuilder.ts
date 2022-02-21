@@ -5,6 +5,7 @@ import { IViewManager } from './../manager/IViewManager';
 import { createElement, createSVG } from '../util/Util';
 import { HomeView } from '../home/home/HomeVIew';
 import { startAudiocall } from '../audiocall/startAudiocall';
+import Dictionary from '../dictionary/Dictionary';
 
 export function getUserAuth(userName: string, manager: IViewManager) {
   const woodenBox = createElement('div', ['user-box__container']);
@@ -33,6 +34,9 @@ function getUserNavigation(manager: IViewManager) {
   });
   words.addEventListener('click', () => {
     box.classList.remove(NAV_ACTIVE_CLASS);
+    const dict = new Dictionary(new API());
+    dict.preSelectLevelAndPage(6, 0);
+    dict.start();
   });
   logout.addEventListener('click', () => {
     box.classList.remove(NAV_ACTIVE_CLASS);
