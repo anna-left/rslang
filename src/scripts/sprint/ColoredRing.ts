@@ -48,6 +48,10 @@ class ColoredRing {
     }
   }
 
+  resetColor() {
+    this.circle.setAttribute('stroke', GreatResult.color);
+  }
+
   partialRing(percent: number) {
     this.circle.style.strokeDashoffset = String(this.path - (this.path * percent) / 100);
   }
