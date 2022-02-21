@@ -42,7 +42,7 @@ export class StatisticsView {
       );
     });
     statGeneralLink.addEventListener('click', () => {
-      new GeneralStatistics(this.contentBox).render([10, 20, 30, 40, 15, 22, 43, 17]);
+      new GeneralStatistics(this.contentBox).render();
     });
     statNav.append(statDailyLink, statGeneralLink);
 
