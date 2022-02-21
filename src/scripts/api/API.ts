@@ -134,11 +134,13 @@ export class API {
         Authorization: `Bearer ${this.refreshToken}`,
       },
     });
-    if (response && response.status === StatusCode.OK) {
-      this.updateStorageTokens(await response.json());
-      this.getStorageUserData();
+    if (response) {
+      if (response.status === StatusCode.OK) {
+        this.updateStorageTokens(await response.json());
+        this.getStorageUserData();
+      }
+      return response.status;
     }
-    return response.status;
   }
 
   async getUserWords(): Promise<void | IUserWord[]> {
