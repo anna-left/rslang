@@ -181,4 +181,4 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
   }
 }
 
-export { IAnswer, writeStatistics };
+export { IAnswer, writeStatistics, TGameName };
