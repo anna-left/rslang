@@ -60,7 +60,9 @@ export class API {
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
     });
-    return (await response.json()) as IWordSchema[];
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IWordSchema[];
+    }
   }
 
   async getWords(group: number, page: number) {
@@ -68,7 +70,9 @@ export class API {
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
     });
-    return (await response.json()) as IWordSchema[];
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IWordSchema[];
+    }
   }
 
   async getWord(id: string) {
@@ -76,10 +80,12 @@ export class API {
     const response = await fetch(this.endpoint + endpointModifier, {
       method: 'GET',
     });
-    if (response.status === StatusCode.InternalServerError) {
+    if (response && response.status === StatusCode.OK) {
+      return (await response.json()) as IWordSchema;
+    } else if (response && response.status === StatusCode.InternalServerError) {
       console.log('There is no word with such id');
     }
-    return (await response.json()) as IWordSchema;
+    return;
   }
 
   async createUser(user: IUserSchema): Promise<void> {
@@ -92,7 +98,7 @@ export class API {
         'Content-Type': 'application/json',
       },
     });
-    if (response.status === StatusCode.UnprocessableEntity) {
+    if (response && response.status === StatusCode.UnprocessableEntity) {
       window.dispatchEvent(new CustomEvent('show-error', { detail: { error: 'Incorrect e-mail or password' } }));
       console.log('Incorrect e-mail or password');
     }
@@ -128,7 +134,7 @@ export class API {
         Authorization: `Bearer ${this.refreshToken}`,
       },
     });
-    if (response.status === StatusCode.OK || response.status === StatusCode.Unauthorized) {
+    if (response && response.status === StatusCode.OK) {
       this.updateStorageTokens(await response.json());
       this.getStorageUserData();
     }
@@ -276,7 +282,7 @@ export class API {
       return response;
     } else if (response.status === StatusCode.Unauthorized) {
       const status = await this.getUserTokens();
-      if (status === 200) {
+      if (status === StatusCode.OK) {
         init.headers.Authorization = `Bearer ${this.accessToken}`;
         response = await fetch(this.endpoint + path, init);
         if (response.status === StatusCode.OK) {
@@ -296,7 +302,6 @@ export class API {
       window.dispatchEvent(new CustomEvent('show-error', { detail: { error: errorText } }));
       window.dispatchEvent(new CustomEvent('logout'));
       this.clearUserData();
-      console.log('fired');
     }
   }
 }
