@@ -5,7 +5,7 @@ import { WordsSettings } from '../sprint/SprintSettings';
 import DifficultyCard from './DifficultyCard';
 import './DictionaryView.scss';
 import WordCard from './WordCard';
-import { IAggregatedWordSchema, IWordSchema } from '../types/types';
+import { IAggregatedWordSchema, IWordSchema, TWordDifficulty } from '../types/types';
 import SmallWordCard from './SmallWordCard';
 import ArrowButton from '../sprint/ArrowButton';
 import Pagination from './Pagination';
@@ -147,15 +147,17 @@ class DictionaryView extends Page {
   }
 
   applyWordStatus(word: IAggregatedWordSchema, index: number) {
+    let increaseCount = false;
     if ('userWord' in word) {
       if (word.userWord.difficulty === 'hard') {
         this.cardMarkHard(index);
-        this.accomplishedCount += 1;
+        increaseCount = true;
       } else if (word.userWord.difficulty === 'known') {
         this.cardMarkKnown(index);
-        this.accomplishedCount += 1;
+        increaseCount = true;
       }
     }
+    return increaseCount;
   }
 
   clearActiveWordStatus() {
@@ -164,9 +166,10 @@ class DictionaryView extends Page {
   }
 
   applyStatusOnPage() {
-    if (this.data[1]) {
-      for (let i = 1; i < this.data.length; i += 1) {
-        this.applyWordStatus(this.data[i], i);
+    for (let i = 0; i < this.data.length; i += 1) {
+      const isKnowOrHard = this.applyWordStatus(this.data[i], i);
+      if (isKnowOrHard) {
+        this.accomplishedCount += 1;
       }
     }
     this.clearActiveWordStatus();
@@ -192,9 +195,7 @@ class DictionaryView extends Page {
       this.displayActiveWord();
       this.applyStatusOnPage();
       this.activateWord();
-      if (this.accomplishedCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
-        this.pageAccomplished();
-      }
+      this.setPageStatus();
     } else {
       this.wordsContainer.innerHTML = DictionaryText.noWords;
     }
@@ -262,14 +263,31 @@ class DictionaryView extends Page {
   }
 
   removeWord() {
-    this.wordsContainer.removeChild(this.wordCards[this.currentWordId].render());
-    this.wordCards.splice(this.currentWordId, 1);
     this.data.splice(this.currentWordId, 1);
-    this.currentWordId = 0;
-    this.activateWord();
-    this.emptyActiveWord();
-    this.displayActiveWord();
-    this.applyWordStatus(this.data[0], 0);
+    this.updateData(this.data);
+  }
+
+  setPageStatus() {
+    if (this.accomplishedCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
+      this.pageAccomplished();
+    } else {
+      this.pageNormal();
+    }
+  }
+
+  changeDataWordStatus(status: TWordDifficulty, id = this.currentWordId) {
+    const word: IAggregatedWordSchema = this.data[id];
+    if ('userWord' in word) {
+      word.userWord.difficulty = status;
+    } else {
+      word.userWord = {
+        difficulty: status,
+      };
+    }
+  }
+
+  incrementAccomplishCount(increment: number) {
+    this.accomplishedCount += increment;
   }
 }
 
