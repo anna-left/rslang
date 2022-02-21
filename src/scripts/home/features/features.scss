@@ -8,18 +8,18 @@
     width: 100%;
     padding-left: 9vw;
     padding-bottom: 5vmax;
-    font-size: calc((2vmin + 2vmax) / 2);
+    font-size: 1.85vmax;
   }
 }
 
 .section-features {
   &__box {
-    width: 20vw;
-    padding: 1rem 2rem;
+    width: 25vw;
+    padding: 2rem 3.5rem;
     border-radius: 2rem;
     border: 0.1rem solid $color-prime-dark;
-    margin-right: 3rem;
-    font-size: calc((1.5vmin + 1.5vmax) / 2);
+    margin-right: 4vmax;
+    font-size: 1.4vmax;
 
     &:last-of-type {
       margin-right: 0;
@@ -44,7 +44,7 @@
     }
 
     &_image {
-      max-width: 15vw;
+      max-width: 23vw;
       max-height: 70vh;
     }
   }
@@ -57,8 +57,121 @@
 .about-box {
   &__header {
     width: 100%;
-    font-size: 3.2vmax;
+    font-size: 3.6vmax;
     text-align: left;
     margin-bottom: 3vh;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main-box__section {
+    &_type_features {
+      padding-left: 7vw;
+      padding-bottom: 5vmax;
+      font-size: 2vmax;
+    }
+  }
+  .section-features {
+    &__box {
+      width: 27vw;
+      font-size: 1.6vmax;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .main-box__section {
+    &_type_features {
+      height: 100%;
+      font-size: 2.5vmax;
+    }
+  }
+  .section-features {
+    &__box {
+      font-size: 1.75vmax;
+      padding: 2rem 2.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main-box__section {
+    &_type_features {
+      padding-left: 5vw;
+      padding-right: 5vw;
+      padding-bottom: 2vmax;
+      font-size: 2.3vmax;
+    }
+  }
+  .section-features {
+    &__box {
+      width: 100%;
+      font-size: 1.6vmax;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+    }
+    &__about-box {
+      width: 100%;
+      margin-bottom: 2vh;
+    }
+    &__container {
+      flex-direction: column;
+      &_text {
+        width: 100%;
+        margin-right: 0;
+        flex-direction: column;
+      }
+
+      &_image {
+        max-width: 100%;
+        max-height: 50%;
+        height: 25vh;
+      }
+    }
+  }
+  .about-box {
+    &__header {
+      font-size: 3.6vmax;
+      text-align: left;
+      margin-bottom: 1vh;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .main-box__section {
+    &_type_features {
+      padding-bottom: 2vmax;
+      font-size: 2vmax;
+    }
+  }
+  .section-features {
+    &__box {
+      width: 100%;
+      font-size: 1.6vmax;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+    }
+    &__about-box {
+      width: 100%;
+      margin-bottom: 2vh;
+    }
+    &__container {
+      flex-direction: column;
+      &_text {
+        width: 100%;
+        margin-right: 0;
+        flex-direction: column;
+      }
+
+      &_image {
+        max-width: 100%;
+        max-height: 50%;
+        height: 20vh;
+      }
+    }
+  }
+  .about-box {
+    &__header {
+      font-size: 3.2vmax;
+    }
   }
 }

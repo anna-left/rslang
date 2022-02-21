@@ -6,7 +6,7 @@ import {
   setAboutBox,
   setCrossBox,
   setProgressBox,
-  setSettingsBox,
+  // setSettingsBox,
   setHiddenFeaturesSVG,
 } from './featuresBuilder';
 
@@ -32,12 +32,12 @@ export class Feature {
     setProgressBox(progressBox);
 
     // Settings
-    const settingsBox = createElement('div', [
-      'section-features__box',
-      'section-features__settings-box',
-      'settings-box',
-    ]);
-    setSettingsBox(settingsBox);
+    // const settingsBox = createElement('div', [
+    //   'section-features__box',
+    //   'section-features__settings-box',
+    //   'settings-box',
+    // ]);
+    // setSettingsBox(settingsBox);
 
     // crossplatform
     const crossplatformBox = createElement('div', [
@@ -50,7 +50,7 @@ export class Feature {
     const featuresBox = createElement('div', ['section-features__container']);
     const featuresBoxText = createElement('div', ['section-features__container_text']);
     const featuresBoxImage = getFeaturesImage();
-    featuresBoxText.append(progressBox, settingsBox, crossplatformBox);
+    featuresBoxText.append(progressBox, crossplatformBox);
     featuresBox.append(featuresBoxText, featuresBoxImage);
     section.append(aboutBox, featuresBox);
 
