@@ -12,7 +12,8 @@ interface IAnswer {
 type TGameName = 'audiocall' | 'sprint';
 
 async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longestStreak: number) {
-  if (!getUserIsAutorized()) {
+  const userIsAutorized = await getUserIsAutorized();
+  if (!userIsAutorized) {
     return;
   }
 
