@@ -90,10 +90,6 @@
     font-size: 3rem;
     font-weight: normal;
   }
-
-  &--accomplished {
-    background-color: palegoldenrod;
-  }
 }
 
 .hidden {
@@ -108,4 +104,10 @@
 
 .unauthorized .difficulty-card:last-child {
   display: none;
+}
+
+.main-box {
+  &--accomplished {
+    background-color: palegoldenrod;
+  }
 }

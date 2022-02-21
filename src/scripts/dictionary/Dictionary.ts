@@ -113,6 +113,9 @@ class Dictionary {
       if (event.detail.hard) {
         this.view.cardUnmarkHard();
         this.model.setUserWord(event.detail.wordId, 'unset');
+        if (this.currentLevel === WordsSettings.groups) {
+          this.view.removeWord();
+        }
       } else {
         this.view.cardMarkHard();
         this.view.cardUnmarkKnown();
@@ -127,6 +130,9 @@ class Dictionary {
         this.view.cardMarkKnown();
         this.view.cardUnmarkHard();
         this.model.setUserWord(event.detail.wordId, 'known');
+        if (this.currentLevel === WordsSettings.groups) {
+          this.view.removeWord();
+        }
       }
     });
     window.addEventListener('login', () => {

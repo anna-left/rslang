@@ -249,14 +249,27 @@ class DictionaryView extends Page {
 
   pageAccomplished() {
     this.gamesSection.classList.add('disabled');
-    this.page.classList.add('dictionary--accomplished');
+    const root = document.querySelector('.main-box');
+    root.classList.add('main-box--accomplished');
     this.pagination.setAccomplished();
   }
 
   pageNormal() {
     this.gamesSection.classList.remove('disabled');
-    this.page.classList.remove('dictionary--accomplished');
+    const root = document.querySelector('.main-box');
+    root.classList.remove('main-box--accomplished');
     this.pagination.setNormal();
+  }
+
+  removeWord() {
+    this.wordsContainer.removeChild(this.wordCards[this.currentWordId].render());
+    this.wordCards.splice(this.currentWordId, 1);
+    this.data.splice(this.currentWordId, 1);
+    this.currentWordId = 0;
+    this.activateWord();
+    this.emptyActiveWord();
+    this.displayActiveWord();
+    this.applyWordStatus(this.data[0], 0);
   }
 }
 
