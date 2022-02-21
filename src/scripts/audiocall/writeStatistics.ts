@@ -103,16 +103,36 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
       general.wrongWordsCount += wrongWordsCount;
       if (gameName === 'audiocall') {
         const audiocall = registerCurDate.audiocall;
-        audiocall.newWordsCount += newWordsCount;
-        audiocall.longestStreak = Math.max(audiocall.longestStreak, longestStreak);
-        audiocall.rightWordsCount += rightWordsCount;
-        audiocall.wrongWordsCount += wrongWordsCount;
+        if (audiocall) {
+          audiocall.newWordsCount += newWordsCount;
+          audiocall.longestStreak = Math.max(audiocall.longestStreak, longestStreak);
+          audiocall.rightWordsCount += rightWordsCount;
+          audiocall.wrongWordsCount += wrongWordsCount;
+        } else {
+          const newAudiocall: IGameStatistics = {
+            newWordsCount: newWordsCount,
+            longestStreak: longestStreak,
+            rightWordsCount: rightWordsCount,
+            wrongWordsCount: wrongWordsCount,
+          };
+          registerCurDate.audiocall = newAudiocall;
+        }
       } else {
         const sprint = registerCurDate.sprint;
-        sprint.newWordsCount += newWordsCount;
-        sprint.longestStreak = Math.max(registerCurDate.sprint.longestStreak, longestStreak);
-        sprint.rightWordsCount += rightWordsCount;
-        sprint.wrongWordsCount += wrongWordsCount;
+        if (sprint) {
+          sprint.newWordsCount += newWordsCount;
+          sprint.longestStreak = Math.max(registerCurDate.sprint.longestStreak, longestStreak);
+          sprint.rightWordsCount += rightWordsCount;
+          sprint.wrongWordsCount += wrongWordsCount;
+        } else {
+          const newsprint: IGameStatistics = {
+            newWordsCount: newWordsCount,
+            longestStreak: longestStreak,
+            rightWordsCount: rightWordsCount,
+            wrongWordsCount: wrongWordsCount,
+          };
+          registerCurDate.sprint = newsprint;
+        }
       }
       const updateStatistics = {
         learnedWords: knownWordsCount,
