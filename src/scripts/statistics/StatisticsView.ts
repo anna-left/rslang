@@ -1,3 +1,4 @@
+import { getDailyGameStatistics, getDailyStatistics } from '../audiocall/getStatistics';
 import { createElement } from '../util/Util';
 import { DailyStatistics } from './DailyStatistics';
 import { GeneralStatistics } from './GeneralStatistics';
@@ -19,12 +20,25 @@ export class StatisticsView {
     const statDailyLink = createElement('span', ['statistics__navigation_link'], [], 'Статистика за сегодня');
     const statGeneralLink = createElement('span', ['statistics__navigation_link'], [], 'Статистика за все время');
 
-    statDailyLink.addEventListener('click', () => {
+    statDailyLink.addEventListener('click', async () => {
+      const data = await getDailyStatistics();
+      const gameData = await getDailyGameStatistics();
+      const audioGameData = {
+        newWordsLearned: gameData.newWordsCountAudiocall,
+        rightAnswerNum: gameData.rightWordsPercentAudiocall,
+        maxSequence: gameData.longestStreakAudiocall,
+      };
+      const sprintGameData = {
+        newWordsLearned: gameData.newWordsCountSprint,
+        rightAnswerNum: gameData.rightWordsPercentSprint,
+        maxSequence: gameData.longestStreakSprint,
+      };
       new DailyStatistics(this.contentBox).render(
-        0,
-        0,
-        { wordsLearned: 0, rightAnswers: 0, maxSequence: 0 },
-        { wordsLearned: 0, rightAnswers: 0, maxSequence: 0 },
+        data.knownWordsCount,
+        data.newWordsCount,
+        data.rightWordsPercent,
+        audioGameData,
+        sprintGameData,
       );
     });
     statGeneralLink.addEventListener('click', () => {
@@ -35,16 +49,28 @@ export class StatisticsView {
     this.stats.append(statNav, this.contentBox);
   }
 
-  renderDaily(
-    root: HTMLElement,
-    learnedWordsOverall: number,
-    rightAnswerOverall: number,
-    audio: { wordsLearned: number; rightAnswers: number; maxSequence: number },
-    sprint: { wordsLearned: number; rightAnswers: number; maxSequence: number },
-  ) {
+  async renderDaily(root: HTMLElement) {
     root.replaceChildren();
+    const data = await getDailyStatistics();
+    const gameData = await getDailyGameStatistics();
+    const audioGameData = {
+      newWordsLearned: gameData.newWordsCountAudiocall,
+      rightAnswerNum: gameData.rightWordsPercentAudiocall,
+      maxSequence: gameData.longestStreakAudiocall,
+    };
+    const sprintGameData = {
+      newWordsLearned: gameData.newWordsCountSprint,
+      rightAnswerNum: gameData.rightWordsPercentSprint,
+      maxSequence: gameData.longestStreakSprint,
+    };
     this.contentBox.replaceChildren();
-    new DailyStatistics(this.contentBox).render(learnedWordsOverall, rightAnswerOverall, audio, sprint);
+    new DailyStatistics(this.contentBox).render(
+      data.knownWordsCount,
+      data.newWordsCount,
+      data.rightWordsPercent,
+      audioGameData,
+      sprintGameData,
+    );
     root.append(this.stats);
   }
 }
