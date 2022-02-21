@@ -17,8 +17,6 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
     return;
   }
 
-  const userTokens = await api.getUserTokens;
-  console.log(userTokens);
   // user/words
   const promises: Array<Promise<IUserWord | void>> = [];
   arrayWords.forEach((curWord) => {
