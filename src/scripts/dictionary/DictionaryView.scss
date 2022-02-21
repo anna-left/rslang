@@ -1,3 +1,5 @@
+@import "../../sass/util/variables";
+
 .dictionary {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,7 @@
   width: 154rem;
   margin: 0 auto;
   align-items: center;
+  line-height: 1.1719;
 
   &__section {
     display: flex;
@@ -25,11 +28,11 @@
   &__header {
     font-size: 4.8rem;
     font-weight: bold;
-    line-height: 5.6rem;
   }
 
   &__subheader {
     font-size: 2.4rem;
+    font-weight: normal;
   }
 
   &__levels {
@@ -109,5 +112,167 @@
 .main-box {
   &--accomplished {
     background-color: palegoldenrod;
+  }
+}
+
+body {
+  &::-webkit-scrollbar {
+    width: 1.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-prime-candy;
+    opacity: 0.61;
+    border: 1px solid $color-prime-candy-light;
+    border-radius: 2rem;
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .dictionary {
+    width: 104rem;
+
+    &__section {
+      &:first-child {
+        margin-top: 12rem;
+      }
+
+      &:last-child {
+        margin-bottom: 5rem;
+      }
+    }
+
+    &__header {
+      font-size: 3.2rem;
+    }
+
+    &__subheader {
+      font-size: 1.6rem;
+    }
+
+    &__game {
+      width: 49rem;
+      height: 25rem;
+      border-radius: 1.7rem;
+      gap: 1.5rem;
+      padding: 2.5rem 3.5rem;
+    }
+
+    &__audiocall {
+      background: url("./../../assets/svg/plant3.svg") no-repeat right 3rem bottom 2rem, linear-gradient(180deg, #DCB1FF 0%, rgba(220, 177, 255, 0) 100%);
+      background-size: auto 20rem, auto auto;
+    }
+
+    &__sprint {
+      background: url("./../../assets/svg/plant2.svg") no-repeat right 3rem bottom 2rem, linear-gradient(180deg, #8EE4A7 0%, rgba(255, 255, 255, 0) 100%);
+      background-size: auto 20rem, auto auto;
+    }
+
+    &__game-header {
+      font-size: 4.7rem;
+    }
+
+    &__game-desc {
+      width: 25rem;
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dictionary {
+    width: 66rem;
+
+    &__words {
+      gap: 1rem;
+    }
+
+    &__levels {
+      flex-wrap: wrap;
+    }
+
+    &__section {
+      align-items: center;
+
+      &:first-child {
+        margin-top: 10rem;
+      }
+
+      &:last-child {
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    &__games-container {
+      gap: 2rem;
+    }
+
+    &__game {
+      width: 32rem;
+      height: 19rem;
+      border-radius: 1.7rem;
+      gap: 1.5rem;
+      padding: 2.5rem 3.5rem;
+    }
+
+    &__audiocall {
+      background: linear-gradient(180deg, #DCB1FF 0%, rgba(220, 177, 255, 0) 100%);
+      background-size: auto auto;
+    }
+
+    &__sprint {
+      background: linear-gradient(180deg, #8EE4A7 0%, rgba(255, 255, 255, 0) 100%);
+      background-size: auto auto;
+    }
+
+    &__game-header {
+      font-size: 4rem;
+    }
+
+    &__game-desc {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .dictionary {
+    width: 31rem;
+
+    &__subheader {
+      display: none;
+    }
+
+    &__all-words {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &__word {
+      order: -1;
+    }
+
+    &__games-container {
+      flex-direction: column;
+    }
+
+    &__game {
+      width: 31rem;
+      height: 19rem;
+      border-radius: 1.7rem;
+      gap: 1.5rem;
+      padding: 2.5rem 3.5rem;
+    }
+
+    &__pagination-container {
+      gap: 1.5rem
+    }
   }
 }

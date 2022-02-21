@@ -17,7 +17,7 @@
   }
 
   &__word, &__translation {
-    overflow:hidden;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
@@ -48,6 +48,7 @@
     right: 1rem;
     padding: 1rem;
     cursor: default;
+
     &--text {
       position: absolute;
       z-index: 1;
@@ -63,6 +64,7 @@
       background-color: black;
       border-radius: 1rem;
       visibility: hidden;
+
       &::after {
         content: " ";
         position: absolute;
@@ -74,6 +76,7 @@
         border-color: black transparent transparent transparent;
       }
     }
+
     &:hover &--text {
       transition: visibility 0.3s;
       visibility: visible;
@@ -84,5 +87,53 @@
 .unauthorized .small-word-card {
   &--hard::after, &--known::after, &__info {
     visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .small-word-card {
+    width: 16rem;
+    height: 9.5rem;
+    padding: 1.5rem;
+
+    &__word {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    &__translation {
+      font-size: 1.6rem;
+    }
+
+    &--hard::after {
+      right: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &--known::after {
+      right: 4rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &__info {
+      top: -0.5rem;
+      right: -0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .small-word-card {
+    width: 16rem;
+    height: 9rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .small-word-card {
+    width: 15rem;
+    height: 9rem;
   }
 }

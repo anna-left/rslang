@@ -43,15 +43,15 @@
 }
 
 .ellipsis-right::after, .ellipsis-left::before {
-    position: absolute;
-    content: "...";
-    width: 4rem;
-    height: 4rem;
-    text-align: center;
-    font-size: 3rem;
-    line-height: 4rem;
-    cursor: auto;
-    pointer-events: none;
+  position: absolute;
+  content: "...";
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  font-size: 3rem;
+  line-height: 4rem;
+  cursor: auto;
+  pointer-events: none;
 }
 
 .ellipsis-right::after {
@@ -60,4 +60,36 @@
 
 .ellipsis-left::before {
   right: 5rem;
+}
+
+@media screen and (max-width: 390px) {
+  .pagination {
+    &__page {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+    }
+  }
+  .ellipsis-right {
+    margin-right: 3.5rem;
+  }
+
+  .ellipsis-left {
+    margin-left: 3.5rem;
+  }
+
+  .ellipsis-right::after, .ellipsis-left::before {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  .ellipsis-right::after {
+    left: 3.5rem;
+  }
+
+  .ellipsis-left::before {
+    right: 3.5rem;
+  }
 }
