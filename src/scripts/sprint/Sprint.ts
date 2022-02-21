@@ -30,6 +30,8 @@ class Sprint {
 
   private dict: Dictionary;
 
+  private longestStreak: number;
+
   constructor(api: API) {
     this.dict = null;
     this.group = null;
@@ -47,6 +49,7 @@ class Sprint {
     this.level = 1;
     this.wrongWords = [];
     this.rightWords = [];
+    this.longestStreak = 0;
   }
 
   addDictionary(dictionary: Dictionary) {
@@ -108,6 +111,7 @@ class Sprint {
     if (this.isCorrectAnswer(answer)) {
       this.updateScore();
       this.rightWords.push(this.round[this.currentWordIndex]);
+      this.longestStreak += 1;
       if (this.canLevelUp()) {
         this.streak = 0;
         this.level = this.level === SprintSettings.maxLevel ? this.level : this.level + 1;
