@@ -6,6 +6,7 @@ import { createElement } from '../util/Util';
 import 'chart.js/auto';
 import { Chart } from 'chart.js';
 import './general.scss';
+import { getLongTermStatistics } from '../audiocall/getStatistics';
 
 export class GeneralStatistics {
   private _root: HTMLElement;
@@ -17,22 +18,32 @@ export class GeneralStatistics {
     this.canvasBox = createElement('div', ['statistics__general_canvas-box', 'canvas-box']);
   }
 
-  render(data: number[]) {
+  async render() {
     this.clear();
+    const data = await getLongTermStatistics();
+    const dates: string[] = [];
+    const newWordsAmount: number[] = [];
+    const knownWordsAmount: number[] = [];
+    data.forEach((el) => {
+      dates.push(el.date);
+      newWordsAmount.push(el.newWordsCount);
+      knownWordsAmount.push(el.knownWordsCount);
+    });
     const canvas = <HTMLCanvasElement>createElement('canvas', ['statistics__general_canvas', 'canvas-box__canvas']);
-    console.log(canvas);
-    const labels = [];
-    for (let i = 0; i < data.length; i++) {
-      labels.push(i);
-    }
     const dataChart = {
-      labels: labels,
+      labels: dates,
       datasets: [
         {
-          label: 'Количество слов за день',
-          backgroundColor: '#ffffff',
-          borderColor: '#000000',
-          data: [0, ...data],
+          label: 'Новых слов за день',
+          backgroundColor: '#43d26c',
+          borderColor: '#43d26c',
+          data: newWordsAmount,
+        },
+        {
+          label: 'Изучено слов за день',
+          backgroundColor: '#cd8eff',
+          borderColor: '#cd8eff',
+          data: knownWordsAmount,
         },
       ],
     };

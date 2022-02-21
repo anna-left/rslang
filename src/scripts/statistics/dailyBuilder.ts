@@ -39,7 +39,7 @@ export function getGameBoxContent(game: { newWordsLearned: number; rightAnswerNu
     'Самая длинная серия\nправильных ответов: ',
   );
   const maxSequence = createElement('span', ['daily-card__sequence'], [], `${game.maxSequence}`);
-  maxSequenceBox.append(maxSequence, '%');
+  maxSequenceBox.append(maxSequence);
 
   return [learnedWordsBox, rightAnswersBox, maxSequenceBox];
 }

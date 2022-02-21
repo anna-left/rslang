@@ -6,7 +6,7 @@ import {
   getGamesItem,
   getHideBurgerIcon,
   getHomeItem,
-  getSettingsItem,
+  // getSettingsItem,
 } from './burgerBuilder';
 
 import './burger.scss';
@@ -45,14 +45,14 @@ export class BurgerView {
     const home = getHomeItem();
     const dictionary = getDictionaryItem();
     const games = getGamesItem();
-    const settings = getSettingsItem();
+    // const settings = getSettingsItem();
 
     home.addEventListener('click', () => new HomeView().render(manager));
     dictionary.addEventListener('click', async () => {
       await dict.start();
     });
 
-    list.append(home, dictionary, games, settings);
+    list.append(home, dictionary, games);
     this.burger.append(hideIcon, list);
     document.body.append(this.burger);
   }
