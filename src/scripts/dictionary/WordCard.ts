@@ -40,12 +40,14 @@ class WordCard extends Page {
     this.page.append(image, header, line, subheader, container);
 
     header.addEventListener('click', () => {
-      const marked = this.page.classList.contains('word-card--hard');
-      window.dispatchEvent(new CustomEvent('mark-hard', { detail: { hard: marked, wordId: word._id } }));
+      const hard = this.page.classList.contains('word-card--hard');
+      const known = this.page.classList.contains('word-card--known');
+      window.dispatchEvent(new CustomEvent('mark-hard', { detail: { hard: hard, known: known, wordId: word._id } }));
     });
     subheader.addEventListener('click', () => {
-      const marked = this.page.classList.contains('word-card--known');
-      window.dispatchEvent(new CustomEvent('mark-known', { detail: { known: marked, wordId: word._id } }));
+      const hard = this.page.classList.contains('word-card--hard');
+      const known = this.page.classList.contains('word-card--known');
+      window.dispatchEvent(new CustomEvent('mark-known', { detail: { hard: hard, known: known, wordId: word._id } }));
     });
   }
 }

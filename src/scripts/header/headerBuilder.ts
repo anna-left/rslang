@@ -39,6 +39,14 @@ function getUserNavigation(manager: IViewManager) {
     new API().clearUserData();
     manager.header.userUnauthorize();
   });
+  window.addEventListener('logout', () => {
+    box.classList.remove(NAV_ACTIVE_CLASS);
+    new API().clearUserData();
+    manager.header.userUnauthorize();
+    manager.manager.renderHome();
+    manager.manager.renderFooter();
+    manager.manager.renderHomeNavigation();
+  });
 
   box.append(stat, words, logout);
   return box;

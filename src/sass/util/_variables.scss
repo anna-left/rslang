@@ -8,20 +8,15 @@ $color-prime-candy: #cd8eff;
 $color-prime-candy-light: #edd7ff;
 
 :root {
-  --timerRadius: 50;
-  --progressRadius: 70;
-  --timerBorderThickness: 8;
+  --timerRadius: 60;
+  --progressRadius: 100;
+  --timerBorderThickness: 15;
 }
-$timerRadius: 5rem;
-$progressRadius: 7rem;
-$timerBorderThickness: 0.8rem;
+$timerRadius: 6rem;
+$progressRadius: 10rem;
+$timerBorderThickness: 1.5rem;
 
-$levelUpSize: 8rem;
-$badgeSize: 3rem;
-
-$sprintMainColor: #43d26c;
-$sprintMainColorShadow:#26783d;
-$sprintGamePadding: 3rem;
-$sprintGameBorderRadius: 3.5rem;
-$color-sprint-wrong: #ff4f4f;
 $color-sprint-right: #43d26c;
+$color-sprint-right-shadow:#26783d;
+$color-sprint-wrong: #ff4f4f;
+$color-sprint-wrong-shadow: #9a1e1e;

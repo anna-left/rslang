@@ -34,3 +34,43 @@
     color: black;
   }
 }
+
+@media screen and (max-width: 1280px) {
+  .difficulty-card {
+    width: 16rem;
+    height: 6rem;
+    border-radius: 1.7rem;
+    padding: 1rem;
+    font-size: 2rem;
+
+    &__label {
+      width: 4.5rem;
+      height: 4.5rem;
+      line-height: 4.5rem;
+    }
+
+    &__range {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .difficulty-card {
+    width: 14rem;
+    height: 5.5rem;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    font-size: 2rem;
+
+    &__label {
+      width: 4rem;
+      height: 4rem;
+      line-height: 4rem;
+    }
+
+    &__range {
+      font-size: 1rem;
+    }
+  }
+}

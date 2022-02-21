@@ -25,9 +25,11 @@
   &__header {
     font-size: 4.5rem;
     font-weight: bold;
+
     &:first-letter {
       text-transform: uppercase;
     }
+
     &::after {
       position: absolute;
       content: "Сложное";
@@ -71,6 +73,7 @@
   &__subheader {
     font-size: 3rem;
     font-weight: bold;
+
     &::after {
       position: absolute;
       content: "Изучено";
@@ -113,5 +116,69 @@
   .unauthorized &__subheader::after,
   .unauthorized &__info {
     visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .word-card {
+    width: 33rem;
+    height: 60rem;
+    gap: 1rem;
+
+    &__img {
+      height: 25rem;
+    }
+
+    &__header {
+      font-size: 3rem;
+      &::after {
+        width: 15rem;
+        height: 3rem;
+        top: 2rem;
+        left: 0;
+        font-size: 2rem;
+        text-indent: 1rem;
+        line-height: 3rem;
+      }
+    }
+
+    &__line {
+      font-size: 1.5rem;
+    }
+
+    &__subheader {
+      font-size: 2rem;
+      &::after {
+        width: 15rem;
+        height: 3rem;
+        top: 7rem;
+        left: 0;
+        font-size: 2rem;
+        text-indent: 1rem;
+        line-height: 3rem;
+      }
+    }
+
+    &__text {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .word-card {
+    width: 32rem;
+    height: 60rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .word-card {
+    width: 31rem;
+    height: 60rem;
+
+    &__img {
+      height: 23rem;
+    }
   }
 }

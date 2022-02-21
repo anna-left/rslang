@@ -150,7 +150,6 @@ declare global {
     'show-error': CustomEvent;
     login: CustomEvent;
     logout: CustomEvent;
-    'go-to-login-screen': CustomEvent;
     'page-to-left': CustomEvent;
     'page-to-right': CustomEvent;
     'audiocall-dict-start': CustomEvent;

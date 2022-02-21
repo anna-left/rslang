@@ -1,9 +1,6 @@
 @import "../../sass/util/variables";
 
 .sprint-game-display {
-  margin: -$sprintGamePadding 0;
-  padding: $sprintGamePadding;
-  border-radius: $sprintGameBorderRadius $sprintGameBorderRadius 0 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -11,8 +8,8 @@
 
   &__level-img {
     display: block;
-    width: $levelUpSize;
-    height: $levelUpSize;
+    width: 7rem;
+    height: 7rem;
   }
 
   &__central {
@@ -20,7 +17,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem
+    gap: 2rem;
+    width: 28rem;
   }
 
   &__score, &__score-info {
@@ -36,6 +34,7 @@
 
   &__score {
     width: 2.5 * $timerRadius;
+    text-align: center;
   }
 
   &__timer {
@@ -51,7 +50,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: calc($timerRadius / 2);
+    font-size: calc(#{$timerRadius} / 2);
   }
 
   &__timer__circle {
@@ -65,5 +64,12 @@
     circle {
       transition: all 1s linear;
     }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .sprint-game-display {
+    flex-direction: column;
+    gap: 2rem;
   }
 }
