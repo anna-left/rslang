@@ -111,12 +111,12 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
         sprint.longestStreak = Math.max(registerCurDate.sprint.longestStreak, longestStreak);
         sprint.rightWordsCount += rightWordsCount;
         sprint.wrongWordsCount += wrongWordsCount;
-        const updateStatistics = {
-          learnedWords: knownWordsCount,
-          optional: { statistics: JSON.stringify(statistics) },
-        };
-        await api.updateUserStatistics(updateStatistics);
       }
+      const updateStatistics = {
+        learnedWords: knownWordsCount,
+        optional: { statistics: JSON.stringify(statistics) },
+      };
+      await api.updateUserStatistics(updateStatistics);
     } else {
       //нет записи за эту дату
       const general: IGeneralStatistics = {
@@ -144,7 +144,6 @@ async function writeStatistics(arrayWords: IAnswer[], gameName: TGameName, longe
       };
       await api.updateUserStatistics(updateStatistics);
     }
-    // await api.updateUserStatistics(userStatistics);
   } else {
     const generalStatistics: IGeneralStatistics = {
       newWordsCount: newWordsCount,
