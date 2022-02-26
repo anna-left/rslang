@@ -85,18 +85,18 @@ export function getGamesItem() {
   return games;
 }
 
-// export function getSettingsItem() {
-//   const settings = createElement('li', ['burger__item', 'burger__link']);
+export function getSettingsItem() {
+  const settings = createElement('li', ['burger__item', 'burger__link']);
 
-//   const configIconSvg = createSVG('svg', ['burger__item_icon']);
-//   const configIconUse = createSVG('use', [], [['href', '#burger_config-icon']]);
+  const configIconSvg = createSVG('svg', ['burger__item_icon']);
+  const configIconUse = createSVG('use', [], [['href', '#burger_config-icon']]);
 
-//   const configText = createElement('span', ['burger__item_text'], [], 'Настройки');
+  const configText = createElement('span', ['burger__item_text'], [], 'Настройки');
 
-//   configIconSvg.append(configIconUse);
-//   settings.append(configIconSvg, configText);
-//   return settings;
-// }
+  configIconSvg.append(configIconUse);
+  settings.append(configIconSvg, configText);
+  return settings;
+}
 
 export function getHideBurgerIcon() {
   const svgHideIcon = createSVG('svg', ['burger__hide-icon']);

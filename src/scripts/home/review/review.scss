@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    padding: 0 9vw 4vmax;
+    padding: 0 9vw 7vh;
   }
 }
 
@@ -31,7 +31,7 @@
   .main-box__section {
     &_type_review {
       align-self: flex-end;
-      padding: 0 5vw 4vmax;
+      padding: 0 5vw 7vh;
     }
   }
   .section-review {
@@ -43,7 +43,7 @@
       height: 100%;
     }
     &__video-box {
-      height: 65vh;
+      height: 67vh;
       width: 80vw;
     }
   }
@@ -52,7 +52,7 @@
   .main-box__section {
     &_type_review {
       align-self: flex-end;
-      padding: 0 5vw 4vmax;
+      padding: 0 5vw 7vh;
     }
   }
   .section-review {
