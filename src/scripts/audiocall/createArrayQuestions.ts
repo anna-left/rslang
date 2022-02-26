@@ -47,7 +47,7 @@ async function createArrayQuestions() {
   if (GLOBAL_VALUES.currentPage === -1) {
     arrayWords = shuffleArray(arrayWords);
   }
-  for (let i = arrayWords.length - 1; i >= 0; i--) {
+  for (let i = 0; i < arrayWords.length; i++) {
     const curWord = arrayWords[i];
     if (userIsAutorized) {
       const promiseUserWord = await api.getUserWord(curWord.id);
