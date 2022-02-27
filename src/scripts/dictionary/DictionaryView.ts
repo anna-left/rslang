@@ -17,7 +17,7 @@ class DictionaryView extends Page {
 
   private readonly wordsContainer: HTMLElement;
 
-  private readonly currentWord: HTMLElement;
+  private readonly currentWordContainer: HTMLElement;
 
   private data: IWordSchema[] | IAggregatedWordSchema[];
 
@@ -37,6 +37,10 @@ class DictionaryView extends Page {
 
   private accomplishedCount: number;
 
+  private readonly audioPlayer: HTMLAudioElement;
+
+  private currentWordCard: WordCard;
+
   constructor(className: string) {
     super(className);
     this.className = className;
@@ -46,6 +50,7 @@ class DictionaryView extends Page {
     this.wordCards = [];
     this.currentWordId = 0;
     this.accomplishedCount = 0;
+    this.audioPlayer = new Audio();
     const levelsSection = createHTMLElement('div', `${this.className}__section`);
     const header = createHTMLElement('h2', `${this.className}__header`, DictionaryText.header);
     const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.subheader);
@@ -56,8 +61,8 @@ class DictionaryView extends Page {
     const wordHeader = createHTMLElement('h2', `${this.className}__header`, DictionaryText.wordHeader);
     const words = createHTMLElement('div', `${this.className}__all-words`);
     this.wordsContainer = createHTMLElement('div', `${this.className}__words unauthorized`);
-    this.currentWord = createHTMLElement('div', `${this.className}__word unauthorized`);
-    words.append(this.wordsContainer, this.currentWord);
+    this.currentWordContainer = createHTMLElement('div', `${this.className}__word unauthorized`);
+    words.append(this.wordsContainer, this.currentWordContainer);
     wordsSection.append(wordHeader, words);
 
     this.paginationContainer = createHTMLElement('div', `${this.className}__pagination-container`);
@@ -161,8 +166,8 @@ class DictionaryView extends Page {
   }
 
   clearActiveWordStatus() {
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
+    this.currentWordCard.render().classList.remove(`word-card--hard`);
+    this.currentWordCard.render().classList.remove(`word-card--known`);
   }
 
   applyStatusOnPage() {
@@ -176,12 +181,12 @@ class DictionaryView extends Page {
   }
 
   displayActiveWord() {
-    const currentWord = new WordCard(this.data[this.currentWordId]);
-    this.currentWord.append(currentWord.render());
+    this.currentWordCard = new WordCard(this.data[this.currentWordId], this.audioPlayer);
+    this.currentWordContainer.append(this.currentWordCard.render());
   }
 
   emptyActiveWord() {
-    this.currentWord.innerHTML = '';
+    this.currentWordContainer.innerHTML = '';
   }
 
   updateData(data: IWordSchema[] | IAggregatedWordSchema[]) {
@@ -218,32 +223,32 @@ class DictionaryView extends Page {
 
   cardMarkHard(id = this.currentWordId) {
     this.wordCards[id].render().classList.add('small-word-card--hard');
-    (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--hard`);
+    this.currentWordCard.render().classList.add(`word-card--hard`);
   }
 
   cardUnmarkHard(id = this.currentWordId) {
     this.wordCards[id].render().classList.remove('small-word-card--hard');
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
+    this.currentWordCard.render().classList.remove(`word-card--hard`);
   }
 
   cardMarkKnown(id = this.currentWordId) {
     this.wordCards[id].render().classList.add('small-word-card--known');
-    (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--known`);
+    this.currentWordCard.render().classList.add(`word-card--known`);
   }
 
   cardUnmarkKnown(id = this.currentWordId) {
     this.wordCards[id].render().classList.remove('small-word-card--known');
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
+    this.currentWordCard.render().classList.remove(`word-card--known`);
   }
 
   authorizeView() {
-    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach((element) => {
+    [this.levelsContainer, this.wordsContainer, this.currentWordContainer].forEach((element) => {
       element.classList.remove('unauthorized');
     });
   }
 
   unAuthorizeView() {
-    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach((element) => {
+    [this.levelsContainer, this.wordsContainer, this.currentWordContainer].forEach((element) => {
       element.classList.add('unauthorized');
     });
   }
@@ -288,6 +293,12 @@ class DictionaryView extends Page {
 
   incrementAccomplishCount(increment: number) {
     this.accomplishedCount += increment;
+  }
+
+  stopPlaying() {
+    if (this.currentWordCard) {
+      this.currentWordCard.stopPlaying();
+    }
   }
 }
 

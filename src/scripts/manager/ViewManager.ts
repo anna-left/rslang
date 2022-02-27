@@ -1,4 +1,4 @@
-import { StatisticsView } from './../statistics/StatisticsView';
+import { StatisticsView } from '../statistics/StatisticsView';
 import { HeaderView } from '../header/HeaderView';
 import { MainView } from '../main/MainView';
 import { FooterView } from '../footer/FooterView';
@@ -36,6 +36,8 @@ export class ViewManager {
 
   manager: this;
 
+  private readonly root: Element;
+
   constructor() {
     this.burger = new BurgerView();
     this.main = new MainView();
@@ -55,6 +57,7 @@ export class ViewManager {
     this.home.render(this);
     this.homeNavigation.render(this);
     this.manager = this;
+    this.root = document.querySelector('.main-box');
   }
 
   async init() {
@@ -82,6 +85,10 @@ export class ViewManager {
     window.addEventListener('show-nav', () => {
       this.renderHomeNavigation();
     });
+    const observer = new MutationObserver(function () {
+      window.dispatchEvent(new CustomEvent('page-changed'));
+    });
+    observer.observe(this.root, { childList: true });
   }
 
   renderFooter() {

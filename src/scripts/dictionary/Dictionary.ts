@@ -158,6 +158,9 @@ class Dictionary {
       this.view.unAuthorizeView();
       this.authorized = false;
     });
+    window.addEventListener('page-changed', () => {
+      this.view.stopPlaying();
+    });
   }
 
   async start() {
