@@ -75,9 +75,9 @@ class Sprint {
       await this.initializeGameState();
       this.model.selectWords(this.group, this.page);
       this.round = await this.model.getWords();
-      await this.nextRound();
       this.view.showGame();
       this.view.startTimer();
+      await this.nextRound();
     });
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
@@ -175,6 +175,7 @@ class Sprint {
   }
 
   async onGameOver() {
+    this.view.clearTimer();
     this.view.onGameOver(this.rightWords, this.wrongWords);
     if (await this.model.checkAuthorizationStatus()) {
       const answers = this.getAnswers();
