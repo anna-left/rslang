@@ -35,7 +35,7 @@ class DictionaryView extends Page {
 
   private readonly gamesSection: HTMLElement;
 
-  private accomplishedCount: number;
+  private knownCount: number;
 
   private readonly audioPlayer: HTMLAudioElement;
 
@@ -49,7 +49,7 @@ class DictionaryView extends Page {
     this.currentDifficultyLevel = 0;
     this.wordCards = [];
     this.currentWordId = 0;
-    this.accomplishedCount = 0;
+    this.knownCount = 0;
     this.audioPlayer = new Audio();
     const levelsSection = createHTMLElement('div', `${this.className}__section`);
     const header = createHTMLElement('h2', `${this.className}__header`, DictionaryText.header);
@@ -152,17 +152,16 @@ class DictionaryView extends Page {
   }
 
   applyWordStatus(word: IAggregatedWordSchema, index: number) {
-    let increaseCount = false;
+    let increaseKnownCount = false;
     if ('userWord' in word) {
       if (word.userWord.difficulty === 'hard') {
         this.cardMarkHard(index);
-        increaseCount = true;
       } else if (word.userWord.difficulty === 'known') {
         this.cardMarkKnown(index);
-        increaseCount = true;
+        increaseKnownCount = true;
       }
     }
-    return increaseCount;
+    return increaseKnownCount;
   }
 
   clearActiveWordStatus() {
@@ -174,7 +173,7 @@ class DictionaryView extends Page {
     for (let i = 0; i < this.data.length; i += 1) {
       const isKnowOrHard = this.applyWordStatus(this.data[i], i);
       if (isKnowOrHard) {
-        this.accomplishedCount += 1;
+        this.knownCount += 1;
       }
     }
     this.clearActiveWordStatus();
@@ -191,7 +190,7 @@ class DictionaryView extends Page {
 
   updateData(data: IWordSchema[] | IAggregatedWordSchema[]) {
     this.data = data ? data : [];
-    this.accomplishedCount = 0;
+    this.knownCount = 0;
     this.createWordsCards();
     this.currentWordId = 0;
     this.emptyActiveWord();
@@ -273,7 +272,7 @@ class DictionaryView extends Page {
   }
 
   setPageStatus() {
-    if (this.accomplishedCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
+    if (this.knownCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
       this.pageAccomplished();
     } else {
       this.pageNormal();
@@ -291,8 +290,8 @@ class DictionaryView extends Page {
     }
   }
 
-  incrementAccomplishCount(increment: number) {
-    this.accomplishedCount += increment;
+  incrementKnownCount(increment: number) {
+    this.knownCount += increment;
   }
 
   stopPlaying() {
