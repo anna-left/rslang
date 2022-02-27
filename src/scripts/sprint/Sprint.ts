@@ -1,7 +1,7 @@
 import SprintView from './SprintView';
 import SprintModel from './SprintModel';
 import { ISprintWord } from '../types/types';
-import { SprintSettings } from './SprintSettings';
+import { SprintIntroText, SprintSettings } from './SprintSettings';
 import Dictionary from '../dictionary/Dictionary';
 import API from '../api/API';
 import { IAnswer, writeStatistics } from '../audiocall/writeStatistics';
@@ -220,6 +220,7 @@ class Sprint {
       this.group = group;
       this.page = page;
       this.view.disableLevelSelection();
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: SprintIntroText.alertText } }));
     }
     const root = document.querySelector('.main-box');
     root.innerHTML = '';
