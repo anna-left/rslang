@@ -9,8 +9,7 @@
     z-index: 50;
 
     height: 100vh;
-    margin-left: -30vw;
-    width: 17vw;
+    width: 0;
 
     display: flex;
     justify-content: center;
@@ -19,11 +18,14 @@
     font-size: 2.6rem;
     font-family: 'Roboto';
     font-weight: 500;
-    transition: all 0.32s;
+    transition: all 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
     user-select: none;
+    overflow: hidden;
 
     &_state_show {
       margin-left: 0;
+      width: 17vw;
+      overflow: visible;
     }
 
     &_blur {
@@ -31,16 +33,16 @@
       top: 0;
       left: 0;
 
-      margin-left: -150vmax;
-      width: 83vw;
+      width: 0;
       height: 100vh;
 
       background-color: $color-prime-dark;
       opacity: 0.85;
 
-      transition: all 0.3s;
+      transition: all 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
     }
     &_blur_show {
+      width: 83vw;
       margin-left: 17vw;
     }
   }
@@ -66,8 +68,8 @@
     display: flex;
     align-items: center;
     padding: 2rem 0 2rem 15%;
-    user-select: none;
     transition: all 0.2s;
+    white-space: nowrap;
     &:hover {
       cursor: pointer;
       background-color: $color-prime-dark;
@@ -110,17 +112,19 @@
     opacity: 0;
     transform: translateY(-25%);
     border-radius: 0.5rem;
-    border: 1px solid $color-prime-dark;
+    width: 0;
+    white-space: nowrap;
     margin-left: 0vw;
-    user-select: none;
     pointer-events: none;
     transition: all 0.3s;
-
+    
     &_state_active {
+      border: 1px solid $color-prime-dark;
       z-index: 10;
       opacity: 1;
       pointer-events: all;
       margin-left: 15vw;
+      width: fit-content;
       background-color: $color-prime-candy;
     }
   }
@@ -129,7 +133,6 @@
     padding: 1.5rem 3rem;
     display: flex;
     align-items: center;
-    user-select: none;
     transition: all 0.2s;
     pointer-events: all;
 

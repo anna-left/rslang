@@ -142,8 +142,6 @@
   right: 0;
   margin-top: 2rem;
   font-size: 1.1vmax;
-  width: 20vw;
-  margin-right: -16vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -152,17 +150,24 @@
   color: $color-prime-light;
   font-weight: bolder;
   letter-spacing: 1px;
-  
-  
+
+  &__text {
+    width: 0;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
   &:hover {
     padding: 0 1vmax;
     background-color: $color-link-hover-dark;
     border-radius: 2rem 0 0 0;
     box-shadow: 0 0 0 1px $color-link-hover-light;
-    margin-right: 0;
 
     .user-box__icon {
       fill: $color-prime-light;
+    }
+    .user-box__text {
+      width: 10vw;
     }
   }
 
