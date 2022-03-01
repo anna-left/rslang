@@ -168,5 +168,6 @@ declare global {
     'show-footer': CustomEvent;
     'hide-nav': CustomEvent;
     'show-nav': CustomEvent;
+    'page-changed': CustomEvent;
   }
 }

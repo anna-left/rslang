@@ -24,13 +24,19 @@ class SprintModel {
   selectWords(group: number, page: number) {
     this.group = group;
     this.page = page;
-    this.currentPage = page ? 0 : 1;
+    this.currentPage = 0;
   }
 
   async fetchWords(group: number, page: number) {
-    return this.authorized
-      ? this.api.getUserAggregatedWords(group.toString(), page.toString(), '20', { 'userWord.difficulty': {'$not': {'$eq':'known'} } })
-      : this.api.getWords(group, page);
+    if (this.authorized) {
+      if (group === WordsSettings.groups) {
+        return this.api.getUserAggregatedWords('', '', '3600', { 'userWord.difficulty': 'hard' });
+      } else {
+        return this.api.getUserAggregatedWords(group.toString(), page.toString(), '', { 'userWord.difficulty': { '$not': { '$eq': 'known' } } });
+      }
+    } else {
+      return this.api.getWords(group, page);
+    }
   }
 
   async getWords(group = this.group, page = this.page) {
@@ -47,7 +53,7 @@ class SprintModel {
 
   shuffleTranslation(array: IWordSchema[]) {
     return array.map((word, index) => {
-      const gameWord = { ...word } as ISprintWord;
+      const gameWord: ISprintWord = { answer: false, gameTranslate: '', ...word };
       if (Math.random() > 0.5) {
         gameWord.gameTranslate = gameWord.wordTranslate;
         gameWord.answer = true;

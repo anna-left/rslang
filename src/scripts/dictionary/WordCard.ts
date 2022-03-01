@@ -8,9 +8,12 @@ import './WordCard.scss';
 class WordCard extends Page {
   private readonly className: string;
 
-  constructor(word: IWordSchema) {
+  private readonly player: HTMLAudioElement;
+
+  constructor(word: IWordSchema, player: HTMLAudioElement) {
     super('word-card', 'div');
     this.className = 'word-card';
+    this.player = player;
     const image = createHTMLElement('img', `${this.className}__img`);
     image.setAttribute('src', WordsSettings.endpoint + word.image);
     const header = createHTMLElement('h2', `${this.className}__header`, word.word);
@@ -18,8 +21,18 @@ class WordCard extends Page {
     const translation = createHTMLElement('span', `${this.className}__translation`, word.wordTranslate);
     const transcription = createHTMLElement('span', `${this.className}__transcription`, word.transcription);
     const audio = createHTMLElement('button', `${this.className}__audio`);
-    audio.addEventListener('click', () => {
-      new Audio(WordsSettings.endpoint + word.audio).play();
+    audio.addEventListener('click', async () => {
+      this.player.src = WordsSettings.endpoint + word.audio;
+      await this.player.play();
+      this.player.onended = async () => {
+        this.player.src = WordsSettings.endpoint + word.audioMeaning;
+        await this.player.play();
+        this.player.onended = async () => {
+          this.player.src = WordsSettings.endpoint + word.audioExample;
+          await this.player.play();
+          this.player.onended = null;
+        };
+      };
     });
     line.append(translation, transcription, audio);
     const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.example);
@@ -49,6 +62,10 @@ class WordCard extends Page {
       const known = this.page.classList.contains('word-card--known');
       window.dispatchEvent(new CustomEvent('mark-known', { detail: { hard: hard, known: known, wordId: word._id } }));
     });
+  }
+
+  stopPlaying() {
+    this.player.pause();
   }
 }
 

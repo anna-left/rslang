@@ -1,7 +1,7 @@
 import SprintView from './SprintView';
 import SprintModel from './SprintModel';
 import { ISprintWord } from '../types/types';
-import { SprintSettings } from './SprintSettings';
+import { SprintIntroText, SprintSettings } from './SprintSettings';
 import Dictionary from '../dictionary/Dictionary';
 import API from '../api/API';
 import { IAnswer, writeStatistics } from '../audiocall/writeStatistics';
@@ -75,9 +75,9 @@ class Sprint {
       await this.initializeGameState();
       this.model.selectWords(this.group, this.page);
       this.round = await this.model.getWords();
-      await this.nextRound();
       this.view.showGame();
       this.view.startTimer();
+      await this.nextRound();
     });
     window.addEventListener('sprint-again', async () => {
       this.view.showIntro();
@@ -175,6 +175,7 @@ class Sprint {
   }
 
   async onGameOver() {
+    this.view.clearTimer();
     this.view.onGameOver(this.rightWords, this.wrongWords);
     if (await this.model.checkAuthorizationStatus()) {
       const answers = this.getAnswers();
@@ -219,6 +220,7 @@ class Sprint {
       this.group = group;
       this.page = page;
       this.view.disableLevelSelection();
+      window.dispatchEvent(new CustomEvent('show-error', { detail: { error: SprintIntroText.alertText } }));
     }
     const root = document.querySelector('.main-box');
     root.innerHTML = '';

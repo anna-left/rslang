@@ -18,6 +18,7 @@ export enum SprintIntroText {
   description = 'Тренировка Спринт - повторение\nзаученных слов из вашего словаря',
   tooltip = 'Выбрать уровень:',
   startButton = 'Начать',
+  alertText = 'Вы будете играть со словами из учебника, выбор уровня сложности заблокирован',
 }
 
 export enum SprintGameText {

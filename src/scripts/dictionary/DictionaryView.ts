@@ -17,7 +17,7 @@ class DictionaryView extends Page {
 
   private readonly wordsContainer: HTMLElement;
 
-  private readonly currentWord: HTMLElement;
+  private readonly currentWordContainer: HTMLElement;
 
   private data: IWordSchema[] | IAggregatedWordSchema[];
 
@@ -35,7 +35,11 @@ class DictionaryView extends Page {
 
   private readonly gamesSection: HTMLElement;
 
-  private accomplishedCount: number;
+  private knownCount: number;
+
+  private readonly audioPlayer: HTMLAudioElement;
+
+  private currentWordCard: WordCard;
 
   constructor(className: string) {
     super(className);
@@ -45,7 +49,8 @@ class DictionaryView extends Page {
     this.currentDifficultyLevel = 0;
     this.wordCards = [];
     this.currentWordId = 0;
-    this.accomplishedCount = 0;
+    this.knownCount = 0;
+    this.audioPlayer = new Audio();
     const levelsSection = createHTMLElement('div', `${this.className}__section`);
     const header = createHTMLElement('h2', `${this.className}__header`, DictionaryText.header);
     const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.subheader);
@@ -56,8 +61,8 @@ class DictionaryView extends Page {
     const wordHeader = createHTMLElement('h2', `${this.className}__header`, DictionaryText.wordHeader);
     const words = createHTMLElement('div', `${this.className}__all-words`);
     this.wordsContainer = createHTMLElement('div', `${this.className}__words unauthorized`);
-    this.currentWord = createHTMLElement('div', `${this.className}__word unauthorized`);
-    words.append(this.wordsContainer, this.currentWord);
+    this.currentWordContainer = createHTMLElement('div', `${this.className}__word unauthorized`);
+    words.append(this.wordsContainer, this.currentWordContainer);
     wordsSection.append(wordHeader, words);
 
     this.paginationContainer = createHTMLElement('div', `${this.className}__pagination-container`);
@@ -147,46 +152,45 @@ class DictionaryView extends Page {
   }
 
   applyWordStatus(word: IAggregatedWordSchema, index: number) {
-    let increaseCount = false;
+    let increaseKnownCount = false;
     if ('userWord' in word) {
       if (word.userWord.difficulty === 'hard') {
         this.cardMarkHard(index);
-        increaseCount = true;
       } else if (word.userWord.difficulty === 'known') {
         this.cardMarkKnown(index);
-        increaseCount = true;
+        increaseKnownCount = true;
       }
     }
-    return increaseCount;
+    return increaseKnownCount;
   }
 
   clearActiveWordStatus() {
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
+    this.currentWordCard.render().classList.remove(`word-card--hard`);
+    this.currentWordCard.render().classList.remove(`word-card--known`);
   }
 
   applyStatusOnPage() {
     for (let i = 0; i < this.data.length; i += 1) {
       const isKnowOrHard = this.applyWordStatus(this.data[i], i);
       if (isKnowOrHard) {
-        this.accomplishedCount += 1;
+        this.knownCount += 1;
       }
     }
     this.clearActiveWordStatus();
   }
 
   displayActiveWord() {
-    const currentWord = new WordCard(this.data[this.currentWordId]);
-    this.currentWord.append(currentWord.render());
+    this.currentWordCard = new WordCard(this.data[this.currentWordId], this.audioPlayer);
+    this.currentWordContainer.append(this.currentWordCard.render());
   }
 
   emptyActiveWord() {
-    this.currentWord.innerHTML = '';
+    this.currentWordContainer.innerHTML = '';
   }
 
   updateData(data: IWordSchema[] | IAggregatedWordSchema[]) {
     this.data = data ? data : [];
-    this.accomplishedCount = 0;
+    this.knownCount = 0;
     this.createWordsCards();
     this.currentWordId = 0;
     this.emptyActiveWord();
@@ -218,32 +222,32 @@ class DictionaryView extends Page {
 
   cardMarkHard(id = this.currentWordId) {
     this.wordCards[id].render().classList.add('small-word-card--hard');
-    (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--hard`);
+    this.currentWordCard.render().classList.add(`word-card--hard`);
   }
 
   cardUnmarkHard(id = this.currentWordId) {
     this.wordCards[id].render().classList.remove('small-word-card--hard');
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--hard`);
+    this.currentWordCard.render().classList.remove(`word-card--hard`);
   }
 
   cardMarkKnown(id = this.currentWordId) {
     this.wordCards[id].render().classList.add('small-word-card--known');
-    (this.currentWord.firstChild as HTMLElement).classList.add(`word-card--known`);
+    this.currentWordCard.render().classList.add(`word-card--known`);
   }
 
   cardUnmarkKnown(id = this.currentWordId) {
     this.wordCards[id].render().classList.remove('small-word-card--known');
-    (this.currentWord.firstChild as HTMLElement).classList.remove(`word-card--known`);
+    this.currentWordCard.render().classList.remove(`word-card--known`);
   }
 
   authorizeView() {
-    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach((element) => {
+    [this.levelsContainer, this.wordsContainer, this.currentWordContainer].forEach((element) => {
       element.classList.remove('unauthorized');
     });
   }
 
   unAuthorizeView() {
-    [this.levelsContainer, this.wordsContainer, this.currentWord].forEach((element) => {
+    [this.levelsContainer, this.wordsContainer, this.currentWordContainer].forEach((element) => {
       element.classList.add('unauthorized');
     });
   }
@@ -268,7 +272,7 @@ class DictionaryView extends Page {
   }
 
   setPageStatus() {
-    if (this.accomplishedCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
+    if (this.knownCount === this.data.length && this.currentDifficultyLevel !== WordsSettings.groups) {
       this.pageAccomplished();
     } else {
       this.pageNormal();
@@ -286,8 +290,14 @@ class DictionaryView extends Page {
     }
   }
 
-  incrementAccomplishCount(increment: number) {
-    this.accomplishedCount += increment;
+  incrementKnownCount(increment: number) {
+    this.knownCount += increment;
+  }
+
+  stopPlaying() {
+    if (this.currentWordCard) {
+      this.currentWordCard.stopPlaying();
+    }
   }
 }
 

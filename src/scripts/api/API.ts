@@ -184,9 +184,9 @@ export class API {
   }
 
   async getUserAggregatedWords(
-    group = '0',
-    page = '0',
-    wordsPerPage = '20',
+    group = '',
+    page = '',
+    wordsPerPage = '',
     filter = {},
   ): Promise<void | IAggregatedWordSchema[]> {
     let queryString = '';
@@ -200,7 +200,7 @@ export class API {
     if (wordsPerPage) {
       queries.push(`wordsPerPage=${wordsPerPage}`);
     }
-    if (filter) {
+    if (Object.keys(filter).length) {
       queries.push(`filter=${JSON.stringify(filter)}`);
     }
     if (queries.length > 1) {
