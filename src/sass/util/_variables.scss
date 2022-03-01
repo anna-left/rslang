@@ -7,6 +7,11 @@ $color-prime-attract: #ff2e63;
 $color-prime-candy: #cd8eff;
 $color-prime-candy-light: #edd7ff;
 
+$color-link-hover: rgba(0, 0, 0, 0.2);
+$color-link-hover-light: rgba(0, 0, 0, 0.3);
+$color-link-hover-dark: rgba(0, 0, 0, 0.4);
+$color-link-hover-dark: #00000066;
+
 :root {
   --timerRadius: 60;
   --progressRadius: 100;
@@ -17,6 +22,6 @@ $progressRadius: 10rem;
 $timerBorderThickness: 1.5rem;
 
 $color-sprint-right: #43d26c;
-$color-sprint-right-shadow:#26783d;
+$color-sprint-right-shadow: #26783d;
 $color-sprint-wrong: #ff4f4f;
 $color-sprint-wrong-shadow: #9a1e1e;

@@ -41,6 +41,7 @@
   }
   &__word_text,
   &__answer_text {
+    text-align: center;
     font-size: 1.5vmax;
   }
 }
@@ -61,7 +62,6 @@
     }
     &_sprint {
       max-width: 30%;
-
     }
   }
 }
@@ -74,4 +74,46 @@
 .daily-sprint {
   background: linear-gradient(180deg, $color-prime-calm 0%, $color-prime-light 100%);
   box-shadow: 3px 3px 3px lighten($color-prime-calm, 10%);
+}
+
+@media screen and (max-width: 1500px) {
+  .daily-common {
+    &__word_text,
+    &__answer_text {
+      font-size: 1.7vmax;
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .statistics {
+    &__daily-common-box {
+      justify-content: space-between;
+      margin-top: 5vh;
+    }
+    &__daily-game-box {
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 3vh;
+      margin-bottom: 2vmax;
+    }
+  }
+  .daily-stats {
+    &__game_box {
+      width: 90%;
+      border-radius: 3rem;
+      padding: 2vmax 3vmax;
+      gap: 2vh 0;
+      font-size: 1.5vmax;
+      margin-bottom: 2rem;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .daily-common {
+    &__word_text,
+    &__answer_text {
+      font-size: 1.7vmax;
+    }
+  }
 }
