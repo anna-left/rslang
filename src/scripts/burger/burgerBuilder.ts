@@ -87,19 +87,63 @@ export function getGamesItem() {
 }
 
 export function getSettingsItem() {
-  const settings = createElement('li', ['burger__item', 'burger__link']);
+  const CONFIG_SHOW_CLASS = 'config__list_state_active';
+  const settings = createElement('li', ['burger__item', 'config']);
 
-  const itemContainer = createElement('li', ['burger__link-container']);
+  const itemContainer = createElement('li', ['burger__link-container', 'config__link']);
 
   const configIconSvg = createSVG('svg', ['burger__item_icon']);
   const configIconUse = createSVG('use', [], [['href', '#burger_config-icon']]);
   configIconSvg.append(configIconUse);
 
   const configText = createElement('span', ['burger__item_text'], [], 'Настройки');
+
   itemContainer.append(configIconSvg, configText);
 
-  settings.append(itemContainer);
+  const settingsContainer = createElement('ul', ['burger__config-list', 'config__list', 'config-list']);
+  const themeItem = createElement('li', ['config-list__item', 'config-item']);
+  const languageItem = createElement('li', ['config-list__item', 'config-item']);
+  const animationItem = createElement('li', ['config-list__item', 'config-item']);
+
+  settings.addEventListener('mouseover', () => settingsContainer.classList.add(CONFIG_SHOW_CLASS));
+  settings.addEventListener('mouseout', () => settingsContainer.classList.remove(CONFIG_SHOW_CLASS));
+
+  setSwitcherItem(themeItem, 'Цветовая схема', 'Светлая', 'Тёмная');
+  setSwitcherItem(languageItem, 'Язык интерфейса', 'Русский', 'Английский');
+  setAnimationItem(animationItem);
+  settingsContainer.append(themeItem, languageItem, animationItem);
+  settings.append(itemContainer, settingsContainer);
   return settings;
+}
+
+function setSwitcherItem(item: HTMLElement, header: string, leftSwitherSide: string, rightSwitcherSide: string) {
+  const itemHeader = createElement('h4', ['config-item__header'], [], `${header}`);
+  const itemContentBox = createElement('div', ['config-item__content-box']);
+  const itemItemTextOn = createElement(
+    'span',
+    ['config-item__switcher-position', 'config-item__switcher-position_state_active'],
+    [],
+    `${leftSwitherSide}`,
+  );
+  const itemItemTextOff = createElement('span', ['config-item__switcher-position'], [], `${rightSwitcherSide}`);
+  const itemItemSwitcher = createElement('div', ['config-item__switcher']);
+  const itemItemSwitchHandler = createElement('span', ['config-item__switch-handler']);
+  itemItemSwitcher.append(itemItemSwitchHandler);
+  itemContentBox.append(itemItemTextOn, itemItemSwitcher, itemItemTextOff);
+
+  item.append(itemHeader, itemContentBox);
+}
+
+function setAnimationItem(item: HTMLElement) {
+  const itemHeader = createElement('h4', ['config-item__header'], [], 'Анимация');
+  const animationType = createElement('select', ['config-item__select']);
+  const animationOption1 = createElement('option', ['config-item__select_optionf'], [['value', 'type-1']], 'вид 1');
+  const animationOption2 = createElement('option', ['config-item__select_optionf'], [['value', 'type-2']], 'вид 2');
+  const animationOption3 = createElement('option', ['config-item__select_optionf'], [['value', 'type-3']], 'вид 3');
+  const animationOption4 = createElement('option', ['config-item__select_optionf'], [['value', 'off']], 'отключить');
+  animationOption4.toggleAttribute('selected');
+  animationType.append(animationOption1, animationOption2, animationOption3, animationOption4);
+  item.append(itemHeader, animationType);
 }
 
 export function getHideBurgerIcon() {
