@@ -18,9 +18,9 @@
     font-size: 2.6rem;
     font-family: 'Roboto';
     font-weight: 500;
-    transition: all 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
     user-select: none;
     overflow: hidden;
+    transition: all 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
 
     &_state_show {
       margin-left: 0;
@@ -265,11 +265,9 @@
         margin-left: 0;
       }
 
-      &_blur {
+      &_blur_show {
         width: 77vw;
-        &_show {
-          margin-left: 23vw;
-        }
+        margin-left: 23vw;
       }
     }
   }
@@ -292,11 +290,9 @@
         margin-left: 0;
       }
 
-      &_blur {
+      &_blur_show {
         width: 66vw;
-        &_show {
-          margin-left: calc(35vw - 2px);
-        }
+        margin-left: 35vw;
       }
     }
   }
@@ -335,11 +331,9 @@
         margin-left: 0;
       }
 
-      &_blur {
+      &_blur_show {
         width: 58vw;
-        &_show {
-          margin-left: calc(43vw - 2px);
-        }
+        margin-left: 42vw;
       }
     }
   }
