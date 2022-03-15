@@ -18,7 +18,14 @@ function startAudiocall(level: number, numperPage: number) {
   dispatchEvent(new CustomEvent('hide-nav'));
   const mainBoxHTML: HTMLElement = document.querySelector('.main-box');
   clearPage(mainBoxHTML);
-  createHtmlElement('div', mainBoxHTML, 'audiocall');
+  const page = createHtmlElement('div', mainBoxHTML, 'audiocall');
+
+  const state = JSON.parse(localStorage.getItem('state'));
+  if (state.colorScheme === 'light') {
+    page.style.background = 'linear-gradient(180deg, #cd8eff 0%, #fff 100%)';
+  } else {
+    page.style.background = 'linear-gradient(180deg, #cd8eff 0%, #212121 100%)';
+  }
 
   mainBoxHTML.insertAdjacentHTML('beforeend', speakerSVG);
   mainBoxHTML.insertAdjacentHTML('beforeend', nextSVG);

@@ -10,6 +10,7 @@ import { LocalStorage } from '../state/StorageSettings';
 import Modal from '../api/Modal';
 import Dictionary from '../dictionary/Dictionary';
 import API from '../api/API';
+import { State } from '../state/State';
 
 export class ViewManager {
   header: HeaderView;
@@ -36,8 +37,6 @@ export class ViewManager {
 
   manager: this;
 
-  private readonly root: Element;
-
   constructor() {
     this.burger = new BurgerView();
     this.main = new MainView();
@@ -51,16 +50,18 @@ export class ViewManager {
     this.sprint = new Sprint(this.api);
     this.modal = new Modal(document.querySelector('body'));
 
-    this.main.render();
-    this.header.render(this);
-    this.burger.render(this, this.dictionary);
-    this.home.render(this);
-    this.homeNavigation.render(this);
     this.manager = this;
-    this.root = document.querySelector('.main-box');
   }
 
   async init() {
+    this.main.render();
+    this.header.render(this);
+    this.footer.render();
+    this.burger.render(this, this.dictionary);
+    this.home.render(this);
+    this.homeNavigation.render(this);
+    this.adaptTheme();
+
     await this.dictionary.init();
     await this.sprint.init();
     this.sprint.addDictionary(this.dictionary);
@@ -85,10 +86,13 @@ export class ViewManager {
     window.addEventListener('show-nav', () => {
       this.renderHomeNavigation();
     });
+    window.addEventListener('adapt-theme', () => {
+      this.adaptTheme();
+    });
     const observer = new MutationObserver(function () {
       window.dispatchEvent(new CustomEvent('page-changed'));
     });
-    observer.observe(this.root, { childList: true });
+    observer.observe(this.main.mainBox, { childList: true });
   }
 
   renderFooter() {
@@ -125,5 +129,23 @@ export class ViewManager {
 
   getAPI() {
     return this.api;
+  }
+
+  adaptTheme() {
+    const state = new State();
+
+    if (state.colorScheme === 'light') {
+      this.main.mainBox.style.background = '#fff';
+      this.footer.footer.style.background = '#EDD7FF';
+      this.header.headerBox.style.color = '#212121';
+      this.main.mainBox.style.color = '#212121';
+      this.footer.footerBox.style.color = '#212121';
+    } else {
+      this.main.mainBox.style.background = '#191847';
+      this.footer.footer.style.background = '#11041C';
+      this.header.headerBox.style.color = '#fff';
+      this.main.mainBox.style.color = '#fff';
+      this.footer.footerBox.style.color = '#ffffff54';
+    }
   }
 }
