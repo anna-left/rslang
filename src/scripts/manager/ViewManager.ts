@@ -10,6 +10,7 @@ import { LocalStorage } from '../state/StorageSettings';
 import Modal from '../api/Modal';
 import Dictionary from '../dictionary/Dictionary';
 import API from '../api/API';
+import { State } from '../state/State';
 
 export class ViewManager {
   header: HeaderView;
@@ -36,7 +37,7 @@ export class ViewManager {
 
   manager: this;
 
-  private readonly root: Element;
+  private readonly root: HTMLElement;
 
   constructor() {
     this.burger = new BurgerView();
@@ -57,7 +58,17 @@ export class ViewManager {
     this.home.render(this);
     this.homeNavigation.render(this);
     this.manager = this;
-    this.root = document.querySelector('.main-box');
+    const state = new State();
+    console.log(state);
+    if (state.colorScheme === 'light') {
+      this.main.mainBox.style.background = '#fff';
+      this.main.mainBox.style.color = '#000';
+      this.header.headerBox.style.color = '#000';
+    } else {
+      this.main.mainBox.style.background = '#191847';
+      this.main.mainBox.style.color = '#fff';
+      this.header.header.style.color = '#fff';
+    }
   }
 
   async init() {

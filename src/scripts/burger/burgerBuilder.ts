@@ -1,6 +1,7 @@
 import { createElement, createSVG } from '../util/Util';
 import { startAudiocall } from '../audiocall/startAudiocall';
 import { getHiddenSvgs } from './burgerSvg';
+import { State } from '../state/State';
 
 const BURGER_CLASS_SHOW = 'main-box__burger_state_show';
 const BURGER_BLUR_CLASS_SHOW = 'main-box__burger_blur_show';
@@ -88,6 +89,9 @@ export function getGamesItem() {
 
 export function getSettingsItem() {
   const CONFIG_SHOW_CLASS = 'config__list_state_active';
+  const ITEM_ACTIVE_CLASS = 'config-item__switcher-position_state_active';
+  const SWITCHER_ACTIVE_CLASS = 'config-item__switch-handler_state_active';
+
   const settings = createElement('li', ['burger__item', 'config']);
 
   const itemContainer = createElement('li', ['burger__link-container', 'config__link']);
@@ -108,28 +112,108 @@ export function getSettingsItem() {
   settings.addEventListener('mouseover', () => settingsContainer.classList.add(CONFIG_SHOW_CLASS));
   settings.addEventListener('mouseout', () => settingsContainer.classList.remove(CONFIG_SHOW_CLASS));
 
-  setSwitcherItem(themeItem, 'Цветовая схема', 'Светлая', 'Тёмная');
-  setSwitcherItem(languageItem, 'Язык интерфейса', 'Русский', 'Английский');
+  setConfigThemeItem(themeItem, ITEM_ACTIVE_CLASS, SWITCHER_ACTIVE_CLASS);
+  setConfigLanguageItem(languageItem, ITEM_ACTIVE_CLASS, SWITCHER_ACTIVE_CLASS);
   setAnimationItem(animationItem);
   settingsContainer.append(themeItem, languageItem, animationItem);
   settings.append(itemContainer, settingsContainer);
   return settings;
 }
 
-function setSwitcherItem(item: HTMLElement, header: string, leftSwitherSide: string, rightSwitcherSide: string) {
-  const itemHeader = createElement('h4', ['config-item__header'], [], `${header}`);
+function themeAdjuster(el: HTMLElement, className: string) {
+  const state = new State();
+  if (el.classList.contains(className)) {
+    state.colorScheme = 'light';
+    console.log(state.colorScheme);
+  } else {
+    state.colorScheme = 'dark';
+    console.log(state.colorScheme);
+  }
+}
+
+function languageAdjuster(el: HTMLElement, className: string) {
+  const state = new State();
+  if (el.classList.contains(className)) {
+    state.lang = 'rus';
+    console.log(state.lang);
+  } else {
+    state.lang = 'eng';
+    console.log(state.lang);
+  }
+}
+
+function setConfigThemeItem(item: HTMLElement, itemActiveClassName: string, handlerActiveClassName: string) {
+  const itemHeader = createElement('h4', ['config-item__header'], [], 'Цветовая схема');
   const itemContentBox = createElement('div', ['config-item__content-box']);
-  const itemItemTextOn = createElement(
+  const itemTextLeft = createElement(
     'span',
     ['config-item__switcher-position', 'config-item__switcher-position_state_active'],
     [],
-    `${leftSwitherSide}`,
+    'Светлая',
   );
-  const itemItemTextOff = createElement('span', ['config-item__switcher-position'], [], `${rightSwitcherSide}`);
-  const itemItemSwitcher = createElement('div', ['config-item__switcher']);
-  const itemItemSwitchHandler = createElement('span', ['config-item__switch-handler']);
-  itemItemSwitcher.append(itemItemSwitchHandler);
-  itemContentBox.append(itemItemTextOn, itemItemSwitcher, itemItemTextOff);
+  const itemTextRight = createElement('span', ['config-item__switcher-position'], [], 'Тёмная');
+  const itemSwitcher = createElement('div', ['config-item__switcher']);
+  const itemSwitchHandler = createElement('span', ['config-item__switch-handler']);
+
+  itemTextLeft.addEventListener('click', () => {
+    itemTextLeft.classList.toggle(itemActiveClassName);
+    itemTextRight.classList.toggle(itemActiveClassName);
+    itemSwitchHandler.classList.toggle(handlerActiveClassName);
+    themeAdjuster(itemTextLeft, itemActiveClassName);
+  });
+  itemTextRight.addEventListener('click', () => {
+    itemTextLeft.classList.toggle(itemActiveClassName);
+    itemTextRight.classList.toggle(itemActiveClassName);
+    itemSwitchHandler.classList.toggle(handlerActiveClassName);
+    themeAdjuster(itemTextLeft, itemActiveClassName);
+  });
+  itemSwitcher.addEventListener('click', () => {
+    itemTextLeft.classList.toggle(itemActiveClassName);
+    itemTextRight.classList.toggle(itemActiveClassName);
+    itemSwitchHandler.classList.toggle(handlerActiveClassName);
+    themeAdjuster(itemTextLeft, itemActiveClassName);
+  });
+
+  itemSwitcher.append(itemSwitchHandler);
+  itemContentBox.append(itemTextLeft, itemSwitcher, itemTextRight);
+
+  item.append(itemHeader, itemContentBox);
+}
+
+function setConfigLanguageItem(item: HTMLElement, itemActiveClassName: string, handlerActiveClassName: string) {
+  const itemHeader = createElement('h4', ['config-item__header'], [], 'Язык интерфейса');
+  const itemContentBox = createElement('div', ['config-item__content-box']);
+  const itemTextLeft = createElement(
+    'span',
+    ['config-item__switcher-position', 'config-item__switcher-position_state_active'],
+    [],
+    'Русский',
+  );
+  const itemTextRight = createElement('span', ['config-item__switcher-position'], [], 'Английский');
+  const itemSwitcher = createElement('div', ['config-item__switcher']);
+  const itemSwitchHandler = createElement('span', ['config-item__switch-handler']);
+
+  itemTextLeft.addEventListener('click', () => {
+    itemTextLeft.classList.toggle(itemActiveClassName);
+    itemTextRight.classList.toggle(itemActiveClassName);
+    itemSwitchHandler.classList.toggle(handlerActiveClassName);
+    languageAdjuster(itemTextLeft, itemActiveClassName);
+  });
+  itemTextRight.addEventListener('click', () => {
+    itemTextLeft.classList.toggle(itemActiveClassName);
+    itemTextRight.classList.toggle(itemActiveClassName);
+    itemSwitchHandler.classList.toggle(handlerActiveClassName);
+    languageAdjuster(itemTextLeft, itemActiveClassName);
+  });
+  itemSwitcher.addEventListener('click', () => {
+    itemTextLeft.classList.toggle(itemActiveClassName);
+    itemTextRight.classList.toggle(itemActiveClassName);
+    itemSwitchHandler.classList.toggle(handlerActiveClassName);
+    languageAdjuster(itemTextLeft, itemActiveClassName);
+  });
+
+  itemSwitcher.append(itemSwitchHandler);
+  itemContentBox.append(itemTextLeft, itemSwitcher, itemTextRight);
 
   item.append(itemHeader, itemContentBox);
 }
