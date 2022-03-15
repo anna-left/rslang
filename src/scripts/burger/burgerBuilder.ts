@@ -124,36 +124,39 @@ function themeAdjuster(el: HTMLElement, className: string) {
   const state = new State();
   if (el.classList.contains(className)) {
     state.colorScheme = 'light';
-    console.log(state.colorScheme);
   } else {
     state.colorScheme = 'dark';
-    console.log(state.colorScheme);
   }
+  window.dispatchEvent(new CustomEvent('adapt-theme'));
 }
 
 function languageAdjuster(el: HTMLElement, className: string) {
   const state = new State();
   if (el.classList.contains(className)) {
     state.lang = 'rus';
-    console.log(state.lang);
   } else {
     state.lang = 'eng';
-    console.log(state.lang);
   }
 }
 
 function setConfigThemeItem(item: HTMLElement, itemActiveClassName: string, handlerActiveClassName: string) {
   const itemHeader = createElement('h4', ['config-item__header'], [], 'Цветовая схема');
   const itemContentBox = createElement('div', ['config-item__content-box']);
-  const itemTextLeft = createElement(
-    'span',
-    ['config-item__switcher-position', 'config-item__switcher-position_state_active'],
-    [],
-    'Светлая',
-  );
-  const itemTextRight = createElement('span', ['config-item__switcher-position'], [], 'Тёмная');
+  const state = JSON.parse(localStorage.getItem('state'));
+  let itemTextLeft: HTMLElement;
+  let itemTextRight: HTMLElement;
+  let itemSwitchHandler: HTMLElement;
+
+  if (state.colorScheme === 'light') {
+    itemTextLeft = createElement('span', ['config-item__switcher-position', itemActiveClassName], [], 'Светлая');
+    itemTextRight = createElement('span', ['config-item__switcher-position'], [], 'Тёмная');
+    itemSwitchHandler = createElement('span', ['config-item__switch-handler']);
+  } else {
+    itemTextLeft = createElement('span', ['config-item__switcher-position'], [], 'Светлая');
+    itemTextRight = createElement('span', ['config-item__switcher-position', itemActiveClassName], [], 'Тёмная');
+    itemSwitchHandler = createElement('span', ['config-item__switch-handler', handlerActiveClassName]);
+  }
   const itemSwitcher = createElement('div', ['config-item__switcher']);
-  const itemSwitchHandler = createElement('span', ['config-item__switch-handler']);
 
   itemTextLeft.addEventListener('click', () => {
     itemTextLeft.classList.toggle(itemActiveClassName);
@@ -183,15 +186,21 @@ function setConfigThemeItem(item: HTMLElement, itemActiveClassName: string, hand
 function setConfigLanguageItem(item: HTMLElement, itemActiveClassName: string, handlerActiveClassName: string) {
   const itemHeader = createElement('h4', ['config-item__header'], [], 'Язык интерфейса');
   const itemContentBox = createElement('div', ['config-item__content-box']);
-  const itemTextLeft = createElement(
-    'span',
-    ['config-item__switcher-position', 'config-item__switcher-position_state_active'],
-    [],
-    'Русский',
-  );
-  const itemTextRight = createElement('span', ['config-item__switcher-position'], [], 'Английский');
+  const state = JSON.parse(localStorage.getItem('state'));
+  let itemTextLeft: HTMLElement;
+  let itemTextRight: HTMLElement;
+  let itemSwitchHandler: HTMLElement;
+
+  if (state.lang === 'rus') {
+    itemTextLeft = createElement('span', ['config-item__switcher-position', itemActiveClassName], [], 'Русский');
+    itemTextRight = createElement('span', ['config-item__switcher-position'], [], 'Английский');
+    itemSwitchHandler = createElement('span', ['config-item__switch-handler']);
+  } else {
+    itemTextLeft = createElement('span', ['config-item__switcher-position'], [], 'Русский');
+    itemTextRight = createElement('span', ['config-item__switcher-position', itemActiveClassName], [], 'Английский');
+    itemSwitchHandler = createElement('span', ['config-item__switch-handler', handlerActiveClassName]);
+  }
   const itemSwitcher = createElement('div', ['config-item__switcher']);
-  const itemSwitchHandler = createElement('span', ['config-item__switch-handler']);
 
   itemTextLeft.addEventListener('click', () => {
     itemTextLeft.classList.toggle(itemActiveClassName);
