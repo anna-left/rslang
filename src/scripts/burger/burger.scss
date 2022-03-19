@@ -1,0 +1,363 @@
+@import '../../sass/util/mixins';
+@import '../../sass/util/variables';
+
+.main-box {
+  &__burger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+
+    height: 100vh;
+    width: 0;
+
+    display: flex;
+    justify-content: center;
+    background-color: $color-prime-candy;
+    color: $color-prime-light;
+    font-size: 2.6rem;
+    font-family: 'Roboto';
+    font-weight: 500;
+    user-select: none;
+    overflow: hidden;
+    transition: all 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    &_state_show {
+      margin-left: 0;
+      width: 17vw;
+      overflow: visible;
+    }
+
+    &_blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 0;
+      height: 100vh;
+
+      background-color: $color-prime-dark;
+      opacity: 0.85;
+
+      transition: all 0.32s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    &_blur_show {
+      width: 83vw;
+      margin-left: 17vw;
+    }
+  }
+}
+
+.burger {
+  &__list {
+    position: relative;
+    z-index: 100;
+
+    padding-top: 15vh;
+    width: 100%;
+  }
+  &__item_icon {
+    max-height: 3rem;
+    max-width: 3rem;
+    margin-right: 1rem;
+    fill: $color-prime-light;
+  }
+  &__item {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0 2rem 15%;
+    transition: all 0.2s;
+    white-space: nowrap;
+    &:hover {
+      cursor: pointer;
+      background-color: $color-prime-dark;
+    }
+  }
+
+  &__hide-icon {
+    position: absolute;
+    z-index: 150;
+    top: 5%;
+    right: 10%;
+    max-height: 4rem;
+    max-width: 4rem;
+    fill: $color-prime-light;
+    transition: all 0.2s;
+    pointer-events: all;
+    &:hover {
+      fill: $color-prime-dark;
+    }
+  }
+}
+
+.burger-games {
+  position: relative;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__link-box {
+    display: flex;
+    align-items: center;
+  }
+  &__games-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(-25%);
+    border-radius: 0.5rem;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    margin-left: 0vw;
+    pointer-events: none;
+    transition: all 0.3s;
+    overflow: hidden;
+
+    &_state_active {
+      border: 1px solid $color-prime-dark;
+      z-index: 10;
+      opacity: 1;
+      pointer-events: all;
+      margin-left: 85%;
+      width: fit-content;
+      height: fit-content;
+      background-color: $color-prime-candy;
+    }
+  }
+
+  &__item {
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    pointer-events: all;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-prime-dark;
+    }
+  }
+}
+
+.config {
+  position: relative;
+  &__link {
+    display: flex;
+    align-items: center;
+  }
+  &__list {
+    margin-left: 5rem;
+    font-size: 1.45rem;
+    letter-spacing: 1px;
+    background-color: $color-prime-candy;
+    border-radius: 0.5rem;
+
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    transform: translateY(50%);
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+    transition: all 0.4s;
+
+    &_state_active {
+      margin-left: 85%;
+      padding: 3vh;
+      border: 1px solid $color-prime-dark;
+      width: fit-content;
+      height: fit-content;
+      pointer-events: all;
+    }
+  }
+  &-list {
+    display: grid;
+    grid-gap: 4vh;
+  }
+  &-item {
+    &__header {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      padding: 0.3rem 0 0 0.7rem;
+      position: relative;
+
+      border-radius: 0.5rem 0 0 0;
+      border-top: 1px solid $color-prime-dark;
+      border-left: 1px solid $color-prime-dark;
+      box-shadow: inset 2px 2px 2px $color-link-hover-light;
+    }
+
+    &__content-box {
+      display: flex;
+      padding: 1rem 2rem;
+
+      border-radius: 0.5rem;
+      box-shadow: inset 0 0 2px $color-link-hover-light;
+    }
+
+    &__switcher {
+      position: relative;
+      width: 10rem;
+      height: 2rem;
+      border: 1px solid $color-prime-light;
+      border-radius: 2rem;
+      margin: 0 1vw;
+      background: $color-prime-dark;
+    }
+    &__switcher-position {
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.4rem;
+      box-shadow: inset 0 0 2px 1px $color-link-hover-dark;
+      transition: all 0.3s;
+
+      &:hover {
+        color: $color-prime-attract;
+      }
+
+      &_state_active {
+        background: $color-prime-dark;
+        color: $color-prime-calm;
+      }
+    }
+    &__switch-handler {
+      position: absolute;
+      left: 0;
+      height: 1.8rem;
+      width: 2.5rem;
+      margin: 0 1px;
+      border: 1px solid $color-link-hover-light;
+      background: $color-prime-calm;
+      border-radius: 10rem;
+      transition: all 0.3s;
+
+      &:hover {
+        background: $color-prime-attract;
+      }
+
+      &_state_active {
+        margin-left: 74%;
+      }
+    }
+
+    &__select {
+      background: $color-prime-dark;
+      color: $color-prime-light;
+      border-radius: 0.4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main-box {
+    &__burger {
+      margin-left: -30vw;
+      width: 23vw;
+
+      &_state_show {
+        margin-left: 0;
+      }
+
+      &_blur_show {
+        width: 77vw;
+        margin-left: 23vw;
+      }
+    }
+  }
+  .burger-games {
+    &__games-box {
+      &_state_active {
+        margin-left: 23vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-box {
+    &__burger {
+      margin-left: -40vw;
+      width: 35vw;
+
+      &_state_show {
+        margin-left: 0;
+      }
+
+      &_blur_show {
+        width: 66vw;
+        margin-left: 35vw;
+      }
+    }
+  }
+  .burger {
+    &__list {
+      font-size: 2rem;
+    }
+    &__item {
+      padding-left: 10%;
+    }
+    &__item_icon {
+      max-height: 2.5rem;
+      max-width: 2.5rem;
+    }
+    &__hide-icon {
+      max-height: 3.5rem;
+      max-width: 3.5rem;
+    }
+  }
+  .burger-games {
+    &__games-box {
+      &_state_active {
+        margin-left: 28vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .main-box {
+    &__burger {
+      margin-left: -50vw;
+      width: 43vw;
+
+      &_state_show {
+        margin-left: 0;
+      }
+
+      &_blur_show {
+        width: 58vw;
+        margin-left: 42vw;
+      }
+    }
+  }
+  .burger {
+    &__list {
+      font-size: 1.9rem;
+    }
+    &__item {
+      padding-left: 4%;
+    }
+    &__item_icon {
+      max-height: 2.3rem;
+      max-width: 2.3rem;
+    }
+    &__hide-icon {
+      max-height: 3.2rem;
+      max-width: 3.2rem;
+    }
+  }
+  .burger-games {
+    &__games-box {
+      &_state_active {
+        margin-left: 35vw;
+      }
+    }
+  }
+}

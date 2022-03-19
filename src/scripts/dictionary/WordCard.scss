@@ -1,0 +1,184 @@
+.word-card {
+  position: relative;
+  width: 50rem;
+  height: 80rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 0.1rem solid black;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  pointer-events: none;
+
+  &__img {
+    display: block;
+    margin: -2.1rem -2.1rem 0 -2.1rem;
+    border-right: 0.1rem solid black;
+    border-left: 0.1rem solid black;
+    border-top: 0.1rem solid black;
+    border-radius: 2rem 2rem 0 0;
+    height: 30rem;
+    object-fit: cover;
+  }
+
+  &__header {
+    font-size: 4.5rem;
+    font-weight: bold;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+
+    &::after {
+      position: absolute;
+      content: "Сложное";
+      width: 17rem;
+      height: 5rem;
+      background-color: darkred;
+      cursor: pointer;
+      pointer-events: all;
+      opacity: 0.4;
+      top: 2rem;
+      left: 0;
+      color: white;
+      font-size: 3rem;
+      line-height: 5rem;
+      text-indent: 1rem;
+    }
+  }
+
+  &__line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 2.5rem;
+    align-items: center;
+  }
+
+  &__translation:first-letter {
+    text-transform: uppercase;
+  }
+
+  &__audio {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: url("../../assets/svg/play.svg") center center;
+    background-size: 2.5rem 2.5rem;
+    cursor: pointer;
+    justify-self: auto;
+    pointer-events: all;
+  }
+
+  &__subheader {
+    font-size: 3rem;
+    font-weight: bold;
+
+    &::after {
+      position: absolute;
+      content: "Изучено";
+      width: 17rem;
+      height: 5rem;
+      background-color: darkgreen;
+      cursor: pointer;
+      pointer-events: all;
+      opacity: 0.4;
+      top: 9rem;
+      left: 0;
+      color: white;
+      font-size: 3rem;
+      line-height: 5rem;
+      text-indent: 1rem;
+    }
+  }
+
+  &__text {
+    font-size: 2rem;
+  }
+
+  &__example {
+    margin-top: 2rem;
+  }
+
+  &__meaning, &__example {
+    font-weight: bold;
+  }
+
+  &--hard &__header::after {
+    opacity: 1.0;
+  }
+
+  &--known &__subheader::after {
+    opacity: 1.0;
+  }
+
+  .unauthorized &__header::after,
+  .unauthorized &__subheader::after,
+  .unauthorized &__info {
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .word-card {
+    width: 33rem;
+    height: 60rem;
+    gap: 1rem;
+
+    &__img {
+      height: 25rem;
+    }
+
+    &__header {
+      font-size: 3rem;
+      &::after {
+        width: 15rem;
+        height: 3rem;
+        top: 2rem;
+        left: 0;
+        font-size: 2rem;
+        text-indent: 1rem;
+        line-height: 3rem;
+      }
+    }
+
+    &__line {
+      font-size: 1.5rem;
+    }
+
+    &__subheader {
+      font-size: 2rem;
+      &::after {
+        width: 15rem;
+        height: 3rem;
+        top: 7rem;
+        left: 0;
+        font-size: 2rem;
+        text-indent: 1rem;
+        line-height: 3rem;
+      }
+    }
+
+    &__text {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .word-card {
+    width: 32rem;
+    height: 60rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .word-card {
+    width: 31rem;
+    height: 60rem;
+
+    &__img {
+      height: 23rem;
+    }
+  }
+}

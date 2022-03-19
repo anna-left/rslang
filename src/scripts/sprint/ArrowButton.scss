@@ -1,0 +1,30 @@
+.arrow-button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 3rem;
+  line-height: 3rem;
+  box-sizing: border-box;
+  background-color: transparent;
+  cursor: pointer;
+
+  &--backward:hover {
+    transform: scale(1.05) translateX(-10%);
+  }
+
+  &--forward:hover {
+    transform: scale(1.05) translateX(10%);
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .arrow-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    padding: 0;
+  }
+}

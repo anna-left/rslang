@@ -1,0 +1,11 @@
+.statistics {
+  &__general {
+    &_canvas-box {
+      margin-top: 3vh;
+    }
+    &_canvas {
+      max-width: 80vw !important;
+      max-height: 70vh !important;
+    }
+  }
+}

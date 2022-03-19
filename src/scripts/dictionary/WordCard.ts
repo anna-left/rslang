@@ -1,0 +1,72 @@
+import Page from '../sprint/Page';
+import { IWordSchema } from '../types/types';
+import { createHTMLElement, removeTags } from '../utils/CommonFunctions';
+import { WordsSettings } from '../sprint/SprintSettings';
+import { DictionaryText } from './DictionarySettings';
+import './WordCard.scss';
+
+class WordCard extends Page {
+  private readonly className: string;
+
+  private readonly player: HTMLAudioElement;
+
+  constructor(word: IWordSchema, player: HTMLAudioElement) {
+    super('word-card', 'div');
+    this.className = 'word-card';
+    this.player = player;
+    const image = createHTMLElement('img', `${this.className}__img`);
+    image.setAttribute('src', WordsSettings.endpoint + word.image);
+    const header = createHTMLElement('h2', `${this.className}__header`, word.word);
+    const line = createHTMLElement('div', `${this.className}__line`);
+    const translation = createHTMLElement('span', `${this.className}__translation`, word.wordTranslate);
+    const transcription = createHTMLElement('span', `${this.className}__transcription`, word.transcription);
+    const audio = createHTMLElement('button', `${this.className}__audio`);
+    audio.addEventListener('click', async () => {
+      this.player.src = WordsSettings.endpoint + word.audio;
+      await this.player.play();
+      this.player.onended = async () => {
+        this.player.src = WordsSettings.endpoint + word.audioMeaning;
+        await this.player.play();
+        this.player.onended = async () => {
+          this.player.src = WordsSettings.endpoint + word.audioExample;
+          await this.player.play();
+          this.player.onended = null;
+        };
+      };
+    });
+    line.append(translation, transcription, audio);
+    const subheader = createHTMLElement('h3', `${this.className}__subheader`, DictionaryText.example);
+    const container = createHTMLElement('div', `${this.className}__text`);
+    const meaning = createHTMLElement('p', `${this.className}__meaning`, removeTags(word.textMeaning));
+    const meaningTranslate = createHTMLElement(
+      'p',
+      `${this.className}__meaning--translate`,
+      removeTags(word.textMeaningTranslate),
+    );
+    const example = createHTMLElement('p', `${this.className}__example`, removeTags(word.textExample));
+    const exampleTranslate = createHTMLElement(
+      'p',
+      `${this.className}__example--translate`,
+      removeTags(word.textExampleTranslate),
+    );
+    container.append(meaning, meaningTranslate, example, exampleTranslate);
+    this.page.append(image, header, line, subheader, container);
+
+    header.addEventListener('click', () => {
+      const hard = this.page.classList.contains('word-card--hard');
+      const known = this.page.classList.contains('word-card--known');
+      window.dispatchEvent(new CustomEvent('mark-hard', { detail: { hard: hard, known: known, wordId: word._id } }));
+    });
+    subheader.addEventListener('click', () => {
+      const hard = this.page.classList.contains('word-card--hard');
+      const known = this.page.classList.contains('word-card--known');
+      window.dispatchEvent(new CustomEvent('mark-known', { detail: { hard: hard, known: known, wordId: word._id } }));
+    });
+  }
+
+  stopPlaying() {
+    this.player.pause();
+  }
+}
+
+export default WordCard;

@@ -1,0 +1,93 @@
+@import "../../sass/util/variables";
+
+.sprint-game {
+  &-controls {
+    display: flex;
+    gap: 10rem;
+  }
+
+  &-controls {
+    &__button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    &__button {
+      width: 19rem;
+      height: 9rem;
+      font-size: 3.6rem;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem 2rem;
+      border-radius: 3.5rem;
+    }
+
+    &__wrong {
+      background-color: $color-sprint-wrong;
+      box-shadow: 5px 5px 5px $color-sprint-wrong-shadow;
+
+      &:hover, &:active, &:focus {
+        box-shadow: 2px 2px 2px $color-sprint-wrong-shadow;
+      }
+    }
+
+    &__right {
+      background-color: $color-sprint-right;
+      box-shadow: 5px 5px 5px $color-sprint-right-shadow;
+
+      &:hover, &:active, &:focus {
+        box-shadow: 2px 2px 2px $color-sprint-right-shadow;
+      }
+    }
+
+    &__info-button {
+      width: 2rem;
+      height: 2rem;
+      border-top: 0.5rem solid black;
+      border-left: 0.5rem solid black;
+    }
+
+    &__info-left {
+      transform: rotate(-45deg);
+    }
+
+    &__info-right {
+      transform: rotate(135deg);
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .sprint-game {
+    &-controls {
+      gap: 7rem;
+    }
+
+    &-controls {
+      &__button {
+        width: 13rem;
+        height: 6rem;
+        font-size: 2.4rem;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem 2rem;
+        border-radius: 2.5rem;
+      }
+
+      &__info-button {
+        border-top: 0.3rem solid black;
+        border-left: 0.3rem solid black;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .sprint-game {
+    &-controls {
+      gap: 1rem;
+    }
+  }
+}

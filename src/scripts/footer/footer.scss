@@ -1,0 +1,219 @@
+@import '../../sass/util/mixins';
+@import '../../sass/util/variables';
+
+footer {
+  background-color: $color-prime-candy-light;
+  height: 9rem;
+  display: flex;
+  align-items: center;
+  padding: 0 9vw;
+}
+
+.footer {
+  &__box {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    width: 100%;
+  }
+  &-box {
+    &__list {
+      width: 100%;
+      display: flex;
+      // color: $color-prime-dark;
+      justify-content: space-between;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+
+      &_course {
+        transition: all 0.2s;
+        .rs-icon {
+          fill: $color-prime-dark;
+          max-width: 16rem;
+          max-height: 6rem;
+        }
+        &:hover {
+          color: $color-prime-calm;
+          .rs-icon {
+            fill: $color-prime-calm;
+          }
+        }
+      }
+
+      &_copy {
+        font-weight: bolder;
+      }
+
+      &_git {
+        transition: all 0.2s;
+        .git-icon {
+          max-height: 6rem;
+          max-width: 6rem;
+          fill: $color-prime-dark;
+        }
+        &:hover {
+          .git-icon {
+            fill: $color-prime-calm;
+          }
+        }
+      }
+    }
+
+    &__link {
+      display: flex;
+      align-items: center;
+    }
+
+    &__info-author-wrapper {
+      display: flex;
+      align-items: center;
+      .footer-box__link {
+        padding: 1rem 2rem;
+        margin: 0 1rem;
+        transition: all 0.2s;
+        &:hover {
+          color: $color-prime-calm;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  footer {
+    height: 7.5rem;
+    padding: 0 7vw;
+
+    .footer {
+      &__box {
+        font-size: 2.2rem;
+      }
+      &-box {
+        &__item {
+          &_course {
+            .rs-icon {
+              max-width: 13rem;
+              max-height: 4.5rem;
+            }
+          }
+          &_git {
+            .git-icon {
+              max-height: 4.5rem;
+              max-width: 4.5rem;
+            }
+          }
+        }
+        &__info-author-wrapper {
+          .footer-box__link {
+            padding: 1rem 1.5rem;
+            margin: 0 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  footer {
+    height: 7.5rem;
+    padding: 0 7vw;
+
+    .footer {
+      &__box {
+        font-size: 1.8rem;
+      }
+      &-box {
+        &__item {
+          &_course {
+            .rs-icon {
+              max-width: 9.6rem;
+              max-height: 3.5rem;
+            }
+          }
+          &_git {
+            .git-icon {
+              max-height: 3.5rem;
+              max-width: 3.5rem;
+            }
+          }
+        }
+        &__info-author-wrapper {
+          .footer-box__link {
+            padding: 1rem 1rem;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 910px) {
+  footer {
+    height: 9rem;
+    padding: 0 5vw;
+
+    .footer {
+      &__box {
+        font-size: 1.6rem;
+      }
+      &-box {
+        &__item {
+          &_course {
+            .rs-icon {
+              max-width: 10rem;
+              max-height: 4rem;
+            }
+          }
+          &_git {
+            .git-icon {
+              max-height: 4rem;
+              max-width: 4rem;
+            }
+          }
+        }
+        &__info-author-wrapper {
+          flex-direction: column;
+          align-items: flex-start;
+          .footer-box__link {
+            padding: 0.4rem 0;
+            margin: 0;
+            &:nth-of-type(2) {
+              padding-left: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  footer {
+    .footer {
+      &__box {
+        font-size: 1.35rem;
+      }
+      &-box {
+        &__item {
+          &_course {
+            .rs-icon {
+              max-width: 7rem;
+              max-height: 3rem;
+            }
+          }
+          &_git {
+            .git-icon {
+              max-height: 3rem;
+              max-width: 3rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

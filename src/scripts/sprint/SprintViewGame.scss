@@ -1,0 +1,74 @@
+@import "../../sass/util/variables";
+
+.sprint-game {
+  font-size: 2.4rem;
+  width: 100rem;
+  margin: 0 auto;
+  border-radius: 3.5rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.61) 0%, rgba(255, 255, 255, 0.61) 0.01%, rgba(255, 255, 255, 0.61) 100%);
+  box-shadow: 1px 2px 4px rgba(38, 120, 61, 0.34);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 4rem 6rem;
+  justify-content: center;
+  align-items: center;
+
+
+  &__foreign {
+    font-size: 4.8rem;
+    font-weight: bold;
+  }
+
+  &__translation {
+    font-size: 3.6rem;
+  }
+
+  &__separation {
+    width: 100%;
+    position: relative;
+  }
+
+  &__sign {
+    width: 3rem;
+    height: 3rem;
+    background-size: 3rem 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__sign-right {
+    background-image: url("../../assets/svg/right.svg");
+  }
+
+  &__sign-wrong {
+    background-image: url("../../assets/svg/wrong.svg");
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .sprint-game {
+    font-size: 2rem;
+    width: 65rem;
+    gap: 2rem;
+    padding: 2rem 3rem;
+
+    &__foreign {
+      font-size: 3.2rem;
+    }
+
+    &__translation {
+      font-size: 2.4rem;
+    }
+  }
+}
+
+
+@media screen and (max-width: 390px) {
+  .sprint-game {
+    width: 32rem;
+  }
+}

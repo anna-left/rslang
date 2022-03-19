@@ -1,0 +1,255 @@
+@import '../../../sass/util/mixins';
+@import '../../../sass/util/variables';
+
+.main-box__section {
+  &_type_auth {
+    width: 100%;
+    padding-left: 9vw;
+  }
+}
+
+.section-auth {
+  &__header {
+    font-size: 1.6vmax;
+    width: 83%;
+    text-align: center;
+    margin-bottom: 2vmin;
+  }
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 35%;
+    font-size: 1.8rem;
+  }
+
+  &__label {
+    width: 83%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input-box {
+    align-self: center;
+    padding-top: 7vh;
+  }
+
+  &__input {
+    width: 83%;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    border: 0.1rem solid $color-prime-candy;
+    border-radius: 1.5rem;
+    font-size: 2.6rem;
+    text-align: center;
+    caret-color: $color-prime-dark;
+    &:focus {
+      outline: 0.1rem solid $color-prime-candy;
+    }
+  }
+  &__image-box {
+    align-self: flex-end;
+    max-height: 80vmin;
+    max-width: 90vmin;
+    padding-bottom: 7vh;
+  }
+  &__image {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  &__btn-send {
+    font-size: 2.6rem;
+    margin-top: 3rem;
+    width: 83%;
+    @include buttonize;
+  }
+
+  &__switch-mode-box {
+    width: 83%;
+    margin-top: 1vh;
+    font-size: 1vmax;
+  }
+}
+
+.switch-mode-box {
+  &__text {
+    margin-right: 0.7rem;
+  }
+  &__link {
+    border-bottom: 1px solid $color-prime-dark;
+    transition: all 0.3s;
+    &:hover {
+      cursor: pointer;
+      color: $color-prime-calm;
+    }
+  }
+}
+
+.input_error {
+  color: $color-prime-attract;
+}
+
+.input_clear {
+  color: $color-prime-calm;
+}
+
+@media screen and (max-width: 1500px) {
+  .main-box__section {
+    &_type_auth {
+      padding-left: 7vw;
+    }
+  }
+
+  .section-auth {
+    &__header {
+      font-size: 1.8vmax;
+      width: 100%;
+      margin-bottom: 2vmin;
+    }
+
+    &__input-box {
+      flex-basis: 45%;
+      font-size: 1.65rem;
+    }
+
+    &__label {
+      width: 95%;
+    }
+
+    &__input-box {
+      padding-top: 7vh;
+    }
+
+    &__input {
+      width: 95%;
+    }
+    &__btn-send {
+      width: 95%;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-box__section {
+    &_type_auth {
+      padding-left: 5vw;
+    }
+  }
+
+  .section-auth {
+    &__header {
+      font-size: 1.6vmax;
+      width: 95%;
+      margin-bottom: 2vmin;
+    }
+
+    &__input-box {
+      flex-basis: 45%;
+      font-size: 1.6rem;
+    }
+
+    &__label {
+      width: 95%;
+    }
+
+    &__input-box {
+      padding-top: 7vh;
+    }
+
+    &__input {
+      width: 95%;
+      padding: 1.2rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 1.5rem;
+      font-size: 2rem;
+    }
+
+    &__btn-send {
+      font-size: 2rem;
+      margin-top: 2rem;
+      width: 95%;
+    }
+
+    &__switch-mode-box {
+      width: 95%;
+      margin-top: 1vh;
+      font-size: 1.2vmax;
+    }
+  }
+}
+@media screen and (max-width: 1050px) {
+  .main-box__section {
+    &_type_auth {
+      padding-left: 5vw;
+      flex-direction: column;
+    }
+  }
+
+  .section-auth {
+    &__image-box {
+      position: absolute;
+      bottom: 7rem;
+      left: 10%;
+      max-height: 60vh;
+      max-width: 80vw;
+      padding-bottom: 3vh;
+      z-index: 1;
+    }
+    &__input-box {
+      width: 40vw;
+      font-size: 1.6rem;
+    }
+
+    &__input-box {
+      position: relative;
+      z-index: 5;
+      align-self: center;
+    }
+
+    &__input {
+      width: 95%;
+      padding: 1.2rem;
+      font-size: 2rem;
+    }
+
+    &__btn-send {
+      font-size: 2rem;
+      margin-top: 2rem;
+      width: 95%;
+    }
+
+    &__switch-mode-box {
+      width: 95%;
+      margin-top: 0.7vh;
+      font-size: 1.2vmax;
+      padding: 0.3rem;
+      border-radius: 4px;
+      color: $color-prime-light;
+      background: rgba(0, 0, 0, 0.65);
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .main-box__section {
+    &_type_auth {
+      padding-left: 5vw;
+      flex-direction: column;
+      align-self: center !important;
+    }
+  }
+}
+@media screen and (max-width: 680px) {
+  .section-auth {
+    &__input-box {
+      width: 60vw;
+      font-size: 1.6rem;
+    }
+  }
+}

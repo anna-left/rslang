@@ -1,0 +1,17 @@
+@import "../../sass/util/variables";
+
+.progress-ring__value {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(#{$timerRadius} / 2);
+}
+
+.progress-ring__text {
+  position: absolute;
+  left: -50%;
+  bottom: -2rem;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+}

@@ -1,0 +1,119 @@
+@import '../../sass/util/variables';
+
+.statistics {
+  &__daily-common-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5vh;
+  }
+  &__daily-game-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6vh;
+    margin-bottom: 2vmax;
+  }
+}
+.daily-stats {
+  &__game_box {
+    position: relative;
+    width: 47%;
+    height: fit-content;
+    display: grid;
+    border-radius: 3rem;
+    padding: 2vmax 3vmax;
+    gap: 3vh 0;
+    font-size: 1.5vmax;
+  }
+}
+
+.daily-common {
+  &__word_box,
+  &__answer_box {
+    width: 47%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-weight: bolder;
+  }
+  &__word_amount,
+  &__answer_amount-box {
+    font-size: 5vmax;
+  }
+  &__word_text,
+  &__answer_text {
+    text-align: center;
+    font-size: 1.5vmax;
+  }
+}
+
+.daily-card {
+  &__header {
+    font-size: 3.6vmax;
+    font-weight: 400;
+  }
+  &__icon {
+    position: absolute;
+    right: 3vmax;
+    bottom: 2vmax;
+
+    height: 85%;
+    &_audio {
+      max-width: 20%;
+    }
+    &_sprint {
+      max-width: 30%;
+    }
+  }
+}
+
+.daily-audiocall {
+  background: linear-gradient(180deg, $color-prime-candy 0%, $color-prime-light 100%);
+  box-shadow: 3px 3px 3px lighten($color-prime-candy, 10%);
+}
+
+.daily-sprint {
+  background: linear-gradient(180deg, $color-prime-calm 0%, $color-prime-light 100%);
+  box-shadow: 3px 3px 3px lighten($color-prime-calm, 10%);
+}
+
+@media screen and (max-width: 1500px) {
+  .daily-common {
+    &__word_text,
+    &__answer_text {
+      font-size: 1.7vmax;
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .statistics {
+    &__daily-common-box {
+      justify-content: space-between;
+      margin-top: 5vh;
+    }
+    &__daily-game-box {
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 3vh;
+      margin-bottom: 2vmax;
+    }
+  }
+  .daily-stats {
+    &__game_box {
+      width: 90%;
+      border-radius: 3rem;
+      padding: 2vmax 3vmax;
+      gap: 2vh 0;
+      font-size: 1.5vmax;
+      margin-bottom: 2rem;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .daily-common {
+    &__word_text,
+    &__answer_text {
+      font-size: 1.7vmax;
+    }
+  }
+}
